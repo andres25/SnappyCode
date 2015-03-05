@@ -7,19 +7,19 @@ if sys.version_info[0] >= 3:
 #Definicion de los Tokens
   
 
-tokens = ( 'INICIO_PROGRAMA', 'FIN_PROGRAMA', 'INICIO_FUNCION', 'FIN_FUNCION', 'REGRESA', 'PARAMETROS',
-    'CREAR','DIBUJAR','BORRAR','GIRAR','ID','TRUE','FALSE'
-    'MOVER','DERECHA','IZQUIERDA','ARRIBA','ABAJO','SI','FIN_SI' ,'ENTONCES',
-    'SI_NO','MIENTRAS','FIN_MIENTRAS','HACER','LISTA','AGREGAR',
-    'SACAR', 'VER','IGUAL', 'IGUAL_QUE' , 'MAYOR_QUE' , 'MENOR_QUE', 'DIFERENTE_QUE', 'PINTAR', 
-    'DESPINTAR', 'DECIR_AL_USUARIO', 'PEDIR_AL_USUARIO', 'INICIO_BLOQUE', 'FIN_BLOQUE', 'MAS','MENOS','COMA',
+tokens = ( 'INICIOPROGRAMA', 'FINPROGRAMA', 'INICIOFUNCION', 'FINFUNCION', 'REGRESA', 'PARAMETROS',
+    'CREAR','DIBUJAR','BORRAR','GIRAR','ID','TRUE','FALSE', 'INICIOPRINCIPAL', 'FINPRINCIPAL',
+    'MOVER','DERECHA','IZQUIERDA','ARRIBA','ABAJO','SI','FINSI' ,'ENTONCES',
+    'SINO','MIENTRAS','FINMIENTRAS','HACER','LISTA','AGREGAR', 'X', 'Y',
+    'SACAR', 'VER','IGUAL', 'IGUALQUE' , 'MAYORQUE' , 'MENORQUE', 'DIFERENTEQUE', 'PINTAR', 
+    'DESPINTAR', 'DECIRALUSUARIO', 'PEDIRALUSUARIO', 'INICIOBLOQUE', 'FINBLOQUE', 'MAS','MENOS','COMA',
     'MULT', 'DIV', 'PUNTOCOMA','PARENTIZQ','PARENTDER', 'ENTERO', 'FLOTANTE', 'TEXTO', 'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO'
     )
 
-reserved = { 'inicio_programa' : 'INICIO_PROGRAMA', 
-             'fin_programa'    : 'FIN_PROGRAMA', 
-             'inicio_funcion' : 'INICIO_FUNCION', 
-             'fin_funcion'     : 'FIN_FUNCION', 
+reserved = { 'inicioprograma' : 'INICIOPROGRAMA', 
+             'finprograma'    : 'FINPROGRAMA', 
+             'iniciofuncion' : 'INICIOFUNCION', 
+             'finfuncion'     : 'FINFUNCION', 
              'parametros'   : 'PARAMETROS', 
              'crear'     : 'CREAR', 
              'dibujar'   : 'DIBUJAR',
@@ -31,42 +31,48 @@ reserved = { 'inicio_programa' : 'INICIO_PROGRAMA',
              'arriba'    : 'ARRIBA',
              'abajo'    : 'ABAJO',
              'si': 'SI',
-             'fin_si': 'FIN_SI',
+             'finsi': 'FINSI',
              'entonces': 'ENTONCES',
-             'si_no': 'SI_NO',
+             'sino': 'SINO',
              'mintras': 'MIENTRAS',
-             'fin_mientras': 'FIN_MIENTRAS',
+             'finmientras': 'FINMIENTRAS',
              'hacer': 'HACER',
              'pintar': 'PINTAR',
-             'no_pintar': 'NO_PINTAR',
+             'nopintar': 'NOPINTAR',
              'lista': 'LISTA',
              'agregar': 'AGREGAR',
              'sacar': 'SACAR',
-             'decir_al_usuario': 'DECIR_AL_USUARIO',
-             'pedir_al_usuario': 'PEDIR_AL_USUARIO',
-             'inicio_bloque': 'INICIO_BLOQUE',
-             'fin_bloque': 'FIN_BLOQUE',
+             'deciralusuario': 'DECIRALUSUARIO',
+             'pediralusuario': 'PEDIRALUSUARIO',
+             'iniciobloque': 'INICIOBLOQUE',
+             'finbloque': 'FINBLOQUE',
              'entero': 'ENTERO',
              'flotante': 'FLOTANTE',
-             'texto': 'TEXTO'
+             'texto': 'TEXTO',
+             'inicioprincipal': 'INICIOPRINCIPAL',
+             'finprincipal': 'FINPRINCIPAL',
+             'x': 'X',
+             'y': 'Y'
               }
 
 t_CTEENTERO              = r'[0-9]+'
 t_CTEFLOTANTE            = r'[0-9]+\.[0-9]+ '
 t_CTETEXTO               = r'"\"".+"\""'
-t_PUNTOCOMA           = r';'
-t_PARENTIZQ       = r'\('
-t_PARENTDER      = r'\)'
-t_IGUAL            = r'='
-t_IGUAL_QUE            = r'=='
+t_PUNTOCOMA              = r';'
+t_PARENTIZQ              = r'\('
+t_PARENTDER              = r'\)'
+t_IGUAL                  = r'='
+t_IGUALQUE            = r'=='
 t_MAS              = r'\+'
 t_MENOS             = r'-'
 t_DIV          = r'\/'
 t_MULT              = r'\*'
-t_MENOR_QUE              = r'<'
-t_MAYOR_QUE           = r'>'
-t_DIFERENTE_QUE         = r'<>'
+t_MENORQUE              = r'<'
+t_MAYORQUE           = r'>'
+t_DIFERENTEQUE         = r'<>'
 t_COMA             = r','
+t_TRUE              = r'[1]'
+T_FALSE             = r'[0]'
 
 t_ignore            = " \t"
 
@@ -82,12 +88,14 @@ def t_error(t):
     print("Caracter no valido'%s'" % t.value[0])
     t.lexer.skip(1)
 
-def p_program(t): 'program : INICIO_PROGRAMA A cuerpo FIN_PROGRAMA'
+def p_program(t): 
+    'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
     pass
+
 def p_A(t): 
     '''A : vars
            | empty'''
-   pass
+    pass
 
 def p_vars(t): 
     '''vars : CREAR tipo ID PUNTOCOMA vars
@@ -95,7 +103,8 @@ def p_vars(t):
     pass
 
  
-def p_cuerpo(t): 'cuerpo : B principal'
+def p_cuerpo(t): 
+    'cuerpo : B principal'
     pass
  
 def p_B(t): 
@@ -103,7 +112,8 @@ def p_B(t):
            | empty'''
     pass
  
-def p_funcion(t): 'funcion : INICIO_FUNCION variable ID parametros C REGRESA expresion FIN_FUNCION'
+def p_funcion(t): 
+    'funcion : INICIOFUNCION variable ID parametros C REGRESA expresion FINFUNCION'
     pass
 
  
@@ -133,25 +143,27 @@ def p_estatuto(t):
            | condicion
            | ciclo
            | io
-           | accion
-           | accion_general'''
+           | accion'''
     pass
  
-def p_asignacion(t): 'asignacion : ID IGUAL expresion PUNTOCOMA'
+def p_asignacion(t): 
+    'asignacion : ID IGUAL expresion PUNTOCOMA'
     pass
  
-def p_expresion(t): 'expresion : exp F'
+def p_expresion(t): 
+    'expresion : exp F'
     pass
  
 def p_F(t): 
-    '''F : MAYOR_QUE exp
-           | MENOR_QUE exp
-           | DIFERENTE_QUE exp
-           | IGUAL_QUE exp
+    '''F : MAYORQUE exp
+           | MENORQUE exp
+           | DIFERENTEQUE exp
+           | IGUALQUE exp
            | empty'''
     pass
  
-def p_exp(t): 'exp : termino G'
+def p_exp(t): 
+    'exp : termino G'
     pass
  
 def p_G(t): 
@@ -160,7 +172,8 @@ def p_G(t):
            | empty'''
     pass
  
-def p_termino(t): 'termino : factor H'
+def p_termino(t): 
+    'termino : factor H'
     pass
  
 def p_H(t): 
@@ -175,13 +188,13 @@ def p_factor(t):
     pass
 
 
-def I(t):
+def p_I(t):
     '''I : MAS
            | MENOS
            | empty '''
 pass
  
-def varcte(t):
+def p_varcte(t):
     '''varcte : ID
            | CTETEXTO
            | CTEFLOTANTE
@@ -189,88 +202,90 @@ def varcte(t):
            | llamada '''
 pass
  
-def llamada(t):
+def p_llamada(t):
     'llamada : ID L'
 pass
  
-def L(t):
+def p_L(t):
     '''L : PARAMETROS expresion M
            | empty  '''
 pass
  
-def M(t):
+def p_M(t):
     '''M : COMA expresion M
            | empty  '''
 pass
  
-def condicion(t):
-'condicion : SI expresion ENTONCES bloque J FIN_SI'
-pass
+def p_condicion(t):
+    'condicion : SI expresion ENTONCES bloque J FINSI'
+    pass
  
-def J(t):
-'''J : SI_NO bloque
-           | empty '''
-pass
+def p_J(t):
+    '''J : SINO bloque
+               | empty '''
+    pass
  
-def ciclo(t):
-'ciclo    : MIENTRAS expresion HACER bloque FIN_MIENTRAS'
-pass
+def p_ciclo(t):
+    'ciclo    : MIENTRAS expresion HACER bloque FINMIENTRAS'
+    pass
  
-def io(t):
-'''io : PEDIR_AL_USUARIO ID
-           | DECIR_AL_USUARIO expresion '''
-pass
+def p_io(t):
+    '''io : PEDIRALUSUARIO ID
+               | DECIRALUSUARIO expresion '''
+    pass
  
-def accion(t):
-'accion   : tipo_accion O instruccion ID SEMICOlON'
- pass
+def p_accion(t):
+    'accion   : tipo_accion O ID PUNTOCOMA'
+    pass
  
-def tipo_accion(t):
-'''tipo_accion : lista
-           | objeto '''
-pass
+def p_tipo_accion(t):
+    '''tipo_accion : lista
+               | objeto '''
+    pass
  
-def objeto(t):
-'''objeto   : CREAR
-           | DIBUJAR
-           | BORRAR
-           | GIRAR
-           | PINTAR
-           | DESPINTAR
-           | MOVER '''
-pass
+def p_objeto(t):
+    '''objeto   : CREAR
+               | DIBUJAR
+               | BORRAR
+               | GIRAR
+               | PINTAR
+               | DESPINTAR
+               | MOVER '''
+    pass
  
-def O(t):
-'''O        : X expresion
-           | Y expresion
-           | DERECHA
-           | IZQUIERDA
-           | empty  '''
-pass
+def p_O(t):
+    '''O        : X expresion
+               | Y expresion
+               | DERECHA
+               | IZQUIERDA
+               | ARRIBA
+               | ABAJO
+               | empty  '''
+    pass
  
-def lista(t):
-'''lista    : AGREGAR
-           | SACAR
-           | VER '''
-pass
+def p_lista(t):
+    '''lista    : AGREGAR
+               | SACAR
+               | VER '''
+    pass
  
-def accion_general(t):
-'accion_general : ESPERA expresion'
-pass
+def p_bloque(t):
+    'bloque   : INICIOBLOQUE K FINBLOQUE'
+    pass
  
-def bloque(t):
-'bloque   : INICIO_BLOQUE K FIN_BLOQUE'
-pass
+def p_K(t):
+    '''K        : estatuto K
+               | empty '''
+    pass
  
-def K(t):
-'''K        : estatuto K
-           | empty '''
-pass
- 
-def tipo(t):
-'''tipo     : svariable
-           | LISTA '''
-pass
+def p_tipo(t):
+    '''tipo     : variable
+               | LISTA '''
+    pass
+
+def p_principal(t): 
+    'principal : INICIOPRINCIPAL C FINPRINCIPAL'
+    pass
 
 def p_empty(t):
     'empty : '
@@ -283,7 +298,7 @@ def p_error(p):
         print("Error de sintaxis")
 
 
-entrada = open ("test-incorrecto2.in", "r");
+entrada = open ("test.in", "r");
 
 import ply.lex as lex
 lex.lex()
