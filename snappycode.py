@@ -26,6 +26,10 @@ reserved = { 'inicioprograma' : 'INICIOPROGRAMA',
              'FINFUNCION'     : 'FINFUNCION', 
              'parametros'   : 'PARAMETROS', 
              'PARAMETROS'   : 'PARAMETROS', 
+             'VER'       : 'VER',
+             'ver'       : 'ver',
+             'REGRESA'   : 'REGRESA',
+             'regresa'   : 'regresa',
              'crear'     : 'CREAR', 
              'CREAR'     : 'CREAR', 
              'dibujar'   : 'DIBUJAR',
@@ -92,8 +96,6 @@ reserved = { 'inicioprograma' : 'INICIOPROGRAMA',
              'Y': 'Y',
               }
 
-t_CTEENTERO              = r'[0-9]+'
-t_CTEFLOTANTE            = r'[0-9]+\.[0-9]+ '
 t_CTETEXTO               = r'"\"".+"\""'
 t_PUNTOCOMA              = r';'
 t_PARENTIZQ              = r'\('
@@ -120,6 +122,17 @@ def t_ID(t):
 
 def t_newline(t):
     r'\n+'
+    t.lexer.lineno += len(t.value)
+
+def t_CTEENTERO(t):
+    r'[0-9]+'
+    t.value = int(t.value)
+    return t
+
+def t_CTEFLOTANTE(t):
+    r'[0-9]+\.[0-9]+ '
+    t.value = float(t.value)
+    return t    
     
 def t_error(t):
     print("Caracter no valido'%s'" % t.value[0])
@@ -151,7 +164,7 @@ def p_B(t):
     pass
  
 def p_funcion(t): 
-    'funcion : INICIOFUNCION variable ID parametros C REGRESA expresion FINFUNCION'
+    'funcion : INICIOFUNCION variable ID param C REGRESA expresion FINFUNCION'
     pass
 
  
@@ -166,8 +179,8 @@ def p_C(t):
            | empty'''
     pass
  
-def p_parametros(t): 
-    '''parametros : PARAMETROS tipo ID E
+def p_param(t): 
+    '''param : PARAMETROS tipo ID E
            | empty'''
 
  
