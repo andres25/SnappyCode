@@ -1,10 +1,13 @@
 inicioprograma 
-
 crear entero juan;
 crear flotante manuel;
+crear flotante manuel2;
 
+INICIOFUNCION ENTERO snappyFunc PARAMETROS ENTERO param1 REGRESA 1 FINFUNCION
 INICIOPRINCIPAL 
 
 FINPRINCIPAL 
 
-FINPROGRAMA
+
+
+finprograma

@@ -117,7 +117,7 @@ t_ignore            = " \t"
 
 symTable = {} 
 scope = 'global'
-function = ''
+params = {}
 procTable = {}
 
 def t_ID(t):
@@ -147,9 +147,9 @@ def p_program(t):
     'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
     print("\nCUMPLE CON TODAS LAS REGLAS.\n")
     print("\nSymbol table.\n")
-    print symTable
+    print (symTable)
     print("\nProcedure table.\n")
-    print procTable
+    print (procTable)
     pass
 
 def p_A(t): 
@@ -160,7 +160,8 @@ def p_A(t):
 def p_vars(t): 
     '''vars : CREAR tipo ID PUNTOCOMA vars
            | empty'''
-    symTable[t[3]] = {'type' : t[2], 'scope' : scope}
+    if t[1] != None:
+      symTable[t[3]] = {'type' : t[2], 'scope' : scope}
     pass
 
  
@@ -173,11 +174,12 @@ def p_B(t):
            | empty'''
     pass
  
-def p_funcion(t): 
+def p_funcion(t):
     'funcion : INICIOFUNCION variable ID param vars C REGRESA expresion FINFUNCION'
-    procTable[t[3]] = {'param' : {} , 'return' : t[2]}
-    function = t[3]
-    scope = t[3]
+    if t[1] != None:
+      procTable[t[3]] = {'param' : params , 'return' : t[2]}
+      params = {}
+      scope = t[3]
     pass
 
  
@@ -196,7 +198,10 @@ def p_C(t):
 def p_param(t): 
     '''param : PARAMETROS tipo ID E
            | empty'''
-    procTable[function][param][t[3]] = {'type' : t[2]}       
+    if t[1] != None:
+      params[t[3]] = {'type' : t[2]}
+       
+    pass     
  
 def p_E(t): 
     '''E : COMA tipo ID E
@@ -346,6 +351,7 @@ def p_K(t):
 def p_tipo(t):
     '''tipo     : variable
                | LISTA '''
+    t[0] = t[1]
     pass
 
 def p_principal(t): 
