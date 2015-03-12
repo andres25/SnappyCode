@@ -111,9 +111,14 @@ t_MAYORQUE           = r'>'
 t_DIFERENTEQUE         = r'<>'
 t_COMA             = r','
 t_TRUE              = r'[1]'
-T_FALSE             = r'[0]'
+t_FALSE             = r'[0]'
 
 t_ignore            = " \t"
+
+symTable = {} 
+scope = 'global'
+function = ''
+procTable = {}
 
 def t_ID(t):
     r'[A-Za-z]+[A-Za-z0-9]*'
@@ -141,6 +146,10 @@ def t_error(t):
 def p_program(t): 
     'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
     print("\nCUMPLE CON TODAS LAS REGLAS.\n")
+    print("\nSymbol table.\n")
+    print symTable
+    print("\nProcedure table.\n")
+    print procTable
     pass
 
 def p_A(t): 
@@ -151,6 +160,7 @@ def p_A(t):
 def p_vars(t): 
     '''vars : CREAR tipo ID PUNTOCOMA vars
            | empty'''
+    symTable[t[3]] = {'type' : t[2], 'scope' : scope}
     pass
 
  
@@ -164,7 +174,10 @@ def p_B(t):
     pass
  
 def p_funcion(t): 
-    'funcion : INICIOFUNCION variable ID param C REGRESA expresion FINFUNCION'
+    'funcion : INICIOFUNCION variable ID param vars C REGRESA expresion FINFUNCION'
+    procTable[t[3]] = {'param' : {} , 'return' : t[2]}
+    function = t[3]
+    scope = t[3]
     pass
 
  
@@ -172,17 +185,18 @@ def p_variable(t):
     '''variable : ENTERO
             | FLOTANTE
             | TEXTO'''
+    t[0] = t[1]
     pass
  
 def p_C(t): 
-    '''C : estatuto
+    '''C : estatuto C
            | empty'''
     pass
  
 def p_param(t): 
     '''param : PARAMETROS tipo ID E
            | empty'''
-
+    procTable[function][param][t[3]] = {'type' : t[2]}       
  
 def p_E(t): 
     '''E : COMA tipo ID E
@@ -336,6 +350,7 @@ def p_tipo(t):
 
 def p_principal(t): 
     'principal : INICIOPRINCIPAL C FINPRINCIPAL'
+    scope = 'main'
     pass
 
 def p_empty(t):
