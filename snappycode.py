@@ -162,6 +162,8 @@ def p_vars(t):
            | empty'''
     if t[1] != None:
       symTable[t[3]] = {'type' : t[2], 'scope' : scope}
+    dix = {}
+    
     pass
 
  
@@ -176,10 +178,13 @@ def p_B(t):
  
 def p_funcion(t):
     'funcion : INICIOFUNCION variable ID param vars C REGRESA expresion FINFUNCION'
+    print (params)
     if t[1] != None:
-      procTable[t[3]] = {'param' : params , 'return' : t[2]}
-      params = {}
+      aux = params.copy()
+      procTable[t[3]] = {'param' : aux , 'return' : t[2]}
+      params.clear()
       scope = t[3]
+
     pass
 
  
@@ -206,6 +211,8 @@ def p_param(t):
 def p_E(t): 
     '''E : COMA tipo ID E
            | empty'''
+    if t[1] != None:
+      params[t[3]] = {'type' : t[2]}
     pass
  
 def p_estatuto(t): 
