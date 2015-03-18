@@ -115,7 +115,8 @@ t_FALSE             = r'[0]'
 
 t_ignore            = " \t"
 
-symTable = {} 
+varGlb = {} 
+varFunc = {}
 scope = "Indefinido"
 params = {}
 procTable = {}
@@ -146,8 +147,8 @@ def t_error(t):
 def p_program(t): 
     'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
     print("\nCUMPLE CON TODAS LAS REGLAS.\n")
-    print("\nSymbol table.\n")
-    print (symTable)
+    print("\nVariables Globales.\n")
+    print (varGlb)
     print("\nProcedure table.\n")
     print (procTable)
     pass
@@ -162,7 +163,10 @@ def p_vars(t):
            | empty'''
     if t[1] != None:
       global scope
-      symTable[t[3]] = {'type' : t[2], 'scope' : scope}
+      if scope == 'global':
+        varGlb[t[3]] = {'type' : t[2], 'scope' : scope}
+      else:
+        varFunc[t[3]] = {'type' : t[2], 'scope' : scope}
     else:
       if scope == 'Indefinido':
         scope = 'global'
@@ -183,12 +187,15 @@ def p_B(t):
 def p_funcion(t):
     'funcion : INICIOFUNCION variable ID param vars C REGRESA expresion FINFUNCION'
     if t[1] != None:
-      aux = params.copy()
-      procTable[t[3]] = {'param' : aux , 'return' : t[2]}
-      params.clear()
-      for key, value in symTable.items():
+      for key, value in varFunc.items():
         if value['scope'] == 'funcion':
-          symTable[key]['scope'] = t[3]
+          varFunc[key]['scope'] = t[3]
+
+      aux = params.copy()
+      aux2 = varFunc.copy() 
+      procTable[t[3]] = {'param' : aux , 'return' : t[2], 'symTable': aux2}
+      params.clear()
+      varFunc.clear()
     pass
 
  
