@@ -1,14 +1,21 @@
 inicioprograma 
-crear entero juan;
-crear flotante manuel;
+crear entero global1;
+crear flotante global2;
 
 
 
-INICIOFUNCION FLOTANTE snappyFunc2 PARAMETROS FLOTANTE xoxo 
-crear flotante andy;
-
+INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS FLOTANTE xoxo, ENTERO yoyo, TEXTO wowow
+crear flotante funcion1;
+crear entero funcion2;
 REGRESA 1
 FINFUNCION
+
+INICIOFUNCION FLOTANTE snappyFunc2 PARAMETROS FLOTANTE xoxo, ENTERO yoyo, TEXTO wowow
+crear flotante funcion3;
+crear entero funcion4;
+REGRESA 1
+FINFUNCION
+
 INICIOPRINCIPAL 
 
 FINPRINCIPAL 

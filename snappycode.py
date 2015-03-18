@@ -116,7 +116,7 @@ t_FALSE             = r'[0]'
 t_ignore            = " \t"
 
 symTable = {} 
-scope = 'global'
+scope = "Indefinido"
 params = {}
 procTable = {}
 
@@ -161,9 +161,13 @@ def p_vars(t):
     '''vars : CREAR tipo ID PUNTOCOMA vars
            | empty'''
     if t[1] != None:
+      global scope
       symTable[t[3]] = {'type' : t[2], 'scope' : scope}
-    dix = {}
-    
+    else:
+      if scope == 'Indefinido':
+        scope = 'global'
+      else:
+        scope = 'funcion'
     pass
 
  
@@ -178,13 +182,13 @@ def p_B(t):
  
 def p_funcion(t):
     'funcion : INICIOFUNCION variable ID param vars C REGRESA expresion FINFUNCION'
-    print (params)
     if t[1] != None:
       aux = params.copy()
       procTable[t[3]] = {'param' : aux , 'return' : t[2]}
       params.clear()
-      scope = t[3]
-
+      for key, value in symTable.items():
+        if value['scope'] == 'funcion':
+          symTable[key]['scope'] = t[3]
     pass
 
  
@@ -363,6 +367,7 @@ def p_tipo(t):
 
 def p_principal(t): 
     'principal : INICIOPRINCIPAL C FINPRINCIPAL'
+    global scope
     scope = 'main'
     pass
 
