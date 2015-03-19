@@ -147,10 +147,10 @@ def t_error(t):
 def p_program(t): 
     'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
     print("\nCUMPLE CON TODAS LAS REGLAS.\n")
-    print("\nVariables Globales.\n")
-    print (varGlb)
-    print("\nProcedure table.\n")
-    print (procTable)
+    #print("\nVariables Globales.\n")
+    #print (varGlb)
+    #print("\nProcedure table.\n")
+    #print (procTable)
     pass
 
 def p_A(t): 
@@ -262,17 +262,26 @@ def p_G(t):
  
 def p_termino(t): 
     'termino : factor H'
+    #print(t[2])
     pass
  
 def p_H(t): 
     '''H : MULT factor
            | DIV factor
            | empty'''
+    if t[1] == '*':
+      t[0]= '*'
+    elif t[1] == '/':
+      t[0]= '/'
+    print(t[0])
     pass
  
 def p_factor(t): 
     '''factor : PARENTIZQ expresion PARENTDER
            | I varcte'''
+    if t[1] == '-':
+      t[0] = (-1)*t[1]
+    pass
     pass
 
 
@@ -280,7 +289,11 @@ def p_I(t):
     '''I : MAS
            | MENOS
            | empty '''
-pass
+    if t[1] == '-':
+      t[0] = t[1]
+    else:
+      t[0] = '+'
+    pass
  
 def p_varcte(t):
     '''varcte : ID
@@ -288,6 +301,7 @@ def p_varcte(t):
            | CTEFLOTANTE
            | CTEENTERO
            | llamada '''
+    t[0] = t[1]
 pass
  
 def p_llamada(t):

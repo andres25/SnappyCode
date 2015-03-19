@@ -7,6 +7,9 @@ crear flotante global2;
 INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS FLOTANTE xoxo, ENTERO yoyo, TEXTO wowow
 crear flotante funcion1;
 crear entero funcion2;
+
+funcion2 = 2 * 2;
+
 REGRESA 1
 FINFUNCION
 
