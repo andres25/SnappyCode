@@ -96,6 +96,13 @@ reserved = { 'inicioprograma' : 'INICIOPROGRAMA',
              'Y': 'Y',
               }
 
+precedence = (
+    ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE'),
+    ('left','MAS','MENOS'),
+    ('left','MULT','DIV'),
+    ('right','UMINUS'),
+    )
+
 t_CTETEXTO               = r'"\"".+"\""'
 t_PUNTOCOMA              = r';'
 t_PARENTIZQ              = r'\('
@@ -117,7 +124,8 @@ t_ignore            = " \t"
 
 varGlb = {} 
 varFunc = {}
-scope = "Indefinido"
+scope = "global"
+actualFunc = "none"
 params = {}
 procTable = {}
 
@@ -146,7 +154,7 @@ def t_error(t):
 
 def p_program(t): 
     'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
-    print("\nCUMPLE CON TODAS LAS REGLAS.\n")
+    #print("\nCUMPLE CON TODAS LAS REGLAS.\n")
     #print("\nVariables Globales.\n")
     #print (varGlb)
     #print("\nProcedure table.\n")
@@ -163,15 +171,15 @@ def p_vars(t):
            | empty'''
     if t[1] != None:
       global scope
+      if t[2] == 'entero':
+        aux = 0
+      else:
+        aux = 0.0
+
       if scope == 'global':
-        varGlb[t[3]] = {'type' : t[2], 'scope' : scope}
+        varGlb[t[3]] = {'type' : t[2], 'scope' : scope, 'val': aux}
       else:
-        varFunc[t[3]] = {'type' : t[2], 'scope' : scope}
-    else:
-      if scope == 'Indefinido':
-        scope = 'global'
-      else:
-        scope = 'funcion'
+        varFunc[t[3]] = {'type' : t[2], 'scope' : scope,'val': aux}
     pass
 
  
@@ -185,17 +193,35 @@ def p_B(t):
     pass
  
 def p_funcion(t):
-    'funcion : INICIOFUNCION variable ID param vars C REGRESA expresion FINFUNCION'
-    if t[1] != None:
-      for key, value in varFunc.items():
-        if value['scope'] == 'funcion':
-          varFunc[key]['scope'] = t[3]
+    'funcion : iniciofunc paramsfunc varsfunc finfunc'
+    pass
 
-      aux = params.copy()
-      aux2 = varFunc.copy() 
-      procTable[t[3]] = {'param' : aux , 'return' : t[2], 'symTable': aux2}
-      params.clear()
-      varFunc.clear()
+def p_iniciofunc(t): 
+    'iniciofunc : INICIOFUNCION variable ID'
+    t[0]= t[3]
+    global scope
+    scope = 'parametro'
+    global actualFunc
+    actualFunc = t[3]
+    pass
+
+def p_paramsfunc(t): 
+    'paramsfunc : param'
+    global scope
+    scope = 'local'
+    pass
+
+def p_varsfunc(t): 
+    'varsfunc : vars'
+    aux = params.copy()
+    aux2 = varFunc.copy() 
+    procTable[actualFunc] = {'param' : aux , 'return' : t[1], 'symTable': aux2}
+    params.clear()
+    varFunc.clear()
+    pass
+
+def p_finfunc(t): 
+    'finfunc : C REGRESA expresion FINFUNCION'
     pass
 
  
@@ -236,70 +262,63 @@ def p_estatuto(t):
  
 def p_asignacion(t): 
     'asignacion : ID IGUAL expresion PUNTOCOMA'
+    procTable[actualFunc]['symTable'][t[1]]['val'] = t[3]
+    print ( procTable)
     pass
  
-def p_expresion(t): 
-    'expresion : exp F'
+def p_expresion_eval(t): 
+    '''expresion : exp MAYORQUE exp
+           | exp MENORQUE exp
+           | exp DIFERENTEQUE exp
+           | exp IGUALQUE exp'''
+    if t[2] == '>'  : t[0] = t[1] > t[3]
+    elif t[2] == '<': t[0] = t[1] < t[3]
+    elif t[2] == '!=': t[0] = t[1] != t[3]
+    elif t[2] == '==': t[0] = t[1] == t[3]
     pass
- 
-def p_F(t): 
-    '''F : MAYORQUE exp
-           | MENORQUE exp
-           | DIFERENTEQUE exp
-           | IGUALQUE exp
-           | empty'''
-    pass
- 
-def p_exp(t): 
-    'exp : termino G'
-    pass
- 
-def p_G(t): 
-    '''G : MAS termino
-           | MENOS termino
-           | empty'''
-    pass
- 
-def p_termino(t): 
-    'termino : factor H'
-    #print(t[2])
-    pass
- 
-def p_H(t): 
-    '''H : MULT factor
-           | DIV factor
-           | empty'''
-    if t[1] == '*':
-      t[0]= '*'
-    elif t[1] == '/':
-      t[0]= '/'
-    print(t[0])
-    pass
- 
-def p_factor(t): 
-    '''factor : PARENTIZQ expresion PARENTDER
-           | I varcte'''
-    if t[1] == '-':
-      t[0] = (-1)*t[1]
-    pass
+
+def p_expresion_empty(t): 
+    '''expresion : exp '''
+    t[0] = t[1]
     pass
 
 
-def p_I(t):
-    '''I : MAS
-           | MENOS
-           | empty '''
-    if t[1] == '-':
-      t[0] = t[1]
-    else:
-      t[0] = '+'
-    pass
  
-def p_varcte(t):
-    '''varcte : ID
-           | CTETEXTO
-           | CTEFLOTANTE
-           | CTEENTERO
+def p_exp_binop(t):
+    '''exp : exp MAS exp
+                  | exp MENOS exp
+                  | exp MULT exp
+                  | exp DIV exp'''
+    if t[2] == '+'  : t[0] = t[1] + t[3]
+    elif t[2] == '-': t[0] = t[1] - t[3]
+    elif t[2] == '*': t[0] = t[1] * t[3]
+    elif t[2] == '/': t[0] = t[1] / t[3]
+ 
+def p_exp_uminus(t):
+    'exp : MENOS exp %prec UMINUS'
+    t[0] = -t[2]
+ 
+def p_exp_agrupacion(t): 
+    'exp : PARENTIZQ expresion PARENTDER'
+    t[0] = t[2]
+    pass
+
+def p_exp_num(t):
+    '''exp : CTEENTERO
+          | CTEFLOTANTE '''
+    t[0] = t[1]
+
+def p_exp_var(t):
+    'exp : ID'
+    try:
+        print (procTable[scope])
+        t[0] = 1
+    except LookupError:
+        print("Undefined name '%s'" % t[1])
+        t[0] = 0
+ 
+def p_exp_texto(t):
+    '''varcte : CTETEXTO
            | llamada '''
     t[0] = t[1]
 pass
