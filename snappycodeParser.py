@@ -42,8 +42,12 @@ def p_vars(t):
       global scope
       if t[2] == 'entero':
         vDir = 0
-      else:
+      elif t[2] == 'flotante':
         vDir = 0.0
+      elif t[2] == 'texto':
+        vDir = ' '
+      elif t[2] == 'booleano':
+        vDir = True
 
       if actualProc == 'global':
         #varGlb[t[3]] = {'type' : t[2], 'scope' : scope, 'val': aux}
@@ -125,6 +129,8 @@ def p_param(t):
         vDir = 0.0
       elif t[2] == 'texto':
         vDir = ' '
+      elif t[2] == 'booleano':
+        vDir = True
       else:
         print("Error de sintaxis en parametros de funcion " + actualProc)
       paramInsert(t[3], t[2], vDir, actualProc)
@@ -141,6 +147,8 @@ def p_E(t):
         vDir = 0.0
       elif t[2] == 'texto':
         vDir = ' '
+      elif t[2] == 'booleano':
+        vDir = True
       else:
         print("Error de sintaxis en parametros de funcion " + actualProc)
       paramInsert(t[3], t[2], vDir, actualProc)
@@ -162,9 +170,6 @@ def p_expresion_eval(t):
     '''expresion : exp MAYORQUE exp
            | exp MENORQUE exp
            | exp DIFERENTEQUE exp
-<<<<<<< Updated upstream
-           | exp IGUALQUE exp'''
-=======
            | exp IGUALQUE exp
            | exp MAYORIGUAL exp
            | exp MENORIGUAL exp'''
@@ -174,7 +179,7 @@ def p_expresion_eval(t):
     elif t[2] == '==': t[0] = t[1] == t[3]
     elif t[2] == '>=': t[0] = t[1] >= t[3]
     elif t[2] == '<=': t[0] = t[1] <= t[3]
->>>>>>> Stashed changes
+
     pass
 
 def p_expresion_empty(t): 
@@ -209,7 +214,8 @@ def p_exp_booleano(t):
     '''exp : TRUE
           | FALSE '''
     if t[1] == 'TRUE': t[0] = 1
-    else t[0] = 0 
+    else:
+      t[0] = 0 
     pass
 
 def p_exp_var(t):

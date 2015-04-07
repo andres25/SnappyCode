@@ -21,7 +21,7 @@ FINFUNCION
 
 INICIOPRINCIPAL 
 	crear flotante var1main;
-	crear entero var2main;
+	crear booleano var2main;
 FINPRINCIPAL 
 
 
