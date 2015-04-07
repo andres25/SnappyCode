@@ -15,7 +15,7 @@ actualProc = "global"
 #params = {}
 
 precedence = (
-    ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE'),
+    ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE', 'MAYORIGUAL', 'MENORIGUAL'),
     ('left','MAS','MENOS'),
     ('left','MULT','DIV'),
     ('right','UMINUS'),
@@ -104,7 +104,8 @@ def p_finfunc(t):
 def p_variable(t): 
     '''variable : ENTERO
             | FLOTANTE
-            | TEXTO'''
+            | TEXTO
+            | BOOLEANO'''
     t[0] = t[1]
     pass
  
@@ -161,7 +162,19 @@ def p_expresion_eval(t):
     '''expresion : exp MAYORQUE exp
            | exp MENORQUE exp
            | exp DIFERENTEQUE exp
+<<<<<<< Updated upstream
            | exp IGUALQUE exp'''
+=======
+           | exp IGUALQUE exp
+           | exp MAYORIGUAL exp
+           | exp MENORIGUAL exp'''
+    if t[2] == '>'  : t[0] = t[1] > t[3]
+    elif t[2] == '<': t[0] = t[1] < t[3]
+    elif t[2] == '!=': t[0] = t[1] != t[3]
+    elif t[2] == '==': t[0] = t[1] == t[3]
+    elif t[2] == '>=': t[0] = t[1] >= t[3]
+    elif t[2] == '<=': t[0] = t[1] <= t[3]
+>>>>>>> Stashed changes
     pass
 
 def p_expresion_empty(t): 
@@ -190,6 +203,14 @@ def p_exp_num(t):
     '''exp : CTEENTERO
           | CTEFLOTANTE '''
     t[0] = t[1]
+    pass
+
+def p_exp_booleano(t):
+    '''exp : TRUE
+          | FALSE '''
+    if t[1] == 'TRUE': t[0] = 1
+    else t[0] = 0 
+    pass
 
 def p_exp_var(t):
     'exp : ID'

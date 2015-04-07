@@ -8,9 +8,10 @@ tokens = ( 'INICIOPROGRAMA', 'FINPROGRAMA', 'INICIOFUNCION', 'FINFUNCION', 'REGR
     'CREAR','DIBUJAR','BORRAR','GIRAR','ID','TRUE','FALSE', 'INICIOPRINCIPAL', 'FINPRINCIPAL',
     'MOVER','DERECHA','IZQUIERDA','ARRIBA','ABAJO','SI','FINSI' ,'ENTONCES',
     'SINO','MIENTRAS','FINMIENTRAS','HACER','LISTA','AGREGAR', 'X', 'Y',
-    'SACAR', 'VER','IGUAL', 'IGUALQUE' , 'MAYORQUE' , 'MENORQUE', 'DIFERENTEQUE', 'PINTAR', 
-    'DESPINTAR', 'DECIRALUSUARIO', 'PEDIRALUSUARIO', 'INICIOBLOQUE', 'FINBLOQUE', 'MAS','MENOS','COMA',
-    'MULT', 'DIV', 'PUNTOCOMA','PARENTIZQ','PARENTDER', 'ENTERO', 'FLOTANTE', 'TEXTO', 'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO'
+    'SACAR', 'VER','IGUAL', 'IGUALQUE' , 'MAYORQUE' , 'MENORQUE', 'DIFERENTEQUE', 
+    'PINTAR', 'DESPINTAR', 'DECIRALUSUARIO', 'PEDIRALUSUARIO', 'INICIOBLOQUE', 'FINBLOQUE', 'MAS',
+    'MENOS','COMA', 'MULT', 'DIV', 'PUNTOCOMA','PARENTIZQ','PARENTDER', 'ENTERO', 'FLOTANTE', 'TEXTO', 
+    'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO', 'MAYORIGUAL', 'MENORIGUAL', 'BOOLEANO'
     )
 
 reserved = { 'inicioprograma' : 'INICIOPROGRAMA', 
@@ -91,6 +92,12 @@ reserved = { 'inicioprograma' : 'INICIOPROGRAMA',
              'X': 'X',
              'y': 'Y',
              'Y': 'Y',
+             'BOOLEANO': 'BOOLEANO',
+             'booleano': 'BOOLEANO',
+             'TRUE': 'TRUE',
+             'true': 'TRUE',
+             'FALSE': 'FALSE',
+             'false': 'FALSE',
               }
 
 t_CTETEXTO               = r'"\"".+"\""'
@@ -98,19 +105,21 @@ t_PUNTOCOMA              = r';'
 t_PARENTIZQ              = r'\('
 t_PARENTDER              = r'\)'
 t_IGUAL                  = r'='
-t_IGUALQUE            = r'=='
-t_MAS              = r'\+'
-t_MENOS             = r'-'
-t_DIV          = r'\/'
-t_MULT              = r'\*'
-t_MENORQUE              = r'<'
-t_MAYORQUE           = r'>'
-t_DIFERENTEQUE         = r'<>'
-t_COMA             = r','
-t_TRUE              = r'[1]'
-t_FALSE             = r'[0]'
+t_IGUALQUE               = r'=='
+t_MAS                    = r'\+'
+t_MENOS                  = r'-'
+t_DIV                    = r'\/'
+t_MULT                   = r'\*'
+t_MENORQUE               = r'<'
+t_MAYORQUE               = r'>'
+t_DIFERENTEQUE           = r'<>'
+t_MAYORIGUAL             = r'>='
+t_MENORIGUAL             = r'<='
+t_COMA                   = r','
+t_TRUE                   = r'[1]'
+t_FALSE                  = r'[0]'
 
-t_ignore            = " \t"
+t_ignore                 = " \t"
 
 def t_ID(t):
     r'[A-Za-z]+[A-Za-z0-9]*'
