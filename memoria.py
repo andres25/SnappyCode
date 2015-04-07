@@ -54,5 +54,6 @@ class Memoria_celda(object):
 			self.direccion = _dir
 			self.valor = value
 		else:
-			prentero "No existe la direccion de memoria"
+			print "No existe la direccion de memoria"
 			sys.exit()
+	

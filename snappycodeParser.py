@@ -5,14 +5,13 @@ import sys
 import snappycodeLex
 import fileinput
 from procVarTables import *
+from memoria import *
 
 tokens = snappycodeLex.tokens
 
 varGlb = {} 
-#varFunc = {}
-#scope = "global"
 actualProc = "global"
-#params = {}
+memoria = 0
 
 precedence = (
     ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE', 'MAYORIGUAL', 'MENORIGUAL'),
@@ -23,11 +22,6 @@ precedence = (
 
 def p_program(t): 
     'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
-    #print("\nCUMPLE CON TODAS LAS REGLAS.\n")
-    #print("\nVariables Globales.\n")
-    #print (varGlb)
-    #print("\nProcedure table.\n")
-    #print (procTable)
     pass
 
 def p_A(t): 
@@ -38,23 +32,14 @@ def p_A(t):
 def p_vars(t): 
     '''vars : CREAR tipo ID PUNTOCOMA vars
            | empty'''
+    global memoria
     if t[1] != None:
-      global scope
-      if t[2] == 'entero':
-        vDir = 0
-      elif t[2] == 'flotante':
-        vDir = 0.0
-      elif t[2] == 'texto':
-        vDir = ' '
-      elif t[2] == 'booleano':
-        vDir = True
-
       if actualProc == 'global':
-        #varGlb[t[3]] = {'type' : t[2], 'scope' : scope, 'val': aux}
-        varGlbInsert(t[3], t[2], vDir)
+        asigna_memoria_global(t[2])
+        varGlbInsert(t[3], t[2], memoria)
       else:
-        #varFunc[t[3]] = {'type' : t[2], 'scope' : scope,'val': aux}
-        varLocInsert(t[3], t[2], vDir, actualProc)
+        asigna_memoria_local(t[2])
+        varLocInsert(t[3], t[2], memoria, actualProc)
     pass
 
  
@@ -121,37 +106,20 @@ def p_C(t):
 def p_param(t): 
     '''param : PARAMETROS tipo ID E
            | empty'''
+    global memoria
     if t[1] != None:
       #params[t[3]] = {'type' : t[2]}
-      if t[2] == 'entero':
-        vDir = 0
-      elif t[2] == 'flotante':
-        vDir = 0.0
-      elif t[2] == 'texto':
-        vDir = ' '
-      elif t[2] == 'booleano':
-        vDir = True
-      else:
-        print("Error de sintaxis en parametros de funcion " + actualProc)
-      paramInsert(t[3], t[2], vDir, actualProc)
+      asigna_memoria_local(t[2])
+      paramInsert(t[3], t[2], memoria, actualProc)
     pass     
  
 def p_E(t): 
     '''E : COMA tipo ID E
            | empty'''
+    global memoria
     if t[1] != None:
-      #params[t[3]] = {'type' : t[2]}
-      if t[2] == 'entero':
-        vDir = 0
-      elif t[2] == 'flotante':
-        vDir = 0.0
-      elif t[2] == 'texto':
-        vDir = ' '
-      elif t[2] == 'booleano':
-        vDir = True
-      else:
-        print("Error de sintaxis en parametros de funcion " + actualProc)
-      paramInsert(t[3], t[2], vDir, actualProc)
+      asigna_memoria_local(t[2])
+      paramInsert(t[3], t[2], memoria, actualProc)
     pass
  
 def p_estatuto(t): 
@@ -337,6 +305,44 @@ def p_error(p):
         print("Error de sintaxis en: '%s'" % p.value + p.type)
     else:
         print("Error de sintaxis")
+
+def asigna_memoria_global(tipo):
+  global EnteroGlobal
+  global FlotanteGlobal
+  global TextoGlobal
+  global BooleanGlobal
+  global memoria 
+  if tipo == 'entero':
+    memoria = EnteroGlobal
+    EnteroGlobal += 1
+  elif tipo == 'flotante':
+    memoria = FlotanteGlobal
+    FlotanteGlobal += 1
+  elif tipo == 'texto':
+    memoria = TextoGlobal
+    TextoGlobal += 1
+  elif tipo == 'booleano':
+    memoria = BooleanGlobal
+    BooleanGlobal += 1
+
+def asigna_memoria_local(tipo):
+  global EnteroLocal
+  global FlotanteLocal
+  global TextoLocal
+  global BooleanLocal
+  global memoria 
+  if tipo == 'entero':
+    memoria = EnteroLocal
+    EnteroLocal += 1
+  elif tipo == 'flotante':
+    memoria = FlotanteLocal
+    FlotanteLocal += 1
+  elif tipo == 'texto':
+    memoria = TextoLocal
+    TextoLocal += 1
+  elif tipo == 'booleano':
+    memoria = BooleanLocal
+    BooleanLocal += 1
 
 import ply.yacc as yacc
 yacc.yacc()
