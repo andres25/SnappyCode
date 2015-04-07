@@ -23,11 +23,11 @@ cubo_semantico = {
 				"&&":"Error", 
 				"||":"Error",
 				}, 
-			"DECIMAL": {
-				"+":"DECIMAL", 
-				"-":"DECIMAL", 
-				"*":"DECIMAL", 
-				"/":"DECIMAL", 
+			"FLOTANTE": {
+				"+":"FLOTANTE", 
+				"-":"FLOTANTE", 
+				"*":"FLOTANTE", 
+				"/":"FLOTANTE", 
 				">":"BOOLEANO", 
 				">=":"BOOLEANO",
 				"<=":"BOOLEANO",
@@ -84,32 +84,32 @@ cubo_semantico = {
 				"||":"Error",
 				},
 			}, 
-		"DECIMAL":{
+		"FLOTANTE":{
 			"ENTERO": {
-				"+":"DECIMAL", 
-				"-":"DECIMAL", 
-				"*":"DECIMAL", 
-				"/":"DECIMAL", 
+				"+":"FLOTANTE", 
+				"-":"FLOTANTE", 
+				"*":"FLOTANTE", 
+				"/":"FLOTANTE", 
 				">":"BOOLEANO", 
 				">=":"BOOLEANO",
 				"<=":"BOOLEANO",
 				"<":"BOOLEANO", 
-				"=":"DECIMAL", 
+				"=":"FLOTANTE", 
 				"==": "BOOLEANO",
 				"!=":"BOOLEANO",
 				"&&":"Error", 
 				"||":"Error",
 				}, 
-			"DECIMAL": {
-				"+":"DECIMAL", 
-				"-":"DECIMAL", 
-				"*":"DECIMAL", 
-				"/":"DECIMAL", 
+			"FLOTANTE": {
+				"+":"FLOTANTE", 
+				"-":"FLOTANTE", 
+				"*":"FLOTANTE", 
+				"/":"FLOTANTE", 
 				">":"BOOLEANO", 
 				">=":"BOOLEANO",
 				"<=":"BOOLEANO",
 				"<":"BOOLEANO", 
-				"=":"DECIMAL",
+				"=":"FLOTANTE",
 				"==": "BOOLEANO", 
 				"!=":"BOOLEANO",
 				"&&":"Error", 
@@ -177,7 +177,7 @@ cubo_semantico = {
 				"&&":"Error", 
 				"||":"Error",
 				}, 
-			"DECIMAL": {
+			"FLOTANTE": {
 				"+":"Error", 
 				"-":"Error", 
 				"*":"Error", 
@@ -254,7 +254,7 @@ cubo_semantico = {
 				"&&":"Error", 
 				"||":"Error",
 				}, 
-			"DECIMAL": {
+			"FLOTANTE": {
 				"+":"Error", 
 				"-":"Error", 
 				"*":"Error", 
@@ -331,7 +331,7 @@ cubo_semantico = {
 				"&&":"Error", 
 				"||":"Error",
 				}, 
-			"DECIMAL": {
+			"FLOTANTE": {
 				"+":"Error", 
 				"-":"Error", 
 				"*":"Error", 
