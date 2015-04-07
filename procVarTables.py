@@ -73,13 +73,13 @@ def procPrint(procTable):
 	for proc in procTable:
 		if proc:
 			print (proc.procName, " - ", proc.procReturn, " - ", proc.procDir)
-			print ("Vars" + "\n")
-			for var in proc.procVars:
-				print (var.varName, " - ", var.varType, " - ", var.varDir)
-			print ("\n")
-			print ("Params" + "\n")
+			print ("  Params")
 			for param in proc.procParams:
-				print (param.varName, " - ", param.varType, " - ", param.varDir)
+				print ("    " + param.varName, " - ", param.varType, " - ", param.varDir)
+			print ("\n")
+			print ("  Vars")
+			for var in proc.procVars:
+				print ("    " + var.varName, " - ", var.varType, " - ", var.varDir)
 			print ("\n")
 
 		else:

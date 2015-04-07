@@ -12,7 +12,7 @@ BooleanLocal=7000
 
 #Temporales
 EnteroTemporal=8000
-FlotanteTemporal=9000 
+FlotanteTemporal=9000
 TextoTemporal=10000
 BooleanTemporal=11000
 
@@ -23,7 +23,7 @@ TextoConstante=14000
 BooleanConstante=15000
 
 class Memoria(object):
-  def __init__(self):
+	def __init__(self):
 		self.globales = Memoria_sub()
 		self.locales = Memoria_sub()
 		self.temporales = Memoria_sub()
@@ -54,6 +54,6 @@ class Memoria_celda(object):
 			self.direccion = _dir
 			self.valor = value
 		else:
-			print "No existe la direccion de memoria"
+			print ("No existe la direccion de memoria")
 			sys.exit()
 	

@@ -307,42 +307,42 @@ def p_error(p):
         print("Error de sintaxis")
 
 def asigna_memoria_global(tipo):
-  global EnteroGlobal
-  global FlotanteGlobal
-  global TextoGlobal
-  global BooleanGlobal
-  global memoria 
-  if tipo == 'entero':
-    memoria = EnteroGlobal
-    EnteroGlobal += 1
-  elif tipo == 'flotante':
-    memoria = FlotanteGlobal
-    FlotanteGlobal += 1
-  elif tipo == 'texto':
-    memoria = TextoGlobal
-    TextoGlobal += 1
-  elif tipo == 'booleano':
-    memoria = BooleanGlobal
-    BooleanGlobal += 1
+    global EnteroGlobal
+    global FlotanteGlobal
+    global TextoGlobal
+    global BooleanGlobal
+    global memoria 
+    if tipo == 'entero' or tipo == 'ENTERO':
+      memoria = EnteroGlobal
+      EnteroGlobal += 1
+    elif tipo == 'flotante' or tipo == 'FLOTANTE':
+      memoria = FlotanteGlobal
+      FlotanteGlobal += 1
+    elif tipo == 'texto' or tipo == 'TEXTO':
+      memoria = TextoGlobal
+      TextoGlobal += 1
+    elif tipo == 'booleano' or tipo == 'BOOLEANO':
+      memoria = BooleanGlobal
+      BooleanGlobal += 1
 
 def asigna_memoria_local(tipo):
-  global EnteroLocal
-  global FlotanteLocal
-  global TextoLocal
-  global BooleanLocal
-  global memoria 
-  if tipo == 'entero':
-    memoria = EnteroLocal
-    EnteroLocal += 1
-  elif tipo == 'flotante':
-    memoria = FlotanteLocal
-    FlotanteLocal += 1
-  elif tipo == 'texto':
-    memoria = TextoLocal
-    TextoLocal += 1
-  elif tipo == 'booleano':
-    memoria = BooleanLocal
-    BooleanLocal += 1
+    global EnteroLocal
+    global FlotanteLocal
+    global TextoLocal
+    global BooleanLocal
+    global memoria 
+    if tipo == 'entero' or tipo == 'ENTERO':
+      memoria = EnteroLocal
+      EnteroLocal += 1
+    elif tipo == 'flotante' or tipo == 'FLOTANTE':
+      memoria = FlotanteLocal
+      FlotanteLocal += 1
+    elif tipo == 'texto' or tipo == 'TEXTO':
+      memoria = TextoLocal
+      TextoLocal += 1
+    elif tipo == 'booleano' or tipo == 'BOOLEANO':
+      memoria = BooleanLocal
+      BooleanLocal += 1
 
 import ply.yacc as yacc
 yacc.yacc()
