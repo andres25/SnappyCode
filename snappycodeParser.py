@@ -20,46 +20,58 @@ precedence = (
     ('right','UMINUS'),
     )
 
+
+
 def p_program(t): 
-    'program : INICIOPROGRAMA A cuerpo FINPROGRAMA'
+    'program : INICIOPROGRAMA vars cuerpo FINPROGRAMA'
     pass
 
-def p_A(t): 
-    '''A : vars
-           | empty'''
-    pass
 
 def p_vars(t): 
-    '''vars : CREAR tipo ID PUNTOCOMA vars
-           | empty'''
+    'vars : vars CREAR tipo ID PUNTOCOMA '
     global memoria
-    if t[1] != None:
-      if actualProc == 'global':
-        asigna_memoria_global(t[2])
-        varGlbInsert(t[3], t[2], memoria)
-      else:
-        asigna_memoria_local(t[2])
-        varLocInsert(t[3], t[2], memoria, actualProc)
+    if actualProc == 'global':
+      asigna_memoria_global(t[3])
+      varGlbInsert(t[4], t[3], memoria)
+    else:
+      asigna_memoria_local(t[3])
+      varLocInsert(t[4], t[3], memoria, actualProc)
+    pass
+
+def p_tipo(t):
+    '''tipo   : ENTERO
+              | FLOTANTE
+              | TEXTO
+              | BOOLEANO
+              | LISTA '''
+    t[0] = t[1]
+    pass
+
+def p_vars_empty(t): 
+    'vars : empty'
+
+def p_empty(t):
+    'empty : '
     pass
 
  
 def p_cuerpo(t): 
-    'cuerpo : B principal'
+    'cuerpo : cuerpo_func principal'
     global procTable
     procPrint(procTable)
     pass
  
-def p_B(t): 
-    '''B : funcion B
-           | empty'''
+def p_cuerpo_func(t): 
+    '''cuerpo_func : cuerpo_func funcion 
+         | empty'''
     pass
  
 def p_funcion(t):
-    'funcion : iniciofunc paramsfunc varsfunc finfunc'
+    'funcion : iniciofunc param vars finfunc'
     pass
 
 def p_iniciofunc(t): 
-    'iniciofunc : INICIOFUNCION variable ID'
+    'iniciofunc : INICIOFUNCION tipo ID'
     t[0]= t[3]
     global scope
     scope = 'parametro'
@@ -69,58 +81,43 @@ def p_iniciofunc(t):
     procInsert(actualProc, t[2], pDir)
     pass
 
-def p_paramsfunc(t): 
-    'paramsfunc : param'
+def p_param(t): 
+    'param : PARAMETROS tipo ID param_mult'
     global scope
     scope = 'local'
+    global memoria
+      #params[t[3]] = {'type' : t[2]}
+    asigna_memoria_local(t[2])
+    paramInsert(t[3], t[2], memoria, actualProc)
+    pass
+     
+ 
+def p_param_mult(t): 
+    'param_mult : COMA tipo ID param_mult'
+    global memoria
+    asigna_memoria_local(t[2])
+    paramInsert(t[3], t[2], memoria, actualProc)
     pass
 
-def p_varsfunc(t): 
-    'varsfunc : vars'
-    #aux = params.copy()
-    #aux2 = varFunc.copy() 
-    #procTable[actualProc] = {'param' : aux , 'return' : t[1], 'symTable': aux2}
-    
-    #params.clear()
-    #varFunc.clear()
+def p_param_mult_empty(t): 
+    'param_mult : empty'
     pass
+
+def p_param_empty(t): 
+    'param : empty'
+    pass 
+
 
 def p_finfunc(t): 
     'finfunc : C REGRESA expresion FINFUNCION'
     pass
 
  
-def p_variable(t): 
-    '''variable : ENTERO
-            | FLOTANTE
-            | TEXTO
-            | BOOLEANO'''
-    t[0] = t[1]
-    pass
- 
 def p_C(t): 
-    '''C : estatuto C
+    '''C : C estatuto 
            | empty'''
     pass
  
-def p_param(t): 
-    '''param : PARAMETROS tipo ID E
-           | empty'''
-    global memoria
-    if t[1] != None:
-      #params[t[3]] = {'type' : t[2]}
-      asigna_memoria_local(t[2])
-      paramInsert(t[3], t[2], memoria, actualProc)
-    pass     
- 
-def p_E(t): 
-    '''E : COMA tipo ID E
-           | empty'''
-    global memoria
-    if t[1] != None:
-      asigna_memoria_local(t[2])
-      paramInsert(t[3], t[2], memoria, actualProc)
-    pass
  
 def p_estatuto(t): 
     '''estatuto : asignacion
@@ -134,6 +131,7 @@ def p_asignacion(t):
     'asignacion : ID IGUAL expresion PUNTOCOMA'
     pass
  
+
 def p_expresion_eval(t): 
     '''expresion : exp MAYORQUE exp
            | exp MENORQUE exp
@@ -147,16 +145,13 @@ def p_expresion_eval(t):
     elif t[2] == '==': t[0] = t[1] == t[3]
     elif t[2] == '>=': t[0] = t[1] >= t[3]
     elif t[2] == '<=': t[0] = t[1] <= t[3]
-
     pass
 
-def p_expresion_empty(t): 
-    '''expresion : exp '''
-    t[0] = t[1]
+def p_exp_agrupacion(t): 
+    'exp : PARENTIZQ expresion PARENTDER'
+    t[0] = t[2]
     pass
 
-
- 
 def p_exp_binop(t):
     '''exp : exp MAS exp
                   | exp MENOS exp
@@ -167,10 +162,7 @@ def p_exp_uminus(t):
     'exp : MENOS exp %prec UMINUS'
     t[0] = -t[2]
  
-def p_exp_agrupacion(t): 
-    'exp : PARENTIZQ expresion PARENTDER'
-    t[0] = t[2]
-    pass
+
 
 def p_exp_num(t):
     '''exp : CTEENTERO
@@ -196,37 +188,53 @@ def p_exp_var(t):
         t[0] = 0
  
 def p_exp_texto(t):
-    '''varcte : CTETEXTO
+    '''exp : CTETEXTO
            | llamada '''
     t[0] = t[1]
 pass
- 
+
 def p_llamada(t):
-    'llamada : ID L'
+    'llamada : ID llamada_param'
 pass
- 
-def p_L(t):
-    '''L : PARAMETROS expresion M
+
+def p_llamada_param(t):
+    '''llamada_param : PARAMETROS expresion llamada_param_mult
            | empty  '''
 pass
+def p_expresion_empty(t): 
+    '''expresion : exp '''
+    t[0] = t[1]
+    pass
  
-def p_M(t):
-    '''M : COMA expresion M
+
+def p_llamada_param_mult(t):
+    '''llamada_param_mult :  llamada_param_mult COMA expresion 
            | empty  '''
 pass
  
 def p_condicion(t):
-    'condicion : SI expresion ENTONCES bloque J FINSI'
+    'condicion : SI expresion ENTONCES bloque condicion_else FINSI'
     pass
  
-def p_J(t):
-    '''J : SINO bloque
+def p_bloque(t):
+    'bloque   : INICIOBLOQUE bloque_estatuto_mult FINBLOQUE'
+    pass
+
+def p_bloque_estatuto_mult(t):
+    '''bloque_estatuto_mult        : bloque_estatuto_mult estatuto 
+               | empty '''
+    pass
+
+def p_condicion_else(t):
+    '''condicion_else : SINO bloque
                | empty '''
     pass
  
 def p_ciclo(t):
     'ciclo    : MIENTRAS expresion HACER bloque FINMIENTRAS'
     pass
+
+
  
 def p_io(t):
     '''io : PEDIRALUSUARIO ID
@@ -240,6 +248,12 @@ def p_accion(t):
 def p_tipo_accion(t):
     '''tipo_accion : lista
                | objeto '''
+    pass
+
+def p_lista(t):
+    '''lista    : AGREGAR
+               | SACAR
+               | VER '''
     pass
  
 def p_objeto(t):
@@ -262,26 +276,6 @@ def p_O(t):
                | empty  '''
     pass
  
-def p_lista(t):
-    '''lista    : AGREGAR
-               | SACAR
-               | VER '''
-    pass
- 
-def p_bloque(t):
-    'bloque   : INICIOBLOQUE K FINBLOQUE'
-    pass
- 
-def p_K(t):
-    '''K        : estatuto K
-               | empty '''
-    pass
- 
-def p_tipo(t):
-    '''tipo     : variable
-               | LISTA '''
-    t[0] = t[1]
-    pass
 
 def p_principal(t): 
     'principal : iniciomain vars C FINPRINCIPAL'
@@ -296,9 +290,6 @@ def p_iniciomain(t):
     procInsert(actualProc, actualProc, pDir)
     pass
 
-def p_empty(t):
-    'empty : '
-    pass
 
 def p_error(p):
     if p:
@@ -345,7 +336,7 @@ def asigna_memoria_local(tipo):
       BooleanLocal += 1
 
 import ply.yacc as yacc
-yacc.yacc()
+yacc.yacc(method = 'LALR')
 
 program = []
 for line in fileinput.input():
