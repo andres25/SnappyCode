@@ -20,9 +20,11 @@ class procTableNode:
 		self.procReturn = pType
 		self.procDir = pDir
 		self.procVars= []
+		self.procParams =  []
 		self.procUsed = False
 
 procTable = [ ]
+varGlb = [ ]
 
 def procInsert(pName, pType, pDir):
 	global procTable
@@ -30,12 +32,24 @@ def procInsert(pName, pType, pDir):
 	procTable.append(node)
 
 
-def varInsert(vName, vType, vDir, pName):
+def varLocInsert(vName, vType, vDir, pName):
 	global procTable
 	var = varTableNode(vName, vType, vDir)
 	for proc in procTable:
 		if proc.procName == pName:
 			proc.procVars.append(var)
+
+def paramInsert(vName, vType, vDir, pName):
+	global procTable
+	var = varTableNode(vName, vType, vDir)
+	for proc in procTable:
+		if proc.procName == pName:
+			proc.procParams.append(var)
+
+def varGlbInsert(vName, vType, vDir):
+	global varGlb
+	var = varTableNode(vName, vType, vDir)
+	varGlb.append(var)
 
 def procFind(pName):
 	global procTable
@@ -50,17 +64,23 @@ def varFind(varTable, vName):
 
 def existe_var_asignar(varTable, vName):
 	if not varFind(varTable, vName):
-		print "Error: " + vName + " no existe"
+		print ("Error: " + vName + " no existe")
 		sys.exit()
 
 
 def procPrint(procTable):
-	print "Tabla de procedimientos y variables"
+	print ("Tabla de procedimientos y variables")
 	for proc in procTable:
 		if proc:
-			print proc.procName, " - ", proc.procReturn, " - ", proc.procDir
-			for var in proc.var:
-				print var.varName, " - ", var.varType, " - ", var.varDir
-			print "\n"
+			print (proc.procName, " - ", proc.procReturn, " - ", proc.procDir)
+			print ("Vars" + "\n")
+			for var in proc.procVars:
+				print (var.varName, " - ", var.varType, " - ", var.varDir)
+			print ("\n")
+			print ("Params" + "\n")
+			for param in proc.procParams:
+				print (param.varName, " - ", param.varType, " - ", param.varDir)
+			print ("\n")
+
 		else:
-			print "No procs defined"
+			print ("No procs defined")

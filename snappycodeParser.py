@@ -4,15 +4,15 @@ from ply.lex import TOKEN
 import sys
 import snappycodeLex
 import fileinput
+from procVarTables import *
 
 tokens = snappycodeLex.tokens
 
 varGlb = {} 
-varFunc = {}
-scope = "global"
-actualFunc = "none"
-params = {}
-procTable = {}
+#varFunc = {}
+#scope = "global"
+actualProc = "global"
+#params = {}
 
 precedence = (
     ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE'),
@@ -41,19 +41,23 @@ def p_vars(t):
     if t[1] != None:
       global scope
       if t[2] == 'entero':
-        aux = 0
+        vDir = 0
       else:
-        aux = 0.0
+        vDir = 0.0
 
-      if scope == 'global':
-        varGlb[t[3]] = {'type' : t[2], 'scope' : scope, 'val': aux}
+      if actualProc == 'global':
+        #varGlb[t[3]] = {'type' : t[2], 'scope' : scope, 'val': aux}
+        varGlbInsert(t[3], t[2], vDir)
       else:
-        varFunc[t[3]] = {'type' : t[2], 'scope' : scope,'val': aux}
+        #varFunc[t[3]] = {'type' : t[2], 'scope' : scope,'val': aux}
+        varLocInsert(t[3], t[2], vDir, actualProc)
     pass
 
  
 def p_cuerpo(t): 
     'cuerpo : B principal'
+    global procTable
+    procPrint(procTable)
     pass
  
 def p_B(t): 
@@ -70,8 +74,10 @@ def p_iniciofunc(t):
     t[0]= t[3]
     global scope
     scope = 'parametro'
-    global actualFunc
-    actualFunc = t[3]
+    global actualProc
+    actualProc = t[3]
+    pDir = 0
+    procInsert(actualProc, t[2], pDir)
     pass
 
 def p_paramsfunc(t): 
@@ -82,11 +88,12 @@ def p_paramsfunc(t):
 
 def p_varsfunc(t): 
     'varsfunc : vars'
-    aux = params.copy()
-    aux2 = varFunc.copy() 
-    procTable[actualFunc] = {'param' : aux , 'return' : t[1], 'symTable': aux2}
-    params.clear()
-    varFunc.clear()
+    #aux = params.copy()
+    #aux2 = varFunc.copy() 
+    #procTable[actualProc] = {'param' : aux , 'return' : t[1], 'symTable': aux2}
+    
+    #params.clear()
+    #varFunc.clear()
     pass
 
 def p_finfunc(t): 
@@ -110,15 +117,32 @@ def p_param(t):
     '''param : PARAMETROS tipo ID E
            | empty'''
     if t[1] != None:
-      params[t[3]] = {'type' : t[2]}
-       
+      #params[t[3]] = {'type' : t[2]}
+      if t[2] == 'entero':
+        vDir = 0
+      elif t[2] == 'flotante':
+        vDir = 0.0
+      elif t[2] == 'texto':
+        vDir = ' '
+      else:
+        print("Error de sintaxis en parametros de funcion " + actualProc)
+      paramInsert(t[3], t[2], vDir, actualProc)
     pass     
  
 def p_E(t): 
     '''E : COMA tipo ID E
            | empty'''
     if t[1] != None:
-      params[t[3]] = {'type' : t[2]}
+      #params[t[3]] = {'type' : t[2]}
+      if t[2] == 'entero':
+        vDir = 0
+      elif t[2] == 'flotante':
+        vDir = 0.0
+      elif t[2] == 'texto':
+        vDir = ' '
+      else:
+        print("Error de sintaxis en parametros de funcion " + actualProc)
+      paramInsert(t[3], t[2], vDir, actualProc)
     pass
  
 def p_estatuto(t): 
@@ -131,8 +155,6 @@ def p_estatuto(t):
  
 def p_asignacion(t): 
     'asignacion : ID IGUAL expresion PUNTOCOMA'
-    procTable[actualFunc]['symTable'][t[1]]['val'] = t[3]
-    print ( procTable)
     pass
  
 def p_expresion_eval(t): 
@@ -140,10 +162,6 @@ def p_expresion_eval(t):
            | exp MENORQUE exp
            | exp DIFERENTEQUE exp
            | exp IGUALQUE exp'''
-    if t[2] == '>'  : t[0] = t[1] > t[3]
-    elif t[2] == '<': t[0] = t[1] < t[3]
-    elif t[2] == '!=': t[0] = t[1] != t[3]
-    elif t[2] == '==': t[0] = t[1] == t[3]
     pass
 
 def p_expresion_empty(t): 
@@ -158,11 +176,7 @@ def p_exp_binop(t):
                   | exp MENOS exp
                   | exp MULT exp
                   | exp DIV exp'''
-    if t[2] == '+'  : t[0] = t[1] + t[3]
-    elif t[2] == '-': t[0] = t[1] - t[3]
-    elif t[2] == '*': t[0] = t[1] * t[3]
-    elif t[2] == '/': t[0] = t[1] / t[3]
- 
+
 def p_exp_uminus(t):
     'exp : MENOS exp %prec UMINUS'
     t[0] = -t[2]
@@ -180,7 +194,7 @@ def p_exp_num(t):
 def p_exp_var(t):
     'exp : ID'
     try:
-        print (procTable[scope])
+        #print (procTable[scope])
         t[0] = 1
     except LookupError:
         print("Undefined name '%s'" % t[1])
@@ -275,9 +289,16 @@ def p_tipo(t):
     pass
 
 def p_principal(t): 
-    'principal : INICIOPRINCIPAL C FINPRINCIPAL'
-    global scope
-    scope = 'main'
+    'principal : iniciomain vars C FINPRINCIPAL'
+
+    pass
+
+def p_iniciomain(t): 
+    'iniciomain : INICIOPRINCIPAL'
+    global actualProc
+    actualProc = 'main'
+    pDir = 0
+    procInsert(actualProc, actualProc, pDir)
     pass
 
 def p_empty(t):
