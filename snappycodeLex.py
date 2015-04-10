@@ -130,16 +130,17 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+
+def t_CTEFLOTANTE(t):
+    r'-?\d+\.\d*(e-?\d+)?'
+    t.value = float(t.value)
+    return t    
+
 def t_CTEENTERO(t):
-    r'[0-9]+'
+    r'\d+'
     t.value = int(t.value)
     return t
 
-def t_CTEFLOTANTE(t):
-    r'[0-9]+\.[0-9]+ '
-    t.value = float(t.value)
-    return t    
-    
 def t_error(t):
     print("Caracter no valido'%s'" % t.value[0])
     t.lexer.skip(1)

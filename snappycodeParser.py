@@ -8,8 +8,6 @@ from procVarTables import *
 from memoria import *
 
 tokens = snappycodeLex.tokens
-
-varGlb = {} 
 actualProc = "global"
 memoria = 0
 
@@ -32,10 +30,10 @@ def p_vars(t):
     global memoria
     if actualProc == 'global':
       asigna_memoria_global(t[3])
-      varGlbInsert(t[4], t[3], memoria)
+      varGlbInsert(t[4], None, t[3], memoria)
     else:
       asigna_memoria_local(t[3])
-      varLocInsert(t[4], t[3], memoria, actualProc)
+      varLocInsert(t[4], None, t[3], memoria, actualProc)
     pass
 
 def p_tipo(t):
@@ -164,18 +162,29 @@ def p_exp_uminus(t):
  
 
 
-def p_exp_num(t):
-    '''exp : CTEENTERO
-          | CTEFLOTANTE '''
+def p_exp_int(t):
+    'exp : CTEENTERO'
+    global memoria
+    asigna_memoria_constante('entero')
+    consInsert(t[1],'entero',memoria)
+    t[0] = t[1]
+
+    pass
+def p_exp_float(t):
+    'exp : CTEFLOTANTE'
+    global memoria
+    asigna_memoria_constante('flotante')
+    consInsert(t[1],'flotante',memoria)
     t[0] = t[1]
     pass
 
 def p_exp_booleano(t):
     '''exp : TRUE
           | FALSE '''
-    if t[1] == 'TRUE': t[0] = 1
-    else:
-      t[0] = 0 
+    t[0]=t[1]
+    global memoria
+    asigna_memoria_constante('booleano')
+    consInsert(t[1],'booleano',memoria)
     pass
 
 def p_exp_var(t):
@@ -190,6 +199,14 @@ def p_exp_var(t):
 def p_exp_texto(t):
     '''exp : CTETEXTO
            | llamada '''
+    t[0] = t[1]
+    global memoria
+    asigna_memoria_constante('texto')
+    consInsert(t[1],'texto',memoria)
+pass
+
+def p_exp_texto(t):
+    'exp :  llamada'
     t[0] = t[1]
 pass
 
@@ -334,6 +351,25 @@ def asigna_memoria_local(tipo):
     elif tipo == 'booleano' or tipo == 'BOOLEANO':
       memoria = BooleanLocal
       BooleanLocal += 1
+
+def asigna_memoria_constante(tipo):
+    global EnteroConstante
+    global FlotanteConstante
+    global TextoConstante
+    global BooleanConstante
+    global memoria 
+    if tipo == 'entero' or tipo == 'ENTERO':
+      memoria = EnteroConstante
+      EnteroConstante += 1
+    elif tipo == 'flotante' or tipo == 'FLOTANTE':
+      memoria = FlotanteConstante
+      FlotanteConstante += 1
+    elif tipo == 'texto' or tipo == 'TEXTO':
+      memoria = TextoConstante
+      TextoConstante += 1
+    elif tipo == 'booleano' or tipo == 'BOOLEANO':
+      memoria = BooleanConstante
+      BooleanConstante += 1
 
 import ply.yacc as yacc
 yacc.yacc(method = 'LALR')
