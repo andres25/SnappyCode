@@ -117,8 +117,9 @@ def procPrint(procTable):
 
 def consInsert(cVal, cType, cDir):
 	global consTable
-	cons = consTableNode(cVal, cType, cDir)
-	consTable.append(cons)
+	if not consGetDir(cVal):
+		cons = consTableNode(cVal, cType, cDir)
+		consTable.append(cons)
 	
 	
 
@@ -127,3 +128,21 @@ def consGetVal(cDir):
 	for cons in consTable:
 		if cons.cDir == cDir:
 			return cons.cVal
+
+
+def consGetDir(cVal):
+	global consTable
+	for cons in consTable:
+		if cons.consVal == cVal:
+			return cons.consDir
+
+
+def getType(value):
+	if type(value) is int:
+		return "entero"
+	if type(value) is float:
+		return "flotante"
+	if type(value) is basestring:
+		return "texto"
+	if type(value) is bool:
+		return "booleano"

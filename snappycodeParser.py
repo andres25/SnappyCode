@@ -4,12 +4,20 @@ from ply.lex import TOKEN
 import sys
 import snappycodeLex
 import fileinput
+from cuadruplo import *
 from procVarTables import *
 from memoria import *
+from cubosemantico import *
+
 
 tokens = snappycodeLex.tokens
 actualProc = "global"
 memoria = 0
+pilaOperadores = []
+pilaOperandos = []
+tempCont = 0
+cuadruplos = []
+cuadCont = 0 
 
 precedence = (
     ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE', 'MAYORIGUAL', 'MENORIGUAL'),
@@ -57,6 +65,10 @@ def p_cuerpo(t):
     'cuerpo : cuerpo_func principal'
     global procTable
     procPrint(procTable)
+    global cuadruplos
+    for cuad in cuadruplos:
+        print ("Cuadruplos")
+        print(cuad.num, '-', cuad.opt, '-', cuad.opd1, '-', cuad.opd2, '-', cuad.res , '\n')
     pass
  
 def p_cuerpo_func(t): 
@@ -150,11 +162,73 @@ def p_exp_agrupacion(t):
     t[0] = t[2]
     pass
 
-def p_exp_binop(t):
-    '''exp : exp MAS exp
-                  | exp MENOS exp
-                  | exp MULT exp
-                  | exp DIV exp'''
+def p_exp_summin(t):
+    '''exp : exp MAS push_opt exp
+           | exp MENOS push_opt exp'''
+    global cuadruplos
+    global pilaOperandos
+    global pilaOperadores
+    global memoria
+    global tempCont
+    global cuadCont
+    
+    if pilaOperadores:
+      operador = pilaOperadores.pop()
+      operando2 = pilaOperandos.pop()
+      operando1 = pilaOperandos.pop()
+
+      op1Name = ''
+      op2Name = ''
+
+      if isinstance(operando1,varTableNode):
+        op1Name = operando1.vName
+        operando1 = operando1.vVal
+      if isinstance(operando2,varTableNode):
+        op2Name = operando2.vName
+        operando2 = operando2.vVal
+
+      type2 = getType(operando2)
+      type1 = getType(operando1)
+
+      resType = cubo_semantico[type1][type2][operador]
+
+      if resType != "error":
+        if operador == '+':
+          resultado = operando1 + operando2
+        elif operador == '-':
+          resultado = operando1 - operando2
+
+        asigna_memoria_constante(resType)
+        consInsert(resultado, resType, memoria)
+        asigna_memoria_temporal(resType)
+
+        operandoTemp = varTableNode('t'+str(tempCont), resultado, resType, memoria)
+
+        op1Dir = consGetDir(operando1)
+        op2Dir = consGetDir(operando2)
+        resDir = consGetDir(resultado)
+        cuadruplo = Cuadruplo(cuadCont, operador, op1Dir, op2Dir, resDir)
+        cuadruplos.append(cuadruplo)
+
+        pilaOperandos.append(operandoTemp)
+        tempCont += 1
+        cuadCont += 1
+        t[0]=t[1]
+
+
+      else:
+        print("Error Semantico: valores incompatibles en suma")    
+    pass
+
+def p_push_opt(t):
+    'push_opt : '
+    global pilaOperadores
+    pilaOperadores.append(t[-1])
+
+def p_exp_multdiv(t):
+    '''exp : exp MULT push_opt exp
+           | exp DIV push_opt exp'''
+    pass
 
 def p_exp_uminus(t):
     'exp : MENOS exp %prec UMINUS'
@@ -163,24 +237,29 @@ def p_exp_uminus(t):
 
 
 def p_exp_int(t):
-    'exp : CTEENTERO'
+    'exp : CTEENTERO push_opd'
     global memoria
     asigna_memoria_constante('entero')
     consInsert(t[1],'entero',memoria)
     t[0] = t[1]
 
+def p_push_opd(t):
+    'push_opd : '
+    pilaOperandos.append(t[-1])
     pass
+
 def p_exp_float(t):
-    'exp : CTEFLOTANTE'
+    'exp : CTEFLOTANTE push_opd'
     global memoria
     asigna_memoria_constante('flotante')
     consInsert(t[1],'flotante',memoria)
+
     t[0] = t[1]
     pass
 
 def p_exp_booleano(t):
-    '''exp : TRUE
-          | FALSE '''
+    '''exp : TRUE push_opd
+          | FALSE push_opd '''
     t[0]=t[1]
     global memoria
     asigna_memoria_constante('booleano')
@@ -197,7 +276,7 @@ def p_exp_var(t):
         t[0] = 0
  
 def p_exp_texto(t):
-    '''exp : CTETEXTO
+    '''exp : CTETEXTO push_opd
            | llamada '''
     t[0] = t[1]
     global memoria
@@ -370,6 +449,25 @@ def asigna_memoria_constante(tipo):
     elif tipo == 'booleano' or tipo == 'BOOLEANO':
       memoria = BooleanConstante
       BooleanConstante += 1
+
+def asigna_memoria_temporal(tipo):
+    global EnteroTemporal
+    global FlotanteTemporal
+    global TextoTemporal
+    global BooleanTemporal
+    global memoria 
+    if tipo == 'entero' or tipo == 'ENTERO':
+      memoria = EnteroTemporal
+      EnteroTemporal += 1
+    elif tipo == 'flotante' or tipo == 'FLOTANTE':
+      memoria = FlotanteTemporal
+      FlotanteTemporal += 1
+    elif tipo == 'texto' or tipo == 'TEXTO':
+      memoria = TextoTemporal
+      TextoTemporal += 1
+    elif tipo == 'booleano' or tipo == 'BOOLEANO':
+      memoria = BooleanTemporal
+      BooleanTemporal += 1
 
 import ply.yacc as yacc
 yacc.yacc(method = 'LALR')

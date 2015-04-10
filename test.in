@@ -8,7 +8,10 @@ INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto 
 	crear flotante var1func1;
 	crear entero var2func1;
 
-	var2func1 = 1 +2;
+	var2func1 = 1 + 2;
+	var2func1 = 1 - 2;
+	var2func1 = 2 + 3;
+	var2func1 = 4 + 5;
 
 	REGRESA 3
 FINFUNCION
