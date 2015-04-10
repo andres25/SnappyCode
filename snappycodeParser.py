@@ -30,6 +30,12 @@ precedence = (
 
 def p_program(t): 
     'program : INICIOPROGRAMA vars cuerpo FINPROGRAMA'
+    global procTable
+    procPrint(procTable)
+    global cuadruplos
+    print ("Cuadruplos")
+    for cuad in cuadruplos:
+        print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
     pass
 
 
@@ -49,7 +55,7 @@ def p_tipo(t):
               | FLOTANTE
               | TEXTO
               | BOOLEANO
-              | LISTA '''
+              | LISTA'''
     t[0] = t[1]
     pass
 
@@ -63,12 +69,6 @@ def p_empty(t):
  
 def p_cuerpo(t): 
     'cuerpo : cuerpo_func principal'
-    global procTable
-    procPrint(procTable)
-    global cuadruplos
-    for cuad in cuadruplos:
-        print ("Cuadruplos")
-        print(cuad.num, '-', cuad.opt, '-', cuad.opd1, '-', cuad.opd2, '-', cuad.res , '\n')
     pass
  
 def p_cuerpo_func(t): 
@@ -139,6 +139,40 @@ def p_estatuto(t):
  
 def p_asignacion(t): 
     'asignacion : ID IGUAL expresion PUNTOCOMA'
+    global varGlb
+    global procTable
+    global cuadCont
+
+    if pilaOperandos:
+      if varFind(varGlb,t[1]):
+        resDir = getVar(varGlb,t[1])
+        tempOperando = pilaOperandos.pop()
+        if isinstance(tempOperando, varTableNode):
+          tempVal = tempOperando.varVal
+        else:
+          tempVal = tempOperando
+        tempConsDir = consGetDir(tempVal)
+        cuadruplo = Cuadruplo(cuadCont, '=',tempConsDir , None, resDir.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+      else:
+        auxTable = getVarTable(actualProc)
+        if varFind(auxTable,t[1]):
+          resDir = getVar(auxTable,t[1])
+          tempOperando = pilaOperandos.pop()
+          if isinstance(tempOperando, varTableNode):
+            tempVal = tempOperando.varVal
+          else:
+            tempVal = tempOperando
+          tempConsDir = consGetDir(tempVal)
+          cuadruplo = Cuadruplo(cuadCont, '=',tempConsDir , None, resDir.varDir)
+          cuadruplos.append(cuadruplo)
+          cuadCont += 1
+        else:
+          print ("Error Semantico: Variable ", t[1], " no encontrada" )
+    else:
+      print ("Error Semantico: Variable ", t[3], " no se puede asignar" )
+
     pass
  
 
@@ -227,7 +261,7 @@ def p_exp_binop(t):
     pass
 
 def p_push_opt(t):
-    'push_opt : '
+    'push_opt : empty'
     global pilaOperadores
     pilaOperadores.append(t[-1])
 
@@ -237,7 +271,6 @@ def p_exp_uminus(t):
     t[0] = -t[2]
  
 
-
 def p_exp_int(t):
     'exp : CTEENTERO push_opd'
     global memoria
@@ -246,7 +279,7 @@ def p_exp_int(t):
     t[0] = t[1]
 
 def p_push_opd(t):
-    'push_opd : '
+    'push_opd : empty'
     pilaOperandos.append(t[-1])
     pass
 
@@ -257,58 +290,73 @@ def p_exp_float(t):
     consInsert(t[1],'flotante',memoria)
 
     t[0] = t[1]
-    pass
+pass
 
 def p_exp_booleano(t):
     '''exp : TRUE push_opd
-          | FALSE push_opd '''
-    t[0]=t[1]
+          | FALSE push_opd'''
+    t[0] = t[1]
     global memoria
     asigna_memoria_constante('booleano')
     consInsert(t[1],'booleano',memoria)
-    pass
+pass
 
 def p_exp_var(t):
-    'exp : ID'
-    try:
-        #print (procTable[scope])
-        t[0] = 1
-    except LookupError:
-        print("Undefined name '%s'" % t[1])
-        t[0] = 0
- 
+    'exp : ID push_var_opd'
+    t[0] = t[1]
+
+pass
+
+def p_push_var_opd(t):
+    'push_var_opd : '
+    if varFind(varGlb,t[-1]):
+      auxVar = getVar(varGlb,t-[1])
+      auxVal = auxVar.varVal
+      pilaOperandos.append(auxVal)
+    else:
+      auxTable = getVarTable(actualProc)
+      if varFind(auxTable,t[-1]):
+        auxVar = getVar(auxTable,t[-1])
+        auxVal = auxVar.varVal
+        print (auxVar)
+        pilaOperandos.append(auxVal)
+      else:
+        print ("Error Semantico: Variable ", t[-1], " no encontrada" )
+pass
+
 def p_exp_texto(t):
-    '''exp : CTETEXTO push_opd
-           | llamada '''
+    '''exp : CTETEXTO push_opd'''
     t[0] = t[1]
     global memoria
     asigna_memoria_constante('texto')
     consInsert(t[1],'texto',memoria)
+
 pass
 
-def p_exp_texto(t):
-    'exp :  llamada'
-    t[0] = t[1]
-pass
 
-def p_llamada(t):
-    'llamada : ID llamada_param'
-pass
+#def p_exp_llamada(t):
+#    'exp :  llamada'
+#    t[0] = t[1]
+#pass
 
-def p_llamada_param(t):
-    '''llamada_param : PARAMETROS expresion llamada_param_mult
-           | empty  '''
-pass
-def p_expresion_empty(t): 
-    '''expresion : exp '''
+#def p_llamada(t):
+#    'llamada : ID llamada_param'
+#pass
+
+#def p_llamada_param(t):
+#    '''llamada_param : PARAMETROS expresion llamada_param_mult
+#           | empty'''
+#pass
+def p_expresion_unique(t): 
+    'expresion : exp'
     t[0] = t[1]
     pass
  
 
-def p_llamada_param_mult(t):
-    '''llamada_param_mult :  llamada_param_mult COMA expresion 
-           | empty  '''
-pass
+#def p_llamada_param_mult(t):
+#    '''llamada_param_mult :  llamada_param_mult COMA expresion 
+#           | empty'''
+#pass
  
 def p_condicion(t):
     'condicion : SI expresion ENTONCES bloque condicion_else FINSI'
@@ -320,12 +368,12 @@ def p_bloque(t):
 
 def p_bloque_estatuto_mult(t):
     '''bloque_estatuto_mult        : bloque_estatuto_mult estatuto 
-               | empty '''
+               | empty'''
     pass
 
 def p_condicion_else(t):
     '''condicion_else : SINO bloque
-               | empty '''
+               | empty'''
     pass
  
 def p_ciclo(t):
@@ -336,7 +384,7 @@ def p_ciclo(t):
  
 def p_io(t):
     '''io : PEDIRALUSUARIO ID
-               | DECIRALUSUARIO expresion '''
+               | DECIRALUSUARIO expresion'''
     pass
  
 def p_accion(t):
@@ -345,13 +393,13 @@ def p_accion(t):
  
 def p_tipo_accion(t):
     '''tipo_accion : lista
-               | objeto '''
+               | objeto'''
     pass
 
 def p_lista(t):
     '''lista    : AGREGAR
                | SACAR
-               | VER '''
+               | VER'''
     pass
  
 def p_objeto(t):
@@ -361,7 +409,7 @@ def p_objeto(t):
                | GIRAR
                | PINTAR
                | DESPINTAR
-               | MOVER '''
+               | MOVER'''
     pass
  
 def p_O(t):
@@ -371,7 +419,7 @@ def p_O(t):
                | IZQUIERDA
                | ARRIBA
                | ABAJO
-               | empty  '''
+               | empty '''
     pass
  
 

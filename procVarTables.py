@@ -126,7 +126,7 @@ def consInsert(cVal, cType, cDir):
 def consGetVal(cDir):
 	global consTable
 	for cons in consTable:
-		if cons.cDir == cDir:
+		if cons.consDir == cDir:
 			return cons.cVal
 
 
