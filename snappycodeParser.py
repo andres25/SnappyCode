@@ -162,9 +162,11 @@ def p_exp_agrupacion(t):
     t[0] = t[2]
     pass
 
-def p_exp_summin(t):
+def p_exp_binop(t):
     '''exp : exp MAS push_opt exp
-           | exp MENOS push_opt exp'''
+           | exp MENOS push_opt exp
+           | exp MULT push_opt exp
+           | exp DIV push_opt exp'''
     global cuadruplos
     global pilaOperandos
     global pilaOperadores
@@ -181,11 +183,11 @@ def p_exp_summin(t):
       op2Name = ''
 
       if isinstance(operando1,varTableNode):
-        op1Name = operando1.vName
-        operando1 = operando1.vVal
+        op1Name = operando1.varName
+        operando1 = operando1.varVal
       if isinstance(operando2,varTableNode):
-        op2Name = operando2.vName
-        operando2 = operando2.vVal
+        op2Name = operando2.varName
+        operando2 = operando2.varVal
 
       type2 = getType(operando2)
       type1 = getType(operando1)
@@ -197,6 +199,10 @@ def p_exp_summin(t):
           resultado = operando1 + operando2
         elif operador == '-':
           resultado = operando1 - operando2
+        elif operador == '*':
+          resultado = operando1 * operando2
+        elif operador == '/':
+          resultado = operando1 / operando2
 
         asigna_memoria_constante(resType)
         consInsert(resultado, resType, memoria)
@@ -225,10 +231,6 @@ def p_push_opt(t):
     global pilaOperadores
     pilaOperadores.append(t[-1])
 
-def p_exp_multdiv(t):
-    '''exp : exp MULT push_opt exp
-           | exp DIV push_opt exp'''
-    pass
 
 def p_exp_uminus(t):
     'exp : MENOS exp %prec UMINUS'
