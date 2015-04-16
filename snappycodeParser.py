@@ -451,7 +451,7 @@ def p_actSi1(t):
     cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempConsDir , None, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
-  
+
     pass
 
 def p_bloque(t):
@@ -498,10 +498,53 @@ def p_actSi3(t):
     pass
 
 def p_ciclo(t):
-    'ciclo    : MIENTRAS expresion HACER bloque FINMIENTRAS'
+    'ciclo    : MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3'
     pass
 
+def p_actCic1(t):
+    'actCic1    : empty'
+    global pilaSaltos
+    global cuadruplos
+    global cuadCont
 
+    pilaSaltos.append(cuadCont)
+
+    pass
+
+def p_actCic2(t):
+    'actCic2    : empty'
+    global pilaSaltos
+    global cuadruplos
+    global cuadCont
+
+    tempOperando = pilaOperandos.pop()
+    if isinstance(tempOperando, varTableNode):
+      tempVal = tempOperando.varVal
+    tempConsDir = consGetDir(tempVal)
+    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempConsDir , None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+    pilaSaltos.append(cuadCont-1)
+    
+    pass
+
+def p_actCic3(t):
+    'actCic3    : empty'
+    global pilaSaltos
+    global cuadruplos
+    global cuadCont
+
+    salto = pilaSaltos.pop()
+    for cuad in cuadruplos:
+      if cuad.num == salto:
+        cuad.opd2= cuadCont+1
+
+    salto = pilaSaltos.pop()
+    cuadruplo = Cuadruplo(cuadCont, 'GOTO',None , salto, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+
+    pass
  
 def p_io(t):
     '''io : PEDIRALUSUARIO ID
