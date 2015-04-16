@@ -433,9 +433,21 @@ def p_expresion_unique(t):
 #pass
  
 def p_condicion(t):
-    'condicion : SI expresion ENTONCES bloque condicion_else FINSI'
+    'condicion : SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI'
     pass
- 
+
+def p_actSi1(t):
+    'actSi1   : empty'
+    global pilaSaltos
+    global cuadruplos
+    global cuadCont
+
+    pilaSaltos.append(cuadCont)
+    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',None , None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+    pass
+
 def p_bloque(t):
     'bloque   : INICIOBLOQUE bloque_estatuto_mult FINBLOQUE'
     pass
@@ -445,11 +457,40 @@ def p_bloque_estatuto_mult(t):
                | empty'''
     pass
 
+def p_actSi2(t):
+    'actSi2   : empty'
+    global pilaSaltos
+    global cuadruplos
+    global cuadCont
+
+    cuadruplo = Cuadruplo(cuadCont, 'GOTO',None , None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+
+    salto = pilaSaltos.pop()
+    for cuad in cuadruplos:
+      if cuad.num == salto:
+        cuad.opd2= cuadCont
+    pilaSaltos.append(cuadCont-1)
+    pass
+
 def p_condicion_else(t):
     '''condicion_else : SINO bloque
                | empty'''
     pass
- 
+
+def p_actSi3(t):
+    'actSi3   : empty'
+    global pilaSaltos
+    global cuadruplos
+    global cuadCont
+
+    salto = pilaSaltos.pop()
+    for cuad in cuadruplos:
+      if cuad.num == salto:
+        cuad.opd2= cuadCont
+    pass
+    
 def p_ciclo(t):
     'ciclo    : MIENTRAS expresion HACER bloque FINMIENTRAS'
     pass
