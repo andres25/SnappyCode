@@ -177,18 +177,92 @@ def p_asignacion(t):
  
 
 def p_expresion_eval(t): 
-    '''expresion : exp MAYORQUE exp
-           | exp MENORQUE exp
-           | exp DIFERENTEQUE exp
-           | exp IGUALQUE exp
-           | exp MAYORIGUAL exp
-           | exp MENORIGUAL exp'''
-    if t[2] == '>'  : t[0] = t[1] > t[3]
-    elif t[2] == '<': t[0] = t[1] < t[3]
-    elif t[2] == '!=': t[0] = t[1] != t[3]
-    elif t[2] == '==': t[0] = t[1] == t[3]
-    elif t[2] == '>=': t[0] = t[1] >= t[3]
-    elif t[2] == '<=': t[0] = t[1] <= t[3]
+    '''expresion : exp MAYORQUE push_opt exp
+           | exp MENORQUE push_opt exp
+           | exp DIFERENTEQUE push_opt exp
+           | exp IGUALQUE push_opt exp
+           | exp MAYORIGUAL push_opt exp
+           | exp MENORIGUAL push_opt exp'''
+    global cuadruplos
+    global pilaOperandos
+    global pilaOperadores
+    global memoria
+    global tempCont
+    global cuadCont
+
+    if pilaOperadores:
+      operador = pilaOperadores.pop()
+      operando2 = pilaOperandos.pop()
+      operando1 = pilaOperandos.pop()
+
+      op1Name = ''
+      op2Name = ''
+
+      if isinstance(operando1,varTableNode):
+        op1Name = operando1.varName
+        operando1 = operando1.varVal
+      if isinstance(operando2,varTableNode):
+        op2Name = operando2.varName
+        operando2 = operando2.varVal
+
+      type2 = getType(operando2)
+      type1 = getType(operando1)
+
+      resType = cubo_semantico[type1][type2][operador]
+
+      if resType != "error":
+        if operador == '>':
+          if operando1 > operando2:
+            resultado = True
+          else:
+            resultado = False
+        elif operador == '<':
+          if operando1 < operando2:
+            resultado = True
+          else:
+            resultado = False
+        elif operador == '!=':
+          if operando1 != operando2:
+            resultado = True
+          else:
+            resultado = False
+        elif operador == '==':
+          if operando1 == operando2:
+            resultado = True
+          else:
+            resultado = False
+        elif operador == '>=':
+          if operando1 >= operando2:
+            resultado = True
+          else:
+            resultado = False
+        elif operador == '<=':
+          if operando1 <= operando2:
+            resultado = True
+          else:
+            resultado = False
+
+        asigna_memoria_constante(resType)
+        consInsert(resultado, resType, memoria)
+        asigna_memoria_temporal(resType)
+
+        operandoTemp = varTableNode('t'+str(tempCont), resultado, resType, memoria)
+
+        op1Dir = consGetDir(operando1)
+        op2Dir = consGetDir(operando2)
+        resDir = consGetDir(resultado)
+        cuadruplo = Cuadruplo(cuadCont, operador, op1Dir, op2Dir, resDir)
+        cuadruplos.append(cuadruplo)
+
+        pilaOperandos.append(operandoTemp)
+        tempCont += 1
+        cuadCont += 1
+        t[0]=t[1]
+
+      else:
+        print("Error Semantico: valores incompatibles en la comparación") 
+
+
     pass
 
 def p_exp_agrupacion(t): 
@@ -388,7 +462,7 @@ def p_io(t):
     pass
  
 def p_accion(t):
-    'accion   : tipo_accion O ID PUNTOCOMA'
+    'accion   : tipo_accion ID PUNTOCOMA'
     pass
  
 def p_tipo_accion(t):
@@ -396,30 +470,33 @@ def p_tipo_accion(t):
                | objeto'''
     pass
 
-def p_lista(t):
-    '''lista    : AGREGAR
-               | SACAR
-               | VER'''
+def p_lista_agregar(t):
+    'lista_agregar : AGREGAR'
+
+    pass
+
+def p_lista_sacar(t):
+    'lista_sacar : SACAR'
+
+    pass
+
+def p_lista_ver(t):
+    'lista_ver : VER'
+
     pass
  
 def p_objeto(t):
-    '''objeto   : CREAR
-               | DIBUJAR
-               | BORRAR
-               | GIRAR
+    '''objeto   : 
+               | BORRAR 
+               | GIRAR lado expresion
                | PINTAR
                | DESPINTAR
-               | MOVER'''
+               | MOVER expresion '''
     pass
  
-def p_O(t):
-    '''O        : X expresion
-               | Y expresion
-               | DERECHA
-               | IZQUIERDA
-               | ARRIBA
-               | ABAJO
-               | empty '''
+def p_lado(t):
+    '''lado    : DERECHA
+               | IZQUIERDA '''
     pass
  
 
