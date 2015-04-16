@@ -18,6 +18,7 @@ pilaOperandos = []
 tempCont = 0
 cuadruplos = []
 cuadCont = 0 
+pilaSaltos = []
 
 precedence = (
     ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE', 'MAYORIGUAL', 'MENORIGUAL'),
@@ -189,7 +190,7 @@ def p_expresion_eval(t):
     global memoria
     global tempCont
     global cuadCont
-
+    print('entro')
     if pilaOperadores:
       operador = pilaOperadores.pop()
       operando2 = pilaOperandos.pop()
@@ -245,13 +246,12 @@ def p_expresion_eval(t):
         asigna_memoria_constante(resType)
         consInsert(resultado, resType, memoria)
         asigna_memoria_temporal(resType)
-
         operandoTemp = varTableNode('t'+str(tempCont), resultado, resType, memoria)
 
         op1Dir = consGetDir(operando1)
         op2Dir = consGetDir(operando2)
-        resDir = consGetDir(resultado)
-        cuadruplo = Cuadruplo(cuadCont, operador, op1Dir, op2Dir, resDir)
+
+        cuadruplo = Cuadruplo(cuadCont, operador, op1Dir, op2Dir, memoria)
         cuadruplos.append(cuadruplo)
 
         pilaOperandos.append(operandoTemp)
@@ -441,11 +441,17 @@ def p_actSi1(t):
     global pilaSaltos
     global cuadruplos
     global cuadCont
+    global pilaOperandos
 
     pilaSaltos.append(cuadCont)
-    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',None , None, None)
+    tempOperando = pilaOperandos.pop()
+    if isinstance(tempOperando, varTableNode):
+      tempVal = tempOperando.varVal
+    tempConsDir = consGetDir(tempVal)
+    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempConsDir , None, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
+  
     pass
 
 def p_bloque(t):
@@ -490,7 +496,7 @@ def p_actSi3(t):
       if cuad.num == salto:
         cuad.opd2= cuadCont
     pass
-    
+
 def p_ciclo(t):
     'ciclo    : MIENTRAS expresion HACER bloque FINMIENTRAS'
     pass
@@ -509,6 +515,12 @@ def p_accion(t):
 def p_tipo_accion(t):
     '''tipo_accion : lista
                | objeto'''
+    pass
+
+def p_lista(t):
+    '''lista : lista_agregar
+               | lista_sacar
+               | lista_ver'''
     pass
 
 def p_lista_agregar(t):

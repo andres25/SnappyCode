@@ -14,6 +14,16 @@ INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto 
 	var2func1 = 3 / 3;
 	var2func1 = 1;
 
+	SI 1>1 ENTONCES
+		INICIOBLOQUE
+			var1func1 = 1 + 1;
+		FINBLOQUE
+	SINO
+		INICIOBLOQUE
+			var2func1 = 1 + 1;
+		FINBLOQUE
+	FINSI
+
 	REGRESA 3
 FINFUNCION
 
