@@ -583,18 +583,21 @@ def p_lista_ver(t):
  
 def p_objeto(t):
     '''objeto   : 
-               | BORRAR 
-               | GIRAR lado expresion
-               | PINTAR
-               | DESPINTAR
+               | objeto_con_expresion 
+               | objeto_sin_expresion'''
+    pass
+
+def p_objeto_con_expresion(t):
+    '''objeto_con_expresion  : GIRARDERECHA expresion
                | MOVER expresion '''
     pass
- 
-def p_lado(t):
-    '''lado    : DERECHA
-               | IZQUIERDA '''
+
+def p_objeto_sin_expresion(t):
+    '''objeto_sin_expresion   : BORRAR 
+               | GIRAIZQUIERDA
+               | PINTAR
+               | DESPINTAR '''
     pass
- 
 
 def p_principal(t): 
     'principal : iniciomain vars C FINPRINCIPAL'
