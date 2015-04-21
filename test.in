@@ -1,18 +1,20 @@
 inicioprograma 
 crear entero global1;
 crear flotante global2;
-
-
+crear entero HolaKeAse [150];
+crear entero despues;
 
 INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wowow
 	crear flotante var1func1;
 	crear entero var2func1;
+	crear entero hola [5];
 
 	var2func1 = 1 + 1 + 1;
 	var2func1 = 3 + 3;
 	var2func1 = 3 * 2;
 	var2func1 = 3 / 3;
 	var2func1 = 1;
+
 
 	SI 1>1 ENTONCES
 		INICIOBLOQUE

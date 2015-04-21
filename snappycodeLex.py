@@ -5,13 +5,13 @@ import sys
 import ply.lex as lex
 
 tokens = ( 'INICIOPROGRAMA', 'FINPROGRAMA', 'INICIOFUNCION', 'FINFUNCION', 'REGRESA', 'PARAMETROS',
-    'CREAR','DIBUJAR','BORRAR','GIRAR','ID','TRUE','FALSE', 'INICIOPRINCIPAL', 'FINPRINCIPAL',
-    'MOVER','DERECHA','IZQUIERDA','ARRIBA','ABAJO','SI','FINSI' ,'ENTONCES',
+    'CREAR','DIBUJAR','BORRAR','ID','TRUE','FALSE', 'INICIOPRINCIPAL', 'FINPRINCIPAL',
+    'MOVER','GIRARDERECHA','GIRARIZQUIERDA','ARRIBA','ABAJO','SI','FINSI' ,'ENTONCES',
     'SINO','MIENTRAS','FINMIENTRAS','HACER','LISTA','AGREGAR', 'X', 'Y',
     'SACAR', 'VER','IGUAL', 'IGUALQUE' , 'MAYORQUE' , 'MENORQUE', 'DIFERENTEQUE', 
     'PINTAR', 'DESPINTAR', 'DECIRALUSUARIO', 'PEDIRALUSUARIO', 'INICIOBLOQUE', 'FINBLOQUE', 'MAS',
     'MENOS','COMA', 'MULT', 'DIV', 'PUNTOCOMA','PARENTIZQ','PARENTDER', 'ENTERO', 'FLOTANTE', 'TEXTO', 
-    'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO', 'MAYORIGUAL', 'MENORIGUAL', 'BOOLEANO'
+    'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO', 'MAYORIGUAL', 'MENORIGUAL', 'BOOLEANO', 'CORCHETEIZQ', 'CORCHETEDER'
     )
 
 reserved = { 'inicioprograma' : 'INICIOPROGRAMA', 
@@ -34,14 +34,12 @@ reserved = { 'inicioprograma' : 'INICIOPROGRAMA',
              'DIBUJAR'   : 'DIBUJAR',
              'borrar'    : 'BORRAR',
              'BORRAR'    : 'BORRAR',
-             'girar'    : 'GIRAR',
-             'GIRAR'    : 'GIRAR',
              'mover'    : 'MOVER',
              'MOVER'    : 'MOVER',
-             'derecha'    : 'DERECHA',
-             'DERECHA'    : 'DERECHA',
-             'izquierda'    : 'IZQUIERDA',
-             'IZQUIERDA'    : 'IZQUIERDA',
+             'girarderecha'    : 'GIRARDERECHA',
+             'GIRARDERECHA'    : 'GIRARDERECHA',
+             'girarizquierda'    : 'GIRARIZQUIERDA',
+             'GIRARIZQUIERDA'    : 'GIRARIZQUIERDA',
              'arriba'    : 'ARRIBA',
              'ARRIBA'    : 'ARRIBA',
              'abajo'    : 'ABAJO',
@@ -104,6 +102,8 @@ t_CTETEXTO               = r'"\"".+"\""'
 t_PUNTOCOMA              = r';'
 t_PARENTIZQ              = r'\('
 t_PARENTDER              = r'\)'
+t_CORCHETEIZQ              = r'\['
+t_CORCHETEDER              = r'\]'
 t_IGUAL                  = r'='
 t_IGUALQUE               = r'=='
 t_MAS                    = r'\+'

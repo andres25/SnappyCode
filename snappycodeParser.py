@@ -40,15 +40,35 @@ def p_program(t):
     pass
 
 
-def p_vars(t): 
-    'vars : vars CREAR tipo ID PUNTOCOMA '
+def p_vars(t):
+    'vars : vars tipo_var'
+    pass
+
+def p_tipo_var(t):
+    '''tipo_var : single
+                | array'''
+
+def p_single(t): 
+    'single : CREAR tipo ID PUNTOCOMA '
     global memoria
     if actualProc == 'global':
-      asigna_memoria_global(t[3])
-      varGlbInsert(t[4], None, t[3], memoria)
+      asigna_memoria_global(t[2])
+      varGlbInsert(t[3], None, t[2], memoria)
     else:
-      asigna_memoria_local(t[3])
-      varLocInsert(t[4], None, t[3], memoria, actualProc)
+      asigna_memoria_local(t[2])
+      varLocInsert(t[3], None, t[2], memoria, actualProc)
+    pass
+
+def p_array(t):
+    'array : CREAR tipo ID CORCHETEIZQ CTEENTERO CORCHETEDER PUNTOCOMA'
+    global memoria
+    if actualProc == 'global':
+      asigna_memoria_global(t[2], t[5])
+      varGlbInsert(t[3], None, t[2], memoria, t[5])
+    else:
+      asigna_memoria_local(t[2], t[5])
+      varLocInsert(t[3], None, t[2], memoria, actualProc, t[5])
+    memoria += t[5]
     pass
 
 def p_tipo(t):
@@ -260,7 +280,7 @@ def p_expresion_eval(t):
         t[0]=t[1]
 
       else:
-        print("Error Semantico: valores incompatibles en la comparación") 
+        print("Error Semantico: valores incompatibles en la comparacion") 
 
 
     pass
@@ -549,10 +569,12 @@ def p_actCic3(t):
 def p_io(t):
     '''io : PEDIRALUSUARIO ID
                | DECIRALUSUARIO expresion'''
+
     pass
  
 def p_accion(t):
     'accion   : tipo_accion ID PUNTOCOMA'
+
     pass
  
 def p_tipo_accion(t):
@@ -589,12 +611,12 @@ def p_objeto(t):
 
 def p_objeto_con_expresion(t):
     '''objeto_con_expresion  : GIRARDERECHA expresion
+               | GIRARIZQUIERDA expresion
                | MOVER expresion '''
     pass
 
 def p_objeto_sin_expresion(t):
-    '''objeto_sin_expresion   : BORRAR 
-               | GIRAIZQUIERDA
+    '''objeto_sin_expresion   : BORRAR
                | PINTAR
                | DESPINTAR '''
     pass
@@ -619,7 +641,7 @@ def p_error(p):
     else:
         print("Error de sintaxis")
 
-def asigna_memoria_global(tipo):
+def asigna_memoria_global(tipo, offset = 0):
     global EnteroGlobal
     global FlotanteGlobal
     global TextoGlobal
@@ -627,18 +649,18 @@ def asigna_memoria_global(tipo):
     global memoria 
     if tipo == 'entero' or tipo == 'ENTERO':
       memoria = EnteroGlobal
-      EnteroGlobal += 1
+      EnteroGlobal += 1 + offset
     elif tipo == 'flotante' or tipo == 'FLOTANTE':
       memoria = FlotanteGlobal
-      FlotanteGlobal += 1
+      FlotanteGlobal += 1 + offset
     elif tipo == 'texto' or tipo == 'TEXTO':
       memoria = TextoGlobal
-      TextoGlobal += 1
+      TextoGlobal += 1 + offset
     elif tipo == 'booleano' or tipo == 'BOOLEANO':
       memoria = BooleanGlobal
-      BooleanGlobal += 1
+      BooleanGlobal += 1 + offset
 
-def asigna_memoria_local(tipo):
+def asigna_memoria_local(tipo, offset = 0):
     global EnteroLocal
     global FlotanteLocal
     global TextoLocal
@@ -646,16 +668,16 @@ def asigna_memoria_local(tipo):
     global memoria 
     if tipo == 'entero' or tipo == 'ENTERO':
       memoria = EnteroLocal
-      EnteroLocal += 1
+      EnteroLocal += 1 + offset
     elif tipo == 'flotante' or tipo == 'FLOTANTE':
       memoria = FlotanteLocal
-      FlotanteLocal += 1
+      FlotanteLocal += 1 + offset
     elif tipo == 'texto' or tipo == 'TEXTO':
       memoria = TextoLocal
-      TextoLocal += 1
+      TextoLocal += 1 + offset
     elif tipo == 'booleano' or tipo == 'BOOLEANO':
       memoria = BooleanLocal
-      BooleanLocal += 1
+      BooleanLocal += 1 + offset
 
 def asigna_memoria_constante(tipo):
     global EnteroConstante
@@ -700,6 +722,6 @@ yacc.yacc(method = 'LALR')
 
 program = []
 for line in fileinput.input():
-	program.append(line)
+    program.append(line)
 yacc.parse(' '.join(program))
 
