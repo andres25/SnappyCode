@@ -9,11 +9,12 @@
 import sys
 
 class varTableNode:
-	def __init__(self, vName, vVal, vType, vDir):
+	def __init__(self, vName, vVal, vType, vDir, vDim = None):
 		self.varName= vName
 		self.varVal= vVal
 		self.varType = vType
 		self.varDir = vDir
+		self.varDim = vDim
 
 class procTableNode:
 	def __init__(self, pName, pType, pDir):
@@ -45,16 +46,15 @@ def procInsert(pName, pType, pDir):
 		procTable.append(node)
 
 
-def varLocInsert(vName, vVal, vType, vDir, pName):
+def varLocInsert(vName, vVal, vType, vDir, pName, vDim = None):
 	global procTable
-	
 	for proc in procTable:
 		if proc.procName == pName:
 			if varFind(proc.procVars,vName):
 				print("Error Semantico: Variable ", vName, " ya fue declarada")
 				sys.exit()
 			else:
-				var = varTableNode(vName, vVal, vType, vDir)
+				var = varTableNode(vName, vVal, vType, vDir, vDim)
 				proc.procVars.append(var)
 
 def paramInsert(vName, vType, vDir, pName):
@@ -64,16 +64,16 @@ def paramInsert(vName, vType, vDir, pName):
 		if proc.procName == pName:
 			proc.procParams.append(var)
 
-def varGlbInsert(vName, vVal, vType, vDir):
+def varGlbInsert(vName, vVal, vType, vDir, vDim = None):
 	global varGlb
+
 	if varFind(varGlb,vName):
 		print("Error Semantico: Variable ", vName, " ya fue declarada")
 		sys.exit()
 	else:
-		var = varTableNode(vName, vVal, vType, vDir)
+		var = varTableNode(vName, vVal, vType, vDir, vDim)
 		varGlb.append(var)
-	
-	
+
 def procFind(pName):
 	global procTable
 	for proc in procTable:
@@ -116,7 +116,7 @@ def procPrint(procTable):
 			print ("\n")
 			print ("  Vars")
 			for var in proc.procVars:
-				print ("    " + var.varName, " - ", var.varVal, " - ",var.varType, " - ", var.varDir)
+				print ("    " + var.varName, " - ", var.varVal, " - ",var.varType, " - ", var.varDir, "-", var.varDim)
 			print ("\n")
 		else:
 			print ("No procs defined")
@@ -124,7 +124,7 @@ def procPrint(procTable):
 	print ("Tabla de variables globales")
 	for var in varGlb:
 		if var:
-			print (var.varName," - ", var.varType, " - ",var.varDir)
+			print (var.varName," - ", var.varType, " - ",var.varDir, "-", var.varDim)
 		else:
 			print ("ConsTable is empty")
 	print ("\n")
