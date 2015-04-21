@@ -18,6 +18,7 @@ tempCont = 0
 cuadruplos = []
 cuadCont = 0 
 pilaSaltos = []
+pilaParams = []
 
 precedence = (
     ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE', 'MAYORIGUAL', 'MENORIGUAL'),
@@ -313,7 +314,7 @@ def p_exp_booleano(t):
 pass
 
 def p_exp_texto(t):
-    '''exp : CTETEXTO'''
+    'exp : CTETEXTO'
     t[0] = t[1]
     global memoria
     asigna_memoria_constante('texto')
@@ -354,6 +355,7 @@ def p_llamada(t):
     'llamada : PARENTIZQ llamada_param PARENTDER'
     global cuadCont
     global cuadruplos
+    global pilaParams
     if procFind(t[-1]):
       proc = getProc(t[-1])
       cuadruplo = Cuadruplo(cuadCont, 'GOTO',proc.procDir , None, None)
@@ -362,15 +364,48 @@ def p_llamada(t):
       retVar = proc.procRetVar
       pilaOperandos.append(retVar)
 
+      paramsFunc = proc.procParams.copy()
+      cantParams = 0
+      cantParamsFunc = 0
+
+      
+      #cantiad de parametros en la llamada
+      for param in pilaParams:
+        cantParams = cantParams + 1
+
+      #cantidad de parametros en la funcion
+      for param in paramsFunc:
+        cantParamsFunc = cantParamsFunc + 1
+
+      #se evalua la cantidad de parametros
+      if cantParams == cantParamsFunc:
+        #se coloca en orden de comparacion en caso de ser multiples parametros
+        if cantParams>1:
+          aux = pilaParams.pop()
+          pilaParams.insert(0,aux)
+          paramsFunc.reverse()
+          while cantParams:
+            #se comparan parametros de llmada y de funcion
+            paramFunc = paramsFunc.pop()
+            paramLlam = pilaParams.pop()
+            if paramFunc.varType != paramLlam.varType:
+              print('Parametros incompatibles en llamada a funcion ', t[-1])
+              sys.exit()
+            cantParams = cantParams - 1
+
+      else:
+        print('Cantidad de parametros en llamada de la funcion ', t[-1],'es incorrecta')
     else:
       print('El procedimiento ', t[-1],' no ha sido declarado')
 
 pass
 
 def p_llamada_param(t): 
-    '''llamada_param : expresion llamada_param_mult
-                     | empty'''
-    
+    'llamada_param : expresion llamada_param_mult'
+    global pilaParams
+    global pilaOperandos
+    param = pilaOperandos.pop()
+    pilaParams.append(param)
 pass
 
 def p_expresion_unique(t): 
@@ -380,8 +415,19 @@ pass
  
 
 def p_llamada_param_mult(t):
-    '''llamada_param_mult :  llamada_param_mult COMA expresion 
-           | empty'''
+    'llamada_param_mult :  llamada_param_mult COMA expresion'
+    global pilaParams
+    global pilaOperandos
+    param = pilaOperandos.pop()
+    pilaParams.append(param)
+pass
+
+def p_llamada_param_mult_empty(t):
+    'llamada_param_mult : empty'
+pass
+
+def p_llamada_param_empty(t):
+    'llamada_param : empty'
 pass
 
 def p_arraycall(t): 

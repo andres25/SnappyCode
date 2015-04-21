@@ -81,7 +81,7 @@ reserved = { 'inicioprograma' : 'INICIOPROGRAMA',
              'false': 'FALSE',
               }
 
-t_CTETEXTO               = r'"\"".+"\""'
+#t_CTETEXTO               = r'"\"".+"\""'
 t_PUNTOCOMA              = r';'
 t_PARENTIZQ              = r'\('
 t_PARENTDER              = r'\)'
@@ -122,6 +122,11 @@ def t_CTEFLOTANTE(t):
 def t_CTEENTERO(t):
     r'\d+'
     t.value = int(t.value)
+    return t
+
+def t_CTETEXTO(t):
+    r'\"[^\"]*\"'
+    t.value = t.value
     return t
 
 def t_error(t):

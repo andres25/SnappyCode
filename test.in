@@ -42,9 +42,11 @@ FINFUNCION
 INICIOFUNCION FLOTANTE snappyFunc2 PARAMETROS flotante xoxo, entero yoyo, texto wowow
 	crear flotante var1func2;
 	crear entero var2func2;
+	crear texto var3func2;
 
+	var3func2 = "AquiElText";
 	var2func2 = 1+1;
-	var1func2 = snappyFunc1();
+	var1func2 = snappyFunc1(1.0,var2func2,"texto");
 	REGRESA 4.0
 FINFUNCION
 
