@@ -139,6 +139,15 @@ def p_param_empty(t):
 
 def p_finfunc(t): 
     'finfunc : C REGRESA expresion FINFUNCION'
+    global cuadCont
+    global cuadruplos
+    global procTable
+    cuadruplo = Cuadruplo(cuadCont, 'RETURN',None , None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+    returnVar = pilaOperandos.pop()
+    proc = getProc(actualProc)
+    proc.procRetVar = returnVar
     pass
 
  
@@ -315,14 +324,15 @@ def p_exp_texto(t):
 pass
 
 def p_exp_var(t):
-    'exp : ID varfunc'
+    'exp : ID varfuncarr'
     t[0] = t[1]
 
 pass
 
 def p_exp_varfunc(t):
-    '''varfunc : push_var_opd
-                | llamada'''
+    '''varfuncarr : push_var_opd
+                | llamada
+                | arraycall'''
 
 pass
 
@@ -349,6 +359,9 @@ def p_llamada(t):
       cuadruplo = Cuadruplo(cuadCont, 'GOTO',proc.procDir , None, None)
       cuadruplos.append(cuadruplo)
       cuadCont += 1
+      retVar = proc.procRetVar
+      pilaOperandos.append(retVar)
+
     else:
       print('El procedimiento ', t[-1],' no ha sido declarado')
 
@@ -370,6 +383,45 @@ def p_llamada_param_mult(t):
     '''llamada_param_mult :  llamada_param_mult COMA expresion 
            | empty'''
 pass
+
+def p_arraycall(t): 
+    'arraycall : CORCHETEIZQ exp CORCHETEDER'
+    global cuadruplos
+    global cuadCont
+    global pilaOperandos
+    global tempCont
+
+    if varFind(varGlb,t[-1]):
+      auxVar = getVar(varGlb,t-[1])
+    else:
+      auxTable = getVarTable(actualProc)
+      if varFind(auxTable,t[-1]):
+        auxVar = getVar(auxTable,t[-1])
+      else:
+        print ("Error Semantico: Variable ", t[-1], " no encontrada" )
+  
+    index = pilaOperandos.pop()
+
+
+    asigna_memoria_temporal('entero')
+    operandoTemp = varTableNode('t'+str(tempCont), None, 'entero', memoria)
+    tempInsert(operandoTemp)
+    tempCont += 1
+
+
+    cuadruplo = Cuadruplo(cuadCont, '+',auxVar.varDir , index.varDir , operandoTemp.varDir)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+
+    
+    cuadruplo = Cuadruplo(cuadCont, 'VER',auxVar.varDim , operandoTemp.varDir , None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+
+    pilaOperandos.append(operandoTemp)
+
+pass
+
  
 def p_condicion(t):
     'condicion : SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI'

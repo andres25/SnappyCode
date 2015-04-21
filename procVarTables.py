@@ -17,9 +17,10 @@ class varTableNode:
 		self.varDim = vDim
 
 class procTableNode:
-	def __init__(self, pName, pType, pDir):
+	def __init__(self, pName, pType, pDir, pRetVar = None):
 		self.procName = pName
 		self.procReturn = pType
+		self.procRetVar = pRetVar
 		self.procDir = pDir
 		self.procVars= []
 		self.procParams =  []
@@ -109,7 +110,11 @@ def procPrint(procTable):
 	print ("Tabla de procedimientos y variables")
 	for proc in procTable:
 		if proc:
-			print (proc.procName, " - ", proc.procReturn, " - ", proc.procDir)
+			retVar = proc.procRetVar
+			if proc.procName != 'main':
+				print (proc.procName, " - ", proc.procReturn, " - ", proc.procDir,  " - ", retVar.varDir)
+			else:
+				print (proc.procName, " - ", proc.procReturn, " - ", proc.procDir)
 			print ("  Params")
 			for param in proc.procParams:
 				print ("    " + param.varName, " - ", param.varType, " - ", param.varDir)
