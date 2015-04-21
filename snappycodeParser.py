@@ -163,34 +163,21 @@ def p_asignacion(t):
     global varGlb
     global procTable
     global cuadCont
+    global tempTable
 
     if pilaOperandos:
       if varFind(varGlb,t[1]):
         resDir = getVar(varGlb,t[1])
-        tempOperando = pilaOperandos.pop()
-        if isinstance(tempOperando, varTableNode):
-          tempVal = tempOperando.varVal
-        else:
-          tempVal = tempOperando
-        tempConsDir = consGetDir(tempVal)
-        cuadruplo = Cuadruplo(cuadCont, '=',tempConsDir , None, resDir.varDir)
-        cuadruplos.append(cuadruplo)
-        cuadCont += 1
       else:
         auxTable = getVarTable(actualProc)
         if varFind(auxTable,t[1]):
           resDir = getVar(auxTable,t[1])
-          tempOperando = pilaOperandos.pop()
-          if isinstance(tempOperando, varTableNode):
-            tempVal = tempOperando.varVal
-          else:
-            tempVal = tempOperando
-          tempConsDir = consGetDir(tempVal)
-          cuadruplo = Cuadruplo(cuadCont, '=',tempConsDir , None, resDir.varDir)
-          cuadruplos.append(cuadruplo)
-          cuadCont += 1
         else:
           print ("Error Semantico: Variable ", t[1], " no encontrada" )
+      tempOperando = pilaOperandos.pop()
+      cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, resDir.varDir)
+      cuadruplos.append(cuadruplo)
+      cuadCont += 1
     else:
       print ("Error Semantico: Variable ", t[3], " no se puede asignar" )
 
@@ -210,79 +197,27 @@ def p_expresion_eval(t):
     global memoria
     global tempCont
     global cuadCont
-    print('entro')
+    
     if pilaOperadores:
       operador = pilaOperadores.pop()
       operando2 = pilaOperandos.pop()
       operando1 = pilaOperandos.pop()
-
-      op1Name = ''
-      op2Name = ''
-
-      if isinstance(operando1,varTableNode):
-        op1Name = operando1.varName
-        operando1 = operando1.varVal
-      if isinstance(operando2,varTableNode):
-        op2Name = operando2.varName
-        operando2 = operando2.varVal
-
-      type2 = getType(operando2)
-      type1 = getType(operando1)
-
-      resType = cubo_semantico[type1][type2][operador]
-
+      resType = cubo_semantico[operando1.varType][operando2.varType][operador]
       if resType != "error":
-        if operador == '>':
-          if operando1 > operando2:
-            resultado = True
-          else:
-            resultado = False
-        elif operador == '<':
-          if operando1 < operando2:
-            resultado = True
-          else:
-            resultado = False
-        elif operador == '!=':
-          if operando1 != operando2:
-            resultado = True
-          else:
-            resultado = False
-        elif operador == '==':
-          if operando1 == operando2:
-            resultado = True
-          else:
-            resultado = False
-        elif operador == '>=':
-          if operando1 >= operando2:
-            resultado = True
-          else:
-            resultado = False
-        elif operador == '<=':
-          if operando1 <= operando2:
-            resultado = True
-          else:
-            resultado = False
-
-        asigna_memoria_constante(resType)
-        consInsert(resultado, resType, memoria)
         asigna_memoria_temporal(resType)
-        operandoTemp = varTableNode('t'+str(tempCont), resultado, resType, memoria)
+        operandoTemp = varTableNode('t'+str(tempCont), None, resType, memoria)
+        tempInsert(operandoTemp)
+        tempCont += 1
 
-        op1Dir = consGetDir(operando1)
-        op2Dir = consGetDir(operando2)
-
-        cuadruplo = Cuadruplo(cuadCont, operador, op1Dir, op2Dir, memoria)
+        cuadruplo = Cuadruplo(cuadCont, operador, operando1.varDir, operando2.varDir, operandoTemp.varDir)
         cuadruplos.append(cuadruplo)
+        cuadCont += 1
 
         pilaOperandos.append(operandoTemp)
-        tempCont += 1
-        cuadCont += 1
         t[0]=t[1]
-
       else:
         print("Error Semantico: valores incompatibles en la comparacion") 
-
-
+    t[0]=t[1]
     pass
 
 def p_exp_agrupacion(t): 
@@ -306,47 +241,18 @@ def p_exp_binop(t):
       operador = pilaOperadores.pop()
       operando2 = pilaOperandos.pop()
       operando1 = pilaOperandos.pop()
-
-      op1Name = ''
-      op2Name = ''
-
-      if isinstance(operando1,varTableNode):
-        op1Name = operando1.varName
-        operando1 = operando1.varVal
-      if isinstance(operando2,varTableNode):
-        op2Name = operando2.varName
-        operando2 = operando2.varVal
-
-      type2 = getType(operando2)
-      type1 = getType(operando1)
-
-      resType = cubo_semantico[type1][type2][operador]
-
+      resType = cubo_semantico[operando1.varType][operando2.varType][operador]
       if resType != "error":
-        if operador == '+':
-          resultado = operando1 + operando2
-        elif operador == '-':
-          resultado = operando1 - operando2
-        elif operador == '*':
-          resultado = operando1 * operando2
-        elif operador == '/':
-          resultado = operando1 / operando2
-
-        asigna_memoria_constante(resType)
-        consInsert(resultado, resType, memoria)
         asigna_memoria_temporal(resType)
+        operandoTemp = varTableNode('t'+str(tempCont), None, resType, memoria)
+        tempInsert(operandoTemp)
+        tempCont += 1
 
-        operandoTemp = varTableNode('t'+str(tempCont), resultado, resType, memoria)
-
-        op1Dir = consGetDir(operando1)
-        op2Dir = consGetDir(operando2)
-        resDir = consGetDir(resultado)
-        cuadruplo = Cuadruplo(cuadCont, operador, op1Dir, op2Dir, resDir)
+        cuadruplo = Cuadruplo(cuadCont, operador, operando1.varDir, operando2.varDir, operandoTemp.varDir)
         cuadruplos.append(cuadruplo)
+        cuadCont += 1
 
         pilaOperandos.append(operandoTemp)
-        tempCont += 1
-        cuadCont += 1
         t[0]=t[1]
 
 
@@ -366,33 +272,33 @@ def p_exp_uminus(t):
  
 
 def p_exp_int(t):
-    'exp : CTEENTERO push_opd'
+    'exp : CTEENTERO'
     global memoria
     asigna_memoria_constante('entero')
     consInsert(t[1],'entero',memoria)
+    consVar = varTableNode('cte', None, 'entero', consGetDir(t[1]))
+    pilaOperandos.append(consVar)
     t[0] = t[1]
 
-def p_push_opd(t):
-    'push_opd : empty'
-    pilaOperandos.append(t[-1])
-    pass
-
 def p_exp_float(t):
-    'exp : CTEFLOTANTE push_opd'
+    'exp : CTEFLOTANTE'
     global memoria
     asigna_memoria_constante('flotante')
     consInsert(t[1],'flotante',memoria)
-
+    consVar = varTableNode('cte', None, 'flotante', consGetDir(t[1]))
+    pilaOperandos.append(consVar)
     t[0] = t[1]
 pass
 
 def p_exp_booleano(t):
-    '''exp : TRUE push_opd
-          | FALSE push_opd'''
+    '''exp : TRUE
+          | FALSE'''
     t[0] = t[1]
     global memoria
     asigna_memoria_constante('booleano')
     consInsert(t[1],'booleano',memoria)
+    consVar = varTableNode('cte', None, 'booleano', consGetDir(t[1]))
+    pilaOperandos.append(consVar)
 pass
 
 def p_exp_var(t):
@@ -412,18 +318,19 @@ def p_push_var_opd(t):
       if varFind(auxTable,t[-1]):
         auxVar = getVar(auxTable,t[-1])
         auxVal = auxVar.varVal
-        print (auxVar)
         pilaOperandos.append(auxVal)
       else:
         print ("Error Semantico: Variable ", t[-1], " no encontrada" )
 pass
 
 def p_exp_texto(t):
-    '''exp : CTETEXTO push_opd'''
+    '''exp : CTETEXTO'''
     t[0] = t[1]
     global memoria
     asigna_memoria_constante('texto')
     consInsert(t[1],'texto',memoria)
+    consVar = varTableNode('cte', None, 'texto', consGetDir(t[1]))
+    pilaOperandos.append(consVar)
 
 pass
 
@@ -465,10 +372,7 @@ def p_actSi1(t):
 
     pilaSaltos.append(cuadCont)
     tempOperando = pilaOperandos.pop()
-    if isinstance(tempOperando, varTableNode):
-      tempVal = tempOperando.varVal
-    tempConsDir = consGetDir(tempVal)
-    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempConsDir , None, None)
+    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempOperando.varDir , None, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
 
@@ -538,10 +442,7 @@ def p_actCic2(t):
     global cuadCont
 
     tempOperando = pilaOperandos.pop()
-    if isinstance(tempOperando, varTableNode):
-      tempVal = tempOperando.varVal
-    tempConsDir = consGetDir(tempVal)
-    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempConsDir , None, None)
+    cuadruplo = Cuadruplo(cuadCont, 'GOTOF',tempOperando.varDir , None, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
     pilaSaltos.append(cuadCont-1)

@@ -33,6 +33,7 @@ class consTableNode:
 
 consTable = [ ]
 procTable = [ ]
+tempTable = [ ]
 varGlb = [ ]
 
 def procInsert(pName, pType, pDir):
@@ -115,6 +116,13 @@ def procPrint(procTable):
 		else:
 			print ("ConsTable is empty")
 	print ("\n")
+	print ("Tabla de temporales")
+	for temp in tempTable:
+		if temp:
+			print (temp.varVal," - ", temp.varType, " - ",temp.varDir)
+		else:
+			print ("TempTable is empty")
+	print ("\n")
 
 def consInsert(cVal, cType, cDir):
 	global consTable
@@ -137,6 +145,9 @@ def consGetDir(cVal):
 		if cons.consVal == cVal:
 			return cons.consDir
 
+def tempInsert(tVar):
+	global tempTable
+	tempTable.append(tVar)
 
 def getType(value):
 	if type(value) is int:
