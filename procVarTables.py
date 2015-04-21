@@ -37,16 +37,25 @@ varGlb = [ ]
 
 def procInsert(pName, pType, pDir):
 	global procTable
-	node = procTableNode(pName, pType, pDir)
-	procTable.append(node)
+	if procFind(pName):
+		print("Error Semantico: Procedimiento ", pName, " ya fue declarado")
+		sys.exit()
+	else:
+		node = procTableNode(pName, pType, pDir)
+		procTable.append(node)
 
 
 def varLocInsert(vName, vVal, vType, vDir, pName):
 	global procTable
-	var = varTableNode(vName, vVal, vType, vDir)
+	
 	for proc in procTable:
 		if proc.procName == pName:
-			proc.procVars.append(var)
+			if varFind(proc.procVars,vName):
+				print("Error Semantico: Variable ", vName, " ya fue declarada")
+				sys.exit()
+			else:
+				var = varTableNode(vName, vVal, vType, vDir)
+				proc.procVars.append(var)
 
 def paramInsert(vName, vType, vDir, pName):
 	global procTable
@@ -57,15 +66,26 @@ def paramInsert(vName, vType, vDir, pName):
 
 def varGlbInsert(vName, vVal, vType, vDir):
 	global varGlb
-	var = varTableNode(vName, vVal, vType, vDir)
-	varGlb.append(var)
-
+	if varFind(varGlb,vName):
+		print("Error Semantico: Variable ", vName, " ya fue declarada")
+		sys.exit()
+	else:
+		var = varTableNode(vName, vVal, vType, vDir)
+		varGlb.append(var)
+	
+	
 def procFind(pName):
 	global procTable
 	for proc in procTable:
 		if proc.procName == pName:
 			return True
 	return False
+
+def getProc(pName):
+	global procTable
+	for proc in procTable:
+		if proc.procName == pName:
+			return proc
 
 def getVarTable(pName):
 	global procTable
@@ -118,7 +138,7 @@ def procPrint(procTable):
 	print ("Tabla de temporales")
 	for temp in tempTable:
 		if temp:
-			print (temp.varVal," - ", temp.varType, " - ",temp.varDir)
+			print (temp.varName," - ", temp.varVal," - ", temp.varType, " - ",temp.varDir)
 		else:
 			print ("TempTable is empty")
 	print ("\n")

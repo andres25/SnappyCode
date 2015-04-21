@@ -9,7 +9,6 @@ from procVarTables import *
 from memoria import *
 from cubosemantico import *
 
-
 tokens = snappycodeLex.tokens
 actualProc = "global"
 memoria = 0
@@ -88,8 +87,7 @@ def p_iniciofunc(t):
     scope = 'parametro'
     global actualProc
     actualProc = t[3]
-    pDir = 0
-    procInsert(actualProc, t[2], pDir)
+    procInsert(actualProc, t[2], cuadCont)
     pass
 
 def p_param(t): 
@@ -155,9 +153,13 @@ def p_asignacion(t):
         else:
           print ("Error Semantico: Variable ", t[1], " no encontrada" )
       tempOperando = pilaOperandos.pop()
-      cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, resDir.varDir)
-      cuadruplos.append(cuadruplo)
-      cuadCont += 1
+      resType = cubo_semantico[resDir.varType][tempOperando.varType]['=']
+      if resType != "error":
+        cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, resDir.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+      else:
+        print ("Error Semantico: Variable ", t[3], " incompatible con valor ",resDir.varType, " a asignar")
     else:
       print ("Error Semantico: Variable ", t[3], " no se puede asignar" )
 
@@ -281,28 +283,6 @@ def p_exp_booleano(t):
     pilaOperandos.append(consVar)
 pass
 
-def p_exp_var(t):
-    'exp : ID push_var_opd'
-    t[0] = t[1]
-
-pass
-
-def p_push_var_opd(t):
-    'push_var_opd : '
-    if varFind(varGlb,t[-1]):
-      auxVar = getVar(varGlb,t-[1])
-      auxVal = auxVar.varVal
-      pilaOperandos.append(auxVal)
-    else:
-      auxTable = getVarTable(actualProc)
-      if varFind(auxTable,t[-1]):
-        auxVar = getVar(auxTable,t[-1])
-        auxVal = auxVar.varVal
-        pilaOperandos.append(auxVal)
-      else:
-        print ("Error Semantico: Variable ", t[-1], " no encontrada" )
-pass
-
 def p_exp_texto(t):
     '''exp : CTETEXTO'''
     t[0] = t[1]
@@ -314,30 +294,62 @@ def p_exp_texto(t):
 
 pass
 
+def p_exp_var(t):
+    'exp : ID varfunc'
+    t[0] = t[1]
 
-#def p_exp_llamada(t):
-#    'exp :  llamada'
-#    t[0] = t[1]
-#pass
+pass
 
-#def p_llamada(t):
-#    'llamada : ID llamada_param'
-#pass
+def p_exp_varfunc(t):
+    '''varfunc : push_var_opd
+                | llamada'''
 
-#def p_llamada_param(t):
-#    '''llamada_param : PARAMETROS expresion llamada_param_mult
-#           | empty'''
-#pass
+pass
+
+
+def p_push_var_opd(t):
+    'push_var_opd : empty'
+    if varFind(varGlb,t[-1]):
+      auxVar = getVar(varGlb,t-[1])
+    else:
+      auxTable = getVarTable(actualProc)
+      if varFind(auxTable,t[-1]):
+        auxVar = getVar(auxTable,t[-1])
+      else:
+        print ("Error Semantico: Variable ", t[-1], " no encontrada" )
+    pilaOperandos.append(auxVar)
+pass
+
+def p_llamada(t):
+    'llamada : PARENTIZQ llamada_param PARENTDER'
+    global cuadCont
+    global cuadruplos
+    if procFind(t[-1]):
+      proc = getProc(t[-1])
+      cuadruplo = Cuadruplo(cuadCont, 'GOTO',proc.procDir , None, None)
+      cuadruplos.append(cuadruplo)
+      cuadCont += 1
+    else:
+      print('El procedimiento ', t[-1],' no ha sido declarado')
+
+pass
+
+def p_llamada_param(t): 
+    '''llamada_param : expresion llamada_param_mult
+                     | empty'''
+    
+pass
+
 def p_expresion_unique(t): 
     'expresion : exp'
     t[0] = t[1]
-    pass
+pass
  
 
-#def p_llamada_param_mult(t):
-#    '''llamada_param_mult :  llamada_param_mult COMA expresion 
-#           | empty'''
-#pass
+def p_llamada_param_mult(t):
+    '''llamada_param_mult :  llamada_param_mult COMA expresion 
+           | empty'''
+pass
  
 def p_condicion(t):
     'condicion : SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI'
@@ -509,8 +521,7 @@ def p_iniciomain(t):
     'iniciomain : INICIOPRINCIPAL'
     global actualProc
     actualProc = 'main'
-    pDir = 0
-    procInsert(actualProc, actualProc, pDir)
+    procInsert(actualProc, actualProc, cuadCont)
     pass
 
 
