@@ -15,6 +15,9 @@ INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto 
 	var2func1 = 3 / 6;
 	var2func1 = var1func1 + 1;
 
+    PINTAR;
+
+    MOVER var1func1;
 
 	SI 1>1 ENTONCES
 		INICIOBLOQUE

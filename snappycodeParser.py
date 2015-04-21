@@ -486,52 +486,37 @@ def p_io(t):
     pass
  
 def p_accion(t):
-    'accion   : tipo_accion ID PUNTOCOMA'
+    'accion   : tipo_accion PUNTOCOMA'
 
     pass
  
 def p_tipo_accion(t):
-    '''tipo_accion : lista
-               | objeto'''
-    pass
-
-def p_lista(t):
-    '''lista : lista_agregar
-               | lista_sacar
-               | lista_ver'''
-    pass
-
-def p_lista_agregar(t):
-    'lista_agregar : AGREGAR'
-
-    pass
-
-def p_lista_sacar(t):
-    'lista_sacar : SACAR'
-
-    pass
-
-def p_lista_ver(t):
-    'lista_ver : VER'
-
-    pass
- 
-def p_objeto(t):
-    '''objeto   : 
-               | objeto_con_expresion 
+    '''tipo_accion : objeto_con_expresion 
                | objeto_sin_expresion'''
     pass
 
 def p_objeto_con_expresion(t):
-    '''objeto_con_expresion  : GIRARDERECHA expresion
+    '''objeto_con_expresion  : GIRARDERECHA expresion 
                | GIRARIZQUIERDA expresion
                | MOVER expresion '''
+    global cuadruplos
+    global cuadCont
+    global pilaOperandos
+    operando1 = pilaOperandos.pop()
+    cuadruplo = Cuadruplo(cuadCont, t[1], operando1.varDir , None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
     pass
 
 def p_objeto_sin_expresion(t):
     '''objeto_sin_expresion   : BORRAR
                | PINTAR
                | DESPINTAR '''
+    global cuadruplos
+    global cuadCont
+    cuadruplo = Cuadruplo(cuadCont, t[1], None, None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
     pass
 
 def p_principal(t): 
