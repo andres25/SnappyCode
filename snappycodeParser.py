@@ -473,7 +473,7 @@ def p_actCic3(t):
         cuad.opd2= cuadCont+1
 
     salto = pilaSaltos.pop()
-    cuadruplo = Cuadruplo(cuadCont, 'GOTO',None , salto, None)
+    cuadruplo = Cuadruplo(cuadCont, 'GOTO', None, salto, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
 
@@ -481,7 +481,7 @@ def p_actCic3(t):
  
 def p_io(t):
     '''io : PEDIRALUSUARIO ID
-               | DECIRALUSUARIO expresion'''
+               | DECIRALUSUARIO exp'''
 
     pass
  
@@ -491,14 +491,14 @@ def p_accion(t):
     pass
  
 def p_tipo_accion(t):
-    '''tipo_accion : objeto_con_expresion 
-               | objeto_sin_expresion'''
+    '''tipo_accion : objeto_con_exp
+               | objeto_sin_exp'''
     pass
 
-def p_objeto_con_expresion(t):
-    '''objeto_con_expresion  : GIRARDERECHA expresion 
-               | GIRARIZQUIERDA expresion
-               | MOVER expresion '''
+def p_objeto_con_exp(t):
+    '''objeto_con_exp  : GIRARDERECHA exp
+               | GIRARIZQUIERDA exp
+               | MOVER exp '''
     global cuadruplos
     global cuadCont
     global pilaOperandos
@@ -508,8 +508,8 @@ def p_objeto_con_expresion(t):
     cuadCont += 1
     pass
 
-def p_objeto_sin_expresion(t):
-    '''objeto_sin_expresion   : BORRAR
+def p_objeto_sin_exp(t):
+    '''objeto_sin_exp   : BORRAR
                | PINTAR
                | DESPINTAR '''
     global cuadruplos

@@ -76,16 +76,16 @@ Rule 70    actCic1 -> empty
 Rule 71    actCic2 -> empty
 Rule 72    actCic3 -> empty
 Rule 73    io -> PEDIRALUSUARIO ID
-Rule 74    io -> DECIRALUSUARIO expresion
+Rule 74    io -> DECIRALUSUARIO exp
 Rule 75    accion -> tipo_accion PUNTOCOMA
-Rule 76    tipo_accion -> objeto_con_expresion
-Rule 77    tipo_accion -> objeto_sin_expresion
-Rule 78    objeto_con_expresion -> GIRARDERECHA expresion
-Rule 79    objeto_con_expresion -> GIRARIZQUIERDA expresion
-Rule 80    objeto_con_expresion -> MOVER expresion
-Rule 81    objeto_sin_expresion -> BORRAR
-Rule 82    objeto_sin_expresion -> PINTAR
-Rule 83    objeto_sin_expresion -> DESPINTAR
+Rule 76    tipo_accion -> objeto_con_exp
+Rule 77    tipo_accion -> objeto_sin_exp
+Rule 78    objeto_con_exp -> GIRARDERECHA exp
+Rule 79    objeto_con_exp -> GIRARIZQUIERDA exp
+Rule 80    objeto_con_exp -> MOVER exp
+Rule 81    objeto_sin_exp -> BORRAR
+Rule 82    objeto_sin_exp -> PINTAR
+Rule 83    objeto_sin_exp -> DESPINTAR
 Rule 84    principal -> iniciomain vars C FINPRINCIPAL
 Rule 85    iniciomain -> INICIOPRINCIPAL
 
@@ -168,8 +168,8 @@ cuerpo               : 1
 cuerpo_func          : 14 15
 empty                : 12 16 21 22 25 43 53 56 59 61 64 65 67 68 70 71 72
 estatuto             : 24 63
-exp                  : 32 32 33 33 34 34 35 35 36 36 37 37 39 39 40 40 41 41 42 42 44 57
-expresion            : 23 31 38 55 58 60 69 74 78 79 80
+exp                  : 32 32 33 33 34 34 35 35 36 36 37 37 39 39 40 40 41 41 42 42 44 57 74 78 79 80
+expresion            : 23 31 38 55 58 60 69
 finfunc              : 17
 funcion              : 15
 iniciofunc           : 17
@@ -178,8 +178,8 @@ io                   : 29
 llamada              : 52
 llamada_param        : 54
 llamada_param_mult   : 55 58
-objeto_con_expresion : 76
-objeto_sin_expresion : 77
+objeto_con_exp       : 76
+objeto_sin_exp       : 77
 param                : 17
 param_mult           : 19 20
 principal            : 14
@@ -686,39 +686,39 @@ state 33
     (60) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
     (69) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
     (73) io -> . PEDIRALUSUARIO ID
-    (74) io -> . DECIRALUSUARIO expresion
+    (74) io -> . DECIRALUSUARIO exp
     (75) accion -> . tipo_accion PUNTOCOMA
-    (76) tipo_accion -> . objeto_con_expresion
-    (77) tipo_accion -> . objeto_sin_expresion
-    (78) objeto_con_expresion -> . GIRARDERECHA expresion
-    (79) objeto_con_expresion -> . GIRARIZQUIERDA expresion
-    (80) objeto_con_expresion -> . MOVER expresion
-    (81) objeto_sin_expresion -> . BORRAR
-    (82) objeto_sin_expresion -> . PINTAR
-    (83) objeto_sin_expresion -> . DESPINTAR
+    (76) tipo_accion -> . objeto_con_exp
+    (77) tipo_accion -> . objeto_sin_exp
+    (78) objeto_con_exp -> . GIRARDERECHA exp
+    (79) objeto_con_exp -> . GIRARIZQUIERDA exp
+    (80) objeto_con_exp -> . MOVER exp
+    (81) objeto_sin_exp -> . BORRAR
+    (82) objeto_sin_exp -> . PINTAR
+    (83) objeto_sin_exp -> . DESPINTAR
 
-    FINPRINCIPAL    shift and go to state 51
-    ID              shift and go to state 54
+    FINPRINCIPAL    shift and go to state 50
+    ID              shift and go to state 53
     SI              shift and go to state 58
-    MIENTRAS        shift and go to state 52
-    PEDIRALUSUARIO  shift and go to state 53
-    DECIRALUSUARIO  shift and go to state 48
-    GIRARDERECHA    shift and go to state 50
-    GIRARIZQUIERDA  shift and go to state 39
-    MOVER           shift and go to state 49
-    BORRAR          shift and go to state 42
-    PINTAR          shift and go to state 40
-    DESPINTAR       shift and go to state 55
+    MIENTRAS        shift and go to state 51
+    PEDIRALUSUARIO  shift and go to state 52
+    DECIRALUSUARIO  shift and go to state 47
+    GIRARDERECHA    shift and go to state 49
+    GIRARIZQUIERDA  shift and go to state 40
+    MOVER           shift and go to state 48
+    BORRAR          shift and go to state 43
+    PINTAR          shift and go to state 41
+    DESPINTAR       shift and go to state 54
 
-    objeto_sin_expresion           shift and go to state 43
-    asignacion                     shift and go to state 57
-    objeto_con_expresion           shift and go to state 45
-    estatuto                       shift and go to state 46
-    accion                         shift and go to state 56
-    condicion                      shift and go to state 47
-    tipo_accion                    shift and go to state 59
-    io                             shift and go to state 41
+    io                             shift and go to state 42
     ciclo                          shift and go to state 44
+    estatuto                       shift and go to state 45
+    condicion                      shift and go to state 46
+    objeto_con_exp                 shift and go to state 39
+    tipo_accion                    shift and go to state 59
+    accion                         shift and go to state 55
+    asignacion                     shift and go to state 56
+    objeto_sin_exp                 shift and go to state 57
 
 state 34
 
@@ -809,14 +809,14 @@ state 38
 
 state 39
 
-    (79) objeto_con_expresion -> GIRARIZQUIERDA . expresion
-    (32) expresion -> . exp MAYORQUE push_opt exp
-    (33) expresion -> . exp MENORQUE push_opt exp
-    (34) expresion -> . exp DIFERENTEQUE push_opt exp
-    (35) expresion -> . exp IGUALQUE push_opt exp
-    (36) expresion -> . exp MAYORIGUAL push_opt exp
-    (37) expresion -> . exp MENORIGUAL push_opt exp
-    (57) expresion -> . exp
+    (76) tipo_accion -> objeto_con_exp .
+
+    PUNTOCOMA       reduce using rule 76 (tipo_accion -> objeto_con_exp .)
+
+
+state 40
+
+    (79) objeto_con_exp -> GIRARIZQUIERDA . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
@@ -830,26 +830,25 @@ state 39
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 69
-    exp                            shift and go to state 73
-
-state 40
-
-    (82) objeto_sin_expresion -> PINTAR .
-
-    PUNTOCOMA       reduce using rule 82 (objeto_sin_expresion -> PINTAR .)
-
+    exp                            shift and go to state 69
 
 state 41
+
+    (82) objeto_sin_exp -> PINTAR .
+
+    PUNTOCOMA       reduce using rule 82 (objeto_sin_exp -> PINTAR .)
+
+
+state 42
 
     (29) estatuto -> io .
 
@@ -869,18 +868,11 @@ state 41
     FINPRINCIPAL    reduce using rule 29 (estatuto -> io .)
 
 
-state 42
-
-    (81) objeto_sin_expresion -> BORRAR .
-
-    PUNTOCOMA       reduce using rule 81 (objeto_sin_expresion -> BORRAR .)
-
-
 state 43
 
-    (77) tipo_accion -> objeto_sin_expresion .
+    (81) objeto_sin_exp -> BORRAR .
 
-    PUNTOCOMA       reduce using rule 77 (tipo_accion -> objeto_sin_expresion .)
+    PUNTOCOMA       reduce using rule 81 (objeto_sin_exp -> BORRAR .)
 
 
 state 44
@@ -905,13 +897,6 @@ state 44
 
 state 45
 
-    (76) tipo_accion -> objeto_con_expresion .
-
-    PUNTOCOMA       reduce using rule 76 (tipo_accion -> objeto_con_expresion .)
-
-
-state 46
-
     (24) C -> C estatuto .
 
     FINPRINCIPAL    reduce using rule 24 (C -> C estatuto .)
@@ -929,7 +914,7 @@ state 46
     REGRESA         reduce using rule 24 (C -> C estatuto .)
 
 
-state 47
+state 46
 
     (27) estatuto -> condicion .
 
@@ -949,16 +934,9 @@ state 47
     FINPRINCIPAL    reduce using rule 27 (estatuto -> condicion .)
 
 
-state 48
+state 47
 
-    (74) io -> DECIRALUSUARIO . expresion
-    (32) expresion -> . exp MAYORQUE push_opt exp
-    (33) expresion -> . exp MENORQUE push_opt exp
-    (34) expresion -> . exp DIFERENTEQUE push_opt exp
-    (35) expresion -> . exp IGUALQUE push_opt exp
-    (36) expresion -> . exp MAYORIGUAL push_opt exp
-    (37) expresion -> . exp MENORIGUAL push_opt exp
-    (57) expresion -> . exp
+    (74) io -> DECIRALUSUARIO . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
@@ -972,28 +950,47 @@ state 48
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 74
     exp                            shift and go to state 73
+
+state 48
+
+    (80) objeto_con_exp -> MOVER . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 74
 
 state 49
 
-    (80) objeto_con_expresion -> MOVER . expresion
-    (32) expresion -> . exp MAYORQUE push_opt exp
-    (33) expresion -> . exp MENORQUE push_opt exp
-    (34) expresion -> . exp DIFERENTEQUE push_opt exp
-    (35) expresion -> . exp IGUALQUE push_opt exp
-    (36) expresion -> . exp MAYORIGUAL push_opt exp
-    (37) expresion -> . exp MENORIGUAL push_opt exp
-    (57) expresion -> . exp
+    (78) objeto_con_exp -> GIRARDERECHA . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
@@ -1007,61 +1004,25 @@ state 49
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 75
-    exp                            shift and go to state 73
+    exp                            shift and go to state 75
 
 state 50
-
-    (78) objeto_con_expresion -> GIRARDERECHA . expresion
-    (32) expresion -> . exp MAYORQUE push_opt exp
-    (33) expresion -> . exp MENORQUE push_opt exp
-    (34) expresion -> . exp DIFERENTEQUE push_opt exp
-    (35) expresion -> . exp IGUALQUE push_opt exp
-    (36) expresion -> . exp MAYORIGUAL push_opt exp
-    (37) expresion -> . exp MENORIGUAL push_opt exp
-    (57) expresion -> . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    expresion                      shift and go to state 76
-    exp                            shift and go to state 73
-
-state 51
 
     (84) principal -> iniciomain vars C FINPRINCIPAL .
 
     FINPROGRAMA     reduce using rule 84 (principal -> iniciomain vars C FINPRINCIPAL .)
 
 
-state 52
+state 51
 
     (69) ciclo -> MIENTRAS . actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
     (70) actCic1 -> . empty
@@ -1076,31 +1037,31 @@ state 52
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    actCic1                        shift and go to state 77
-    empty                          shift and go to state 78
+    actCic1                        shift and go to state 76
+    empty                          shift and go to state 77
 
-state 53
+state 52
 
     (73) io -> PEDIRALUSUARIO . ID
 
-    ID              shift and go to state 79
+    ID              shift and go to state 78
+
+
+state 53
+
+    (31) asignacion -> ID . IGUAL expresion PUNTOCOMA
+
+    IGUAL           shift and go to state 79
 
 
 state 54
 
-    (31) asignacion -> ID . IGUAL expresion PUNTOCOMA
+    (83) objeto_sin_exp -> DESPINTAR .
 
-    IGUAL           shift and go to state 80
+    PUNTOCOMA       reduce using rule 83 (objeto_sin_exp -> DESPINTAR .)
 
 
 state 55
-
-    (83) objeto_sin_expresion -> DESPINTAR .
-
-    PUNTOCOMA       reduce using rule 83 (objeto_sin_expresion -> DESPINTAR .)
-
-
-state 56
 
     (30) estatuto -> accion .
 
@@ -1120,7 +1081,7 @@ state 56
     FINPRINCIPAL    reduce using rule 30 (estatuto -> accion .)
 
 
-state 57
+state 56
 
     (26) estatuto -> asignacion .
 
@@ -1138,6 +1099,13 @@ state 57
     DESPINTAR       reduce using rule 26 (estatuto -> asignacion .)
     FINBLOQUE       reduce using rule 26 (estatuto -> asignacion .)
     FINPRINCIPAL    reduce using rule 26 (estatuto -> asignacion .)
+
+
+state 57
+
+    (77) tipo_accion -> objeto_sin_exp .
+
+    PUNTOCOMA       reduce using rule 77 (tipo_accion -> objeto_sin_exp .)
 
 
 state 58
@@ -1163,17 +1131,17 @@ state 58
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 81
-    exp                            shift and go to state 73
+    expresion                      shift and go to state 80
+    exp                            shift and go to state 81
 
 state 59
 
@@ -1203,39 +1171,39 @@ state 61
     (60) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
     (69) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
     (73) io -> . PEDIRALUSUARIO ID
-    (74) io -> . DECIRALUSUARIO expresion
+    (74) io -> . DECIRALUSUARIO exp
     (75) accion -> . tipo_accion PUNTOCOMA
-    (76) tipo_accion -> . objeto_con_expresion
-    (77) tipo_accion -> . objeto_sin_expresion
-    (78) objeto_con_expresion -> . GIRARDERECHA expresion
-    (79) objeto_con_expresion -> . GIRARIZQUIERDA expresion
-    (80) objeto_con_expresion -> . MOVER expresion
-    (81) objeto_sin_expresion -> . BORRAR
-    (82) objeto_sin_expresion -> . PINTAR
-    (83) objeto_sin_expresion -> . DESPINTAR
+    (76) tipo_accion -> . objeto_con_exp
+    (77) tipo_accion -> . objeto_sin_exp
+    (78) objeto_con_exp -> . GIRARDERECHA exp
+    (79) objeto_con_exp -> . GIRARIZQUIERDA exp
+    (80) objeto_con_exp -> . MOVER exp
+    (81) objeto_sin_exp -> . BORRAR
+    (82) objeto_sin_exp -> . PINTAR
+    (83) objeto_sin_exp -> . DESPINTAR
 
     REGRESA         shift and go to state 83
-    ID              shift and go to state 54
+    ID              shift and go to state 53
     SI              shift and go to state 58
-    MIENTRAS        shift and go to state 52
-    PEDIRALUSUARIO  shift and go to state 53
-    DECIRALUSUARIO  shift and go to state 48
-    GIRARDERECHA    shift and go to state 50
-    GIRARIZQUIERDA  shift and go to state 39
-    MOVER           shift and go to state 49
-    BORRAR          shift and go to state 42
-    PINTAR          shift and go to state 40
-    DESPINTAR       shift and go to state 55
+    MIENTRAS        shift and go to state 51
+    PEDIRALUSUARIO  shift and go to state 52
+    DECIRALUSUARIO  shift and go to state 47
+    GIRARDERECHA    shift and go to state 49
+    GIRARIZQUIERDA  shift and go to state 40
+    MOVER           shift and go to state 48
+    BORRAR          shift and go to state 43
+    PINTAR          shift and go to state 41
+    DESPINTAR       shift and go to state 54
 
-    objeto_sin_expresion           shift and go to state 43
     ciclo                          shift and go to state 44
-    asignacion                     shift and go to state 57
-    objeto_con_expresion           shift and go to state 45
-    estatuto                       shift and go to state 46
-    condicion                      shift and go to state 47
+    asignacion                     shift and go to state 56
+    estatuto                       shift and go to state 45
+    objeto_con_exp                 shift and go to state 39
+    objeto_sin_exp                 shift and go to state 57
+    condicion                      shift and go to state 46
     tipo_accion                    shift and go to state 59
-    io                             shift and go to state 41
-    accion                         shift and go to state 56
+    io                             shift and go to state 42
+    accion                         shift and go to state 55
 
 state 62
 
@@ -1271,56 +1239,49 @@ state 63
 
 state 64
 
-    (49) exp -> CTETEXTO .
+    (48) exp -> FALSE .
 
-    MAYORQUE        reduce using rule 49 (exp -> CTETEXTO .)
-    MENORQUE        reduce using rule 49 (exp -> CTETEXTO .)
-    DIFERENTEQUE    reduce using rule 49 (exp -> CTETEXTO .)
-    IGUALQUE        reduce using rule 49 (exp -> CTETEXTO .)
-    MAYORIGUAL      reduce using rule 49 (exp -> CTETEXTO .)
-    MENORIGUAL      reduce using rule 49 (exp -> CTETEXTO .)
-    MAS             reduce using rule 49 (exp -> CTETEXTO .)
-    MENOS           reduce using rule 49 (exp -> CTETEXTO .)
-    MULT            reduce using rule 49 (exp -> CTETEXTO .)
-    DIV             reduce using rule 49 (exp -> CTETEXTO .)
-    PUNTOCOMA       reduce using rule 49 (exp -> CTETEXTO .)
-    HACER           reduce using rule 49 (exp -> CTETEXTO .)
-    FINPRINCIPAL    reduce using rule 49 (exp -> CTETEXTO .)
-    ID              reduce using rule 49 (exp -> CTETEXTO .)
-    SI              reduce using rule 49 (exp -> CTETEXTO .)
-    MIENTRAS        reduce using rule 49 (exp -> CTETEXTO .)
-    PEDIRALUSUARIO  reduce using rule 49 (exp -> CTETEXTO .)
-    DECIRALUSUARIO  reduce using rule 49 (exp -> CTETEXTO .)
-    GIRARDERECHA    reduce using rule 49 (exp -> CTETEXTO .)
-    GIRARIZQUIERDA  reduce using rule 49 (exp -> CTETEXTO .)
-    MOVER           reduce using rule 49 (exp -> CTETEXTO .)
-    BORRAR          reduce using rule 49 (exp -> CTETEXTO .)
-    PINTAR          reduce using rule 49 (exp -> CTETEXTO .)
-    DESPINTAR       reduce using rule 49 (exp -> CTETEXTO .)
-    REGRESA         reduce using rule 49 (exp -> CTETEXTO .)
-    FINBLOQUE       reduce using rule 49 (exp -> CTETEXTO .)
-    ENTONCES        reduce using rule 49 (exp -> CTETEXTO .)
-    PARENTDER       reduce using rule 49 (exp -> CTETEXTO .)
-    FINFUNCION      reduce using rule 49 (exp -> CTETEXTO .)
-    COMA            reduce using rule 49 (exp -> CTETEXTO .)
+    MAS             reduce using rule 48 (exp -> FALSE .)
+    MENOS           reduce using rule 48 (exp -> FALSE .)
+    MULT            reduce using rule 48 (exp -> FALSE .)
+    DIV             reduce using rule 48 (exp -> FALSE .)
+    PUNTOCOMA       reduce using rule 48 (exp -> FALSE .)
+    FINPRINCIPAL    reduce using rule 48 (exp -> FALSE .)
+    ID              reduce using rule 48 (exp -> FALSE .)
+    SI              reduce using rule 48 (exp -> FALSE .)
+    MIENTRAS        reduce using rule 48 (exp -> FALSE .)
+    PEDIRALUSUARIO  reduce using rule 48 (exp -> FALSE .)
+    DECIRALUSUARIO  reduce using rule 48 (exp -> FALSE .)
+    GIRARDERECHA    reduce using rule 48 (exp -> FALSE .)
+    GIRARIZQUIERDA  reduce using rule 48 (exp -> FALSE .)
+    MOVER           reduce using rule 48 (exp -> FALSE .)
+    BORRAR          reduce using rule 48 (exp -> FALSE .)
+    PINTAR          reduce using rule 48 (exp -> FALSE .)
+    DESPINTAR       reduce using rule 48 (exp -> FALSE .)
+    REGRESA         reduce using rule 48 (exp -> FALSE .)
+    FINBLOQUE       reduce using rule 48 (exp -> FALSE .)
+    MAYORQUE        reduce using rule 48 (exp -> FALSE .)
+    MENORQUE        reduce using rule 48 (exp -> FALSE .)
+    DIFERENTEQUE    reduce using rule 48 (exp -> FALSE .)
+    IGUALQUE        reduce using rule 48 (exp -> FALSE .)
+    MAYORIGUAL      reduce using rule 48 (exp -> FALSE .)
+    MENORIGUAL      reduce using rule 48 (exp -> FALSE .)
+    ENTONCES        reduce using rule 48 (exp -> FALSE .)
+    PARENTDER       reduce using rule 48 (exp -> FALSE .)
+    HACER           reduce using rule 48 (exp -> FALSE .)
+    FINFUNCION      reduce using rule 48 (exp -> FALSE .)
+    COMA            reduce using rule 48 (exp -> FALSE .)
 
 
 state 65
 
     (45) exp -> CTEENTERO .
 
-    MAYORQUE        reduce using rule 45 (exp -> CTEENTERO .)
-    MENORQUE        reduce using rule 45 (exp -> CTEENTERO .)
-    DIFERENTEQUE    reduce using rule 45 (exp -> CTEENTERO .)
-    IGUALQUE        reduce using rule 45 (exp -> CTEENTERO .)
-    MAYORIGUAL      reduce using rule 45 (exp -> CTEENTERO .)
-    MENORIGUAL      reduce using rule 45 (exp -> CTEENTERO .)
     MAS             reduce using rule 45 (exp -> CTEENTERO .)
     MENOS           reduce using rule 45 (exp -> CTEENTERO .)
     MULT            reduce using rule 45 (exp -> CTEENTERO .)
     DIV             reduce using rule 45 (exp -> CTEENTERO .)
     PUNTOCOMA       reduce using rule 45 (exp -> CTEENTERO .)
-    HACER           reduce using rule 45 (exp -> CTEENTERO .)
     FINPRINCIPAL    reduce using rule 45 (exp -> CTEENTERO .)
     ID              reduce using rule 45 (exp -> CTEENTERO .)
     SI              reduce using rule 45 (exp -> CTEENTERO .)
@@ -1335,13 +1296,134 @@ state 65
     DESPINTAR       reduce using rule 45 (exp -> CTEENTERO .)
     REGRESA         reduce using rule 45 (exp -> CTEENTERO .)
     FINBLOQUE       reduce using rule 45 (exp -> CTEENTERO .)
+    MAYORQUE        reduce using rule 45 (exp -> CTEENTERO .)
+    MENORQUE        reduce using rule 45 (exp -> CTEENTERO .)
+    DIFERENTEQUE    reduce using rule 45 (exp -> CTEENTERO .)
+    IGUALQUE        reduce using rule 45 (exp -> CTEENTERO .)
+    MAYORIGUAL      reduce using rule 45 (exp -> CTEENTERO .)
+    MENORIGUAL      reduce using rule 45 (exp -> CTEENTERO .)
     ENTONCES        reduce using rule 45 (exp -> CTEENTERO .)
     PARENTDER       reduce using rule 45 (exp -> CTEENTERO .)
+    HACER           reduce using rule 45 (exp -> CTEENTERO .)
     FINFUNCION      reduce using rule 45 (exp -> CTEENTERO .)
     COMA            reduce using rule 45 (exp -> CTEENTERO .)
 
 
 state 66
+
+    (46) exp -> CTEFLOTANTE .
+
+    MAS             reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MENOS           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MULT            reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DIV             reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PUNTOCOMA       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    FINPRINCIPAL    reduce using rule 46 (exp -> CTEFLOTANTE .)
+    ID              reduce using rule 46 (exp -> CTEFLOTANTE .)
+    SI              reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MIENTRAS        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PEDIRALUSUARIO  reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DECIRALUSUARIO  reduce using rule 46 (exp -> CTEFLOTANTE .)
+    GIRARDERECHA    reduce using rule 46 (exp -> CTEFLOTANTE .)
+    GIRARIZQUIERDA  reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MOVER           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    BORRAR          reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PINTAR          reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DESPINTAR       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    REGRESA         reduce using rule 46 (exp -> CTEFLOTANTE .)
+    FINBLOQUE       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MAYORQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MENORQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DIFERENTEQUE    reduce using rule 46 (exp -> CTEFLOTANTE .)
+    IGUALQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MAYORIGUAL      reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MENORIGUAL      reduce using rule 46 (exp -> CTEFLOTANTE .)
+    ENTONCES        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PARENTDER       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    HACER           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    FINFUNCION      reduce using rule 46 (exp -> CTEFLOTANTE .)
+    COMA            reduce using rule 46 (exp -> CTEFLOTANTE .)
+
+
+state 67
+
+    (49) exp -> CTETEXTO .
+
+    MAS             reduce using rule 49 (exp -> CTETEXTO .)
+    MENOS           reduce using rule 49 (exp -> CTETEXTO .)
+    MULT            reduce using rule 49 (exp -> CTETEXTO .)
+    DIV             reduce using rule 49 (exp -> CTETEXTO .)
+    PUNTOCOMA       reduce using rule 49 (exp -> CTETEXTO .)
+    FINPRINCIPAL    reduce using rule 49 (exp -> CTETEXTO .)
+    ID              reduce using rule 49 (exp -> CTETEXTO .)
+    SI              reduce using rule 49 (exp -> CTETEXTO .)
+    MIENTRAS        reduce using rule 49 (exp -> CTETEXTO .)
+    PEDIRALUSUARIO  reduce using rule 49 (exp -> CTETEXTO .)
+    DECIRALUSUARIO  reduce using rule 49 (exp -> CTETEXTO .)
+    GIRARDERECHA    reduce using rule 49 (exp -> CTETEXTO .)
+    GIRARIZQUIERDA  reduce using rule 49 (exp -> CTETEXTO .)
+    MOVER           reduce using rule 49 (exp -> CTETEXTO .)
+    BORRAR          reduce using rule 49 (exp -> CTETEXTO .)
+    PINTAR          reduce using rule 49 (exp -> CTETEXTO .)
+    DESPINTAR       reduce using rule 49 (exp -> CTETEXTO .)
+    REGRESA         reduce using rule 49 (exp -> CTETEXTO .)
+    FINBLOQUE       reduce using rule 49 (exp -> CTETEXTO .)
+    MAYORQUE        reduce using rule 49 (exp -> CTETEXTO .)
+    MENORQUE        reduce using rule 49 (exp -> CTETEXTO .)
+    DIFERENTEQUE    reduce using rule 49 (exp -> CTETEXTO .)
+    IGUALQUE        reduce using rule 49 (exp -> CTETEXTO .)
+    MAYORIGUAL      reduce using rule 49 (exp -> CTETEXTO .)
+    MENORIGUAL      reduce using rule 49 (exp -> CTETEXTO .)
+    ENTONCES        reduce using rule 49 (exp -> CTETEXTO .)
+    PARENTDER       reduce using rule 49 (exp -> CTETEXTO .)
+    HACER           reduce using rule 49 (exp -> CTETEXTO .)
+    FINFUNCION      reduce using rule 49 (exp -> CTETEXTO .)
+    COMA            reduce using rule 49 (exp -> CTETEXTO .)
+
+
+state 68
+
+    (44) exp -> MENOS . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 88
+
+state 69
+
+    (79) objeto_con_exp -> GIRARIZQUIERDA exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 79 (objeto_con_exp -> GIRARIZQUIERDA exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+
+state 70
 
     (38) exp -> PARENTIZQ . expresion PARENTDER
     (32) expresion -> . exp MAYORQUE push_opt exp
@@ -1364,34 +1446,27 @@ state 66
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 88
-    exp                            shift and go to state 73
+    expresion                      shift and go to state 93
+    exp                            shift and go to state 81
 
-state 67
+state 71
 
     (47) exp -> TRUE .
 
-    MAYORQUE        reduce using rule 47 (exp -> TRUE .)
-    MENORQUE        reduce using rule 47 (exp -> TRUE .)
-    DIFERENTEQUE    reduce using rule 47 (exp -> TRUE .)
-    IGUALQUE        reduce using rule 47 (exp -> TRUE .)
-    MAYORIGUAL      reduce using rule 47 (exp -> TRUE .)
-    MENORIGUAL      reduce using rule 47 (exp -> TRUE .)
     MAS             reduce using rule 47 (exp -> TRUE .)
     MENOS           reduce using rule 47 (exp -> TRUE .)
     MULT            reduce using rule 47 (exp -> TRUE .)
     DIV             reduce using rule 47 (exp -> TRUE .)
     PUNTOCOMA       reduce using rule 47 (exp -> TRUE .)
-    HACER           reduce using rule 47 (exp -> TRUE .)
     FINPRINCIPAL    reduce using rule 47 (exp -> TRUE .)
     ID              reduce using rule 47 (exp -> TRUE .)
     SI              reduce using rule 47 (exp -> TRUE .)
@@ -1406,13 +1481,20 @@ state 67
     DESPINTAR       reduce using rule 47 (exp -> TRUE .)
     REGRESA         reduce using rule 47 (exp -> TRUE .)
     FINBLOQUE       reduce using rule 47 (exp -> TRUE .)
+    MAYORQUE        reduce using rule 47 (exp -> TRUE .)
+    MENORQUE        reduce using rule 47 (exp -> TRUE .)
+    DIFERENTEQUE    reduce using rule 47 (exp -> TRUE .)
+    IGUALQUE        reduce using rule 47 (exp -> TRUE .)
+    MAYORIGUAL      reduce using rule 47 (exp -> TRUE .)
+    MENORIGUAL      reduce using rule 47 (exp -> TRUE .)
     ENTONCES        reduce using rule 47 (exp -> TRUE .)
     PARENTDER       reduce using rule 47 (exp -> TRUE .)
+    HACER           reduce using rule 47 (exp -> TRUE .)
     FINFUNCION      reduce using rule 47 (exp -> TRUE .)
     COMA            reduce using rule 47 (exp -> TRUE .)
 
 
-state 68
+state 72
 
     (50) exp -> ID . varfunc
     (51) varfunc -> . push_var_opd
@@ -1421,13 +1503,7 @@ state 68
     (54) llamada -> . PARENTIZQ llamada_param PARENTDER
     (13) empty -> .
 
-    PARENTIZQ       shift and go to state 92
-    MAYORQUE        reduce using rule 13 (empty -> .)
-    MENORQUE        reduce using rule 13 (empty -> .)
-    DIFERENTEQUE    reduce using rule 13 (empty -> .)
-    IGUALQUE        reduce using rule 13 (empty -> .)
-    MAYORIGUAL      reduce using rule 13 (empty -> .)
-    MENORIGUAL      reduce using rule 13 (empty -> .)
+    PARENTIZQ       shift and go to state 97
     MAS             reduce using rule 13 (empty -> .)
     MENOS           reduce using rule 13 (empty -> .)
     MULT            reduce using rule 13 (empty -> .)
@@ -1447,204 +1523,82 @@ state 68
     DESPINTAR       reduce using rule 13 (empty -> .)
     REGRESA         reduce using rule 13 (empty -> .)
     FINBLOQUE       reduce using rule 13 (empty -> .)
+    MAYORQUE        reduce using rule 13 (empty -> .)
+    MENORQUE        reduce using rule 13 (empty -> .)
+    DIFERENTEQUE    reduce using rule 13 (empty -> .)
+    IGUALQUE        reduce using rule 13 (empty -> .)
+    MAYORIGUAL      reduce using rule 13 (empty -> .)
+    MENORIGUAL      reduce using rule 13 (empty -> .)
     ENTONCES        reduce using rule 13 (empty -> .)
     PARENTDER       reduce using rule 13 (empty -> .)
     HACER           reduce using rule 13 (empty -> .)
     FINFUNCION      reduce using rule 13 (empty -> .)
     COMA            reduce using rule 13 (empty -> .)
 
-    push_var_opd                   shift and go to state 91
-    llamada                        shift and go to state 89
-    empty                          shift and go to state 93
-    varfunc                        shift and go to state 90
-
-state 69
-
-    (79) objeto_con_expresion -> GIRARIZQUIERDA expresion .
-
-    PUNTOCOMA       reduce using rule 79 (objeto_con_expresion -> GIRARIZQUIERDA expresion .)
-
-
-state 70
-
-    (48) exp -> FALSE .
-
-    MAYORQUE        reduce using rule 48 (exp -> FALSE .)
-    MENORQUE        reduce using rule 48 (exp -> FALSE .)
-    DIFERENTEQUE    reduce using rule 48 (exp -> FALSE .)
-    IGUALQUE        reduce using rule 48 (exp -> FALSE .)
-    MAYORIGUAL      reduce using rule 48 (exp -> FALSE .)
-    MENORIGUAL      reduce using rule 48 (exp -> FALSE .)
-    MAS             reduce using rule 48 (exp -> FALSE .)
-    MENOS           reduce using rule 48 (exp -> FALSE .)
-    MULT            reduce using rule 48 (exp -> FALSE .)
-    DIV             reduce using rule 48 (exp -> FALSE .)
-    PUNTOCOMA       reduce using rule 48 (exp -> FALSE .)
-    HACER           reduce using rule 48 (exp -> FALSE .)
-    FINPRINCIPAL    reduce using rule 48 (exp -> FALSE .)
-    ID              reduce using rule 48 (exp -> FALSE .)
-    SI              reduce using rule 48 (exp -> FALSE .)
-    MIENTRAS        reduce using rule 48 (exp -> FALSE .)
-    PEDIRALUSUARIO  reduce using rule 48 (exp -> FALSE .)
-    DECIRALUSUARIO  reduce using rule 48 (exp -> FALSE .)
-    GIRARDERECHA    reduce using rule 48 (exp -> FALSE .)
-    GIRARIZQUIERDA  reduce using rule 48 (exp -> FALSE .)
-    MOVER           reduce using rule 48 (exp -> FALSE .)
-    BORRAR          reduce using rule 48 (exp -> FALSE .)
-    PINTAR          reduce using rule 48 (exp -> FALSE .)
-    DESPINTAR       reduce using rule 48 (exp -> FALSE .)
-    REGRESA         reduce using rule 48 (exp -> FALSE .)
-    FINBLOQUE       reduce using rule 48 (exp -> FALSE .)
-    ENTONCES        reduce using rule 48 (exp -> FALSE .)
-    PARENTDER       reduce using rule 48 (exp -> FALSE .)
-    FINFUNCION      reduce using rule 48 (exp -> FALSE .)
-    COMA            reduce using rule 48 (exp -> FALSE .)
-
-
-state 71
-
-    (46) exp -> CTEFLOTANTE .
-
-    MAYORQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MENORQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
-    DIFERENTEQUE    reduce using rule 46 (exp -> CTEFLOTANTE .)
-    IGUALQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MAYORIGUAL      reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MENORIGUAL      reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MAS             reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MENOS           reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MULT            reduce using rule 46 (exp -> CTEFLOTANTE .)
-    DIV             reduce using rule 46 (exp -> CTEFLOTANTE .)
-    PUNTOCOMA       reduce using rule 46 (exp -> CTEFLOTANTE .)
-    HACER           reduce using rule 46 (exp -> CTEFLOTANTE .)
-    FINPRINCIPAL    reduce using rule 46 (exp -> CTEFLOTANTE .)
-    ID              reduce using rule 46 (exp -> CTEFLOTANTE .)
-    SI              reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MIENTRAS        reduce using rule 46 (exp -> CTEFLOTANTE .)
-    PEDIRALUSUARIO  reduce using rule 46 (exp -> CTEFLOTANTE .)
-    DECIRALUSUARIO  reduce using rule 46 (exp -> CTEFLOTANTE .)
-    GIRARDERECHA    reduce using rule 46 (exp -> CTEFLOTANTE .)
-    GIRARIZQUIERDA  reduce using rule 46 (exp -> CTEFLOTANTE .)
-    MOVER           reduce using rule 46 (exp -> CTEFLOTANTE .)
-    BORRAR          reduce using rule 46 (exp -> CTEFLOTANTE .)
-    PINTAR          reduce using rule 46 (exp -> CTEFLOTANTE .)
-    DESPINTAR       reduce using rule 46 (exp -> CTEFLOTANTE .)
-    REGRESA         reduce using rule 46 (exp -> CTEFLOTANTE .)
-    FINBLOQUE       reduce using rule 46 (exp -> CTEFLOTANTE .)
-    ENTONCES        reduce using rule 46 (exp -> CTEFLOTANTE .)
-    PARENTDER       reduce using rule 46 (exp -> CTEFLOTANTE .)
-    FINFUNCION      reduce using rule 46 (exp -> CTEFLOTANTE .)
-    COMA            reduce using rule 46 (exp -> CTEFLOTANTE .)
-
-
-state 72
-
-    (44) exp -> MENOS . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 94
+    push_var_opd                   shift and go to state 96
+    llamada                        shift and go to state 94
+    empty                          shift and go to state 98
+    varfunc                        shift and go to state 95
 
 state 73
 
-    (32) expresion -> exp . MAYORQUE push_opt exp
-    (33) expresion -> exp . MENORQUE push_opt exp
-    (34) expresion -> exp . DIFERENTEQUE push_opt exp
-    (35) expresion -> exp . IGUALQUE push_opt exp
-    (36) expresion -> exp . MAYORIGUAL push_opt exp
-    (37) expresion -> exp . MENORIGUAL push_opt exp
-    (57) expresion -> exp .
+    (74) io -> DECIRALUSUARIO exp .
     (39) exp -> exp . MAS push_opt exp
     (40) exp -> exp . MENOS push_opt exp
     (41) exp -> exp . MULT push_opt exp
     (42) exp -> exp . DIV push_opt exp
 
-    MAYORQUE        shift and go to state 101
-    MENORQUE        shift and go to state 100
-    DIFERENTEQUE    shift and go to state 99
-    IGUALQUE        shift and go to state 96
-    MAYORIGUAL      shift and go to state 102
-    MENORIGUAL      shift and go to state 97
-    PUNTOCOMA       reduce using rule 57 (expresion -> exp .)
-    COMA            reduce using rule 57 (expresion -> exp .)
-    PARENTDER       reduce using rule 57 (expresion -> exp .)
-    FINFUNCION      reduce using rule 57 (expresion -> exp .)
-    HACER           reduce using rule 57 (expresion -> exp .)
-    ENTONCES        reduce using rule 57 (expresion -> exp .)
-    FINPRINCIPAL    reduce using rule 57 (expresion -> exp .)
-    ID              reduce using rule 57 (expresion -> exp .)
-    SI              reduce using rule 57 (expresion -> exp .)
-    MIENTRAS        reduce using rule 57 (expresion -> exp .)
-    PEDIRALUSUARIO  reduce using rule 57 (expresion -> exp .)
-    DECIRALUSUARIO  reduce using rule 57 (expresion -> exp .)
-    GIRARDERECHA    reduce using rule 57 (expresion -> exp .)
-    GIRARIZQUIERDA  reduce using rule 57 (expresion -> exp .)
-    MOVER           reduce using rule 57 (expresion -> exp .)
-    BORRAR          reduce using rule 57 (expresion -> exp .)
-    PINTAR          reduce using rule 57 (expresion -> exp .)
-    DESPINTAR       reduce using rule 57 (expresion -> exp .)
-    REGRESA         reduce using rule 57 (expresion -> exp .)
-    FINBLOQUE       reduce using rule 57 (expresion -> exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
+    FINPRINCIPAL    reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    ID              reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    SI              reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    MIENTRAS        reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    PEDIRALUSUARIO  reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    DECIRALUSUARIO  reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    GIRARDERECHA    reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    GIRARIZQUIERDA  reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    MOVER           reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    BORRAR          reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    PINTAR          reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    DESPINTAR       reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    FINBLOQUE       reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    REGRESA         reduce using rule 74 (io -> DECIRALUSUARIO exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
 
 
 state 74
 
-    (74) io -> DECIRALUSUARIO expresion .
+    (80) objeto_con_exp -> MOVER exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
 
-    FINPRINCIPAL    reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    ID              reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    SI              reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    MIENTRAS        reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    PEDIRALUSUARIO  reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    DECIRALUSUARIO  reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    GIRARDERECHA    reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    GIRARIZQUIERDA  reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    MOVER           reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    BORRAR          reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    PINTAR          reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    DESPINTAR       reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    FINBLOQUE       reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
-    REGRESA         reduce using rule 74 (io -> DECIRALUSUARIO expresion .)
+    PUNTOCOMA       reduce using rule 80 (objeto_con_exp -> MOVER exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
 
 
 state 75
 
-    (80) objeto_con_expresion -> MOVER expresion .
+    (78) objeto_con_exp -> GIRARDERECHA exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
 
-    PUNTOCOMA       reduce using rule 80 (objeto_con_expresion -> MOVER expresion .)
+    PUNTOCOMA       reduce using rule 78 (objeto_con_exp -> GIRARDERECHA exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
 
 
 state 76
-
-    (78) objeto_con_expresion -> GIRARDERECHA expresion .
-
-    PUNTOCOMA       reduce using rule 78 (objeto_con_expresion -> GIRARDERECHA expresion .)
-
-
-state 77
 
     (69) ciclo -> MIENTRAS actCic1 . expresion actCic2 HACER bloque FINMIENTRAS actCic3
     (32) expresion -> . exp MAYORQUE push_opt exp
@@ -1667,19 +1621,19 @@ state 77
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 105
-    exp                            shift and go to state 73
+    expresion                      shift and go to state 99
+    exp                            shift and go to state 81
 
-state 78
+state 77
 
     (70) actCic1 -> empty .
 
@@ -1693,7 +1647,7 @@ state 78
     ID              reduce using rule 70 (actCic1 -> empty .)
 
 
-state 79
+state 78
 
     (73) io -> PEDIRALUSUARIO ID .
 
@@ -1713,7 +1667,7 @@ state 79
     REGRESA         reduce using rule 73 (io -> PEDIRALUSUARIO ID .)
 
 
-state 80
+state 79
 
     (31) asignacion -> ID IGUAL . expresion PUNTOCOMA
     (32) expresion -> . exp MAYORQUE push_opt exp
@@ -1736,19 +1690,19 @@ state 80
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 106
-    exp                            shift and go to state 73
+    expresion                      shift and go to state 100
+    exp                            shift and go to state 81
 
-state 81
+state 80
 
     (60) condicion -> SI expresion . actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
     (61) actSi1 -> . empty
@@ -1756,8 +1710,40 @@ state 81
 
     ENTONCES        reduce using rule 13 (empty -> .)
 
-    actSi1                         shift and go to state 107
-    empty                          shift and go to state 108
+    actSi1                         shift and go to state 101
+    empty                          shift and go to state 102
+
+state 81
+
+    (32) expresion -> exp . MAYORQUE push_opt exp
+    (33) expresion -> exp . MENORQUE push_opt exp
+    (34) expresion -> exp . DIFERENTEQUE push_opt exp
+    (35) expresion -> exp . IGUALQUE push_opt exp
+    (36) expresion -> exp . MAYORIGUAL push_opt exp
+    (37) expresion -> exp . MENORIGUAL push_opt exp
+    (57) expresion -> exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    MAYORQUE        shift and go to state 107
+    MENORQUE        shift and go to state 106
+    DIFERENTEQUE    shift and go to state 105
+    IGUALQUE        shift and go to state 103
+    MAYORIGUAL      shift and go to state 108
+    MENORIGUAL      shift and go to state 104
+    PUNTOCOMA       reduce using rule 57 (expresion -> exp .)
+    COMA            reduce using rule 57 (expresion -> exp .)
+    PARENTDER       reduce using rule 57 (expresion -> exp .)
+    FINFUNCION      reduce using rule 57 (expresion -> exp .)
+    HACER           reduce using rule 57 (expresion -> exp .)
+    ENTONCES        reduce using rule 57 (expresion -> exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
 
 state 82
 
@@ -1802,17 +1788,17 @@ state 83
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
     expresion                      shift and go to state 109
-    exp                            shift and go to state 73
+    exp                            shift and go to state 81
 
 state 84
 
@@ -1893,21 +1879,132 @@ state 87
 
 state 88
 
-    (38) exp -> PARENTIZQ expresion . PARENTDER
+    (44) exp -> MENOS exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
 
-    PARENTDER       shift and go to state 111
+    MAS             reduce using rule 44 (exp -> MENOS exp .)
+    MENOS           reduce using rule 44 (exp -> MENOS exp .)
+    MULT            reduce using rule 44 (exp -> MENOS exp .)
+    DIV             reduce using rule 44 (exp -> MENOS exp .)
+    PUNTOCOMA       reduce using rule 44 (exp -> MENOS exp .)
+    FINPRINCIPAL    reduce using rule 44 (exp -> MENOS exp .)
+    ID              reduce using rule 44 (exp -> MENOS exp .)
+    SI              reduce using rule 44 (exp -> MENOS exp .)
+    MIENTRAS        reduce using rule 44 (exp -> MENOS exp .)
+    PEDIRALUSUARIO  reduce using rule 44 (exp -> MENOS exp .)
+    DECIRALUSUARIO  reduce using rule 44 (exp -> MENOS exp .)
+    GIRARDERECHA    reduce using rule 44 (exp -> MENOS exp .)
+    GIRARIZQUIERDA  reduce using rule 44 (exp -> MENOS exp .)
+    MOVER           reduce using rule 44 (exp -> MENOS exp .)
+    BORRAR          reduce using rule 44 (exp -> MENOS exp .)
+    PINTAR          reduce using rule 44 (exp -> MENOS exp .)
+    DESPINTAR       reduce using rule 44 (exp -> MENOS exp .)
+    REGRESA         reduce using rule 44 (exp -> MENOS exp .)
+    FINBLOQUE       reduce using rule 44 (exp -> MENOS exp .)
+    MAYORQUE        reduce using rule 44 (exp -> MENOS exp .)
+    MENORQUE        reduce using rule 44 (exp -> MENOS exp .)
+    DIFERENTEQUE    reduce using rule 44 (exp -> MENOS exp .)
+    IGUALQUE        reduce using rule 44 (exp -> MENOS exp .)
+    MAYORIGUAL      reduce using rule 44 (exp -> MENOS exp .)
+    MENORIGUAL      reduce using rule 44 (exp -> MENOS exp .)
+    ENTONCES        reduce using rule 44 (exp -> MENOS exp .)
+    PARENTDER       reduce using rule 44 (exp -> MENOS exp .)
+    HACER           reduce using rule 44 (exp -> MENOS exp .)
+    FINFUNCION      reduce using rule 44 (exp -> MENOS exp .)
+    COMA            reduce using rule 44 (exp -> MENOS exp .)
+
+  ! MAS             [ shift and go to state 89 ]
+  ! MENOS           [ shift and go to state 90 ]
+  ! MULT            [ shift and go to state 92 ]
+  ! DIV             [ shift and go to state 91 ]
 
 
 state 89
 
+    (39) exp -> exp MAS . push_opt exp
+    (43) push_opt -> . empty
+    (13) empty -> .
+
+    PARENTIZQ       reduce using rule 13 (empty -> .)
+    MENOS           reduce using rule 13 (empty -> .)
+    CTEENTERO       reduce using rule 13 (empty -> .)
+    CTEFLOTANTE     reduce using rule 13 (empty -> .)
+    TRUE            reduce using rule 13 (empty -> .)
+    FALSE           reduce using rule 13 (empty -> .)
+    CTETEXTO        reduce using rule 13 (empty -> .)
+    ID              reduce using rule 13 (empty -> .)
+
+    push_opt                       shift and go to state 112
+    empty                          shift and go to state 111
+
+state 90
+
+    (40) exp -> exp MENOS . push_opt exp
+    (43) push_opt -> . empty
+    (13) empty -> .
+
+    PARENTIZQ       reduce using rule 13 (empty -> .)
+    MENOS           reduce using rule 13 (empty -> .)
+    CTEENTERO       reduce using rule 13 (empty -> .)
+    CTEFLOTANTE     reduce using rule 13 (empty -> .)
+    TRUE            reduce using rule 13 (empty -> .)
+    FALSE           reduce using rule 13 (empty -> .)
+    CTETEXTO        reduce using rule 13 (empty -> .)
+    ID              reduce using rule 13 (empty -> .)
+
+    push_opt                       shift and go to state 113
+    empty                          shift and go to state 111
+
+state 91
+
+    (42) exp -> exp DIV . push_opt exp
+    (43) push_opt -> . empty
+    (13) empty -> .
+
+    PARENTIZQ       reduce using rule 13 (empty -> .)
+    MENOS           reduce using rule 13 (empty -> .)
+    CTEENTERO       reduce using rule 13 (empty -> .)
+    CTEFLOTANTE     reduce using rule 13 (empty -> .)
+    TRUE            reduce using rule 13 (empty -> .)
+    FALSE           reduce using rule 13 (empty -> .)
+    CTETEXTO        reduce using rule 13 (empty -> .)
+    ID              reduce using rule 13 (empty -> .)
+
+    push_opt                       shift and go to state 114
+    empty                          shift and go to state 111
+
+state 92
+
+    (41) exp -> exp MULT . push_opt exp
+    (43) push_opt -> . empty
+    (13) empty -> .
+
+    PARENTIZQ       reduce using rule 13 (empty -> .)
+    MENOS           reduce using rule 13 (empty -> .)
+    CTEENTERO       reduce using rule 13 (empty -> .)
+    CTEFLOTANTE     reduce using rule 13 (empty -> .)
+    TRUE            reduce using rule 13 (empty -> .)
+    FALSE           reduce using rule 13 (empty -> .)
+    CTETEXTO        reduce using rule 13 (empty -> .)
+    ID              reduce using rule 13 (empty -> .)
+
+    push_opt                       shift and go to state 115
+    empty                          shift and go to state 111
+
+state 93
+
+    (38) exp -> PARENTIZQ expresion . PARENTDER
+
+    PARENTDER       shift and go to state 116
+
+
+state 94
+
     (52) varfunc -> llamada .
 
-    MAYORQUE        reduce using rule 52 (varfunc -> llamada .)
-    MENORQUE        reduce using rule 52 (varfunc -> llamada .)
-    DIFERENTEQUE    reduce using rule 52 (varfunc -> llamada .)
-    IGUALQUE        reduce using rule 52 (varfunc -> llamada .)
-    MAYORIGUAL      reduce using rule 52 (varfunc -> llamada .)
-    MENORIGUAL      reduce using rule 52 (varfunc -> llamada .)
     MAS             reduce using rule 52 (varfunc -> llamada .)
     MENOS           reduce using rule 52 (varfunc -> llamada .)
     MULT            reduce using rule 52 (varfunc -> llamada .)
@@ -1927,6 +2024,12 @@ state 89
     DESPINTAR       reduce using rule 52 (varfunc -> llamada .)
     REGRESA         reduce using rule 52 (varfunc -> llamada .)
     FINBLOQUE       reduce using rule 52 (varfunc -> llamada .)
+    MAYORQUE        reduce using rule 52 (varfunc -> llamada .)
+    MENORQUE        reduce using rule 52 (varfunc -> llamada .)
+    DIFERENTEQUE    reduce using rule 52 (varfunc -> llamada .)
+    IGUALQUE        reduce using rule 52 (varfunc -> llamada .)
+    MAYORIGUAL      reduce using rule 52 (varfunc -> llamada .)
+    MENORIGUAL      reduce using rule 52 (varfunc -> llamada .)
     ENTONCES        reduce using rule 52 (varfunc -> llamada .)
     PARENTDER       reduce using rule 52 (varfunc -> llamada .)
     HACER           reduce using rule 52 (varfunc -> llamada .)
@@ -1934,22 +2037,15 @@ state 89
     COMA            reduce using rule 52 (varfunc -> llamada .)
 
 
-state 90
+state 95
 
     (50) exp -> ID varfunc .
 
-    MAYORQUE        reduce using rule 50 (exp -> ID varfunc .)
-    MENORQUE        reduce using rule 50 (exp -> ID varfunc .)
-    DIFERENTEQUE    reduce using rule 50 (exp -> ID varfunc .)
-    IGUALQUE        reduce using rule 50 (exp -> ID varfunc .)
-    MAYORIGUAL      reduce using rule 50 (exp -> ID varfunc .)
-    MENORIGUAL      reduce using rule 50 (exp -> ID varfunc .)
     MAS             reduce using rule 50 (exp -> ID varfunc .)
     MENOS           reduce using rule 50 (exp -> ID varfunc .)
     MULT            reduce using rule 50 (exp -> ID varfunc .)
     DIV             reduce using rule 50 (exp -> ID varfunc .)
     PUNTOCOMA       reduce using rule 50 (exp -> ID varfunc .)
-    HACER           reduce using rule 50 (exp -> ID varfunc .)
     FINPRINCIPAL    reduce using rule 50 (exp -> ID varfunc .)
     ID              reduce using rule 50 (exp -> ID varfunc .)
     SI              reduce using rule 50 (exp -> ID varfunc .)
@@ -1964,22 +2060,23 @@ state 90
     DESPINTAR       reduce using rule 50 (exp -> ID varfunc .)
     REGRESA         reduce using rule 50 (exp -> ID varfunc .)
     FINBLOQUE       reduce using rule 50 (exp -> ID varfunc .)
+    MAYORQUE        reduce using rule 50 (exp -> ID varfunc .)
+    MENORQUE        reduce using rule 50 (exp -> ID varfunc .)
+    DIFERENTEQUE    reduce using rule 50 (exp -> ID varfunc .)
+    IGUALQUE        reduce using rule 50 (exp -> ID varfunc .)
+    MAYORIGUAL      reduce using rule 50 (exp -> ID varfunc .)
+    MENORIGUAL      reduce using rule 50 (exp -> ID varfunc .)
     ENTONCES        reduce using rule 50 (exp -> ID varfunc .)
     PARENTDER       reduce using rule 50 (exp -> ID varfunc .)
+    HACER           reduce using rule 50 (exp -> ID varfunc .)
     FINFUNCION      reduce using rule 50 (exp -> ID varfunc .)
     COMA            reduce using rule 50 (exp -> ID varfunc .)
 
 
-state 91
+state 96
 
     (51) varfunc -> push_var_opd .
 
-    MAYORQUE        reduce using rule 51 (varfunc -> push_var_opd .)
-    MENORQUE        reduce using rule 51 (varfunc -> push_var_opd .)
-    DIFERENTEQUE    reduce using rule 51 (varfunc -> push_var_opd .)
-    IGUALQUE        reduce using rule 51 (varfunc -> push_var_opd .)
-    MAYORIGUAL      reduce using rule 51 (varfunc -> push_var_opd .)
-    MENORIGUAL      reduce using rule 51 (varfunc -> push_var_opd .)
     MAS             reduce using rule 51 (varfunc -> push_var_opd .)
     MENOS           reduce using rule 51 (varfunc -> push_var_opd .)
     MULT            reduce using rule 51 (varfunc -> push_var_opd .)
@@ -1999,6 +2096,12 @@ state 91
     DESPINTAR       reduce using rule 51 (varfunc -> push_var_opd .)
     REGRESA         reduce using rule 51 (varfunc -> push_var_opd .)
     FINBLOQUE       reduce using rule 51 (varfunc -> push_var_opd .)
+    MAYORQUE        reduce using rule 51 (varfunc -> push_var_opd .)
+    MENORQUE        reduce using rule 51 (varfunc -> push_var_opd .)
+    DIFERENTEQUE    reduce using rule 51 (varfunc -> push_var_opd .)
+    IGUALQUE        reduce using rule 51 (varfunc -> push_var_opd .)
+    MAYORIGUAL      reduce using rule 51 (varfunc -> push_var_opd .)
+    MENORIGUAL      reduce using rule 51 (varfunc -> push_var_opd .)
     ENTONCES        reduce using rule 51 (varfunc -> push_var_opd .)
     PARENTDER       reduce using rule 51 (varfunc -> push_var_opd .)
     HACER           reduce using rule 51 (varfunc -> push_var_opd .)
@@ -2006,7 +2109,7 @@ state 91
     COMA            reduce using rule 51 (varfunc -> push_var_opd .)
 
 
-state 92
+state 97
 
     (54) llamada -> PARENTIZQ . llamada_param PARENTDER
     (55) llamada_param -> . expresion llamada_param_mult
@@ -2033,30 +2136,24 @@ state 92
     (50) exp -> . ID varfunc
 
     PARENTDER       reduce using rule 13 (empty -> .)
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    expresion                      shift and go to state 113
-    llamada_param                  shift and go to state 114
-    exp                            shift and go to state 73
-    empty                          shift and go to state 112
+    expresion                      shift and go to state 118
+    llamada_param                  shift and go to state 119
+    exp                            shift and go to state 81
+    empty                          shift and go to state 117
 
-state 93
+state 98
 
     (53) push_var_opd -> empty .
 
-    MAYORQUE        reduce using rule 53 (push_var_opd -> empty .)
-    MENORQUE        reduce using rule 53 (push_var_opd -> empty .)
-    DIFERENTEQUE    reduce using rule 53 (push_var_opd -> empty .)
-    IGUALQUE        reduce using rule 53 (push_var_opd -> empty .)
-    MAYORIGUAL      reduce using rule 53 (push_var_opd -> empty .)
-    MENORIGUAL      reduce using rule 53 (push_var_opd -> empty .)
     MAS             reduce using rule 53 (push_var_opd -> empty .)
     MENOS           reduce using rule 53 (push_var_opd -> empty .)
     MULT            reduce using rule 53 (push_var_opd -> empty .)
@@ -2076,6 +2173,12 @@ state 93
     DESPINTAR       reduce using rule 53 (push_var_opd -> empty .)
     REGRESA         reduce using rule 53 (push_var_opd -> empty .)
     FINBLOQUE       reduce using rule 53 (push_var_opd -> empty .)
+    MAYORQUE        reduce using rule 53 (push_var_opd -> empty .)
+    MENORQUE        reduce using rule 53 (push_var_opd -> empty .)
+    DIFERENTEQUE    reduce using rule 53 (push_var_opd -> empty .)
+    IGUALQUE        reduce using rule 53 (push_var_opd -> empty .)
+    MAYORIGUAL      reduce using rule 53 (push_var_opd -> empty .)
+    MENORIGUAL      reduce using rule 53 (push_var_opd -> empty .)
     ENTONCES        reduce using rule 53 (push_var_opd -> empty .)
     PARENTDER       reduce using rule 53 (push_var_opd -> empty .)
     HACER           reduce using rule 53 (push_var_opd -> empty .)
@@ -2083,70 +2186,39 @@ state 93
     COMA            reduce using rule 53 (push_var_opd -> empty .)
 
 
-state 94
+state 99
 
-    (44) exp -> MENOS exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    MAYORQUE        reduce using rule 44 (exp -> MENOS exp .)
-    MENORQUE        reduce using rule 44 (exp -> MENOS exp .)
-    DIFERENTEQUE    reduce using rule 44 (exp -> MENOS exp .)
-    IGUALQUE        reduce using rule 44 (exp -> MENOS exp .)
-    MAYORIGUAL      reduce using rule 44 (exp -> MENOS exp .)
-    MENORIGUAL      reduce using rule 44 (exp -> MENOS exp .)
-    MAS             reduce using rule 44 (exp -> MENOS exp .)
-    MENOS           reduce using rule 44 (exp -> MENOS exp .)
-    MULT            reduce using rule 44 (exp -> MENOS exp .)
-    DIV             reduce using rule 44 (exp -> MENOS exp .)
-    PUNTOCOMA       reduce using rule 44 (exp -> MENOS exp .)
-    HACER           reduce using rule 44 (exp -> MENOS exp .)
-    FINPRINCIPAL    reduce using rule 44 (exp -> MENOS exp .)
-    ID              reduce using rule 44 (exp -> MENOS exp .)
-    SI              reduce using rule 44 (exp -> MENOS exp .)
-    MIENTRAS        reduce using rule 44 (exp -> MENOS exp .)
-    PEDIRALUSUARIO  reduce using rule 44 (exp -> MENOS exp .)
-    DECIRALUSUARIO  reduce using rule 44 (exp -> MENOS exp .)
-    GIRARDERECHA    reduce using rule 44 (exp -> MENOS exp .)
-    GIRARIZQUIERDA  reduce using rule 44 (exp -> MENOS exp .)
-    MOVER           reduce using rule 44 (exp -> MENOS exp .)
-    BORRAR          reduce using rule 44 (exp -> MENOS exp .)
-    PINTAR          reduce using rule 44 (exp -> MENOS exp .)
-    DESPINTAR       reduce using rule 44 (exp -> MENOS exp .)
-    REGRESA         reduce using rule 44 (exp -> MENOS exp .)
-    FINBLOQUE       reduce using rule 44 (exp -> MENOS exp .)
-    ENTONCES        reduce using rule 44 (exp -> MENOS exp .)
-    PARENTDER       reduce using rule 44 (exp -> MENOS exp .)
-    FINFUNCION      reduce using rule 44 (exp -> MENOS exp .)
-    COMA            reduce using rule 44 (exp -> MENOS exp .)
-
-  ! MAS             [ shift and go to state 95 ]
-  ! MENOS           [ shift and go to state 98 ]
-  ! MULT            [ shift and go to state 104 ]
-  ! DIV             [ shift and go to state 103 ]
-
-
-state 95
-
-    (39) exp -> exp MAS . push_opt exp
-    (43) push_opt -> . empty
+    (69) ciclo -> MIENTRAS actCic1 expresion . actCic2 HACER bloque FINMIENTRAS actCic3
+    (71) actCic2 -> . empty
     (13) empty -> .
 
-    PARENTIZQ       reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    CTEENTERO       reduce using rule 13 (empty -> .)
-    CTEFLOTANTE     reduce using rule 13 (empty -> .)
-    TRUE            reduce using rule 13 (empty -> .)
-    FALSE           reduce using rule 13 (empty -> .)
-    CTETEXTO        reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
+    HACER           reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 116
-    empty                          shift and go to state 115
+    actCic2                        shift and go to state 120
+    empty                          shift and go to state 121
 
-state 96
+state 100
+
+    (31) asignacion -> ID IGUAL expresion . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 122
+
+
+state 101
+
+    (60) condicion -> SI expresion actSi1 . ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+
+    ENTONCES        shift and go to state 123
+
+
+state 102
+
+    (61) actSi1 -> empty .
+
+    ENTONCES        reduce using rule 61 (actSi1 -> empty .)
+
+
+state 103
 
     (35) expresion -> exp IGUALQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2161,10 +2233,10 @@ state 96
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 117
-    empty                          shift and go to state 115
+    push_opt                       shift and go to state 124
+    empty                          shift and go to state 111
 
-state 97
+state 104
 
     (37) expresion -> exp MENORIGUAL . push_opt exp
     (43) push_opt -> . empty
@@ -2179,28 +2251,10 @@ state 97
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 118
-    empty                          shift and go to state 115
+    push_opt                       shift and go to state 125
+    empty                          shift and go to state 111
 
-state 98
-
-    (40) exp -> exp MENOS . push_opt exp
-    (43) push_opt -> . empty
-    (13) empty -> .
-
-    PARENTIZQ       reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    CTEENTERO       reduce using rule 13 (empty -> .)
-    CTEFLOTANTE     reduce using rule 13 (empty -> .)
-    TRUE            reduce using rule 13 (empty -> .)
-    FALSE           reduce using rule 13 (empty -> .)
-    CTETEXTO        reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-
-    push_opt                       shift and go to state 119
-    empty                          shift and go to state 115
-
-state 99
+state 105
 
     (34) expresion -> exp DIFERENTEQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2215,10 +2269,10 @@ state 99
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 120
-    empty                          shift and go to state 115
+    push_opt                       shift and go to state 126
+    empty                          shift and go to state 111
 
-state 100
+state 106
 
     (33) expresion -> exp MENORQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2233,10 +2287,10 @@ state 100
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 121
-    empty                          shift and go to state 115
+    push_opt                       shift and go to state 127
+    empty                          shift and go to state 111
 
-state 101
+state 107
 
     (32) expresion -> exp MAYORQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2251,10 +2305,10 @@ state 101
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 122
-    empty                          shift and go to state 115
+    push_opt                       shift and go to state 128
+    empty                          shift and go to state 111
 
-state 102
+state 108
 
     (36) expresion -> exp MAYORIGUAL . push_opt exp
     (43) push_opt -> . empty
@@ -2269,76 +2323,8 @@ state 102
     CTETEXTO        reduce using rule 13 (empty -> .)
     ID              reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 123
-    empty                          shift and go to state 115
-
-state 103
-
-    (42) exp -> exp DIV . push_opt exp
-    (43) push_opt -> . empty
-    (13) empty -> .
-
-    PARENTIZQ       reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    CTEENTERO       reduce using rule 13 (empty -> .)
-    CTEFLOTANTE     reduce using rule 13 (empty -> .)
-    TRUE            reduce using rule 13 (empty -> .)
-    FALSE           reduce using rule 13 (empty -> .)
-    CTETEXTO        reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-
-    push_opt                       shift and go to state 124
-    empty                          shift and go to state 115
-
-state 104
-
-    (41) exp -> exp MULT . push_opt exp
-    (43) push_opt -> . empty
-    (13) empty -> .
-
-    PARENTIZQ       reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    CTEENTERO       reduce using rule 13 (empty -> .)
-    CTEFLOTANTE     reduce using rule 13 (empty -> .)
-    TRUE            reduce using rule 13 (empty -> .)
-    FALSE           reduce using rule 13 (empty -> .)
-    CTETEXTO        reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-
-    push_opt                       shift and go to state 125
-    empty                          shift and go to state 115
-
-state 105
-
-    (69) ciclo -> MIENTRAS actCic1 expresion . actCic2 HACER bloque FINMIENTRAS actCic3
-    (71) actCic2 -> . empty
-    (13) empty -> .
-
-    HACER           reduce using rule 13 (empty -> .)
-
-    actCic2                        shift and go to state 126
-    empty                          shift and go to state 127
-
-state 106
-
-    (31) asignacion -> ID IGUAL expresion . PUNTOCOMA
-
-    PUNTOCOMA       shift and go to state 128
-
-
-state 107
-
-    (60) condicion -> SI expresion actSi1 . ENTONCES bloque actSi2 condicion_else actSi3 FINSI
-
-    ENTONCES        shift and go to state 129
-
-
-state 108
-
-    (61) actSi1 -> empty .
-
-    ENTONCES        reduce using rule 61 (actSi1 -> empty .)
-
+    push_opt                       shift and go to state 129
+    empty                          shift and go to state 111
 
 state 109
 
@@ -2356,69 +2342,6 @@ state 110
 
 state 111
 
-    (38) exp -> PARENTIZQ expresion PARENTDER .
-
-    MAYORQUE        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MENORQUE        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    DIFERENTEQUE    reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    IGUALQUE        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MAYORIGUAL      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MENORIGUAL      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MAS             reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MENOS           reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MULT            reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    DIV             reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    PUNTOCOMA       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    HACER           reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    FINPRINCIPAL    reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    ID              reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    SI              reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MIENTRAS        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    PEDIRALUSUARIO  reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    DECIRALUSUARIO  reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    GIRARDERECHA    reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    GIRARIZQUIERDA  reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    MOVER           reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    BORRAR          reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    PINTAR          reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    DESPINTAR       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    REGRESA         reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    FINBLOQUE       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    ENTONCES        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    PARENTDER       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    FINFUNCION      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-    COMA            reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
-
-
-state 112
-
-    (56) llamada_param -> empty .
-
-    PARENTDER       reduce using rule 56 (llamada_param -> empty .)
-
-
-state 113
-
-    (55) llamada_param -> expresion . llamada_param_mult
-    (58) llamada_param_mult -> . llamada_param_mult COMA expresion
-    (59) llamada_param_mult -> . empty
-    (13) empty -> .
-
-    COMA            reduce using rule 13 (empty -> .)
-    PARENTDER       reduce using rule 13 (empty -> .)
-
-    llamada_param_mult             shift and go to state 132
-    empty                          shift and go to state 133
-
-state 114
-
-    (54) llamada -> PARENTIZQ llamada_param . PARENTDER
-
-    PARENTDER       shift and go to state 134
-
-
-state 115
-
     (43) push_opt -> empty .
 
     PARENTIZQ       reduce using rule 43 (push_opt -> empty .)
@@ -2431,7 +2354,7 @@ state 115
     ID              reduce using rule 43 (push_opt -> empty .)
 
 
-state 116
+state 112
 
     (39) exp -> exp MAS push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
@@ -2447,72 +2370,18 @@ state 116
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    exp                            shift and go to state 135
+    exp                            shift and go to state 132
 
-state 117
-
-    (35) expresion -> exp IGUALQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 136
-
-state 118
-
-    (37) expresion -> exp MENORIGUAL push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 137
-
-state 119
+state 113
 
     (40) exp -> exp MENOS push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
@@ -2528,126 +2397,18 @@ state 119
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    exp                            shift and go to state 138
+    exp                            shift and go to state 133
 
-state 120
-
-    (34) expresion -> exp DIFERENTEQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 139
-
-state 121
-
-    (33) expresion -> exp MENORQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 140
-
-state 122
-
-    (32) expresion -> exp MAYORQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 141
-
-state 123
-
-    (36) expresion -> exp MAYORIGUAL push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO
-    (46) exp -> . CTEFLOTANTE
-    (47) exp -> . TRUE
-    (48) exp -> . FALSE
-    (49) exp -> . CTETEXTO
-    (50) exp -> . ID varfunc
-
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
-    CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
-
-    exp                            shift and go to state 142
-
-state 124
+state 114
 
     (42) exp -> exp DIV push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
@@ -2663,18 +2424,18 @@ state 124
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    exp                            shift and go to state 143
+    exp                            shift and go to state 134
 
-state 125
+state 115
 
     (41) exp -> exp MULT push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
@@ -2690,32 +2451,95 @@ state 125
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
-    exp                            shift and go to state 144
+    exp                            shift and go to state 135
 
-state 126
+state 116
+
+    (38) exp -> PARENTIZQ expresion PARENTDER .
+
+    MAS             reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MENOS           reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MULT            reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    DIV             reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    PUNTOCOMA       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    FINPRINCIPAL    reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    ID              reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    SI              reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MIENTRAS        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    PEDIRALUSUARIO  reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    DECIRALUSUARIO  reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    GIRARDERECHA    reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    GIRARIZQUIERDA  reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MOVER           reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    BORRAR          reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    PINTAR          reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    DESPINTAR       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    REGRESA         reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    FINBLOQUE       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MAYORQUE        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MENORQUE        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    DIFERENTEQUE    reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    IGUALQUE        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MAYORIGUAL      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    MENORIGUAL      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    ENTONCES        reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    PARENTDER       reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    HACER           reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    FINFUNCION      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+    COMA            reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
+
+
+state 117
+
+    (56) llamada_param -> empty .
+
+    PARENTDER       reduce using rule 56 (llamada_param -> empty .)
+
+
+state 118
+
+    (55) llamada_param -> expresion . llamada_param_mult
+    (58) llamada_param_mult -> . llamada_param_mult COMA expresion
+    (59) llamada_param_mult -> . empty
+    (13) empty -> .
+
+    COMA            reduce using rule 13 (empty -> .)
+    PARENTDER       reduce using rule 13 (empty -> .)
+
+    llamada_param_mult             shift and go to state 136
+    empty                          shift and go to state 137
+
+state 119
+
+    (54) llamada -> PARENTIZQ llamada_param . PARENTDER
+
+    PARENTDER       shift and go to state 138
+
+
+state 120
 
     (69) ciclo -> MIENTRAS actCic1 expresion actCic2 . HACER bloque FINMIENTRAS actCic3
 
-    HACER           shift and go to state 145
+    HACER           shift and go to state 139
 
 
-state 127
+state 121
 
     (71) actCic2 -> empty .
 
     HACER           reduce using rule 71 (actCic2 -> empty .)
 
 
-state 128
+state 122
 
     (31) asignacion -> ID IGUAL expresion PUNTOCOMA .
 
@@ -2735,14 +2559,176 @@ state 128
     FINBLOQUE       reduce using rule 31 (asignacion -> ID IGUAL expresion PUNTOCOMA .)
 
 
-state 129
+state 123
 
     (60) condicion -> SI expresion actSi1 ENTONCES . bloque actSi2 condicion_else actSi3 FINSI
     (62) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
 
-    INICIOBLOQUE    shift and go to state 146
+    INICIOBLOQUE    shift and go to state 140
 
-    bloque                         shift and go to state 147
+    bloque                         shift and go to state 141
+
+state 124
+
+    (35) expresion -> exp IGUALQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 142
+
+state 125
+
+    (37) expresion -> exp MENORIGUAL push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 143
+
+state 126
+
+    (34) expresion -> exp DIFERENTEQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 144
+
+state 127
+
+    (33) expresion -> exp MENORQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 145
+
+state 128
+
+    (32) expresion -> exp MAYORQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 146
+
+state 129
+
+    (36) expresion -> exp MAYORIGUAL push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . CTETEXTO
+    (50) exp -> . ID varfunc
+
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
+    CTEENTERO       shift and go to state 65
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
+
+    exp                            shift and go to state 147
 
 state 130
 
@@ -2779,6 +2765,186 @@ state 131
 
 state 132
 
+    (39) exp -> exp MAS push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    MAS             reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MENOS           reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    PUNTOCOMA       reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    FINPRINCIPAL    reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    ID              reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    SI              reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MIENTRAS        reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    PEDIRALUSUARIO  reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    DECIRALUSUARIO  reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    GIRARDERECHA    reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    GIRARIZQUIERDA  reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MOVER           reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    BORRAR          reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    PINTAR          reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    DESPINTAR       reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    REGRESA         reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    FINBLOQUE       reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MAYORQUE        reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MENORQUE        reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    DIFERENTEQUE    reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    IGUALQUE        reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MAYORIGUAL      reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MENORIGUAL      reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    ENTONCES        reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    PARENTDER       reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    HACER           reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    FINFUNCION      reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    COMA            reduce using rule 39 (exp -> exp MAS push_opt exp .)
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+  ! MULT            [ reduce using rule 39 (exp -> exp MAS push_opt exp .) ]
+  ! DIV             [ reduce using rule 39 (exp -> exp MAS push_opt exp .) ]
+  ! MAS             [ shift and go to state 89 ]
+  ! MENOS           [ shift and go to state 90 ]
+
+
+state 133
+
+    (40) exp -> exp MENOS push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    MAS             reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MENOS           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    PUNTOCOMA       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    FINPRINCIPAL    reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    ID              reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    SI              reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MIENTRAS        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    PEDIRALUSUARIO  reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    DECIRALUSUARIO  reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    GIRARDERECHA    reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    GIRARIZQUIERDA  reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MOVER           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    BORRAR          reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    PINTAR          reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    DESPINTAR       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    REGRESA         reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    FINBLOQUE       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MAYORQUE        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MENORQUE        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    DIFERENTEQUE    reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    IGUALQUE        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MAYORIGUAL      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MENORIGUAL      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    ENTONCES        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    PARENTDER       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    HACER           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    FINFUNCION      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    COMA            reduce using rule 40 (exp -> exp MENOS push_opt exp .)
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+  ! MULT            [ reduce using rule 40 (exp -> exp MENOS push_opt exp .) ]
+  ! DIV             [ reduce using rule 40 (exp -> exp MENOS push_opt exp .) ]
+  ! MAS             [ shift and go to state 89 ]
+  ! MENOS           [ shift and go to state 90 ]
+
+
+state 134
+
+    (42) exp -> exp DIV push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    MAS             reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MENOS           reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MULT            reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    DIV             reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    PUNTOCOMA       reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    FINPRINCIPAL    reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    ID              reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    SI              reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MIENTRAS        reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    PEDIRALUSUARIO  reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    DECIRALUSUARIO  reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    GIRARDERECHA    reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    GIRARIZQUIERDA  reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MOVER           reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    BORRAR          reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    PINTAR          reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    DESPINTAR       reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    REGRESA         reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    FINBLOQUE       reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MAYORQUE        reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MENORQUE        reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    DIFERENTEQUE    reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    IGUALQUE        reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MAYORIGUAL      reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    MENORIGUAL      reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    ENTONCES        reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    PARENTDER       reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    HACER           reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    FINFUNCION      reduce using rule 42 (exp -> exp DIV push_opt exp .)
+    COMA            reduce using rule 42 (exp -> exp DIV push_opt exp .)
+
+  ! MAS             [ shift and go to state 89 ]
+  ! MENOS           [ shift and go to state 90 ]
+  ! MULT            [ shift and go to state 92 ]
+  ! DIV             [ shift and go to state 91 ]
+
+
+state 135
+
+    (41) exp -> exp MULT push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    MAS             reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MENOS           reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MULT            reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    DIV             reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    PUNTOCOMA       reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    FINPRINCIPAL    reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    ID              reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    SI              reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MIENTRAS        reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    PEDIRALUSUARIO  reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    DECIRALUSUARIO  reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    GIRARDERECHA    reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    GIRARIZQUIERDA  reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MOVER           reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    BORRAR          reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    PINTAR          reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    DESPINTAR       reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    REGRESA         reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    FINBLOQUE       reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MAYORQUE        reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MENORQUE        reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    DIFERENTEQUE    reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    IGUALQUE        reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MAYORIGUAL      reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    MENORIGUAL      reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    ENTONCES        reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    PARENTDER       reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    HACER           reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    FINFUNCION      reduce using rule 41 (exp -> exp MULT push_opt exp .)
+    COMA            reduce using rule 41 (exp -> exp MULT push_opt exp .)
+
+  ! MAS             [ shift and go to state 89 ]
+  ! MENOS           [ shift and go to state 90 ]
+  ! MULT            [ shift and go to state 92 ]
+  ! DIV             [ shift and go to state 91 ]
+
+
+state 136
+
     (55) llamada_param -> expresion llamada_param_mult .
     (58) llamada_param_mult -> llamada_param_mult . COMA expresion
 
@@ -2786,7 +2952,7 @@ state 132
     COMA            shift and go to state 149
 
 
-state 133
+state 137
 
     (59) llamada_param_mult -> empty .
 
@@ -2794,16 +2960,10 @@ state 133
     PARENTDER       reduce using rule 59 (llamada_param_mult -> empty .)
 
 
-state 134
+state 138
 
     (54) llamada -> PARENTIZQ llamada_param PARENTDER .
 
-    MAYORQUE        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
-    MENORQUE        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
-    DIFERENTEQUE    reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
-    IGUALQUE        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
-    MAYORIGUAL      reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
-    MENORIGUAL      reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     MAS             reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     MENOS           reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     MULT            reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
@@ -2823,6 +2983,12 @@ state 134
     DESPINTAR       reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     REGRESA         reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     FINBLOQUE       reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
+    MAYORQUE        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
+    MENORQUE        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
+    DIFERENTEQUE    reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
+    IGUALQUE        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
+    MAYORIGUAL      reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
+    MENORIGUAL      reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     ENTONCES        reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     PARENTDER       reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
     HACER           reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
@@ -2830,400 +2996,16 @@ state 134
     COMA            reduce using rule 54 (llamada -> PARENTIZQ llamada_param PARENTDER .)
 
 
-state 135
-
-    (39) exp -> exp MAS push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    MAYORQUE        reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MENORQUE        reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    DIFERENTEQUE    reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    IGUALQUE        reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MAYORIGUAL      reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MENORIGUAL      reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MAS             reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MENOS           reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    PUNTOCOMA       reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    HACER           reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    FINPRINCIPAL    reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    ID              reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    SI              reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MIENTRAS        reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    GIRARDERECHA    reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MOVER           reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    BORRAR          reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    PINTAR          reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    DESPINTAR       reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    REGRESA         reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    FINBLOQUE       reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    ENTONCES        reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    PARENTDER       reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    FINFUNCION      reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    COMA            reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-  ! MULT            [ reduce using rule 39 (exp -> exp MAS push_opt exp .) ]
-  ! DIV             [ reduce using rule 39 (exp -> exp MAS push_opt exp .) ]
-  ! MAS             [ shift and go to state 95 ]
-  ! MENOS           [ shift and go to state 98 ]
-
-
-state 136
-
-    (35) expresion -> exp IGUALQUE push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    PUNTOCOMA       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    COMA            reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    PARENTDER       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    FINFUNCION      reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    HACER           reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    ENTONCES        reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    FINPRINCIPAL    reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    ID              reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    SI              reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    MIENTRAS        reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    GIRARDERECHA    reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    MOVER           reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    BORRAR          reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    PINTAR          reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    DESPINTAR       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    REGRESA         reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    FINBLOQUE       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-
-state 137
-
-    (37) expresion -> exp MENORIGUAL push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    PUNTOCOMA       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    COMA            reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    PARENTDER       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    FINFUNCION      reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    HACER           reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    ENTONCES        reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    FINPRINCIPAL    reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    ID              reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    SI              reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    MIENTRAS        reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    GIRARDERECHA    reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    MOVER           reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    BORRAR          reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    PINTAR          reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    DESPINTAR       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    REGRESA         reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    FINBLOQUE       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-
-state 138
-
-    (40) exp -> exp MENOS push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    MAYORQUE        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MENORQUE        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    DIFERENTEQUE    reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    IGUALQUE        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MAYORIGUAL      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MENORIGUAL      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MAS             reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MENOS           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    PUNTOCOMA       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    HACER           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    FINPRINCIPAL    reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    ID              reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    SI              reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MIENTRAS        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    GIRARDERECHA    reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MOVER           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    BORRAR          reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    PINTAR          reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    DESPINTAR       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    REGRESA         reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    FINBLOQUE       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    ENTONCES        reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    PARENTDER       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    FINFUNCION      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    COMA            reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-  ! MULT            [ reduce using rule 40 (exp -> exp MENOS push_opt exp .) ]
-  ! DIV             [ reduce using rule 40 (exp -> exp MENOS push_opt exp .) ]
-  ! MAS             [ shift and go to state 95 ]
-  ! MENOS           [ shift and go to state 98 ]
-
-
 state 139
-
-    (34) expresion -> exp DIFERENTEQUE push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    PUNTOCOMA       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    COMA            reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    PARENTDER       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    FINFUNCION      reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    HACER           reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    ENTONCES        reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    FINPRINCIPAL    reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    ID              reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    SI              reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    MIENTRAS        reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    GIRARDERECHA    reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    MOVER           reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    BORRAR          reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    PINTAR          reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    DESPINTAR       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    REGRESA         reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    FINBLOQUE       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-
-state 140
-
-    (33) expresion -> exp MENORQUE push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    PUNTOCOMA       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    COMA            reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    PARENTDER       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    FINFUNCION      reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    HACER           reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    ENTONCES        reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    FINPRINCIPAL    reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    ID              reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    SI              reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    MIENTRAS        reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    GIRARDERECHA    reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    MOVER           reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    BORRAR          reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    PINTAR          reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    DESPINTAR       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    REGRESA         reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    FINBLOQUE       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-
-state 141
-
-    (32) expresion -> exp MAYORQUE push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    PUNTOCOMA       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    COMA            reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    PARENTDER       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    FINFUNCION      reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    HACER           reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    ENTONCES        reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    FINPRINCIPAL    reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    ID              reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    SI              reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    MIENTRAS        reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    GIRARDERECHA    reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    MOVER           reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    BORRAR          reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    PINTAR          reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    DESPINTAR       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    REGRESA         reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    FINBLOQUE       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-
-state 142
-
-    (36) expresion -> exp MAYORIGUAL push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    PUNTOCOMA       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    COMA            reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    PARENTDER       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    FINFUNCION      reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    HACER           reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    ENTONCES        reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    FINPRINCIPAL    reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    ID              reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    SI              reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    MIENTRAS        reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    GIRARDERECHA    reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    MOVER           reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    BORRAR          reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    PINTAR          reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    DESPINTAR       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    REGRESA         reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    FINBLOQUE       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    MAS             shift and go to state 95
-    MENOS           shift and go to state 98
-    MULT            shift and go to state 104
-    DIV             shift and go to state 103
-
-
-state 143
-
-    (42) exp -> exp DIV push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    MAYORQUE        reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MENORQUE        reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    DIFERENTEQUE    reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    IGUALQUE        reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MAYORIGUAL      reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MENORIGUAL      reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MAS             reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MENOS           reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MULT            reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    DIV             reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    PUNTOCOMA       reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    HACER           reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    FINPRINCIPAL    reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    ID              reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    SI              reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MIENTRAS        reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    GIRARDERECHA    reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    MOVER           reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    BORRAR          reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    PINTAR          reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    DESPINTAR       reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    REGRESA         reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    FINBLOQUE       reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    ENTONCES        reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    PARENTDER       reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    FINFUNCION      reduce using rule 42 (exp -> exp DIV push_opt exp .)
-    COMA            reduce using rule 42 (exp -> exp DIV push_opt exp .)
-
-  ! MAS             [ shift and go to state 95 ]
-  ! MENOS           [ shift and go to state 98 ]
-  ! MULT            [ shift and go to state 104 ]
-  ! DIV             [ shift and go to state 103 ]
-
-
-state 144
-
-    (41) exp -> exp MULT push_opt exp .
-    (39) exp -> exp . MAS push_opt exp
-    (40) exp -> exp . MENOS push_opt exp
-    (41) exp -> exp . MULT push_opt exp
-    (42) exp -> exp . DIV push_opt exp
-
-    MAYORQUE        reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MENORQUE        reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    DIFERENTEQUE    reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    IGUALQUE        reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MAYORIGUAL      reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MENORIGUAL      reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MAS             reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MENOS           reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MULT            reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    DIV             reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    PUNTOCOMA       reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    HACER           reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    FINPRINCIPAL    reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    ID              reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    SI              reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MIENTRAS        reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    PEDIRALUSUARIO  reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    DECIRALUSUARIO  reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    GIRARDERECHA    reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    GIRARIZQUIERDA  reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    MOVER           reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    BORRAR          reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    PINTAR          reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    DESPINTAR       reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    REGRESA         reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    FINBLOQUE       reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    ENTONCES        reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    PARENTDER       reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    FINFUNCION      reduce using rule 41 (exp -> exp MULT push_opt exp .)
-    COMA            reduce using rule 41 (exp -> exp MULT push_opt exp .)
-
-  ! MAS             [ shift and go to state 95 ]
-  ! MENOS           [ shift and go to state 98 ]
-  ! MULT            [ shift and go to state 104 ]
-  ! DIV             [ shift and go to state 103 ]
-
-
-state 145
 
     (69) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER . bloque FINMIENTRAS actCic3
     (62) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
 
-    INICIOBLOQUE    shift and go to state 146
+    INICIOBLOQUE    shift and go to state 140
 
     bloque                         shift and go to state 150
 
-state 146
+state 140
 
     (62) bloque -> INICIOBLOQUE . bloque_estatuto_mult FINBLOQUE
     (63) bloque_estatuto_mult -> . bloque_estatuto_mult estatuto
@@ -3246,7 +3028,7 @@ state 146
     bloque_estatuto_mult           shift and go to state 152
     empty                          shift and go to state 151
 
-state 147
+state 141
 
     (60) condicion -> SI expresion actSi1 ENTONCES bloque . actSi2 condicion_else actSi3 FINSI
     (65) actSi2 -> . empty
@@ -3257,6 +3039,126 @@ state 147
 
     actSi2                         shift and go to state 153
     empty                          shift and go to state 154
+
+state 142
+
+    (35) expresion -> exp IGUALQUE push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
+    COMA            reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
+    PARENTDER       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
+    FINFUNCION      reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
+    HACER           reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
+    ENTONCES        reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+
+state 143
+
+    (37) expresion -> exp MENORIGUAL push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
+    COMA            reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
+    PARENTDER       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
+    FINFUNCION      reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
+    HACER           reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
+    ENTONCES        reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+
+state 144
+
+    (34) expresion -> exp DIFERENTEQUE push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
+    COMA            reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
+    PARENTDER       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
+    FINFUNCION      reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
+    HACER           reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
+    ENTONCES        reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+
+state 145
+
+    (33) expresion -> exp MENORQUE push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
+    COMA            reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
+    PARENTDER       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
+    FINFUNCION      reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
+    HACER           reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
+    ENTONCES        reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+
+state 146
+
+    (32) expresion -> exp MAYORQUE push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
+    COMA            reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
+    PARENTDER       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
+    FINFUNCION      reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
+    HACER           reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
+    ENTONCES        reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
+
+state 147
+
+    (36) expresion -> exp MAYORIGUAL push_opt exp .
+    (39) exp -> exp . MAS push_opt exp
+    (40) exp -> exp . MENOS push_opt exp
+    (41) exp -> exp . MULT push_opt exp
+    (42) exp -> exp . DIV push_opt exp
+
+    PUNTOCOMA       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
+    COMA            reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
+    PARENTDER       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
+    FINFUNCION      reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
+    HACER           reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
+    ENTONCES        reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
+    MAS             shift and go to state 89
+    MENOS           shift and go to state 90
+    MULT            shift and go to state 92
+    DIV             shift and go to state 91
+
 
 state 148
 
@@ -3300,17 +3202,17 @@ state 149
     (49) exp -> . CTETEXTO
     (50) exp -> . ID varfunc
 
-    PARENTIZQ       shift and go to state 66
-    MENOS           shift and go to state 72
+    PARENTIZQ       shift and go to state 70
+    MENOS           shift and go to state 68
     CTEENTERO       shift and go to state 65
-    CTEFLOTANTE     shift and go to state 71
-    TRUE            shift and go to state 67
-    FALSE           shift and go to state 70
-    CTETEXTO        shift and go to state 64
-    ID              shift and go to state 68
+    CTEFLOTANTE     shift and go to state 66
+    TRUE            shift and go to state 71
+    FALSE           shift and go to state 64
+    CTETEXTO        shift and go to state 67
+    ID              shift and go to state 72
 
     expresion                      shift and go to state 155
-    exp                            shift and go to state 73
+    exp                            shift and go to state 81
 
 state 150
 
@@ -3350,39 +3252,39 @@ state 152
     (60) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
     (69) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
     (73) io -> . PEDIRALUSUARIO ID
-    (74) io -> . DECIRALUSUARIO expresion
+    (74) io -> . DECIRALUSUARIO exp
     (75) accion -> . tipo_accion PUNTOCOMA
-    (76) tipo_accion -> . objeto_con_expresion
-    (77) tipo_accion -> . objeto_sin_expresion
-    (78) objeto_con_expresion -> . GIRARDERECHA expresion
-    (79) objeto_con_expresion -> . GIRARIZQUIERDA expresion
-    (80) objeto_con_expresion -> . MOVER expresion
-    (81) objeto_sin_expresion -> . BORRAR
-    (82) objeto_sin_expresion -> . PINTAR
-    (83) objeto_sin_expresion -> . DESPINTAR
+    (76) tipo_accion -> . objeto_con_exp
+    (77) tipo_accion -> . objeto_sin_exp
+    (78) objeto_con_exp -> . GIRARDERECHA exp
+    (79) objeto_con_exp -> . GIRARIZQUIERDA exp
+    (80) objeto_con_exp -> . MOVER exp
+    (81) objeto_sin_exp -> . BORRAR
+    (82) objeto_sin_exp -> . PINTAR
+    (83) objeto_sin_exp -> . DESPINTAR
 
     FINBLOQUE       shift and go to state 157
-    ID              shift and go to state 54
+    ID              shift and go to state 53
     SI              shift and go to state 58
-    MIENTRAS        shift and go to state 52
-    PEDIRALUSUARIO  shift and go to state 53
-    DECIRALUSUARIO  shift and go to state 48
-    GIRARDERECHA    shift and go to state 50
-    GIRARIZQUIERDA  shift and go to state 39
-    MOVER           shift and go to state 49
-    BORRAR          shift and go to state 42
-    PINTAR          shift and go to state 40
-    DESPINTAR       shift and go to state 55
+    MIENTRAS        shift and go to state 51
+    PEDIRALUSUARIO  shift and go to state 52
+    DECIRALUSUARIO  shift and go to state 47
+    GIRARDERECHA    shift and go to state 49
+    GIRARIZQUIERDA  shift and go to state 40
+    MOVER           shift and go to state 48
+    BORRAR          shift and go to state 43
+    PINTAR          shift and go to state 41
+    DESPINTAR       shift and go to state 54
 
-    objeto_sin_expresion           shift and go to state 43
     ciclo                          shift and go to state 44
-    asignacion                     shift and go to state 57
-    objeto_con_expresion           shift and go to state 45
+    asignacion                     shift and go to state 56
     estatuto                       shift and go to state 158
-    condicion                      shift and go to state 47
+    objeto_con_exp                 shift and go to state 39
+    objeto_sin_exp                 shift and go to state 57
+    condicion                      shift and go to state 46
     tipo_accion                    shift and go to state 59
-    io                             shift and go to state 41
-    accion                         shift and go to state 56
+    io                             shift and go to state 42
+    accion                         shift and go to state 55
 
 state 153
 
@@ -3441,9 +3343,9 @@ state 157
 
     (62) bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .
 
+    FINMIENTRAS     reduce using rule 62 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
     SINO            reduce using rule 62 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
     FINSI           reduce using rule 62 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
-    FINMIENTRAS     reduce using rule 62 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
 
 
 state 158
@@ -3480,7 +3382,7 @@ state 160
     (66) condicion_else -> SINO . bloque
     (62) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
 
-    INICIOBLOQUE    shift and go to state 146
+    INICIOBLOQUE    shift and go to state 140
 
     bloque                         shift and go to state 166
 
