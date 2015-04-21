@@ -1,13 +1,5 @@
 Created by PLY version 3.4 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    Y
-    X
-    DIBUJAR
-    ABAJO
-    ARRIBA
-
 Grammar
 
 Rule 0     S' -> program
@@ -55,89 +47,85 @@ Rule 41    exp -> exp MULT push_opt exp
 Rule 42    exp -> exp DIV push_opt exp
 Rule 43    push_opt -> empty
 Rule 44    exp -> MENOS exp
-Rule 45    exp -> CTEENTERO push_opd
-Rule 46    push_opd -> empty
-Rule 47    exp -> CTEFLOTANTE push_opd
-Rule 48    exp -> TRUE push_opd
-Rule 49    exp -> FALSE push_opd
-Rule 50    exp -> ID push_var_opd
-Rule 51    push_var_opd -> <empty>
-Rule 52    exp -> CTETEXTO push_opd
-Rule 53    expresion -> exp
-Rule 54    condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
-Rule 55    actSi1 -> empty
-Rule 56    bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
-Rule 57    bloque_estatuto_mult -> bloque_estatuto_mult estatuto
-Rule 58    bloque_estatuto_mult -> empty
-Rule 59    actSi2 -> empty
-Rule 60    condicion_else -> SINO bloque
-Rule 61    condicion_else -> empty
-Rule 62    actSi3 -> empty
-Rule 63    ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
-Rule 64    actCic1 -> empty
-Rule 65    actCic2 -> empty
-Rule 66    actCic3 -> empty
-Rule 67    io -> PEDIRALUSUARIO ID
-Rule 68    io -> DECIRALUSUARIO expresion
-Rule 69    accion -> tipo_accion ID PUNTOCOMA
-Rule 70    tipo_accion -> lista
-Rule 71    tipo_accion -> objeto
-Rule 72    lista -> lista_agregar
-Rule 73    lista -> lista_sacar
-Rule 74    lista -> lista_ver
-Rule 75    lista_agregar -> AGREGAR
-Rule 76    lista_sacar -> SACAR
-Rule 77    lista_ver -> VER
-Rule 78    objeto -> <empty>
-Rule 79    objeto -> objeto_con_expresion
-Rule 80    objeto -> objeto_sin_expresion
-Rule 81    objeto_con_expresion -> GIRARDERECHA expresion
-Rule 82    objeto_con_expresion -> GIRARIZQUIERDA expresion
-Rule 83    objeto_con_expresion -> MOVER expresion
-Rule 84    objeto_sin_expresion -> BORRAR
-Rule 85    objeto_sin_expresion -> PINTAR
-Rule 86    objeto_sin_expresion -> DESPINTAR
-Rule 87    principal -> iniciomain vars C FINPRINCIPAL
-Rule 88    iniciomain -> INICIOPRINCIPAL
+Rule 45    exp -> CTEENTERO
+Rule 46    exp -> CTEFLOTANTE
+Rule 47    exp -> TRUE
+Rule 48    exp -> FALSE
+Rule 49    exp -> ID push_var_opd
+Rule 50    push_var_opd -> <empty>
+Rule 51    exp -> CTETEXTO
+Rule 52    expresion -> exp
+Rule 53    condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+Rule 54    actSi1 -> empty
+Rule 55    bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
+Rule 56    bloque_estatuto_mult -> bloque_estatuto_mult estatuto
+Rule 57    bloque_estatuto_mult -> empty
+Rule 58    actSi2 -> empty
+Rule 59    condicion_else -> SINO bloque
+Rule 60    condicion_else -> empty
+Rule 61    actSi3 -> empty
+Rule 62    ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
+Rule 63    actCic1 -> empty
+Rule 64    actCic2 -> empty
+Rule 65    actCic3 -> empty
+Rule 66    io -> PEDIRALUSUARIO ID
+Rule 67    io -> DECIRALUSUARIO expresion
+Rule 68    accion -> tipo_accion ID PUNTOCOMA
+Rule 69    tipo_accion -> lista
+Rule 70    tipo_accion -> objeto
+Rule 71    lista -> lista_agregar
+Rule 72    lista -> lista_sacar
+Rule 73    lista -> lista_ver
+Rule 74    lista_agregar -> AGREGAR
+Rule 75    lista_sacar -> SACAR
+Rule 76    lista_ver -> VER
+Rule 77    objeto -> <empty>
+Rule 78    objeto -> objeto_con_expresion
+Rule 79    objeto -> objeto_sin_expresion
+Rule 80    objeto_con_expresion -> GIRARDERECHA expresion
+Rule 81    objeto_con_expresion -> GIRARIZQUIERDA expresion
+Rule 82    objeto_con_expresion -> MOVER expresion
+Rule 83    objeto_sin_expresion -> BORRAR
+Rule 84    objeto_sin_expresion -> PINTAR
+Rule 85    objeto_sin_expresion -> DESPINTAR
+Rule 86    principal -> iniciomain vars C FINPRINCIPAL
+Rule 87    iniciomain -> INICIOPRINCIPAL
 
 Terminals, with rules where they appear
 
-ABAJO                : 
-AGREGAR              : 75
-ARRIBA               : 
+AGREGAR              : 74
 BOOLEANO             : 10
-BORRAR               : 84
+BORRAR               : 83
 COMA                 : 20
 CORCHETEDER          : 6
 CORCHETEIZQ          : 6
 CREAR                : 5 6
 CTEENTERO            : 6 45
-CTEFLOTANTE          : 47
-CTETEXTO             : 52
-DECIRALUSUARIO       : 68
-DESPINTAR            : 86
-DIBUJAR              : 
+CTEFLOTANTE          : 46
+CTETEXTO             : 51
+DECIRALUSUARIO       : 67
+DESPINTAR            : 85
 DIFERENTEQUE         : 34
 DIV                  : 42
 ENTERO               : 7
-ENTONCES             : 54
-FALSE                : 49
-FINBLOQUE            : 56
+ENTONCES             : 53
+FALSE                : 48
+FINBLOQUE            : 55
 FINFUNCION           : 23
-FINMIENTRAS          : 63
-FINPRINCIPAL         : 87
+FINMIENTRAS          : 62
+FINPRINCIPAL         : 86
 FINPROGRAMA          : 1
-FINSI                : 54
+FINSI                : 53
 FLOTANTE             : 8
-GIRARDERECHA         : 81
-GIRARIZQUIERDA       : 82
-HACER                : 63
-ID                   : 5 6 18 19 20 31 50 67 69
+GIRARDERECHA         : 80
+GIRARIZQUIERDA       : 81
+HACER                : 62
+ID                   : 5 6 18 19 20 31 49 66 68
 IGUAL                : 31
 IGUALQUE             : 35
-INICIOBLOQUE         : 56
+INICIOBLOQUE         : 55
 INICIOFUNCION        : 18
-INICIOPRINCIPAL      : 88
+INICIOPRINCIPAL      : 87
 INICIOPROGRAMA       : 1
 LISTA                : 11
 MAS                  : 39
@@ -146,73 +134,70 @@ MAYORQUE             : 32
 MENORIGUAL           : 37
 MENORQUE             : 33
 MENOS                : 40 44
-MIENTRAS             : 63
-MOVER                : 83
+MIENTRAS             : 62
+MOVER                : 82
 MULT                 : 41
 PARAMETROS           : 19
 PARENTDER            : 38
 PARENTIZQ            : 38
-PEDIRALUSUARIO       : 67
-PINTAR               : 85
-PUNTOCOMA            : 5 6 31 69
+PEDIRALUSUARIO       : 66
+PINTAR               : 84
+PUNTOCOMA            : 5 6 31 68
 REGRESA              : 23
-SACAR                : 76
-SI                   : 54
-SINO                 : 60
+SACAR                : 75
+SI                   : 53
+SINO                 : 59
 TEXTO                : 9
-TRUE                 : 48
-VER                  : 77
-X                    : 
-Y                    : 
+TRUE                 : 47
+VER                  : 76
 error                : 
 
 Nonterminals, with rules where they appear
 
-C                    : 23 24 87
+C                    : 23 24 86
 accion               : 30
-actCic1              : 63
-actCic2              : 63
-actCic3              : 63
-actSi1               : 54
-actSi2               : 54
-actSi3               : 54
+actCic1              : 62
+actCic2              : 62
+actCic3              : 62
+actSi1               : 53
+actSi2               : 53
+actSi3               : 53
 array                : 4
 asignacion           : 26
-bloque               : 54 60 63
-bloque_estatuto_mult : 56 57
+bloque               : 53 59 62
+bloque_estatuto_mult : 55 56
 ciclo                : 28
 condicion            : 27
-condicion_else       : 54
+condicion_else       : 53
 cuerpo               : 1
 cuerpo_func          : 14 15
-empty                : 12 16 21 22 25 43 46 55 58 59 61 62 64 65 66
-estatuto             : 24 57
-exp                  : 32 32 33 33 34 34 35 35 36 36 37 37 39 39 40 40 41 41 42 42 44 53
-expresion            : 23 31 38 54 63 68 81 82 83
+empty                : 12 16 21 22 25 43 54 57 58 60 61 63 64 65
+estatuto             : 24 56
+exp                  : 32 32 33 33 34 34 35 35 36 36 37 37 39 39 40 40 41 41 42 42 44 52
+expresion            : 23 31 38 53 62 67 80 81 82
 finfunc              : 17
 funcion              : 15
 iniciofunc           : 17
-iniciomain           : 87
+iniciomain           : 86
 io                   : 29
-lista                : 70
-lista_agregar        : 72
-lista_sacar          : 73
-lista_ver            : 74
-objeto               : 71
-objeto_con_expresion : 79
-objeto_sin_expresion : 80
+lista                : 69
+lista_agregar        : 71
+lista_sacar          : 72
+lista_ver            : 73
+objeto               : 70
+objeto_con_expresion : 78
+objeto_sin_expresion : 79
 param                : 17
 param_mult           : 19 20
 principal            : 14
 program              : 0
-push_opd             : 45 47 48 49 52
 push_opt             : 32 33 34 35 36 37 39 40 41 42
-push_var_opd         : 50
+push_var_opd         : 49
 single               : 3
 tipo                 : 5 6 18 19 20
-tipo_accion          : 69
+tipo_accion          : 68
 tipo_var             : 2
-vars                 : 1 2 17 87
+vars                 : 1 2 17 86
 
 Parsing method: LALR
 
@@ -373,9 +358,9 @@ state 9
 
     (14) cuerpo -> cuerpo_func . principal
     (15) cuerpo_func -> cuerpo_func . funcion
-    (87) principal -> . iniciomain vars C FINPRINCIPAL
+    (86) principal -> . iniciomain vars C FINPRINCIPAL
     (17) funcion -> . iniciofunc param vars finfunc
-    (88) iniciomain -> . INICIOPRINCIPAL
+    (87) iniciomain -> . INICIOPRINCIPAL
     (18) iniciofunc -> . INICIOFUNCION tipo ID
 
     INICIOPRINCIPAL shift and go to state 20
@@ -471,7 +456,7 @@ state 18
 
 state 19
 
-    (87) principal -> iniciomain . vars C FINPRINCIPAL
+    (86) principal -> iniciomain . vars C FINPRINCIPAL
     (2) vars -> . vars tipo_var
     (12) vars -> . empty
     (13) empty -> .
@@ -498,24 +483,24 @@ state 19
 
 state 20
 
-    (88) iniciomain -> INICIOPRINCIPAL .
+    (87) iniciomain -> INICIOPRINCIPAL .
 
-    CREAR           reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    FINPRINCIPAL    reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    ID              reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    SI              reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    MIENTRAS        reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    PEDIRALUSUARIO  reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    DECIRALUSUARIO  reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    AGREGAR         reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    SACAR           reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    VER             reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    GIRARDERECHA    reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    GIRARIZQUIERDA  reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    MOVER           reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    BORRAR          reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    PINTAR          reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
-    DESPINTAR       reduce using rule 88 (iniciomain -> INICIOPRINCIPAL .)
+    CREAR           reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    FINPRINCIPAL    reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    ID              reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    SI              reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    MIENTRAS        reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    PEDIRALUSUARIO  reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    DECIRALUSUARIO  reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    AGREGAR         reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    SACAR           reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    VER             reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    GIRARDERECHA    reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    GIRARIZQUIERDA  reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    MOVER           reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    BORRAR          reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    PINTAR          reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
+    DESPINTAR       reduce using rule 87 (iniciomain -> INICIOPRINCIPAL .)
 
 
 state 21
@@ -589,7 +574,7 @@ state 25
 
 state 26
 
-    (87) principal -> iniciomain vars . C FINPRINCIPAL
+    (86) principal -> iniciomain vars . C FINPRINCIPAL
     (2) vars -> vars . tipo_var
     (24) C -> . C estatuto
     (25) C -> . empty
@@ -729,7 +714,7 @@ state 32
 
 state 33
 
-    (87) principal -> iniciomain vars C . FINPRINCIPAL
+    (86) principal -> iniciomain vars C . FINPRINCIPAL
     (24) C -> C . estatuto
     (26) estatuto -> . asignacion
     (27) estatuto -> . condicion
@@ -737,28 +722,28 @@ state 33
     (29) estatuto -> . io
     (30) estatuto -> . accion
     (31) asignacion -> . ID IGUAL expresion PUNTOCOMA
-    (54) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
-    (63) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
-    (67) io -> . PEDIRALUSUARIO ID
-    (68) io -> . DECIRALUSUARIO expresion
-    (69) accion -> . tipo_accion ID PUNTOCOMA
-    (70) tipo_accion -> . lista
-    (71) tipo_accion -> . objeto
-    (72) lista -> . lista_agregar
-    (73) lista -> . lista_sacar
-    (74) lista -> . lista_ver
-    (78) objeto -> .
-    (79) objeto -> . objeto_con_expresion
-    (80) objeto -> . objeto_sin_expresion
-    (75) lista_agregar -> . AGREGAR
-    (76) lista_sacar -> . SACAR
-    (77) lista_ver -> . VER
-    (81) objeto_con_expresion -> . GIRARDERECHA expresion
-    (82) objeto_con_expresion -> . GIRARIZQUIERDA expresion
-    (83) objeto_con_expresion -> . MOVER expresion
-    (84) objeto_sin_expresion -> . BORRAR
-    (85) objeto_sin_expresion -> . PINTAR
-    (86) objeto_sin_expresion -> . DESPINTAR
+    (53) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+    (62) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
+    (66) io -> . PEDIRALUSUARIO ID
+    (67) io -> . DECIRALUSUARIO expresion
+    (68) accion -> . tipo_accion ID PUNTOCOMA
+    (69) tipo_accion -> . lista
+    (70) tipo_accion -> . objeto
+    (71) lista -> . lista_agregar
+    (72) lista -> . lista_sacar
+    (73) lista -> . lista_ver
+    (77) objeto -> .
+    (78) objeto -> . objeto_con_expresion
+    (79) objeto -> . objeto_sin_expresion
+    (74) lista_agregar -> . AGREGAR
+    (75) lista_sacar -> . SACAR
+    (76) lista_ver -> . VER
+    (80) objeto_con_expresion -> . GIRARDERECHA expresion
+    (81) objeto_con_expresion -> . GIRARIZQUIERDA expresion
+    (82) objeto_con_expresion -> . MOVER expresion
+    (83) objeto_sin_expresion -> . BORRAR
+    (84) objeto_sin_expresion -> . PINTAR
+    (85) objeto_sin_expresion -> . DESPINTAR
 
   ! shift/reduce conflict for ID resolved as shift
     FINPRINCIPAL    shift and go to state 55
@@ -777,7 +762,7 @@ state 33
     PINTAR          shift and go to state 40
     DESPINTAR       shift and go to state 62
 
-  ! ID              [ reduce using rule 78 (objeto -> .) ]
+  ! ID              [ reduce using rule 77 (objeto -> .) ]
 
     lista_ver                      shift and go to state 41
     io                             shift and go to state 42
@@ -892,26 +877,26 @@ state 38
 
 state 39
 
-    (82) objeto_con_expresion -> GIRARIZQUIERDA . expresion
+    (81) objeto_con_expresion -> GIRARIZQUIERDA . expresion
     (32) expresion -> . exp MAYORQUE push_opt exp
     (33) expresion -> . exp MENORQUE push_opt exp
     (34) expresion -> . exp DIFERENTEQUE push_opt exp
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -927,16 +912,16 @@ state 39
 
 state 40
 
-    (85) objeto_sin_expresion -> PINTAR .
+    (84) objeto_sin_expresion -> PINTAR .
 
-    ID              reduce using rule 85 (objeto_sin_expresion -> PINTAR .)
+    ID              reduce using rule 84 (objeto_sin_expresion -> PINTAR .)
 
 
 state 41
 
-    (74) lista -> lista_ver .
+    (73) lista -> lista_ver .
 
-    ID              reduce using rule 74 (lista -> lista_ver .)
+    ID              reduce using rule 73 (lista -> lista_ver .)
 
 
 state 42
@@ -964,16 +949,16 @@ state 42
 
 state 43
 
-    (84) objeto_sin_expresion -> BORRAR .
+    (83) objeto_sin_expresion -> BORRAR .
 
-    ID              reduce using rule 84 (objeto_sin_expresion -> BORRAR .)
+    ID              reduce using rule 83 (objeto_sin_expresion -> BORRAR .)
 
 
 state 44
 
-    (80) objeto -> objeto_sin_expresion .
+    (79) objeto -> objeto_sin_expresion .
 
-    ID              reduce using rule 80 (objeto -> objeto_sin_expresion .)
+    ID              reduce using rule 79 (objeto -> objeto_sin_expresion .)
 
 
 state 45
@@ -1001,9 +986,9 @@ state 45
 
 state 46
 
-    (79) objeto -> objeto_con_expresion .
+    (78) objeto -> objeto_con_expresion .
 
-    ID              reduce using rule 79 (objeto -> objeto_con_expresion .)
+    ID              reduce using rule 78 (objeto -> objeto_con_expresion .)
 
 
 state 47
@@ -1030,9 +1015,9 @@ state 47
 
 state 48
 
-    (73) lista -> lista_sacar .
+    (72) lista -> lista_sacar .
 
-    ID              reduce using rule 73 (lista -> lista_sacar .)
+    ID              reduce using rule 72 (lista -> lista_sacar .)
 
 
 state 49
@@ -1060,26 +1045,26 @@ state 49
 
 state 50
 
-    (68) io -> DECIRALUSUARIO . expresion
+    (67) io -> DECIRALUSUARIO . expresion
     (32) expresion -> . exp MAYORQUE push_opt exp
     (33) expresion -> . exp MENORQUE push_opt exp
     (34) expresion -> . exp DIFERENTEQUE push_opt exp
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1095,26 +1080,26 @@ state 50
 
 state 51
 
-    (83) objeto_con_expresion -> MOVER . expresion
+    (82) objeto_con_expresion -> MOVER . expresion
     (32) expresion -> . exp MAYORQUE push_opt exp
     (33) expresion -> . exp MENORQUE push_opt exp
     (34) expresion -> . exp DIFERENTEQUE push_opt exp
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1130,33 +1115,33 @@ state 51
 
 state 52
 
-    (72) lista -> lista_agregar .
+    (71) lista -> lista_agregar .
 
-    ID              reduce using rule 72 (lista -> lista_agregar .)
+    ID              reduce using rule 71 (lista -> lista_agregar .)
 
 
 state 53
 
-    (81) objeto_con_expresion -> GIRARDERECHA . expresion
+    (80) objeto_con_expresion -> GIRARDERECHA . expresion
     (32) expresion -> . exp MAYORQUE push_opt exp
     (33) expresion -> . exp MENORQUE push_opt exp
     (34) expresion -> . exp DIFERENTEQUE push_opt exp
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1172,22 +1157,22 @@ state 53
 
 state 54
 
-    (77) lista_ver -> VER .
+    (76) lista_ver -> VER .
 
-    ID              reduce using rule 77 (lista_ver -> VER .)
+    ID              reduce using rule 76 (lista_ver -> VER .)
 
 
 state 55
 
-    (87) principal -> iniciomain vars C FINPRINCIPAL .
+    (86) principal -> iniciomain vars C FINPRINCIPAL .
 
-    FINPROGRAMA     reduce using rule 87 (principal -> iniciomain vars C FINPRINCIPAL .)
+    FINPROGRAMA     reduce using rule 86 (principal -> iniciomain vars C FINPRINCIPAL .)
 
 
 state 56
 
-    (63) ciclo -> MIENTRAS . actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
-    (64) actCic1 -> . empty
+    (62) ciclo -> MIENTRAS . actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
+    (63) actCic1 -> . empty
     (13) empty -> .
 
     PARENTIZQ       reduce using rule 13 (empty -> .)
@@ -1204,23 +1189,23 @@ state 56
 
 state 57
 
-    (76) lista_sacar -> SACAR .
+    (75) lista_sacar -> SACAR .
 
-    ID              reduce using rule 76 (lista_sacar -> SACAR .)
+    ID              reduce using rule 75 (lista_sacar -> SACAR .)
 
 
 state 58
 
-    (67) io -> PEDIRALUSUARIO . ID
+    (66) io -> PEDIRALUSUARIO . ID
 
     ID              shift and go to state 87
 
 
 state 59
 
-    (70) tipo_accion -> lista .
+    (69) tipo_accion -> lista .
 
-    ID              reduce using rule 70 (tipo_accion -> lista .)
+    ID              reduce using rule 69 (tipo_accion -> lista .)
 
 
 state 60
@@ -1232,16 +1217,16 @@ state 60
 
 state 61
 
-    (71) tipo_accion -> objeto .
+    (70) tipo_accion -> objeto .
 
-    ID              reduce using rule 71 (tipo_accion -> objeto .)
+    ID              reduce using rule 70 (tipo_accion -> objeto .)
 
 
 state 62
 
-    (86) objeto_sin_expresion -> DESPINTAR .
+    (85) objeto_sin_expresion -> DESPINTAR .
 
-    ID              reduce using rule 86 (objeto_sin_expresion -> DESPINTAR .)
+    ID              reduce using rule 85 (objeto_sin_expresion -> DESPINTAR .)
 
 
 state 63
@@ -1292,26 +1277,26 @@ state 64
 
 state 65
 
-    (54) condicion -> SI . expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+    (53) condicion -> SI . expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
     (32) expresion -> . exp MAYORQUE push_opt exp
     (33) expresion -> . exp MENORQUE push_opt exp
     (34) expresion -> . exp DIFERENTEQUE push_opt exp
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1327,14 +1312,14 @@ state 65
 
 state 66
 
-    (75) lista_agregar -> AGREGAR .
+    (74) lista_agregar -> AGREGAR .
 
-    ID              reduce using rule 75 (lista_agregar -> AGREGAR .)
+    ID              reduce using rule 74 (lista_agregar -> AGREGAR .)
 
 
 state 67
 
-    (69) accion -> tipo_accion . ID PUNTOCOMA
+    (68) accion -> tipo_accion . ID PUNTOCOMA
 
     ID              shift and go to state 90
 
@@ -1357,28 +1342,28 @@ state 69
     (29) estatuto -> . io
     (30) estatuto -> . accion
     (31) asignacion -> . ID IGUAL expresion PUNTOCOMA
-    (54) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
-    (63) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
-    (67) io -> . PEDIRALUSUARIO ID
-    (68) io -> . DECIRALUSUARIO expresion
-    (69) accion -> . tipo_accion ID PUNTOCOMA
-    (70) tipo_accion -> . lista
-    (71) tipo_accion -> . objeto
-    (72) lista -> . lista_agregar
-    (73) lista -> . lista_sacar
-    (74) lista -> . lista_ver
-    (78) objeto -> .
-    (79) objeto -> . objeto_con_expresion
-    (80) objeto -> . objeto_sin_expresion
-    (75) lista_agregar -> . AGREGAR
-    (76) lista_sacar -> . SACAR
-    (77) lista_ver -> . VER
-    (81) objeto_con_expresion -> . GIRARDERECHA expresion
-    (82) objeto_con_expresion -> . GIRARIZQUIERDA expresion
-    (83) objeto_con_expresion -> . MOVER expresion
-    (84) objeto_sin_expresion -> . BORRAR
-    (85) objeto_sin_expresion -> . PINTAR
-    (86) objeto_sin_expresion -> . DESPINTAR
+    (53) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+    (62) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
+    (66) io -> . PEDIRALUSUARIO ID
+    (67) io -> . DECIRALUSUARIO expresion
+    (68) accion -> . tipo_accion ID PUNTOCOMA
+    (69) tipo_accion -> . lista
+    (70) tipo_accion -> . objeto
+    (71) lista -> . lista_agregar
+    (72) lista -> . lista_sacar
+    (73) lista -> . lista_ver
+    (77) objeto -> .
+    (78) objeto -> . objeto_con_expresion
+    (79) objeto -> . objeto_sin_expresion
+    (74) lista_agregar -> . AGREGAR
+    (75) lista_sacar -> . SACAR
+    (76) lista_ver -> . VER
+    (80) objeto_con_expresion -> . GIRARDERECHA expresion
+    (81) objeto_con_expresion -> . GIRARIZQUIERDA expresion
+    (82) objeto_con_expresion -> . MOVER expresion
+    (83) objeto_sin_expresion -> . BORRAR
+    (84) objeto_sin_expresion -> . PINTAR
+    (85) objeto_sin_expresion -> . DESPINTAR
 
   ! shift/reduce conflict for ID resolved as shift
     REGRESA         shift and go to state 91
@@ -1397,7 +1382,7 @@ state 69
     PINTAR          shift and go to state 40
     DESPINTAR       shift and go to state 62
 
-  ! ID              [ reduce using rule 78 (objeto -> .) ]
+  ! ID              [ reduce using rule 77 (objeto -> .) ]
 
     lista_ver                      shift and go to state 41
     io                             shift and go to state 42
@@ -1451,45 +1436,41 @@ state 71
 
 state 72
 
-    (45) exp -> CTEENTERO . push_opd
-    (46) push_opd -> . empty
-    (13) empty -> .
+    (45) exp -> CTEENTERO .
 
-    MAYORQUE        reduce using rule 13 (empty -> .)
-    MENORQUE        reduce using rule 13 (empty -> .)
-    DIFERENTEQUE    reduce using rule 13 (empty -> .)
-    IGUALQUE        reduce using rule 13 (empty -> .)
-    MAYORIGUAL      reduce using rule 13 (empty -> .)
-    MENORIGUAL      reduce using rule 13 (empty -> .)
-    MAS             reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    MULT            reduce using rule 13 (empty -> .)
-    DIV             reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-    FINPRINCIPAL    reduce using rule 13 (empty -> .)
-    SI              reduce using rule 13 (empty -> .)
-    MIENTRAS        reduce using rule 13 (empty -> .)
-    PEDIRALUSUARIO  reduce using rule 13 (empty -> .)
-    DECIRALUSUARIO  reduce using rule 13 (empty -> .)
-    AGREGAR         reduce using rule 13 (empty -> .)
-    SACAR           reduce using rule 13 (empty -> .)
-    VER             reduce using rule 13 (empty -> .)
-    GIRARDERECHA    reduce using rule 13 (empty -> .)
-    GIRARIZQUIERDA  reduce using rule 13 (empty -> .)
-    MOVER           reduce using rule 13 (empty -> .)
-    BORRAR          reduce using rule 13 (empty -> .)
-    PINTAR          reduce using rule 13 (empty -> .)
-    DESPINTAR       reduce using rule 13 (empty -> .)
-    REGRESA         reduce using rule 13 (empty -> .)
-    FINBLOQUE       reduce using rule 13 (empty -> .)
-    ENTONCES        reduce using rule 13 (empty -> .)
-    PARENTDER       reduce using rule 13 (empty -> .)
-    HACER           reduce using rule 13 (empty -> .)
-    PUNTOCOMA       reduce using rule 13 (empty -> .)
-    FINFUNCION      reduce using rule 13 (empty -> .)
+    MAYORQUE        reduce using rule 45 (exp -> CTEENTERO .)
+    MENORQUE        reduce using rule 45 (exp -> CTEENTERO .)
+    DIFERENTEQUE    reduce using rule 45 (exp -> CTEENTERO .)
+    IGUALQUE        reduce using rule 45 (exp -> CTEENTERO .)
+    MAYORIGUAL      reduce using rule 45 (exp -> CTEENTERO .)
+    MENORIGUAL      reduce using rule 45 (exp -> CTEENTERO .)
+    MAS             reduce using rule 45 (exp -> CTEENTERO .)
+    MENOS           reduce using rule 45 (exp -> CTEENTERO .)
+    MULT            reduce using rule 45 (exp -> CTEENTERO .)
+    DIV             reduce using rule 45 (exp -> CTEENTERO .)
+    FINPRINCIPAL    reduce using rule 45 (exp -> CTEENTERO .)
+    ID              reduce using rule 45 (exp -> CTEENTERO .)
+    SI              reduce using rule 45 (exp -> CTEENTERO .)
+    MIENTRAS        reduce using rule 45 (exp -> CTEENTERO .)
+    PEDIRALUSUARIO  reduce using rule 45 (exp -> CTEENTERO .)
+    DECIRALUSUARIO  reduce using rule 45 (exp -> CTEENTERO .)
+    AGREGAR         reduce using rule 45 (exp -> CTEENTERO .)
+    SACAR           reduce using rule 45 (exp -> CTEENTERO .)
+    VER             reduce using rule 45 (exp -> CTEENTERO .)
+    GIRARDERECHA    reduce using rule 45 (exp -> CTEENTERO .)
+    GIRARIZQUIERDA  reduce using rule 45 (exp -> CTEENTERO .)
+    MOVER           reduce using rule 45 (exp -> CTEENTERO .)
+    BORRAR          reduce using rule 45 (exp -> CTEENTERO .)
+    PINTAR          reduce using rule 45 (exp -> CTEENTERO .)
+    DESPINTAR       reduce using rule 45 (exp -> CTEENTERO .)
+    REGRESA         reduce using rule 45 (exp -> CTEENTERO .)
+    FINBLOQUE       reduce using rule 45 (exp -> CTEENTERO .)
+    ENTONCES        reduce using rule 45 (exp -> CTEENTERO .)
+    PARENTDER       reduce using rule 45 (exp -> CTEENTERO .)
+    HACER           reduce using rule 45 (exp -> CTEENTERO .)
+    PUNTOCOMA       reduce using rule 45 (exp -> CTEENTERO .)
+    FINFUNCION      reduce using rule 45 (exp -> CTEENTERO .)
 
-    push_opd                       shift and go to state 96
-    empty                          shift and go to state 97
 
 state 73
 
@@ -1500,19 +1481,19 @@ state 73
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1523,223 +1504,207 @@ state 73
     ID              shift and go to state 75
     CTETEXTO        shift and go to state 79
 
-    expresion                      shift and go to state 98
+    expresion                      shift and go to state 96
     exp                            shift and go to state 81
 
 state 74
 
-    (48) exp -> TRUE . push_opd
-    (46) push_opd -> . empty
-    (13) empty -> .
+    (47) exp -> TRUE .
 
-    MAYORQUE        reduce using rule 13 (empty -> .)
-    MENORQUE        reduce using rule 13 (empty -> .)
-    DIFERENTEQUE    reduce using rule 13 (empty -> .)
-    IGUALQUE        reduce using rule 13 (empty -> .)
-    MAYORIGUAL      reduce using rule 13 (empty -> .)
-    MENORIGUAL      reduce using rule 13 (empty -> .)
-    MAS             reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    MULT            reduce using rule 13 (empty -> .)
-    DIV             reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-    FINPRINCIPAL    reduce using rule 13 (empty -> .)
-    SI              reduce using rule 13 (empty -> .)
-    MIENTRAS        reduce using rule 13 (empty -> .)
-    PEDIRALUSUARIO  reduce using rule 13 (empty -> .)
-    DECIRALUSUARIO  reduce using rule 13 (empty -> .)
-    AGREGAR         reduce using rule 13 (empty -> .)
-    SACAR           reduce using rule 13 (empty -> .)
-    VER             reduce using rule 13 (empty -> .)
-    GIRARDERECHA    reduce using rule 13 (empty -> .)
-    GIRARIZQUIERDA  reduce using rule 13 (empty -> .)
-    MOVER           reduce using rule 13 (empty -> .)
-    BORRAR          reduce using rule 13 (empty -> .)
-    PINTAR          reduce using rule 13 (empty -> .)
-    DESPINTAR       reduce using rule 13 (empty -> .)
-    REGRESA         reduce using rule 13 (empty -> .)
-    FINBLOQUE       reduce using rule 13 (empty -> .)
-    ENTONCES        reduce using rule 13 (empty -> .)
-    PARENTDER       reduce using rule 13 (empty -> .)
-    HACER           reduce using rule 13 (empty -> .)
-    PUNTOCOMA       reduce using rule 13 (empty -> .)
-    FINFUNCION      reduce using rule 13 (empty -> .)
+    MAYORQUE        reduce using rule 47 (exp -> TRUE .)
+    MENORQUE        reduce using rule 47 (exp -> TRUE .)
+    DIFERENTEQUE    reduce using rule 47 (exp -> TRUE .)
+    IGUALQUE        reduce using rule 47 (exp -> TRUE .)
+    MAYORIGUAL      reduce using rule 47 (exp -> TRUE .)
+    MENORIGUAL      reduce using rule 47 (exp -> TRUE .)
+    MAS             reduce using rule 47 (exp -> TRUE .)
+    MENOS           reduce using rule 47 (exp -> TRUE .)
+    MULT            reduce using rule 47 (exp -> TRUE .)
+    DIV             reduce using rule 47 (exp -> TRUE .)
+    FINPRINCIPAL    reduce using rule 47 (exp -> TRUE .)
+    ID              reduce using rule 47 (exp -> TRUE .)
+    SI              reduce using rule 47 (exp -> TRUE .)
+    MIENTRAS        reduce using rule 47 (exp -> TRUE .)
+    PEDIRALUSUARIO  reduce using rule 47 (exp -> TRUE .)
+    DECIRALUSUARIO  reduce using rule 47 (exp -> TRUE .)
+    AGREGAR         reduce using rule 47 (exp -> TRUE .)
+    SACAR           reduce using rule 47 (exp -> TRUE .)
+    VER             reduce using rule 47 (exp -> TRUE .)
+    GIRARDERECHA    reduce using rule 47 (exp -> TRUE .)
+    GIRARIZQUIERDA  reduce using rule 47 (exp -> TRUE .)
+    MOVER           reduce using rule 47 (exp -> TRUE .)
+    BORRAR          reduce using rule 47 (exp -> TRUE .)
+    PINTAR          reduce using rule 47 (exp -> TRUE .)
+    DESPINTAR       reduce using rule 47 (exp -> TRUE .)
+    REGRESA         reduce using rule 47 (exp -> TRUE .)
+    FINBLOQUE       reduce using rule 47 (exp -> TRUE .)
+    ENTONCES        reduce using rule 47 (exp -> TRUE .)
+    PARENTDER       reduce using rule 47 (exp -> TRUE .)
+    HACER           reduce using rule 47 (exp -> TRUE .)
+    PUNTOCOMA       reduce using rule 47 (exp -> TRUE .)
+    FINFUNCION      reduce using rule 47 (exp -> TRUE .)
 
-    push_opd                       shift and go to state 99
-    empty                          shift and go to state 97
 
 state 75
 
-    (50) exp -> ID . push_var_opd
-    (51) push_var_opd -> .
+    (49) exp -> ID . push_var_opd
+    (50) push_var_opd -> .
 
-    MAYORQUE        reduce using rule 51 (push_var_opd -> .)
-    MENORQUE        reduce using rule 51 (push_var_opd -> .)
-    DIFERENTEQUE    reduce using rule 51 (push_var_opd -> .)
-    IGUALQUE        reduce using rule 51 (push_var_opd -> .)
-    MAYORIGUAL      reduce using rule 51 (push_var_opd -> .)
-    MENORIGUAL      reduce using rule 51 (push_var_opd -> .)
-    MAS             reduce using rule 51 (push_var_opd -> .)
-    MENOS           reduce using rule 51 (push_var_opd -> .)
-    MULT            reduce using rule 51 (push_var_opd -> .)
-    DIV             reduce using rule 51 (push_var_opd -> .)
-    ID              reduce using rule 51 (push_var_opd -> .)
-    FINPRINCIPAL    reduce using rule 51 (push_var_opd -> .)
-    SI              reduce using rule 51 (push_var_opd -> .)
-    MIENTRAS        reduce using rule 51 (push_var_opd -> .)
-    PEDIRALUSUARIO  reduce using rule 51 (push_var_opd -> .)
-    DECIRALUSUARIO  reduce using rule 51 (push_var_opd -> .)
-    AGREGAR         reduce using rule 51 (push_var_opd -> .)
-    SACAR           reduce using rule 51 (push_var_opd -> .)
-    VER             reduce using rule 51 (push_var_opd -> .)
-    GIRARDERECHA    reduce using rule 51 (push_var_opd -> .)
-    GIRARIZQUIERDA  reduce using rule 51 (push_var_opd -> .)
-    MOVER           reduce using rule 51 (push_var_opd -> .)
-    BORRAR          reduce using rule 51 (push_var_opd -> .)
-    PINTAR          reduce using rule 51 (push_var_opd -> .)
-    DESPINTAR       reduce using rule 51 (push_var_opd -> .)
-    REGRESA         reduce using rule 51 (push_var_opd -> .)
-    FINBLOQUE       reduce using rule 51 (push_var_opd -> .)
-    ENTONCES        reduce using rule 51 (push_var_opd -> .)
-    PARENTDER       reduce using rule 51 (push_var_opd -> .)
-    HACER           reduce using rule 51 (push_var_opd -> .)
-    PUNTOCOMA       reduce using rule 51 (push_var_opd -> .)
-    FINFUNCION      reduce using rule 51 (push_var_opd -> .)
+    MAYORQUE        reduce using rule 50 (push_var_opd -> .)
+    MENORQUE        reduce using rule 50 (push_var_opd -> .)
+    DIFERENTEQUE    reduce using rule 50 (push_var_opd -> .)
+    IGUALQUE        reduce using rule 50 (push_var_opd -> .)
+    MAYORIGUAL      reduce using rule 50 (push_var_opd -> .)
+    MENORIGUAL      reduce using rule 50 (push_var_opd -> .)
+    MAS             reduce using rule 50 (push_var_opd -> .)
+    MENOS           reduce using rule 50 (push_var_opd -> .)
+    MULT            reduce using rule 50 (push_var_opd -> .)
+    DIV             reduce using rule 50 (push_var_opd -> .)
+    ID              reduce using rule 50 (push_var_opd -> .)
+    FINPRINCIPAL    reduce using rule 50 (push_var_opd -> .)
+    SI              reduce using rule 50 (push_var_opd -> .)
+    MIENTRAS        reduce using rule 50 (push_var_opd -> .)
+    PEDIRALUSUARIO  reduce using rule 50 (push_var_opd -> .)
+    DECIRALUSUARIO  reduce using rule 50 (push_var_opd -> .)
+    AGREGAR         reduce using rule 50 (push_var_opd -> .)
+    SACAR           reduce using rule 50 (push_var_opd -> .)
+    VER             reduce using rule 50 (push_var_opd -> .)
+    GIRARDERECHA    reduce using rule 50 (push_var_opd -> .)
+    GIRARIZQUIERDA  reduce using rule 50 (push_var_opd -> .)
+    MOVER           reduce using rule 50 (push_var_opd -> .)
+    BORRAR          reduce using rule 50 (push_var_opd -> .)
+    PINTAR          reduce using rule 50 (push_var_opd -> .)
+    DESPINTAR       reduce using rule 50 (push_var_opd -> .)
+    REGRESA         reduce using rule 50 (push_var_opd -> .)
+    FINBLOQUE       reduce using rule 50 (push_var_opd -> .)
+    ENTONCES        reduce using rule 50 (push_var_opd -> .)
+    PARENTDER       reduce using rule 50 (push_var_opd -> .)
+    HACER           reduce using rule 50 (push_var_opd -> .)
+    PUNTOCOMA       reduce using rule 50 (push_var_opd -> .)
+    FINFUNCION      reduce using rule 50 (push_var_opd -> .)
 
-    push_var_opd                   shift and go to state 100
+    push_var_opd                   shift and go to state 97
 
 state 76
 
-    (82) objeto_con_expresion -> GIRARIZQUIERDA expresion .
+    (81) objeto_con_expresion -> GIRARIZQUIERDA expresion .
 
-    ID              reduce using rule 82 (objeto_con_expresion -> GIRARIZQUIERDA expresion .)
+    ID              reduce using rule 81 (objeto_con_expresion -> GIRARIZQUIERDA expresion .)
 
 
 state 77
 
-    (49) exp -> FALSE . push_opd
-    (46) push_opd -> . empty
-    (13) empty -> .
+    (48) exp -> FALSE .
 
-    MAYORQUE        reduce using rule 13 (empty -> .)
-    MENORQUE        reduce using rule 13 (empty -> .)
-    DIFERENTEQUE    reduce using rule 13 (empty -> .)
-    IGUALQUE        reduce using rule 13 (empty -> .)
-    MAYORIGUAL      reduce using rule 13 (empty -> .)
-    MENORIGUAL      reduce using rule 13 (empty -> .)
-    MAS             reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    MULT            reduce using rule 13 (empty -> .)
-    DIV             reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-    FINPRINCIPAL    reduce using rule 13 (empty -> .)
-    SI              reduce using rule 13 (empty -> .)
-    MIENTRAS        reduce using rule 13 (empty -> .)
-    PEDIRALUSUARIO  reduce using rule 13 (empty -> .)
-    DECIRALUSUARIO  reduce using rule 13 (empty -> .)
-    AGREGAR         reduce using rule 13 (empty -> .)
-    SACAR           reduce using rule 13 (empty -> .)
-    VER             reduce using rule 13 (empty -> .)
-    GIRARDERECHA    reduce using rule 13 (empty -> .)
-    GIRARIZQUIERDA  reduce using rule 13 (empty -> .)
-    MOVER           reduce using rule 13 (empty -> .)
-    BORRAR          reduce using rule 13 (empty -> .)
-    PINTAR          reduce using rule 13 (empty -> .)
-    DESPINTAR       reduce using rule 13 (empty -> .)
-    REGRESA         reduce using rule 13 (empty -> .)
-    FINBLOQUE       reduce using rule 13 (empty -> .)
-    ENTONCES        reduce using rule 13 (empty -> .)
-    PARENTDER       reduce using rule 13 (empty -> .)
-    HACER           reduce using rule 13 (empty -> .)
-    PUNTOCOMA       reduce using rule 13 (empty -> .)
-    FINFUNCION      reduce using rule 13 (empty -> .)
+    MAYORQUE        reduce using rule 48 (exp -> FALSE .)
+    MENORQUE        reduce using rule 48 (exp -> FALSE .)
+    DIFERENTEQUE    reduce using rule 48 (exp -> FALSE .)
+    IGUALQUE        reduce using rule 48 (exp -> FALSE .)
+    MAYORIGUAL      reduce using rule 48 (exp -> FALSE .)
+    MENORIGUAL      reduce using rule 48 (exp -> FALSE .)
+    MAS             reduce using rule 48 (exp -> FALSE .)
+    MENOS           reduce using rule 48 (exp -> FALSE .)
+    MULT            reduce using rule 48 (exp -> FALSE .)
+    DIV             reduce using rule 48 (exp -> FALSE .)
+    FINPRINCIPAL    reduce using rule 48 (exp -> FALSE .)
+    ID              reduce using rule 48 (exp -> FALSE .)
+    SI              reduce using rule 48 (exp -> FALSE .)
+    MIENTRAS        reduce using rule 48 (exp -> FALSE .)
+    PEDIRALUSUARIO  reduce using rule 48 (exp -> FALSE .)
+    DECIRALUSUARIO  reduce using rule 48 (exp -> FALSE .)
+    AGREGAR         reduce using rule 48 (exp -> FALSE .)
+    SACAR           reduce using rule 48 (exp -> FALSE .)
+    VER             reduce using rule 48 (exp -> FALSE .)
+    GIRARDERECHA    reduce using rule 48 (exp -> FALSE .)
+    GIRARIZQUIERDA  reduce using rule 48 (exp -> FALSE .)
+    MOVER           reduce using rule 48 (exp -> FALSE .)
+    BORRAR          reduce using rule 48 (exp -> FALSE .)
+    PINTAR          reduce using rule 48 (exp -> FALSE .)
+    DESPINTAR       reduce using rule 48 (exp -> FALSE .)
+    REGRESA         reduce using rule 48 (exp -> FALSE .)
+    FINBLOQUE       reduce using rule 48 (exp -> FALSE .)
+    ENTONCES        reduce using rule 48 (exp -> FALSE .)
+    PARENTDER       reduce using rule 48 (exp -> FALSE .)
+    HACER           reduce using rule 48 (exp -> FALSE .)
+    PUNTOCOMA       reduce using rule 48 (exp -> FALSE .)
+    FINFUNCION      reduce using rule 48 (exp -> FALSE .)
 
-    push_opd                       shift and go to state 101
-    empty                          shift and go to state 97
 
 state 78
 
-    (47) exp -> CTEFLOTANTE . push_opd
-    (46) push_opd -> . empty
-    (13) empty -> .
+    (46) exp -> CTEFLOTANTE .
 
-    MAYORQUE        reduce using rule 13 (empty -> .)
-    MENORQUE        reduce using rule 13 (empty -> .)
-    DIFERENTEQUE    reduce using rule 13 (empty -> .)
-    IGUALQUE        reduce using rule 13 (empty -> .)
-    MAYORIGUAL      reduce using rule 13 (empty -> .)
-    MENORIGUAL      reduce using rule 13 (empty -> .)
-    MAS             reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    MULT            reduce using rule 13 (empty -> .)
-    DIV             reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-    FINPRINCIPAL    reduce using rule 13 (empty -> .)
-    SI              reduce using rule 13 (empty -> .)
-    MIENTRAS        reduce using rule 13 (empty -> .)
-    PEDIRALUSUARIO  reduce using rule 13 (empty -> .)
-    DECIRALUSUARIO  reduce using rule 13 (empty -> .)
-    AGREGAR         reduce using rule 13 (empty -> .)
-    SACAR           reduce using rule 13 (empty -> .)
-    VER             reduce using rule 13 (empty -> .)
-    GIRARDERECHA    reduce using rule 13 (empty -> .)
-    GIRARIZQUIERDA  reduce using rule 13 (empty -> .)
-    MOVER           reduce using rule 13 (empty -> .)
-    BORRAR          reduce using rule 13 (empty -> .)
-    PINTAR          reduce using rule 13 (empty -> .)
-    DESPINTAR       reduce using rule 13 (empty -> .)
-    REGRESA         reduce using rule 13 (empty -> .)
-    FINBLOQUE       reduce using rule 13 (empty -> .)
-    ENTONCES        reduce using rule 13 (empty -> .)
-    PARENTDER       reduce using rule 13 (empty -> .)
-    HACER           reduce using rule 13 (empty -> .)
-    PUNTOCOMA       reduce using rule 13 (empty -> .)
-    FINFUNCION      reduce using rule 13 (empty -> .)
+    MAYORQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MENORQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DIFERENTEQUE    reduce using rule 46 (exp -> CTEFLOTANTE .)
+    IGUALQUE        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MAYORIGUAL      reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MENORIGUAL      reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MAS             reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MENOS           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MULT            reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DIV             reduce using rule 46 (exp -> CTEFLOTANTE .)
+    FINPRINCIPAL    reduce using rule 46 (exp -> CTEFLOTANTE .)
+    ID              reduce using rule 46 (exp -> CTEFLOTANTE .)
+    SI              reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MIENTRAS        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PEDIRALUSUARIO  reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DECIRALUSUARIO  reduce using rule 46 (exp -> CTEFLOTANTE .)
+    AGREGAR         reduce using rule 46 (exp -> CTEFLOTANTE .)
+    SACAR           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    VER             reduce using rule 46 (exp -> CTEFLOTANTE .)
+    GIRARDERECHA    reduce using rule 46 (exp -> CTEFLOTANTE .)
+    GIRARIZQUIERDA  reduce using rule 46 (exp -> CTEFLOTANTE .)
+    MOVER           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    BORRAR          reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PINTAR          reduce using rule 46 (exp -> CTEFLOTANTE .)
+    DESPINTAR       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    REGRESA         reduce using rule 46 (exp -> CTEFLOTANTE .)
+    FINBLOQUE       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    ENTONCES        reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PARENTDER       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    HACER           reduce using rule 46 (exp -> CTEFLOTANTE .)
+    PUNTOCOMA       reduce using rule 46 (exp -> CTEFLOTANTE .)
+    FINFUNCION      reduce using rule 46 (exp -> CTEFLOTANTE .)
 
-    push_opd                       shift and go to state 102
-    empty                          shift and go to state 97
 
 state 79
 
-    (52) exp -> CTETEXTO . push_opd
-    (46) push_opd -> . empty
-    (13) empty -> .
+    (51) exp -> CTETEXTO .
 
-    MAYORQUE        reduce using rule 13 (empty -> .)
-    MENORQUE        reduce using rule 13 (empty -> .)
-    DIFERENTEQUE    reduce using rule 13 (empty -> .)
-    IGUALQUE        reduce using rule 13 (empty -> .)
-    MAYORIGUAL      reduce using rule 13 (empty -> .)
-    MENORIGUAL      reduce using rule 13 (empty -> .)
-    MAS             reduce using rule 13 (empty -> .)
-    MENOS           reduce using rule 13 (empty -> .)
-    MULT            reduce using rule 13 (empty -> .)
-    DIV             reduce using rule 13 (empty -> .)
-    ID              reduce using rule 13 (empty -> .)
-    FINPRINCIPAL    reduce using rule 13 (empty -> .)
-    SI              reduce using rule 13 (empty -> .)
-    MIENTRAS        reduce using rule 13 (empty -> .)
-    PEDIRALUSUARIO  reduce using rule 13 (empty -> .)
-    DECIRALUSUARIO  reduce using rule 13 (empty -> .)
-    AGREGAR         reduce using rule 13 (empty -> .)
-    SACAR           reduce using rule 13 (empty -> .)
-    VER             reduce using rule 13 (empty -> .)
-    GIRARDERECHA    reduce using rule 13 (empty -> .)
-    GIRARIZQUIERDA  reduce using rule 13 (empty -> .)
-    MOVER           reduce using rule 13 (empty -> .)
-    BORRAR          reduce using rule 13 (empty -> .)
-    PINTAR          reduce using rule 13 (empty -> .)
-    DESPINTAR       reduce using rule 13 (empty -> .)
-    REGRESA         reduce using rule 13 (empty -> .)
-    FINBLOQUE       reduce using rule 13 (empty -> .)
-    ENTONCES        reduce using rule 13 (empty -> .)
-    PARENTDER       reduce using rule 13 (empty -> .)
-    HACER           reduce using rule 13 (empty -> .)
-    PUNTOCOMA       reduce using rule 13 (empty -> .)
-    FINFUNCION      reduce using rule 13 (empty -> .)
+    MAYORQUE        reduce using rule 51 (exp -> CTETEXTO .)
+    MENORQUE        reduce using rule 51 (exp -> CTETEXTO .)
+    DIFERENTEQUE    reduce using rule 51 (exp -> CTETEXTO .)
+    IGUALQUE        reduce using rule 51 (exp -> CTETEXTO .)
+    MAYORIGUAL      reduce using rule 51 (exp -> CTETEXTO .)
+    MENORIGUAL      reduce using rule 51 (exp -> CTETEXTO .)
+    MAS             reduce using rule 51 (exp -> CTETEXTO .)
+    MENOS           reduce using rule 51 (exp -> CTETEXTO .)
+    MULT            reduce using rule 51 (exp -> CTETEXTO .)
+    DIV             reduce using rule 51 (exp -> CTETEXTO .)
+    FINPRINCIPAL    reduce using rule 51 (exp -> CTETEXTO .)
+    ID              reduce using rule 51 (exp -> CTETEXTO .)
+    SI              reduce using rule 51 (exp -> CTETEXTO .)
+    MIENTRAS        reduce using rule 51 (exp -> CTETEXTO .)
+    PEDIRALUSUARIO  reduce using rule 51 (exp -> CTETEXTO .)
+    DECIRALUSUARIO  reduce using rule 51 (exp -> CTETEXTO .)
+    AGREGAR         reduce using rule 51 (exp -> CTETEXTO .)
+    SACAR           reduce using rule 51 (exp -> CTETEXTO .)
+    VER             reduce using rule 51 (exp -> CTETEXTO .)
+    GIRARDERECHA    reduce using rule 51 (exp -> CTETEXTO .)
+    GIRARIZQUIERDA  reduce using rule 51 (exp -> CTETEXTO .)
+    MOVER           reduce using rule 51 (exp -> CTETEXTO .)
+    BORRAR          reduce using rule 51 (exp -> CTETEXTO .)
+    PINTAR          reduce using rule 51 (exp -> CTETEXTO .)
+    DESPINTAR       reduce using rule 51 (exp -> CTETEXTO .)
+    REGRESA         reduce using rule 51 (exp -> CTETEXTO .)
+    FINBLOQUE       reduce using rule 51 (exp -> CTETEXTO .)
+    ENTONCES        reduce using rule 51 (exp -> CTETEXTO .)
+    PARENTDER       reduce using rule 51 (exp -> CTETEXTO .)
+    HACER           reduce using rule 51 (exp -> CTETEXTO .)
+    PUNTOCOMA       reduce using rule 51 (exp -> CTETEXTO .)
+    FINFUNCION      reduce using rule 51 (exp -> CTETEXTO .)
 
-    push_opd                       shift and go to state 103
-    empty                          shift and go to state 97
 
 state 80
 
@@ -1750,12 +1715,12 @@ state 80
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1766,7 +1731,7 @@ state 80
     ID              shift and go to state 75
     CTETEXTO        shift and go to state 79
 
-    exp                            shift and go to state 104
+    exp                            shift and go to state 98
 
 state 81
 
@@ -1776,105 +1741,105 @@ state 81
     (35) expresion -> exp . IGUALQUE push_opt exp
     (36) expresion -> exp . MAYORIGUAL push_opt exp
     (37) expresion -> exp . MENORIGUAL push_opt exp
-    (53) expresion -> exp .
+    (52) expresion -> exp .
     (39) exp -> exp . MAS push_opt exp
     (40) exp -> exp . MENOS push_opt exp
     (41) exp -> exp . MULT push_opt exp
     (42) exp -> exp . DIV push_opt exp
 
-    MAYORQUE        shift and go to state 111
-    MENORQUE        shift and go to state 110
-    DIFERENTEQUE    shift and go to state 109
-    IGUALQUE        shift and go to state 106
-    MAYORIGUAL      shift and go to state 112
-    MENORIGUAL      shift and go to state 107
-    FINPRINCIPAL    reduce using rule 53 (expresion -> exp .)
-    ID              reduce using rule 53 (expresion -> exp .)
-    SI              reduce using rule 53 (expresion -> exp .)
-    MIENTRAS        reduce using rule 53 (expresion -> exp .)
-    PEDIRALUSUARIO  reduce using rule 53 (expresion -> exp .)
-    DECIRALUSUARIO  reduce using rule 53 (expresion -> exp .)
-    AGREGAR         reduce using rule 53 (expresion -> exp .)
-    SACAR           reduce using rule 53 (expresion -> exp .)
-    VER             reduce using rule 53 (expresion -> exp .)
-    GIRARDERECHA    reduce using rule 53 (expresion -> exp .)
-    GIRARIZQUIERDA  reduce using rule 53 (expresion -> exp .)
-    MOVER           reduce using rule 53 (expresion -> exp .)
-    BORRAR          reduce using rule 53 (expresion -> exp .)
-    PINTAR          reduce using rule 53 (expresion -> exp .)
-    DESPINTAR       reduce using rule 53 (expresion -> exp .)
-    REGRESA         reduce using rule 53 (expresion -> exp .)
-    FINBLOQUE       reduce using rule 53 (expresion -> exp .)
-    ENTONCES        reduce using rule 53 (expresion -> exp .)
-    HACER           reduce using rule 53 (expresion -> exp .)
-    FINFUNCION      reduce using rule 53 (expresion -> exp .)
-    PARENTDER       reduce using rule 53 (expresion -> exp .)
-    PUNTOCOMA       reduce using rule 53 (expresion -> exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAYORQUE        shift and go to state 105
+    MENORQUE        shift and go to state 104
+    DIFERENTEQUE    shift and go to state 103
+    IGUALQUE        shift and go to state 100
+    MAYORIGUAL      shift and go to state 106
+    MENORIGUAL      shift and go to state 101
+    FINPRINCIPAL    reduce using rule 52 (expresion -> exp .)
+    ID              reduce using rule 52 (expresion -> exp .)
+    SI              reduce using rule 52 (expresion -> exp .)
+    MIENTRAS        reduce using rule 52 (expresion -> exp .)
+    PEDIRALUSUARIO  reduce using rule 52 (expresion -> exp .)
+    DECIRALUSUARIO  reduce using rule 52 (expresion -> exp .)
+    AGREGAR         reduce using rule 52 (expresion -> exp .)
+    SACAR           reduce using rule 52 (expresion -> exp .)
+    VER             reduce using rule 52 (expresion -> exp .)
+    GIRARDERECHA    reduce using rule 52 (expresion -> exp .)
+    GIRARIZQUIERDA  reduce using rule 52 (expresion -> exp .)
+    MOVER           reduce using rule 52 (expresion -> exp .)
+    BORRAR          reduce using rule 52 (expresion -> exp .)
+    PINTAR          reduce using rule 52 (expresion -> exp .)
+    DESPINTAR       reduce using rule 52 (expresion -> exp .)
+    REGRESA         reduce using rule 52 (expresion -> exp .)
+    FINBLOQUE       reduce using rule 52 (expresion -> exp .)
+    ENTONCES        reduce using rule 52 (expresion -> exp .)
+    HACER           reduce using rule 52 (expresion -> exp .)
+    FINFUNCION      reduce using rule 52 (expresion -> exp .)
+    PARENTDER       reduce using rule 52 (expresion -> exp .)
+    PUNTOCOMA       reduce using rule 52 (expresion -> exp .)
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
 state 82
 
-    (68) io -> DECIRALUSUARIO expresion .
+    (67) io -> DECIRALUSUARIO expresion .
 
-    REGRESA         reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    ID              reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    SI              reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    MIENTRAS        reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    PEDIRALUSUARIO  reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    DECIRALUSUARIO  reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    AGREGAR         reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    SACAR           reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    VER             reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    GIRARDERECHA    reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    GIRARIZQUIERDA  reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    MOVER           reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    BORRAR          reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    PINTAR          reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    DESPINTAR       reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    FINPRINCIPAL    reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
-    FINBLOQUE       reduce using rule 68 (io -> DECIRALUSUARIO expresion .)
+    REGRESA         reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    ID              reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    SI              reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    MIENTRAS        reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    PEDIRALUSUARIO  reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    DECIRALUSUARIO  reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    AGREGAR         reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    SACAR           reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    VER             reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    GIRARDERECHA    reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    GIRARIZQUIERDA  reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    MOVER           reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    BORRAR          reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    PINTAR          reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    DESPINTAR       reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    FINPRINCIPAL    reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
+    FINBLOQUE       reduce using rule 67 (io -> DECIRALUSUARIO expresion .)
 
 
 state 83
 
-    (83) objeto_con_expresion -> MOVER expresion .
+    (82) objeto_con_expresion -> MOVER expresion .
 
-    ID              reduce using rule 83 (objeto_con_expresion -> MOVER expresion .)
+    ID              reduce using rule 82 (objeto_con_expresion -> MOVER expresion .)
 
 
 state 84
 
-    (81) objeto_con_expresion -> GIRARDERECHA expresion .
+    (80) objeto_con_expresion -> GIRARDERECHA expresion .
 
-    ID              reduce using rule 81 (objeto_con_expresion -> GIRARDERECHA expresion .)
+    ID              reduce using rule 80 (objeto_con_expresion -> GIRARDERECHA expresion .)
 
 
 state 85
 
-    (63) ciclo -> MIENTRAS actCic1 . expresion actCic2 HACER bloque FINMIENTRAS actCic3
+    (62) ciclo -> MIENTRAS actCic1 . expresion actCic2 HACER bloque FINMIENTRAS actCic3
     (32) expresion -> . exp MAYORQUE push_opt exp
     (33) expresion -> . exp MENORQUE push_opt exp
     (34) expresion -> . exp DIFERENTEQUE push_opt exp
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1885,44 +1850,44 @@ state 85
     ID              shift and go to state 75
     CTETEXTO        shift and go to state 79
 
-    expresion                      shift and go to state 115
+    expresion                      shift and go to state 109
     exp                            shift and go to state 81
 
 state 86
 
-    (64) actCic1 -> empty .
+    (63) actCic1 -> empty .
 
-    PARENTIZQ       reduce using rule 64 (actCic1 -> empty .)
-    MENOS           reduce using rule 64 (actCic1 -> empty .)
-    CTEENTERO       reduce using rule 64 (actCic1 -> empty .)
-    CTEFLOTANTE     reduce using rule 64 (actCic1 -> empty .)
-    TRUE            reduce using rule 64 (actCic1 -> empty .)
-    FALSE           reduce using rule 64 (actCic1 -> empty .)
-    ID              reduce using rule 64 (actCic1 -> empty .)
-    CTETEXTO        reduce using rule 64 (actCic1 -> empty .)
+    PARENTIZQ       reduce using rule 63 (actCic1 -> empty .)
+    MENOS           reduce using rule 63 (actCic1 -> empty .)
+    CTEENTERO       reduce using rule 63 (actCic1 -> empty .)
+    CTEFLOTANTE     reduce using rule 63 (actCic1 -> empty .)
+    TRUE            reduce using rule 63 (actCic1 -> empty .)
+    FALSE           reduce using rule 63 (actCic1 -> empty .)
+    ID              reduce using rule 63 (actCic1 -> empty .)
+    CTETEXTO        reduce using rule 63 (actCic1 -> empty .)
 
 
 state 87
 
-    (67) io -> PEDIRALUSUARIO ID .
+    (66) io -> PEDIRALUSUARIO ID .
 
-    REGRESA         reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    ID              reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    SI              reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    MIENTRAS        reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    PEDIRALUSUARIO  reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    DECIRALUSUARIO  reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    AGREGAR         reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    SACAR           reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    VER             reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    GIRARDERECHA    reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    GIRARIZQUIERDA  reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    MOVER           reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    BORRAR          reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    PINTAR          reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    DESPINTAR       reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    FINPRINCIPAL    reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
-    FINBLOQUE       reduce using rule 67 (io -> PEDIRALUSUARIO ID .)
+    REGRESA         reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    ID              reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    SI              reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    MIENTRAS        reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    PEDIRALUSUARIO  reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    DECIRALUSUARIO  reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    AGREGAR         reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    SACAR           reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    VER             reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    GIRARDERECHA    reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    GIRARIZQUIERDA  reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    MOVER           reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    BORRAR          reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    PINTAR          reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    DESPINTAR       reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    FINPRINCIPAL    reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
+    FINBLOQUE       reduce using rule 66 (io -> PEDIRALUSUARIO ID .)
 
 
 state 88
@@ -1934,19 +1899,19 @@ state 88
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -1957,25 +1922,25 @@ state 88
     ID              shift and go to state 75
     CTETEXTO        shift and go to state 79
 
-    expresion                      shift and go to state 116
+    expresion                      shift and go to state 110
     exp                            shift and go to state 81
 
 state 89
 
-    (54) condicion -> SI expresion . actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
-    (55) actSi1 -> . empty
+    (53) condicion -> SI expresion . actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+    (54) actSi1 -> . empty
     (13) empty -> .
 
     ENTONCES        reduce using rule 13 (empty -> .)
 
-    actSi1                         shift and go to state 117
-    empty                          shift and go to state 118
+    actSi1                         shift and go to state 111
+    empty                          shift and go to state 112
 
 state 90
 
-    (69) accion -> tipo_accion ID . PUNTOCOMA
+    (68) accion -> tipo_accion ID . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 119
+    PUNTOCOMA       shift and go to state 113
 
 
 state 91
@@ -1987,19 +1952,19 @@ state 91
     (35) expresion -> . exp IGUALQUE push_opt exp
     (36) expresion -> . exp MAYORIGUAL push_opt exp
     (37) expresion -> . exp MENORIGUAL push_opt exp
-    (53) expresion -> . exp
+    (52) expresion -> . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -2010,7 +1975,7 @@ state 91
     ID              shift and go to state 75
     CTETEXTO        shift and go to state 79
 
-    expresion                      shift and go to state 120
+    expresion                      shift and go to state 114
     exp                            shift and go to state 81
 
 state 92
@@ -2050,7 +2015,7 @@ state 93
     BOOLEANO        shift and go to state 15
     LISTA           shift and go to state 16
 
-    tipo                           shift and go to state 121
+    tipo                           shift and go to state 115
 
 state 94
 
@@ -2101,278 +2066,50 @@ state 95
 
 state 96
 
-    (45) exp -> CTEENTERO push_opd .
+    (38) exp -> PARENTIZQ expresion . PARENTDER
 
-    MAYORQUE        reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MENORQUE        reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    DIFERENTEQUE    reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    IGUALQUE        reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MAYORIGUAL      reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MENORIGUAL      reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MAS             reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MENOS           reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MULT            reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    DIV             reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    FINPRINCIPAL    reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    ID              reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    SI              reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MIENTRAS        reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    PEDIRALUSUARIO  reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    DECIRALUSUARIO  reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    AGREGAR         reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    SACAR           reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    VER             reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    GIRARDERECHA    reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    GIRARIZQUIERDA  reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    MOVER           reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    BORRAR          reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    PINTAR          reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    DESPINTAR       reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    REGRESA         reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    FINBLOQUE       reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    ENTONCES        reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    PARENTDER       reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    HACER           reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    PUNTOCOMA       reduce using rule 45 (exp -> CTEENTERO push_opd .)
-    FINFUNCION      reduce using rule 45 (exp -> CTEENTERO push_opd .)
+    PARENTDER       shift and go to state 116
 
 
 state 97
 
-    (46) push_opd -> empty .
+    (49) exp -> ID push_var_opd .
 
-    MAYORQUE        reduce using rule 46 (push_opd -> empty .)
-    MENORQUE        reduce using rule 46 (push_opd -> empty .)
-    DIFERENTEQUE    reduce using rule 46 (push_opd -> empty .)
-    IGUALQUE        reduce using rule 46 (push_opd -> empty .)
-    MAYORIGUAL      reduce using rule 46 (push_opd -> empty .)
-    MENORIGUAL      reduce using rule 46 (push_opd -> empty .)
-    MAS             reduce using rule 46 (push_opd -> empty .)
-    MENOS           reduce using rule 46 (push_opd -> empty .)
-    MULT            reduce using rule 46 (push_opd -> empty .)
-    DIV             reduce using rule 46 (push_opd -> empty .)
-    ID              reduce using rule 46 (push_opd -> empty .)
-    FINPRINCIPAL    reduce using rule 46 (push_opd -> empty .)
-    SI              reduce using rule 46 (push_opd -> empty .)
-    MIENTRAS        reduce using rule 46 (push_opd -> empty .)
-    PEDIRALUSUARIO  reduce using rule 46 (push_opd -> empty .)
-    DECIRALUSUARIO  reduce using rule 46 (push_opd -> empty .)
-    AGREGAR         reduce using rule 46 (push_opd -> empty .)
-    SACAR           reduce using rule 46 (push_opd -> empty .)
-    VER             reduce using rule 46 (push_opd -> empty .)
-    GIRARDERECHA    reduce using rule 46 (push_opd -> empty .)
-    GIRARIZQUIERDA  reduce using rule 46 (push_opd -> empty .)
-    MOVER           reduce using rule 46 (push_opd -> empty .)
-    BORRAR          reduce using rule 46 (push_opd -> empty .)
-    PINTAR          reduce using rule 46 (push_opd -> empty .)
-    DESPINTAR       reduce using rule 46 (push_opd -> empty .)
-    REGRESA         reduce using rule 46 (push_opd -> empty .)
-    FINBLOQUE       reduce using rule 46 (push_opd -> empty .)
-    ENTONCES        reduce using rule 46 (push_opd -> empty .)
-    PARENTDER       reduce using rule 46 (push_opd -> empty .)
-    HACER           reduce using rule 46 (push_opd -> empty .)
-    PUNTOCOMA       reduce using rule 46 (push_opd -> empty .)
-    FINFUNCION      reduce using rule 46 (push_opd -> empty .)
+    MAYORQUE        reduce using rule 49 (exp -> ID push_var_opd .)
+    MENORQUE        reduce using rule 49 (exp -> ID push_var_opd .)
+    DIFERENTEQUE    reduce using rule 49 (exp -> ID push_var_opd .)
+    IGUALQUE        reduce using rule 49 (exp -> ID push_var_opd .)
+    MAYORIGUAL      reduce using rule 49 (exp -> ID push_var_opd .)
+    MENORIGUAL      reduce using rule 49 (exp -> ID push_var_opd .)
+    MAS             reduce using rule 49 (exp -> ID push_var_opd .)
+    MENOS           reduce using rule 49 (exp -> ID push_var_opd .)
+    MULT            reduce using rule 49 (exp -> ID push_var_opd .)
+    DIV             reduce using rule 49 (exp -> ID push_var_opd .)
+    FINPRINCIPAL    reduce using rule 49 (exp -> ID push_var_opd .)
+    ID              reduce using rule 49 (exp -> ID push_var_opd .)
+    SI              reduce using rule 49 (exp -> ID push_var_opd .)
+    MIENTRAS        reduce using rule 49 (exp -> ID push_var_opd .)
+    PEDIRALUSUARIO  reduce using rule 49 (exp -> ID push_var_opd .)
+    DECIRALUSUARIO  reduce using rule 49 (exp -> ID push_var_opd .)
+    AGREGAR         reduce using rule 49 (exp -> ID push_var_opd .)
+    SACAR           reduce using rule 49 (exp -> ID push_var_opd .)
+    VER             reduce using rule 49 (exp -> ID push_var_opd .)
+    GIRARDERECHA    reduce using rule 49 (exp -> ID push_var_opd .)
+    GIRARIZQUIERDA  reduce using rule 49 (exp -> ID push_var_opd .)
+    MOVER           reduce using rule 49 (exp -> ID push_var_opd .)
+    BORRAR          reduce using rule 49 (exp -> ID push_var_opd .)
+    PINTAR          reduce using rule 49 (exp -> ID push_var_opd .)
+    DESPINTAR       reduce using rule 49 (exp -> ID push_var_opd .)
+    REGRESA         reduce using rule 49 (exp -> ID push_var_opd .)
+    FINBLOQUE       reduce using rule 49 (exp -> ID push_var_opd .)
+    ENTONCES        reduce using rule 49 (exp -> ID push_var_opd .)
+    PARENTDER       reduce using rule 49 (exp -> ID push_var_opd .)
+    HACER           reduce using rule 49 (exp -> ID push_var_opd .)
+    PUNTOCOMA       reduce using rule 49 (exp -> ID push_var_opd .)
+    FINFUNCION      reduce using rule 49 (exp -> ID push_var_opd .)
 
 
 state 98
-
-    (38) exp -> PARENTIZQ expresion . PARENTDER
-
-    PARENTDER       shift and go to state 122
-
-
-state 99
-
-    (48) exp -> TRUE push_opd .
-
-    MAYORQUE        reduce using rule 48 (exp -> TRUE push_opd .)
-    MENORQUE        reduce using rule 48 (exp -> TRUE push_opd .)
-    DIFERENTEQUE    reduce using rule 48 (exp -> TRUE push_opd .)
-    IGUALQUE        reduce using rule 48 (exp -> TRUE push_opd .)
-    MAYORIGUAL      reduce using rule 48 (exp -> TRUE push_opd .)
-    MENORIGUAL      reduce using rule 48 (exp -> TRUE push_opd .)
-    MAS             reduce using rule 48 (exp -> TRUE push_opd .)
-    MENOS           reduce using rule 48 (exp -> TRUE push_opd .)
-    MULT            reduce using rule 48 (exp -> TRUE push_opd .)
-    DIV             reduce using rule 48 (exp -> TRUE push_opd .)
-    FINPRINCIPAL    reduce using rule 48 (exp -> TRUE push_opd .)
-    ID              reduce using rule 48 (exp -> TRUE push_opd .)
-    SI              reduce using rule 48 (exp -> TRUE push_opd .)
-    MIENTRAS        reduce using rule 48 (exp -> TRUE push_opd .)
-    PEDIRALUSUARIO  reduce using rule 48 (exp -> TRUE push_opd .)
-    DECIRALUSUARIO  reduce using rule 48 (exp -> TRUE push_opd .)
-    AGREGAR         reduce using rule 48 (exp -> TRUE push_opd .)
-    SACAR           reduce using rule 48 (exp -> TRUE push_opd .)
-    VER             reduce using rule 48 (exp -> TRUE push_opd .)
-    GIRARDERECHA    reduce using rule 48 (exp -> TRUE push_opd .)
-    GIRARIZQUIERDA  reduce using rule 48 (exp -> TRUE push_opd .)
-    MOVER           reduce using rule 48 (exp -> TRUE push_opd .)
-    BORRAR          reduce using rule 48 (exp -> TRUE push_opd .)
-    PINTAR          reduce using rule 48 (exp -> TRUE push_opd .)
-    DESPINTAR       reduce using rule 48 (exp -> TRUE push_opd .)
-    REGRESA         reduce using rule 48 (exp -> TRUE push_opd .)
-    FINBLOQUE       reduce using rule 48 (exp -> TRUE push_opd .)
-    ENTONCES        reduce using rule 48 (exp -> TRUE push_opd .)
-    PARENTDER       reduce using rule 48 (exp -> TRUE push_opd .)
-    HACER           reduce using rule 48 (exp -> TRUE push_opd .)
-    PUNTOCOMA       reduce using rule 48 (exp -> TRUE push_opd .)
-    FINFUNCION      reduce using rule 48 (exp -> TRUE push_opd .)
-
-
-state 100
-
-    (50) exp -> ID push_var_opd .
-
-    MAYORQUE        reduce using rule 50 (exp -> ID push_var_opd .)
-    MENORQUE        reduce using rule 50 (exp -> ID push_var_opd .)
-    DIFERENTEQUE    reduce using rule 50 (exp -> ID push_var_opd .)
-    IGUALQUE        reduce using rule 50 (exp -> ID push_var_opd .)
-    MAYORIGUAL      reduce using rule 50 (exp -> ID push_var_opd .)
-    MENORIGUAL      reduce using rule 50 (exp -> ID push_var_opd .)
-    MAS             reduce using rule 50 (exp -> ID push_var_opd .)
-    MENOS           reduce using rule 50 (exp -> ID push_var_opd .)
-    MULT            reduce using rule 50 (exp -> ID push_var_opd .)
-    DIV             reduce using rule 50 (exp -> ID push_var_opd .)
-    FINPRINCIPAL    reduce using rule 50 (exp -> ID push_var_opd .)
-    ID              reduce using rule 50 (exp -> ID push_var_opd .)
-    SI              reduce using rule 50 (exp -> ID push_var_opd .)
-    MIENTRAS        reduce using rule 50 (exp -> ID push_var_opd .)
-    PEDIRALUSUARIO  reduce using rule 50 (exp -> ID push_var_opd .)
-    DECIRALUSUARIO  reduce using rule 50 (exp -> ID push_var_opd .)
-    AGREGAR         reduce using rule 50 (exp -> ID push_var_opd .)
-    SACAR           reduce using rule 50 (exp -> ID push_var_opd .)
-    VER             reduce using rule 50 (exp -> ID push_var_opd .)
-    GIRARDERECHA    reduce using rule 50 (exp -> ID push_var_opd .)
-    GIRARIZQUIERDA  reduce using rule 50 (exp -> ID push_var_opd .)
-    MOVER           reduce using rule 50 (exp -> ID push_var_opd .)
-    BORRAR          reduce using rule 50 (exp -> ID push_var_opd .)
-    PINTAR          reduce using rule 50 (exp -> ID push_var_opd .)
-    DESPINTAR       reduce using rule 50 (exp -> ID push_var_opd .)
-    REGRESA         reduce using rule 50 (exp -> ID push_var_opd .)
-    FINBLOQUE       reduce using rule 50 (exp -> ID push_var_opd .)
-    ENTONCES        reduce using rule 50 (exp -> ID push_var_opd .)
-    PARENTDER       reduce using rule 50 (exp -> ID push_var_opd .)
-    HACER           reduce using rule 50 (exp -> ID push_var_opd .)
-    PUNTOCOMA       reduce using rule 50 (exp -> ID push_var_opd .)
-    FINFUNCION      reduce using rule 50 (exp -> ID push_var_opd .)
-
-
-state 101
-
-    (49) exp -> FALSE push_opd .
-
-    MAYORQUE        reduce using rule 49 (exp -> FALSE push_opd .)
-    MENORQUE        reduce using rule 49 (exp -> FALSE push_opd .)
-    DIFERENTEQUE    reduce using rule 49 (exp -> FALSE push_opd .)
-    IGUALQUE        reduce using rule 49 (exp -> FALSE push_opd .)
-    MAYORIGUAL      reduce using rule 49 (exp -> FALSE push_opd .)
-    MENORIGUAL      reduce using rule 49 (exp -> FALSE push_opd .)
-    MAS             reduce using rule 49 (exp -> FALSE push_opd .)
-    MENOS           reduce using rule 49 (exp -> FALSE push_opd .)
-    MULT            reduce using rule 49 (exp -> FALSE push_opd .)
-    DIV             reduce using rule 49 (exp -> FALSE push_opd .)
-    FINPRINCIPAL    reduce using rule 49 (exp -> FALSE push_opd .)
-    ID              reduce using rule 49 (exp -> FALSE push_opd .)
-    SI              reduce using rule 49 (exp -> FALSE push_opd .)
-    MIENTRAS        reduce using rule 49 (exp -> FALSE push_opd .)
-    PEDIRALUSUARIO  reduce using rule 49 (exp -> FALSE push_opd .)
-    DECIRALUSUARIO  reduce using rule 49 (exp -> FALSE push_opd .)
-    AGREGAR         reduce using rule 49 (exp -> FALSE push_opd .)
-    SACAR           reduce using rule 49 (exp -> FALSE push_opd .)
-    VER             reduce using rule 49 (exp -> FALSE push_opd .)
-    GIRARDERECHA    reduce using rule 49 (exp -> FALSE push_opd .)
-    GIRARIZQUIERDA  reduce using rule 49 (exp -> FALSE push_opd .)
-    MOVER           reduce using rule 49 (exp -> FALSE push_opd .)
-    BORRAR          reduce using rule 49 (exp -> FALSE push_opd .)
-    PINTAR          reduce using rule 49 (exp -> FALSE push_opd .)
-    DESPINTAR       reduce using rule 49 (exp -> FALSE push_opd .)
-    REGRESA         reduce using rule 49 (exp -> FALSE push_opd .)
-    FINBLOQUE       reduce using rule 49 (exp -> FALSE push_opd .)
-    ENTONCES        reduce using rule 49 (exp -> FALSE push_opd .)
-    PARENTDER       reduce using rule 49 (exp -> FALSE push_opd .)
-    HACER           reduce using rule 49 (exp -> FALSE push_opd .)
-    PUNTOCOMA       reduce using rule 49 (exp -> FALSE push_opd .)
-    FINFUNCION      reduce using rule 49 (exp -> FALSE push_opd .)
-
-
-state 102
-
-    (47) exp -> CTEFLOTANTE push_opd .
-
-    MAYORQUE        reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MENORQUE        reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    DIFERENTEQUE    reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    IGUALQUE        reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MAYORIGUAL      reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MENORIGUAL      reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MAS             reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MENOS           reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MULT            reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    DIV             reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    FINPRINCIPAL    reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    ID              reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    SI              reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MIENTRAS        reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    PEDIRALUSUARIO  reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    DECIRALUSUARIO  reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    AGREGAR         reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    SACAR           reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    VER             reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    GIRARDERECHA    reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    GIRARIZQUIERDA  reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    MOVER           reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    BORRAR          reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    PINTAR          reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    DESPINTAR       reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    REGRESA         reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    FINBLOQUE       reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    ENTONCES        reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    PARENTDER       reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    HACER           reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    PUNTOCOMA       reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-    FINFUNCION      reduce using rule 47 (exp -> CTEFLOTANTE push_opd .)
-
-
-state 103
-
-    (52) exp -> CTETEXTO push_opd .
-
-    MAYORQUE        reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MENORQUE        reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    DIFERENTEQUE    reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    IGUALQUE        reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MAYORIGUAL      reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MENORIGUAL      reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MAS             reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MENOS           reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MULT            reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    DIV             reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    FINPRINCIPAL    reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    ID              reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    SI              reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MIENTRAS        reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    PEDIRALUSUARIO  reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    DECIRALUSUARIO  reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    AGREGAR         reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    SACAR           reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    VER             reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    GIRARDERECHA    reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    GIRARIZQUIERDA  reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    MOVER           reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    BORRAR          reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    PINTAR          reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    DESPINTAR       reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    REGRESA         reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    FINBLOQUE       reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    ENTONCES        reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    PARENTDER       reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    HACER           reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    PUNTOCOMA       reduce using rule 52 (exp -> CTETEXTO push_opd .)
-    FINFUNCION      reduce using rule 52 (exp -> CTETEXTO push_opd .)
-
-
-state 104
 
     (44) exp -> MENOS exp .
     (39) exp -> exp . MAS push_opt exp
@@ -2413,13 +2150,13 @@ state 104
     PUNTOCOMA       reduce using rule 44 (exp -> MENOS exp .)
     FINFUNCION      reduce using rule 44 (exp -> MENOS exp .)
 
-  ! MAS             [ shift and go to state 105 ]
-  ! MENOS           [ shift and go to state 108 ]
-  ! MULT            [ shift and go to state 114 ]
-  ! DIV             [ shift and go to state 113 ]
+  ! MAS             [ shift and go to state 99 ]
+  ! MENOS           [ shift and go to state 102 ]
+  ! MULT            [ shift and go to state 108 ]
+  ! DIV             [ shift and go to state 107 ]
 
 
-state 105
+state 99
 
     (39) exp -> exp MAS . push_opt exp
     (43) push_opt -> . empty
@@ -2434,10 +2171,10 @@ state 105
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 124
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 118
+    empty                          shift and go to state 117
 
-state 106
+state 100
 
     (35) expresion -> exp IGUALQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2452,10 +2189,10 @@ state 106
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 125
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 119
+    empty                          shift and go to state 117
 
-state 107
+state 101
 
     (37) expresion -> exp MENORIGUAL . push_opt exp
     (43) push_opt -> . empty
@@ -2470,10 +2207,10 @@ state 107
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 126
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 120
+    empty                          shift and go to state 117
 
-state 108
+state 102
 
     (40) exp -> exp MENOS . push_opt exp
     (43) push_opt -> . empty
@@ -2488,10 +2225,10 @@ state 108
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 127
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 121
+    empty                          shift and go to state 117
 
-state 109
+state 103
 
     (34) expresion -> exp DIFERENTEQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2506,10 +2243,10 @@ state 109
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 128
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 122
+    empty                          shift and go to state 117
 
-state 110
+state 104
 
     (33) expresion -> exp MENORQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2524,10 +2261,10 @@ state 110
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 129
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 123
+    empty                          shift and go to state 117
 
-state 111
+state 105
 
     (32) expresion -> exp MAYORQUE . push_opt exp
     (43) push_opt -> . empty
@@ -2542,10 +2279,10 @@ state 111
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 130
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 124
+    empty                          shift and go to state 117
 
-state 112
+state 106
 
     (36) expresion -> exp MAYORIGUAL . push_opt exp
     (43) push_opt -> . empty
@@ -2560,10 +2297,10 @@ state 112
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 131
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 125
+    empty                          shift and go to state 117
 
-state 113
+state 107
 
     (42) exp -> exp DIV . push_opt exp
     (43) push_opt -> . empty
@@ -2578,10 +2315,10 @@ state 113
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 132
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 126
+    empty                          shift and go to state 117
 
-state 114
+state 108
 
     (41) exp -> exp MULT . push_opt exp
     (43) push_opt -> . empty
@@ -2596,79 +2333,79 @@ state 114
     ID              reduce using rule 13 (empty -> .)
     CTETEXTO        reduce using rule 13 (empty -> .)
 
-    push_opt                       shift and go to state 133
-    empty                          shift and go to state 123
+    push_opt                       shift and go to state 127
+    empty                          shift and go to state 117
 
-state 115
+state 109
 
-    (63) ciclo -> MIENTRAS actCic1 expresion . actCic2 HACER bloque FINMIENTRAS actCic3
-    (65) actCic2 -> . empty
+    (62) ciclo -> MIENTRAS actCic1 expresion . actCic2 HACER bloque FINMIENTRAS actCic3
+    (64) actCic2 -> . empty
     (13) empty -> .
 
     HACER           reduce using rule 13 (empty -> .)
 
-    actCic2                        shift and go to state 134
-    empty                          shift and go to state 135
+    actCic2                        shift and go to state 128
+    empty                          shift and go to state 129
 
-state 116
+state 110
 
     (31) asignacion -> ID IGUAL expresion . PUNTOCOMA
 
-    PUNTOCOMA       shift and go to state 136
+    PUNTOCOMA       shift and go to state 130
 
 
-state 117
+state 111
 
-    (54) condicion -> SI expresion actSi1 . ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+    (53) condicion -> SI expresion actSi1 . ENTONCES bloque actSi2 condicion_else actSi3 FINSI
 
-    ENTONCES        shift and go to state 137
-
-
-state 118
-
-    (55) actSi1 -> empty .
-
-    ENTONCES        reduce using rule 55 (actSi1 -> empty .)
+    ENTONCES        shift and go to state 131
 
 
-state 119
+state 112
 
-    (69) accion -> tipo_accion ID PUNTOCOMA .
+    (54) actSi1 -> empty .
 
-    FINPRINCIPAL    reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    ID              reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    SI              reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    MIENTRAS        reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    PEDIRALUSUARIO  reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    DECIRALUSUARIO  reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    AGREGAR         reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    SACAR           reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    VER             reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    GIRARDERECHA    reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    GIRARIZQUIERDA  reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    MOVER           reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    BORRAR          reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    PINTAR          reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    DESPINTAR       reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    FINBLOQUE       reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
-    REGRESA         reduce using rule 69 (accion -> tipo_accion ID PUNTOCOMA .)
+    ENTONCES        reduce using rule 54 (actSi1 -> empty .)
 
 
-state 120
+state 113
+
+    (68) accion -> tipo_accion ID PUNTOCOMA .
+
+    FINPRINCIPAL    reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    ID              reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    SI              reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    MIENTRAS        reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    PEDIRALUSUARIO  reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    DECIRALUSUARIO  reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    AGREGAR         reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    SACAR           reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    VER             reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    GIRARDERECHA    reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    GIRARIZQUIERDA  reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    MOVER           reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    BORRAR          reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    PINTAR          reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    DESPINTAR       reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    FINBLOQUE       reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+    REGRESA         reduce using rule 68 (accion -> tipo_accion ID PUNTOCOMA .)
+
+
+state 114
 
     (23) finfunc -> C REGRESA expresion . FINFUNCION
 
-    FINFUNCION      shift and go to state 138
+    FINFUNCION      shift and go to state 132
 
 
-state 121
+state 115
 
     (20) param_mult -> COMA tipo . ID param_mult
 
-    ID              shift and go to state 139
+    ID              shift and go to state 133
 
 
-state 122
+state 116
 
     (38) exp -> PARENTIZQ expresion PARENTDER .
 
@@ -2706,7 +2443,7 @@ state 122
     FINFUNCION      reduce using rule 38 (exp -> PARENTIZQ expresion PARENTDER .)
 
 
-state 123
+state 117
 
     (43) push_opt -> empty .
 
@@ -2720,7 +2457,7 @@ state 123
     CTETEXTO        reduce using rule 43 (push_opt -> empty .)
 
 
-state 124
+state 118
 
     (39) exp -> exp MAS push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
@@ -2729,12 +2466,174 @@ state 124
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
+
+    PARENTIZQ       shift and go to state 73
+    MENOS           shift and go to state 80
+    CTEENTERO       shift and go to state 72
+    CTEFLOTANTE     shift and go to state 78
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 77
+    ID              shift and go to state 75
+    CTETEXTO        shift and go to state 79
+
+    exp                            shift and go to state 134
+
+state 119
+
+    (35) expresion -> exp IGUALQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
+
+    PARENTIZQ       shift and go to state 73
+    MENOS           shift and go to state 80
+    CTEENTERO       shift and go to state 72
+    CTEFLOTANTE     shift and go to state 78
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 77
+    ID              shift and go to state 75
+    CTETEXTO        shift and go to state 79
+
+    exp                            shift and go to state 135
+
+state 120
+
+    (37) expresion -> exp MENORIGUAL push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
+
+    PARENTIZQ       shift and go to state 73
+    MENOS           shift and go to state 80
+    CTEENTERO       shift and go to state 72
+    CTEFLOTANTE     shift and go to state 78
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 77
+    ID              shift and go to state 75
+    CTETEXTO        shift and go to state 79
+
+    exp                            shift and go to state 136
+
+state 121
+
+    (40) exp -> exp MENOS push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
+
+    PARENTIZQ       shift and go to state 73
+    MENOS           shift and go to state 80
+    CTEENTERO       shift and go to state 72
+    CTEFLOTANTE     shift and go to state 78
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 77
+    ID              shift and go to state 75
+    CTETEXTO        shift and go to state 79
+
+    exp                            shift and go to state 137
+
+state 122
+
+    (34) expresion -> exp DIFERENTEQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
+
+    PARENTIZQ       shift and go to state 73
+    MENOS           shift and go to state 80
+    CTEENTERO       shift and go to state 72
+    CTEFLOTANTE     shift and go to state 78
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 77
+    ID              shift and go to state 75
+    CTETEXTO        shift and go to state 79
+
+    exp                            shift and go to state 138
+
+state 123
+
+    (33) expresion -> exp MENORQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
+
+    PARENTIZQ       shift and go to state 73
+    MENOS           shift and go to state 80
+    CTEENTERO       shift and go to state 72
+    CTEFLOTANTE     shift and go to state 78
+    TRUE            shift and go to state 74
+    FALSE           shift and go to state 77
+    ID              shift and go to state 75
+    CTETEXTO        shift and go to state 79
+
+    exp                            shift and go to state 139
+
+state 124
+
+    (32) expresion -> exp MAYORQUE push_opt . exp
+    (38) exp -> . PARENTIZQ expresion PARENTDER
+    (39) exp -> . exp MAS push_opt exp
+    (40) exp -> . exp MENOS push_opt exp
+    (41) exp -> . exp MULT push_opt exp
+    (42) exp -> . exp DIV push_opt exp
+    (44) exp -> . MENOS exp
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -2749,19 +2648,19 @@ state 124
 
 state 125
 
-    (35) expresion -> exp IGUALQUE push_opt . exp
+    (36) expresion -> exp MAYORIGUAL push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -2776,19 +2675,19 @@ state 125
 
 state 126
 
-    (37) expresion -> exp MENORIGUAL push_opt . exp
+    (42) exp -> exp DIV push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -2803,19 +2702,19 @@ state 126
 
 state 127
 
-    (40) exp -> exp MENOS push_opt . exp
+    (41) exp -> exp MULT push_opt . exp
     (38) exp -> . PARENTIZQ expresion PARENTDER
     (39) exp -> . exp MAS push_opt exp
     (40) exp -> . exp MENOS push_opt exp
     (41) exp -> . exp MULT push_opt exp
     (42) exp -> . exp DIV push_opt exp
     (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (45) exp -> . CTEENTERO
+    (46) exp -> . CTEFLOTANTE
+    (47) exp -> . TRUE
+    (48) exp -> . FALSE
+    (49) exp -> . ID push_var_opd
+    (51) exp -> . CTETEXTO
 
     PARENTIZQ       shift and go to state 73
     MENOS           shift and go to state 80
@@ -2830,181 +2729,19 @@ state 127
 
 state 128
 
-    (34) expresion -> exp DIFERENTEQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (62) ciclo -> MIENTRAS actCic1 expresion actCic2 . HACER bloque FINMIENTRAS actCic3
 
-    PARENTIZQ       shift and go to state 73
-    MENOS           shift and go to state 80
-    CTEENTERO       shift and go to state 72
-    CTEFLOTANTE     shift and go to state 78
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 77
-    ID              shift and go to state 75
-    CTETEXTO        shift and go to state 79
+    HACER           shift and go to state 144
 
-    exp                            shift and go to state 144
 
 state 129
 
-    (33) expresion -> exp MENORQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
+    (64) actCic2 -> empty .
 
-    PARENTIZQ       shift and go to state 73
-    MENOS           shift and go to state 80
-    CTEENTERO       shift and go to state 72
-    CTEFLOTANTE     shift and go to state 78
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 77
-    ID              shift and go to state 75
-    CTETEXTO        shift and go to state 79
+    HACER           reduce using rule 64 (actCic2 -> empty .)
 
-    exp                            shift and go to state 145
 
 state 130
-
-    (32) expresion -> exp MAYORQUE push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
-
-    PARENTIZQ       shift and go to state 73
-    MENOS           shift and go to state 80
-    CTEENTERO       shift and go to state 72
-    CTEFLOTANTE     shift and go to state 78
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 77
-    ID              shift and go to state 75
-    CTETEXTO        shift and go to state 79
-
-    exp                            shift and go to state 146
-
-state 131
-
-    (36) expresion -> exp MAYORIGUAL push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
-
-    PARENTIZQ       shift and go to state 73
-    MENOS           shift and go to state 80
-    CTEENTERO       shift and go to state 72
-    CTEFLOTANTE     shift and go to state 78
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 77
-    ID              shift and go to state 75
-    CTETEXTO        shift and go to state 79
-
-    exp                            shift and go to state 147
-
-state 132
-
-    (42) exp -> exp DIV push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
-
-    PARENTIZQ       shift and go to state 73
-    MENOS           shift and go to state 80
-    CTEENTERO       shift and go to state 72
-    CTEFLOTANTE     shift and go to state 78
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 77
-    ID              shift and go to state 75
-    CTETEXTO        shift and go to state 79
-
-    exp                            shift and go to state 148
-
-state 133
-
-    (41) exp -> exp MULT push_opt . exp
-    (38) exp -> . PARENTIZQ expresion PARENTDER
-    (39) exp -> . exp MAS push_opt exp
-    (40) exp -> . exp MENOS push_opt exp
-    (41) exp -> . exp MULT push_opt exp
-    (42) exp -> . exp DIV push_opt exp
-    (44) exp -> . MENOS exp
-    (45) exp -> . CTEENTERO push_opd
-    (47) exp -> . CTEFLOTANTE push_opd
-    (48) exp -> . TRUE push_opd
-    (49) exp -> . FALSE push_opd
-    (50) exp -> . ID push_var_opd
-    (52) exp -> . CTETEXTO push_opd
-
-    PARENTIZQ       shift and go to state 73
-    MENOS           shift and go to state 80
-    CTEENTERO       shift and go to state 72
-    CTEFLOTANTE     shift and go to state 78
-    TRUE            shift and go to state 74
-    FALSE           shift and go to state 77
-    ID              shift and go to state 75
-    CTETEXTO        shift and go to state 79
-
-    exp                            shift and go to state 149
-
-state 134
-
-    (63) ciclo -> MIENTRAS actCic1 expresion actCic2 . HACER bloque FINMIENTRAS actCic3
-
-    HACER           shift and go to state 150
-
-
-state 135
-
-    (65) actCic2 -> empty .
-
-    HACER           reduce using rule 65 (actCic2 -> empty .)
-
-
-state 136
 
     (31) asignacion -> ID IGUAL expresion PUNTOCOMA .
 
@@ -3027,16 +2764,16 @@ state 136
     REGRESA         reduce using rule 31 (asignacion -> ID IGUAL expresion PUNTOCOMA .)
 
 
-state 137
+state 131
 
-    (54) condicion -> SI expresion actSi1 ENTONCES . bloque actSi2 condicion_else actSi3 FINSI
-    (56) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
+    (53) condicion -> SI expresion actSi1 ENTONCES . bloque actSi2 condicion_else actSi3 FINSI
+    (55) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
 
-    INICIOBLOQUE    shift and go to state 151
+    INICIOBLOQUE    shift and go to state 145
 
-    bloque                         shift and go to state 152
+    bloque                         shift and go to state 146
 
-state 138
+state 132
 
     (23) finfunc -> C REGRESA expresion FINFUNCION .
 
@@ -3044,7 +2781,7 @@ state 138
     INICIOFUNCION   reduce using rule 23 (finfunc -> C REGRESA expresion FINFUNCION .)
 
 
-state 139
+state 133
 
     (20) param_mult -> COMA tipo ID . param_mult
     (20) param_mult -> . COMA tipo ID param_mult
@@ -3069,10 +2806,10 @@ state 139
     PINTAR          reduce using rule 13 (empty -> .)
     DESPINTAR       reduce using rule 13 (empty -> .)
 
-    param_mult                     shift and go to state 153
+    param_mult                     shift and go to state 147
     empty                          shift and go to state 94
 
-state 140
+state 134
 
     (39) exp -> exp MAS push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3110,16 +2847,16 @@ state 140
     HACER           reduce using rule 39 (exp -> exp MAS push_opt exp .)
     PUNTOCOMA       reduce using rule 39 (exp -> exp MAS push_opt exp .)
     FINFUNCION      reduce using rule 39 (exp -> exp MAS push_opt exp .)
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
   ! MULT            [ reduce using rule 39 (exp -> exp MAS push_opt exp .) ]
   ! DIV             [ reduce using rule 39 (exp -> exp MAS push_opt exp .) ]
-  ! MAS             [ shift and go to state 105 ]
-  ! MENOS           [ shift and go to state 108 ]
+  ! MAS             [ shift and go to state 99 ]
+  ! MENOS           [ shift and go to state 102 ]
 
 
-state 141
+state 135
 
     (35) expresion -> exp IGUALQUE push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3149,13 +2886,13 @@ state 141
     FINFUNCION      reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
     PARENTDER       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
     PUNTOCOMA       reduce using rule 35 (expresion -> exp IGUALQUE push_opt exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
-state 142
+state 136
 
     (37) expresion -> exp MENORIGUAL push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3185,13 +2922,13 @@ state 142
     FINFUNCION      reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
     PARENTDER       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
     PUNTOCOMA       reduce using rule 37 (expresion -> exp MENORIGUAL push_opt exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
-state 143
+state 137
 
     (40) exp -> exp MENOS push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3229,16 +2966,16 @@ state 143
     HACER           reduce using rule 40 (exp -> exp MENOS push_opt exp .)
     PUNTOCOMA       reduce using rule 40 (exp -> exp MENOS push_opt exp .)
     FINFUNCION      reduce using rule 40 (exp -> exp MENOS push_opt exp .)
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
   ! MULT            [ reduce using rule 40 (exp -> exp MENOS push_opt exp .) ]
   ! DIV             [ reduce using rule 40 (exp -> exp MENOS push_opt exp .) ]
-  ! MAS             [ shift and go to state 105 ]
-  ! MENOS           [ shift and go to state 108 ]
+  ! MAS             [ shift and go to state 99 ]
+  ! MENOS           [ shift and go to state 102 ]
 
 
-state 144
+state 138
 
     (34) expresion -> exp DIFERENTEQUE push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3268,13 +3005,13 @@ state 144
     FINFUNCION      reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
     PARENTDER       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
     PUNTOCOMA       reduce using rule 34 (expresion -> exp DIFERENTEQUE push_opt exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
-state 145
+state 139
 
     (33) expresion -> exp MENORQUE push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3304,13 +3041,13 @@ state 145
     FINFUNCION      reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
     PARENTDER       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
     PUNTOCOMA       reduce using rule 33 (expresion -> exp MENORQUE push_opt exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
-state 146
+state 140
 
     (32) expresion -> exp MAYORQUE push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3340,13 +3077,13 @@ state 146
     FINFUNCION      reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
     PARENTDER       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
     PUNTOCOMA       reduce using rule 32 (expresion -> exp MAYORQUE push_opt exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
-state 147
+state 141
 
     (36) expresion -> exp MAYORIGUAL push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3376,13 +3113,13 @@ state 147
     FINFUNCION      reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
     PARENTDER       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
     PUNTOCOMA       reduce using rule 36 (expresion -> exp MAYORIGUAL push_opt exp .)
-    MAS             shift and go to state 105
-    MENOS           shift and go to state 108
-    MULT            shift and go to state 114
-    DIV             shift and go to state 113
+    MAS             shift and go to state 99
+    MENOS           shift and go to state 102
+    MULT            shift and go to state 108
+    DIV             shift and go to state 107
 
 
-state 148
+state 142
 
     (42) exp -> exp DIV push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3423,13 +3160,13 @@ state 148
     PUNTOCOMA       reduce using rule 42 (exp -> exp DIV push_opt exp .)
     FINFUNCION      reduce using rule 42 (exp -> exp DIV push_opt exp .)
 
-  ! MAS             [ shift and go to state 105 ]
-  ! MENOS           [ shift and go to state 108 ]
-  ! MULT            [ shift and go to state 114 ]
-  ! DIV             [ shift and go to state 113 ]
+  ! MAS             [ shift and go to state 99 ]
+  ! MENOS           [ shift and go to state 102 ]
+  ! MULT            [ shift and go to state 108 ]
+  ! DIV             [ shift and go to state 107 ]
 
 
-state 149
+state 143
 
     (41) exp -> exp MULT push_opt exp .
     (39) exp -> exp . MAS push_opt exp
@@ -3470,26 +3207,26 @@ state 149
     PUNTOCOMA       reduce using rule 41 (exp -> exp MULT push_opt exp .)
     FINFUNCION      reduce using rule 41 (exp -> exp MULT push_opt exp .)
 
-  ! MAS             [ shift and go to state 105 ]
-  ! MENOS           [ shift and go to state 108 ]
-  ! MULT            [ shift and go to state 114 ]
-  ! DIV             [ shift and go to state 113 ]
+  ! MAS             [ shift and go to state 99 ]
+  ! MENOS           [ shift and go to state 102 ]
+  ! MULT            [ shift and go to state 108 ]
+  ! DIV             [ shift and go to state 107 ]
 
 
-state 150
+state 144
 
-    (63) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER . bloque FINMIENTRAS actCic3
-    (56) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
+    (62) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER . bloque FINMIENTRAS actCic3
+    (55) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
 
-    INICIOBLOQUE    shift and go to state 151
+    INICIOBLOQUE    shift and go to state 145
 
-    bloque                         shift and go to state 154
+    bloque                         shift and go to state 148
 
-state 151
+state 145
 
-    (56) bloque -> INICIOBLOQUE . bloque_estatuto_mult FINBLOQUE
-    (57) bloque_estatuto_mult -> . bloque_estatuto_mult estatuto
-    (58) bloque_estatuto_mult -> . empty
+    (55) bloque -> INICIOBLOQUE . bloque_estatuto_mult FINBLOQUE
+    (56) bloque_estatuto_mult -> . bloque_estatuto_mult estatuto
+    (57) bloque_estatuto_mult -> . empty
     (13) empty -> .
 
     FINBLOQUE       reduce using rule 13 (empty -> .)
@@ -3508,22 +3245,22 @@ state 151
     PINTAR          reduce using rule 13 (empty -> .)
     DESPINTAR       reduce using rule 13 (empty -> .)
 
-    bloque_estatuto_mult           shift and go to state 156
-    empty                          shift and go to state 155
+    bloque_estatuto_mult           shift and go to state 150
+    empty                          shift and go to state 149
 
-state 152
+state 146
 
-    (54) condicion -> SI expresion actSi1 ENTONCES bloque . actSi2 condicion_else actSi3 FINSI
-    (59) actSi2 -> . empty
+    (53) condicion -> SI expresion actSi1 ENTONCES bloque . actSi2 condicion_else actSi3 FINSI
+    (58) actSi2 -> . empty
     (13) empty -> .
 
     SINO            reduce using rule 13 (empty -> .)
     FINSI           reduce using rule 13 (empty -> .)
 
-    actSi2                         shift and go to state 157
-    empty                          shift and go to state 158
+    actSi2                         shift and go to state 151
+    empty                          shift and go to state 152
 
-state 153
+state 147
 
     (20) param_mult -> COMA tipo ID param_mult .
 
@@ -3545,69 +3282,69 @@ state 153
     DESPINTAR       reduce using rule 20 (param_mult -> COMA tipo ID param_mult .)
 
 
-state 154
+state 148
 
-    (63) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque . FINMIENTRAS actCic3
+    (62) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque . FINMIENTRAS actCic3
 
-    FINMIENTRAS     shift and go to state 159
-
-
-state 155
-
-    (58) bloque_estatuto_mult -> empty .
-
-    FINBLOQUE       reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    ID              reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    SI              reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    MIENTRAS        reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    PEDIRALUSUARIO  reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    DECIRALUSUARIO  reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    AGREGAR         reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    SACAR           reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    VER             reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    GIRARDERECHA    reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    GIRARIZQUIERDA  reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    MOVER           reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    BORRAR          reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    PINTAR          reduce using rule 58 (bloque_estatuto_mult -> empty .)
-    DESPINTAR       reduce using rule 58 (bloque_estatuto_mult -> empty .)
+    FINMIENTRAS     shift and go to state 153
 
 
-state 156
+state 149
 
-    (56) bloque -> INICIOBLOQUE bloque_estatuto_mult . FINBLOQUE
-    (57) bloque_estatuto_mult -> bloque_estatuto_mult . estatuto
+    (57) bloque_estatuto_mult -> empty .
+
+    FINBLOQUE       reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    ID              reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    SI              reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    MIENTRAS        reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    PEDIRALUSUARIO  reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    DECIRALUSUARIO  reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    AGREGAR         reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    SACAR           reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    VER             reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    GIRARDERECHA    reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    GIRARIZQUIERDA  reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    MOVER           reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    BORRAR          reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    PINTAR          reduce using rule 57 (bloque_estatuto_mult -> empty .)
+    DESPINTAR       reduce using rule 57 (bloque_estatuto_mult -> empty .)
+
+
+state 150
+
+    (55) bloque -> INICIOBLOQUE bloque_estatuto_mult . FINBLOQUE
+    (56) bloque_estatuto_mult -> bloque_estatuto_mult . estatuto
     (26) estatuto -> . asignacion
     (27) estatuto -> . condicion
     (28) estatuto -> . ciclo
     (29) estatuto -> . io
     (30) estatuto -> . accion
     (31) asignacion -> . ID IGUAL expresion PUNTOCOMA
-    (54) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
-    (63) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
-    (67) io -> . PEDIRALUSUARIO ID
-    (68) io -> . DECIRALUSUARIO expresion
-    (69) accion -> . tipo_accion ID PUNTOCOMA
-    (70) tipo_accion -> . lista
-    (71) tipo_accion -> . objeto
-    (72) lista -> . lista_agregar
-    (73) lista -> . lista_sacar
-    (74) lista -> . lista_ver
-    (78) objeto -> .
-    (79) objeto -> . objeto_con_expresion
-    (80) objeto -> . objeto_sin_expresion
-    (75) lista_agregar -> . AGREGAR
-    (76) lista_sacar -> . SACAR
-    (77) lista_ver -> . VER
-    (81) objeto_con_expresion -> . GIRARDERECHA expresion
-    (82) objeto_con_expresion -> . GIRARIZQUIERDA expresion
-    (83) objeto_con_expresion -> . MOVER expresion
-    (84) objeto_sin_expresion -> . BORRAR
-    (85) objeto_sin_expresion -> . PINTAR
-    (86) objeto_sin_expresion -> . DESPINTAR
+    (53) condicion -> . SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI
+    (62) ciclo -> . MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3
+    (66) io -> . PEDIRALUSUARIO ID
+    (67) io -> . DECIRALUSUARIO expresion
+    (68) accion -> . tipo_accion ID PUNTOCOMA
+    (69) tipo_accion -> . lista
+    (70) tipo_accion -> . objeto
+    (71) lista -> . lista_agregar
+    (72) lista -> . lista_sacar
+    (73) lista -> . lista_ver
+    (77) objeto -> .
+    (78) objeto -> . objeto_con_expresion
+    (79) objeto -> . objeto_sin_expresion
+    (74) lista_agregar -> . AGREGAR
+    (75) lista_sacar -> . SACAR
+    (76) lista_ver -> . VER
+    (80) objeto_con_expresion -> . GIRARDERECHA expresion
+    (81) objeto_con_expresion -> . GIRARIZQUIERDA expresion
+    (82) objeto_con_expresion -> . MOVER expresion
+    (83) objeto_sin_expresion -> . BORRAR
+    (84) objeto_sin_expresion -> . PINTAR
+    (85) objeto_sin_expresion -> . DESPINTAR
 
   ! shift/reduce conflict for ID resolved as shift
-    FINBLOQUE       shift and go to state 160
+    FINBLOQUE       shift and go to state 154
     ID              shift and go to state 60
     SI              shift and go to state 65
     MIENTRAS        shift and go to state 56
@@ -3623,14 +3360,14 @@ state 156
     PINTAR          shift and go to state 40
     DESPINTAR       shift and go to state 62
 
-  ! ID              [ reduce using rule 78 (objeto -> .) ]
+  ! ID              [ reduce using rule 77 (objeto -> .) ]
 
     lista_ver                      shift and go to state 41
     io                             shift and go to state 42
     objeto_sin_expresion           shift and go to state 44
     ciclo                          shift and go to state 45
     objeto_con_expresion           shift and go to state 46
-    estatuto                       shift and go to state 161
+    estatuto                       shift and go to state 155
     condicion                      shift and go to state 49
     lista_agregar                  shift and go to state 52
     accion                         shift and go to state 63
@@ -3640,31 +3377,31 @@ state 156
     lista_sacar                    shift and go to state 48
     asignacion                     shift and go to state 64
 
-state 157
+state 151
 
-    (54) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 . condicion_else actSi3 FINSI
-    (60) condicion_else -> . SINO bloque
-    (61) condicion_else -> . empty
+    (53) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 . condicion_else actSi3 FINSI
+    (59) condicion_else -> . SINO bloque
+    (60) condicion_else -> . empty
     (13) empty -> .
 
-    SINO            shift and go to state 163
+    SINO            shift and go to state 157
     FINSI           reduce using rule 13 (empty -> .)
 
-    condicion_else                 shift and go to state 162
-    empty                          shift and go to state 164
+    condicion_else                 shift and go to state 156
+    empty                          shift and go to state 158
 
-state 158
+state 152
 
-    (59) actSi2 -> empty .
+    (58) actSi2 -> empty .
 
-    SINO            reduce using rule 59 (actSi2 -> empty .)
-    FINSI           reduce using rule 59 (actSi2 -> empty .)
+    SINO            reduce using rule 58 (actSi2 -> empty .)
+    FINSI           reduce using rule 58 (actSi2 -> empty .)
 
 
-state 159
+state 153
 
-    (63) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS . actCic3
-    (66) actCic3 -> . empty
+    (62) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS . actCic3
+    (65) actCic3 -> . empty
     (13) empty -> .
 
     FINPRINCIPAL    reduce using rule 13 (empty -> .)
@@ -3685,158 +3422,158 @@ state 159
     REGRESA         reduce using rule 13 (empty -> .)
     FINBLOQUE       reduce using rule 13 (empty -> .)
 
-    actCic3                        shift and go to state 165
-    empty                          shift and go to state 166
+    actCic3                        shift and go to state 159
+    empty                          shift and go to state 160
 
-state 160
+state 154
 
-    (56) bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .
+    (55) bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .
 
-    FINMIENTRAS     reduce using rule 56 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
-    SINO            reduce using rule 56 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
-    FINSI           reduce using rule 56 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
-
-
-state 161
-
-    (57) bloque_estatuto_mult -> bloque_estatuto_mult estatuto .
-
-    FINBLOQUE       reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    ID              reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    SI              reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    MIENTRAS        reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    PEDIRALUSUARIO  reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    DECIRALUSUARIO  reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    AGREGAR         reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    SACAR           reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    VER             reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    GIRARDERECHA    reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    GIRARIZQUIERDA  reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    MOVER           reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    BORRAR          reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    PINTAR          reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
-    DESPINTAR       reduce using rule 57 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    FINMIENTRAS     reduce using rule 55 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
+    SINO            reduce using rule 55 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
+    FINSI           reduce using rule 55 (bloque -> INICIOBLOQUE bloque_estatuto_mult FINBLOQUE .)
 
 
-state 162
+state 155
 
-    (54) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else . actSi3 FINSI
-    (62) actSi3 -> . empty
+    (56) bloque_estatuto_mult -> bloque_estatuto_mult estatuto .
+
+    FINBLOQUE       reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    ID              reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    SI              reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    MIENTRAS        reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    PEDIRALUSUARIO  reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    DECIRALUSUARIO  reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    AGREGAR         reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    SACAR           reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    VER             reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    GIRARDERECHA    reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    GIRARIZQUIERDA  reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    MOVER           reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    BORRAR          reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    PINTAR          reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+    DESPINTAR       reduce using rule 56 (bloque_estatuto_mult -> bloque_estatuto_mult estatuto .)
+
+
+state 156
+
+    (53) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else . actSi3 FINSI
+    (61) actSi3 -> . empty
     (13) empty -> .
 
     FINSI           reduce using rule 13 (empty -> .)
 
-    actSi3                         shift and go to state 167
-    empty                          shift and go to state 168
+    actSi3                         shift and go to state 161
+    empty                          shift and go to state 162
+
+state 157
+
+    (59) condicion_else -> SINO . bloque
+    (55) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
+
+    INICIOBLOQUE    shift and go to state 145
+
+    bloque                         shift and go to state 163
+
+state 158
+
+    (60) condicion_else -> empty .
+
+    FINSI           reduce using rule 60 (condicion_else -> empty .)
+
+
+state 159
+
+    (62) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .
+
+    REGRESA         reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    ID              reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    SI              reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    MIENTRAS        reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    PEDIRALUSUARIO  reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    DECIRALUSUARIO  reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    AGREGAR         reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    SACAR           reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    VER             reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    GIRARDERECHA    reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    GIRARIZQUIERDA  reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    MOVER           reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    BORRAR          reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    PINTAR          reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    DESPINTAR       reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    FINBLOQUE       reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+    FINPRINCIPAL    reduce using rule 62 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
+
+
+state 160
+
+    (65) actCic3 -> empty .
+
+    FINPRINCIPAL    reduce using rule 65 (actCic3 -> empty .)
+    ID              reduce using rule 65 (actCic3 -> empty .)
+    SI              reduce using rule 65 (actCic3 -> empty .)
+    MIENTRAS        reduce using rule 65 (actCic3 -> empty .)
+    PEDIRALUSUARIO  reduce using rule 65 (actCic3 -> empty .)
+    DECIRALUSUARIO  reduce using rule 65 (actCic3 -> empty .)
+    AGREGAR         reduce using rule 65 (actCic3 -> empty .)
+    SACAR           reduce using rule 65 (actCic3 -> empty .)
+    VER             reduce using rule 65 (actCic3 -> empty .)
+    GIRARDERECHA    reduce using rule 65 (actCic3 -> empty .)
+    GIRARIZQUIERDA  reduce using rule 65 (actCic3 -> empty .)
+    MOVER           reduce using rule 65 (actCic3 -> empty .)
+    BORRAR          reduce using rule 65 (actCic3 -> empty .)
+    PINTAR          reduce using rule 65 (actCic3 -> empty .)
+    DESPINTAR       reduce using rule 65 (actCic3 -> empty .)
+    REGRESA         reduce using rule 65 (actCic3 -> empty .)
+    FINBLOQUE       reduce using rule 65 (actCic3 -> empty .)
+
+
+state 161
+
+    (53) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 . FINSI
+
+    FINSI           shift and go to state 164
+
+
+state 162
+
+    (61) actSi3 -> empty .
+
+    FINSI           reduce using rule 61 (actSi3 -> empty .)
+
 
 state 163
 
-    (60) condicion_else -> SINO . bloque
-    (56) bloque -> . INICIOBLOQUE bloque_estatuto_mult FINBLOQUE
+    (59) condicion_else -> SINO bloque .
 
-    INICIOBLOQUE    shift and go to state 151
+    FINSI           reduce using rule 59 (condicion_else -> SINO bloque .)
 
-    bloque                         shift and go to state 169
 
 state 164
 
-    (61) condicion_else -> empty .
+    (53) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .
 
-    FINSI           reduce using rule 61 (condicion_else -> empty .)
-
-
-state 165
-
-    (63) ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .
-
-    REGRESA         reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    ID              reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    SI              reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    MIENTRAS        reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    PEDIRALUSUARIO  reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    DECIRALUSUARIO  reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    AGREGAR         reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    SACAR           reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    VER             reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    GIRARDERECHA    reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    GIRARIZQUIERDA  reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    MOVER           reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    BORRAR          reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    PINTAR          reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    DESPINTAR       reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    FINBLOQUE       reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-    FINPRINCIPAL    reduce using rule 63 (ciclo -> MIENTRAS actCic1 expresion actCic2 HACER bloque FINMIENTRAS actCic3 .)
-
-
-state 166
-
-    (66) actCic3 -> empty .
-
-    FINPRINCIPAL    reduce using rule 66 (actCic3 -> empty .)
-    ID              reduce using rule 66 (actCic3 -> empty .)
-    SI              reduce using rule 66 (actCic3 -> empty .)
-    MIENTRAS        reduce using rule 66 (actCic3 -> empty .)
-    PEDIRALUSUARIO  reduce using rule 66 (actCic3 -> empty .)
-    DECIRALUSUARIO  reduce using rule 66 (actCic3 -> empty .)
-    AGREGAR         reduce using rule 66 (actCic3 -> empty .)
-    SACAR           reduce using rule 66 (actCic3 -> empty .)
-    VER             reduce using rule 66 (actCic3 -> empty .)
-    GIRARDERECHA    reduce using rule 66 (actCic3 -> empty .)
-    GIRARIZQUIERDA  reduce using rule 66 (actCic3 -> empty .)
-    MOVER           reduce using rule 66 (actCic3 -> empty .)
-    BORRAR          reduce using rule 66 (actCic3 -> empty .)
-    PINTAR          reduce using rule 66 (actCic3 -> empty .)
-    DESPINTAR       reduce using rule 66 (actCic3 -> empty .)
-    REGRESA         reduce using rule 66 (actCic3 -> empty .)
-    FINBLOQUE       reduce using rule 66 (actCic3 -> empty .)
-
-
-state 167
-
-    (54) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 . FINSI
-
-    FINSI           shift and go to state 170
-
-
-state 168
-
-    (62) actSi3 -> empty .
-
-    FINSI           reduce using rule 62 (actSi3 -> empty .)
-
-
-state 169
-
-    (60) condicion_else -> SINO bloque .
-
-    FINSI           reduce using rule 60 (condicion_else -> SINO bloque .)
-
-
-state 170
-
-    (54) condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .
-
-    FINPRINCIPAL    reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    ID              reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    SI              reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    MIENTRAS        reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    PEDIRALUSUARIO  reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    DECIRALUSUARIO  reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    AGREGAR         reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    SACAR           reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    VER             reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    GIRARDERECHA    reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    GIRARIZQUIERDA  reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    MOVER           reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    BORRAR          reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    PINTAR          reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    DESPINTAR       reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    FINBLOQUE       reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
-    REGRESA         reduce using rule 54 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    FINPRINCIPAL    reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    ID              reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    SI              reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    MIENTRAS        reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    PEDIRALUSUARIO  reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    DECIRALUSUARIO  reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    AGREGAR         reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    SACAR           reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    VER             reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    GIRARDERECHA    reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    GIRARIZQUIERDA  reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    MOVER           reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    BORRAR          reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    PINTAR          reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    DESPINTAR       reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    REGRESA         reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
+    FINBLOQUE       reduce using rule 53 (condicion -> SI expresion actSi1 ENTONCES bloque actSi2 condicion_else actSi3 FINSI .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
 WARNING: shift/reduce conflict for ID in state 33 resolved as shift
 WARNING: shift/reduce conflict for ID in state 69 resolved as shift
-WARNING: shift/reduce conflict for ID in state 156 resolved as shift
+WARNING: shift/reduce conflict for ID in state 150 resolved as shift
