@@ -8,11 +8,10 @@ INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto 
 	crear flotante var1func1;
 	crear entero var2func1;
 
-	var2func1 = 1 + 1 + 1;
-	var2func1 = 3 + 3;
+	var1func1 = 1 + 2;
+	var1func1 = 1 + 1 + 1;
 	var2func1 = 3 * 2;
-	var2func1 = 3 / 3;
-	var2func1 = 1;
+	var2func1 = 3 / 6;
 
 	SI 1>1 ENTONCES
 		INICIOBLOQUE
