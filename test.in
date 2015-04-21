@@ -4,7 +4,7 @@ crear flotante global2;
 crear entero HolaKeAse [150];
 crear entero despues;
 
-INICIOFUNCION FLOTANTE snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wowow
+INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wowow
 	crear flotante var1func1;
 	crear entero var2func1;
 	crear entero arr1func1[5];

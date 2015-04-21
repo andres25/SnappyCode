@@ -75,8 +75,7 @@ def p_tipo(t):
     '''tipo   : ENTERO
               | FLOTANTE
               | TEXTO
-              | BOOLEANO
-              | LISTA'''
+              | BOOLEANO'''
     t[0] = t[1]
     pass
 
@@ -108,7 +107,18 @@ def p_iniciofunc(t):
     scope = 'parametro'
     global actualProc
     actualProc = t[3]
-    procInsert(actualProc, t[2], cuadCont)
+    procType= t[2]
+    if procType == 'ENTERO':
+      procType = 'entero'
+    elif procType == 'FLOTANTE':
+      procType = 'flotante'
+    elif procType == 'TEXTO':
+      procType = 'texto'
+    elif procType == 'BOOLEANO':
+      procType = 'booleano'
+    elif procType == 'ENTERO':
+      procType = 'entero'
+    procInsert(actualProc, procType, cuadCont)
     pass
 
 def p_param(t): 
@@ -149,6 +159,9 @@ def p_finfunc(t):
     returnVar = pilaOperandos.pop()
     proc = getProc(actualProc)
     proc.procRetVar = returnVar
+    if returnVar.varType != proc.procReturn:
+      print ("Error Semantico: Valor de retorno incompatible con tipo de funcion ",proc.procReturn, " en ", actualProc )
+      sys.exit()
     pass
 
  
