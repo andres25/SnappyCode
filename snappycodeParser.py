@@ -8,6 +8,8 @@ from cuadruplo import *
 from procVarTables import *
 from memory import *
 from cubosemantico import *
+from varGlobales import *
+import vm
 
 tokens = snappycodeLex.tokens
 actualProc = "global"
@@ -15,7 +17,6 @@ memoria = 0
 pilaOperadores = []
 pilaOperandos = []
 tempCont = 0
-cuadruplos = []
 cuadCont = 0 
 pilaSaltos = []
 pilaParams = []
@@ -37,6 +38,7 @@ def p_program(t):
     print ("Cuadruplos")
     for cuad in cuadruplos:
         print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
+    vm.InterpretarCuadruplos()
     pass
 
 

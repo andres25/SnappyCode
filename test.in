@@ -13,7 +13,7 @@ INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wo
 	var1func1 = 1 + 1 + 1;
 	var2func1 = 3 * 2;
 	var2func1 = 3 / 6;
-	var2func1 = arr1func1[var1func1] + 1;
+	var2func1 = 1 + 1;
 
     PINTAR;
 

@@ -5,7 +5,7 @@
 # Juan Paulo Lara Rodriguez A00999823
 # CREADO: 18/03/2014
 #----------------------------------------------
-
+from varGlobales import *
 import sys
 
 class varTableNode:
@@ -31,11 +31,6 @@ class consTableNode:
 		self.consVal= cVal
 		self.consType = cType
 		self.consDir = cDir
-
-consTable = [ ]
-procTable = [ ]
-tempTable = [ ]
-varGlb = [ ]
 
 def procInsert(pName, pType, pDir):
 	global procTable
