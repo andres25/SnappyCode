@@ -6,7 +6,7 @@ import snappycodeLex
 import fileinput
 from cuadruplo import *
 from procVarTables import *
-from memoria import *
+from memory import *
 from cubosemantico import *
 
 tokens = snappycodeLex.tokens
@@ -52,10 +52,10 @@ def p_single(t):
     'single : CREAR tipo ID PUNTOCOMA '
     global memoria
     if actualProc == 'global':
-      asigna_memoria_global(t[2])
+      memoria = asigna_memoria_global(t[2])
       varGlbInsert(t[3], None, t[2], memoria)
     else:
-      asigna_memoria_local(t[2])
+      memoria = asigna_memoria_local(t[2])
       varLocInsert(t[3], None, t[2], memoria, actualProc)
     pass
 
@@ -63,10 +63,10 @@ def p_array(t):
     'array : CREAR tipo ID CORCHETEIZQ CTEENTERO CORCHETEDER PUNTOCOMA'
     global memoria
     if actualProc == 'global':
-      asigna_memoria_global(t[2], t[5])
+      memoria = asigna_memoria_global(t[2], t[5])
       varGlbInsert(t[3], None, t[2], memoria, t[5])
     else:
-      asigna_memoria_local(t[2], t[5])
+      memoria = asigna_memoria_local(t[2], t[5])
       varLocInsert(t[3], None, t[2], memoria, actualProc, t[5])
     memoria += t[5]
     pass
@@ -127,7 +127,7 @@ def p_param(t):
     scope = 'local'
     global memoria
       #params[t[3]] = {'type' : t[2]}
-    asigna_memoria_local(t[2])
+    memoria = asigna_memoria_local(t[2])
     paramInsert(t[3], t[2], memoria, actualProc)
     pass
      
@@ -135,7 +135,7 @@ def p_param(t):
 def p_param_mult(t): 
     'param_mult : COMA tipo ID param_mult'
     global memoria
-    asigna_memoria_local(t[2])
+    memoria = asigna_memoria_local(t[2])
     paramInsert(t[3], t[2], memoria, actualProc)
     pass
 
@@ -229,7 +229,7 @@ def p_expresion_eval(t):
       operando1 = pilaOperandos.pop()
       resType = cubo_semantico[operando1.varType][operando2.varType][operador]
       if resType != "error":
-        asigna_memoria_temporal(resType)
+        memoria = asigna_memoria_temporal(resType)
         operandoTemp = varTableNode('t'+str(tempCont), None, resType, memoria)
         tempInsert(operandoTemp)
         tempCont += 1
@@ -268,7 +268,7 @@ def p_exp_binop(t):
       operando1 = pilaOperandos.pop()
       resType = cubo_semantico[operando1.varType][operando2.varType][operador]
       if resType != "error":
-        asigna_memoria_temporal(resType)
+        memoria = asigna_memoria_temporal(resType)
         operandoTemp = varTableNode('t'+str(tempCont), None, resType, memoria)
         tempInsert(operandoTemp)
         tempCont += 1
@@ -299,7 +299,7 @@ def p_exp_uminus(t):
 def p_exp_int(t):
     'exp : CTEENTERO'
     global memoria
-    asigna_memoria_constante('entero')
+    memoria = asigna_memoria_constante('entero')
     consInsert(t[1],'entero',memoria)
     consVar = varTableNode('cte', None, 'entero', consGetDir(t[1]))
     pilaOperandos.append(consVar)
@@ -308,7 +308,7 @@ def p_exp_int(t):
 def p_exp_float(t):
     'exp : CTEFLOTANTE'
     global memoria
-    asigna_memoria_constante('flotante')
+    memoria = asigna_memoria_constante('flotante')
     consInsert(t[1],'flotante',memoria)
     consVar = varTableNode('cte', None, 'flotante', consGetDir(t[1]))
     pilaOperandos.append(consVar)
@@ -320,7 +320,7 @@ def p_exp_booleano(t):
           | FALSE'''
     t[0] = t[1]
     global memoria
-    asigna_memoria_constante('booleano')
+    memoria = asigna_memoria_constante('booleano')
     consInsert(t[1],'booleano',memoria)
     consVar = varTableNode('cte', None, 'booleano', consGetDir(t[1]))
     pilaOperandos.append(consVar)
@@ -330,7 +330,7 @@ def p_exp_texto(t):
     'exp : CTETEXTO'
     t[0] = t[1]
     global memoria
-    asigna_memoria_constante('texto')
+    memoria = asigna_memoria_constante('texto')
     consInsert(t[1],'texto',memoria)
     consVar = varTableNode('cte', None, 'texto', consGetDir(t[1]))
     pilaOperandos.append(consVar)
@@ -462,7 +462,7 @@ def p_arraycall(t):
     index = pilaOperandos.pop()
 
 
-    asigna_memoria_temporal('entero')
+    memoria = asigna_memoria_temporal('entero')
     operandoTemp = varTableNode('t'+str(tempCont), None, 'entero', memoria)
     tempInsert(operandoTemp)
     tempCont += 1
@@ -649,81 +649,7 @@ def p_error(p):
     else:
         print("Error de sintaxis")
 
-def asigna_memoria_global(tipo, offset = 0):
-    global EnteroGlobal
-    global FlotanteGlobal
-    global TextoGlobal
-    global BooleanGlobal
-    global memoria 
-    if tipo == 'entero' or tipo == 'ENTERO':
-      memoria = EnteroGlobal
-      EnteroGlobal += 1 + offset
-    elif tipo == 'flotante' or tipo == 'FLOTANTE':
-      memoria = FlotanteGlobal
-      FlotanteGlobal += 1 + offset
-    elif tipo == 'texto' or tipo == 'TEXTO':
-      memoria = TextoGlobal
-      TextoGlobal += 1 + offset
-    elif tipo == 'booleano' or tipo == 'BOOLEANO':
-      memoria = BooleanGlobal
-      BooleanGlobal += 1 + offset
 
-def asigna_memoria_local(tipo, offset = 0):
-    global EnteroLocal
-    global FlotanteLocal
-    global TextoLocal
-    global BooleanLocal
-    global memoria 
-    if tipo == 'entero' or tipo == 'ENTERO':
-      memoria = EnteroLocal
-      EnteroLocal += 1 + offset
-    elif tipo == 'flotante' or tipo == 'FLOTANTE':
-      memoria = FlotanteLocal
-      FlotanteLocal += 1 + offset
-    elif tipo == 'texto' or tipo == 'TEXTO':
-      memoria = TextoLocal
-      TextoLocal += 1 + offset
-    elif tipo == 'booleano' or tipo == 'BOOLEANO':
-      memoria = BooleanLocal
-      BooleanLocal += 1 + offset
-
-def asigna_memoria_constante(tipo):
-    global EnteroConstante
-    global FlotanteConstante
-    global TextoConstante
-    global BooleanConstante
-    global memoria 
-    if tipo == 'entero' or tipo == 'ENTERO':
-      memoria = EnteroConstante
-      EnteroConstante += 1
-    elif tipo == 'flotante' or tipo == 'FLOTANTE':
-      memoria = FlotanteConstante
-      FlotanteConstante += 1
-    elif tipo == 'texto' or tipo == 'TEXTO':
-      memoria = TextoConstante
-      TextoConstante += 1
-    elif tipo == 'booleano' or tipo == 'BOOLEANO':
-      memoria = BooleanConstante
-      BooleanConstante += 1
-
-def asigna_memoria_temporal(tipo):
-    global EnteroTemporal
-    global FlotanteTemporal
-    global TextoTemporal
-    global BooleanTemporal
-    global memoria 
-    if tipo == 'entero' or tipo == 'ENTERO':
-      memoria = EnteroTemporal
-      EnteroTemporal += 1
-    elif tipo == 'flotante' or tipo == 'FLOTANTE':
-      memoria = FlotanteTemporal
-      FlotanteTemporal += 1
-    elif tipo == 'texto' or tipo == 'TEXTO':
-      memoria = TextoTemporal
-      TextoTemporal += 1
-    elif tipo == 'booleano' or tipo == 'BOOLEANO':
-      memoria = BooleanTemporal
-      BooleanTemporal += 1
 
 import ply.yacc as yacc
 yacc.yacc(method = 'LALR')

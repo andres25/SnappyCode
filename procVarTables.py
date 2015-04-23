@@ -150,9 +150,11 @@ def procPrint(procTable):
 
 def consInsert(cVal, cType, cDir):
 	global consTable
-	if not consGetDir(cVal):
+	if consGetDir(cVal) == None:
 		cons = consTableNode(cVal, cType, cDir)
 		consTable.append(cons)
+		return True
+	return False
 	
 	
 
