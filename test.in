@@ -36,6 +36,7 @@ INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wo
 		FINBLOQUE
 	FINMIENTRAS
 
+	var2func1 = 5;
 	REGRESA var2func1
 FINFUNCION
 
@@ -56,6 +57,8 @@ INICIOPRINCIPAL
 
 	var1main = 1 + 1;
 	var1main = snappyFunc1(1.0,var1main,"texto");
+
+	DECIRALUSUARIO(var1main);
 
 FINPRINCIPAL 
 

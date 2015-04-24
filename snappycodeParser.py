@@ -592,10 +592,18 @@ def p_actCic3(t):
 
     pass
  
-def p_io(t):
-    '''io : PEDIRALUSUARIO ID
-               | DECIRALUSUARIO exp'''
-
+def p_io_cout(t):
+    'io : DECIRALUSUARIO exp PUNTOCOMA'
+    global cuadruplos
+    global cuadCont
+    global pilaOperandos
+    operando1 = pilaOperandos.pop()
+    cuadruplo = Cuadruplo(cuadCont, 'PRINT', operando1.varDir , None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+    pass
+def p_io_cin(t):
+    'io : PEDIRALUSUARIO ID PUNTOCOMA'
     pass
  
 def p_accion(t):

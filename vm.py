@@ -127,6 +127,10 @@ def InterpretarCuadruplos():
 				x = x + 1
 		elif opt == 'RETURN':
 			x = pilaSaltosEjec.pop()
+		elif opt == 'PRINT':
+			opd1 = getOperand(cuadruplos[x], 1)
+			x = x +1
+			print (opd1)
 		elif opt == 'MOVER':
 			print('MOVER')
 			x = x+1
