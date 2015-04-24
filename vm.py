@@ -104,11 +104,21 @@ def initMem():
 		elif cons.consType == 'booleano':
 			if cons.consDir > memBooleano:
 				memBooleano = cons.consDir
+
 def getCuadMain():
 	for proc in procTable:
 		if proc.procName == 'main':
 			return proc.procDir
 
+def setParam(varDir, saltoProc, numparem):
+	paramsFunc = None
+	procVars = None
+	for proc in procTable:
+		if proc.procDir == saltoProc:
+			paramsFunc = proc.procParams.copy()
+			procVars = proc.procVars
+	paramsFunc[numparem].varVal = varDir
+	procVars.append(paramsFunc[numparem])
 def InterpretarCuadruplos():
 	x = getCuadMain()
 	initMem()
@@ -117,7 +127,17 @@ def InterpretarCuadruplos():
 		num = cuadruplos[x].num
 		if opt == 'GOTO':
 			if cuadruplos[x].res == 1:
-				pilaSaltosEjec.append(x+1)
+				y = x + 1
+				opt = cuadruplos[y].opt
+				numParam = 0
+				saltoProc = cuadruplos[x].opd2
+				while opt == 'PARAM':
+					setParam(cuadruplos[y].opd1,saltoProc,numParam)
+					numParam = numParam + 1
+					y = y + 1
+					opt = cuadruplos[y].opt
+					
+				pilaSaltosEjec.append(y)
 			x = cuadruplos[x].opd2
 		elif opt == 'GOTOF':
 			val = getOperand(cuadruplos[x], 1)

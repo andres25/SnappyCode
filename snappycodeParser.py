@@ -33,12 +33,13 @@ precedence = (
 def p_program(t): 
     'program : INICIOPROGRAMA vars cuerpo FINPROGRAMA'
     global procTable
-    procPrint(procTable)
+
     global cuadruplos
-    #print ("Cuadruplos")
-    #for cuad in cuadruplos:
-    #    print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
+    print ("Cuadruplos")
+    for cuad in cuadruplos:
+        print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
     vm.InterpretarCuadruplos()
+    procPrint(procTable)
     pass
 
 
@@ -358,11 +359,16 @@ def p_push_var_opd(t):
     if varFind(varGlb,t[-1]):
       auxVar = getVar(varGlb,t-[1])
     else:
-      auxTable = getVarTable(actualProc)
-      if varFind(auxTable,t[-1]):
-        auxVar = getVar(auxTable,t[-1])
+      proc = getProc(actualProc)
+      auxParams = proc.procParams
+      if varFind(auxParams, t[-1]):
+        auxVar = getVar(auxParams,t[-1])
       else:
-        print ("Error Semantico: Variable ", t[-1], " no encontrada" )
+        auxTable = getVarTable(actualProc)
+        if varFind(auxTable,t[-1]):
+          auxVar = getVar(auxTable,t[-1])
+        else:
+          print ("Error Semantico: Variable ", t[-1], " no encontrada" )
     pilaOperandos.append(auxVar)
 pass
 
@@ -406,6 +412,9 @@ def p_llamada(t):
             if paramFunc.varType != paramLlam.varType:
               print('Parametros incompatibles en llamada a funcion ', t[-1])
               sys.exit()
+            cuadruplo = Cuadruplo(cuadCont, 'PARAM', paramLlam.varDir , None, None)
+            cuadruplos.append(cuadruplo)
+            cuadCont += 1
             cantParams = cantParams - 1
 
       else:
