@@ -59,8 +59,7 @@ INICIOPRINCIPAL
 
 	var1main = 1 + 1;
 	var1main = snappyFunc1(1.0,var1main,"texto");
-
-	DECIRALUSUARIO(var1main);
+	var1main = snappyFunc1(1.0,var1main,"texto2");
 
 FINPRINCIPAL 
 

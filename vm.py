@@ -8,7 +8,8 @@ memFlotante = 0
 memTexto = 0
 memBooleano = 0
 pilaSaltosEjec = []
-
+pilaVarTableLocSpace = []
+pilaVarTableLocSpaceName = []
 def getOperand(cuadruplo, num):
 	if (num == 1):
 		opdDir = cuadruplo.opd1
@@ -110,15 +111,20 @@ def getCuadMain():
 		if proc.procName == 'main':
 			return proc.procDir
 
-def setParam(varDir, saltoProc, numparem):
+def getProcByJumpDir(jumpDir):
+	for proc in procTable:
+		if proc.procDir == jumpDir:
+			return proc
+
+def setParam(varDir, jumpDir, numparem):
 	paramsFunc = None
 	procVars = None
-	for proc in procTable:
-		if proc.procDir == saltoProc:
-			paramsFunc = proc.procParams.copy()
-			procVars = proc.procVars
+	proc = getProcByJumpDir(jumpDir)
+	paramsFunc = proc.procParams.copy()
+	procVars = proc.procVars
 	paramsFunc[numparem].varVal = varDir
 	procVars.append(paramsFunc[numparem])
+
 def InterpretarCuadruplos():
 	x = getCuadMain()
 	initMem()
@@ -131,6 +137,10 @@ def InterpretarCuadruplos():
 				opt = cuadruplos[y].opt
 				numParam = 0
 				saltoProc = cuadruplos[x].opd2
+				proc = getProcByJumpDir(saltoProc)
+				auxVarTable = proc.procVars.copy()
+				pilaVarTableLocSpace.append(auxVarTable)
+				pilaVarTableLocSpaceName.append(proc.procName)
 				while opt == 'PARAM':
 					setParam(cuadruplos[y].opd1,saltoProc,numParam)
 					numParam = numParam + 1
@@ -147,6 +157,10 @@ def InterpretarCuadruplos():
 				x = x + 1
 		elif opt == 'RETURN':
 			x = pilaSaltosEjec.pop()
+			procName = pilaVarTableLocSpaceName.pop()
+			proc = getProc(procName)
+			auxVarTable = pilaVarTableLocSpace.pop()
+			proc.procVars = auxVarTable
 		elif opt == 'PRINT':
 			opd1 = getOperand(cuadruplos[x], 1)
 			x = x +1
