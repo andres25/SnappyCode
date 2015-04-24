@@ -1,12 +1,21 @@
 from varGlobales import *
 from procVarTables import *
 from memory import *
+import turtle
 
 cuadEjec = 0
 memEntero = 0
 memFlotante = 0
 memTexto = 0
 memBooleano = 0
+
+# grapgics turtle
+turtle.setup(800, 600)
+wn = turtle.Screen()
+wn.title("SnappyCode")
+tess = turtle.Turtle()
+wn.exitonclick()
+
 pilaSaltosEjec = []
 pilaVarTableLocSpace = []
 pilaVarTableLocSpaceName = []
@@ -126,6 +135,7 @@ def setParam(varDir, jumpDir, numparem):
 	procVars.append(paramsFunc[numparem])
 
 def InterpretarCuadruplos():
+	global tess
 	x = getCuadMain()
 	initMem()
 	while x < len(cuadruplos):
@@ -146,7 +156,6 @@ def InterpretarCuadruplos():
 					numParam = numParam + 1
 					y = y + 1
 					opt = cuadruplos[y].opt
-					
 				pilaSaltosEjec.append(y)
 			x = cuadruplos[x].opd2
 		elif opt == 'GOTOF':
@@ -166,10 +175,28 @@ def InterpretarCuadruplos():
 			x = x +1
 			print (opd1)
 		elif opt == 'MOVER':
+			tess.forward(getOperand(cuadruplos[x], 1))
 			print('MOVER')
 			x = x+1
 		elif opt == 'PINTAR':
+			tess.pendown()
 			print('PINTAR')
+			x = x+1
+		elif opt == 'DESPINTAR':
+			tess.penup()
+			print('DESPINTAR')
+			x = x+1
+		elif opt == 'BORRAR':
+			tess.reset()
+			print('BORRAR')
+			x = x+1
+		elif opt == 'GIRARDERECHA':
+			tess.right(getOperand(cuadruplos[x], 1))
+			print('GIRARDERECHA')
+			x = x+1
+		elif opt == 'GIRARIZQUIERDA':
+			tess.left(getOperand(cuadruplos[x], 1))
+			print('GIRARIZQUIERDA')
 			x = x+1
 		elif opt == '=':
 			opdDir = cuadruplos[x].opd1

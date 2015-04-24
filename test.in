@@ -19,7 +19,7 @@ INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wo
 
     PINTAR;
 
-    MOVER var1func1;
+    MOVER 100;
 
 	SI 2>1 ENTONCES
 		INICIOBLOQUE
