@@ -19,20 +19,20 @@ INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wo
 
     MOVER var1func1;
 
-	SI 1>1 ENTONCES
+	SI 2>1 ENTONCES
 		INICIOBLOQUE
-			var1func1 = 1 + 1;
+			var1func1 = 1;
 		FINBLOQUE
 	SINO
 		INICIOBLOQUE
-			var2func1 = 1 + 1;
+			var1func1 = 2;
 		FINBLOQUE
 	FINSI
 
 
-	MIENTRAS 1>1 HACER
+	MIENTRAS var2func1>1 HACER
 		INICIOBLOQUE
-			var1func1 = 1 + 1;
+			var2func1 = 1;
 		FINBLOQUE
 	FINMIENTRAS
 
@@ -46,13 +46,17 @@ INICIOFUNCION FLOTANTE snappyFunc2 PARAMETROS flotante xoxo, entero yoyo, texto 
 
 	var3func2 = "AquiElText";
 	var2func2 = 1+1;
-	var1func2 = snappyFunc1(1.0,var2func2,"texto");
+	var1func2 = 1;
 	REGRESA 4.0
 FINFUNCION
 
 INICIOPRINCIPAL 
-	crear flotante var1main;
+	crear entero var1main;
 	crear booleano var2main;
+
+	var1main = 1 + 1;
+	var1main = snappyFunc1(1.0,var1main,"texto");
+
 FINPRINCIPAL 
 
 

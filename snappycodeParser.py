@@ -35,9 +35,9 @@ def p_program(t):
     global procTable
     procPrint(procTable)
     global cuadruplos
-    print ("Cuadruplos")
-    for cuad in cuadruplos:
-        print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
+    #print ("Cuadruplos")
+    #for cuad in cuadruplos:
+    #    print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
     vm.InterpretarCuadruplos()
     pass
 
@@ -373,7 +373,7 @@ def p_llamada(t):
     global pilaParams
     if procFind(t[-1]):
       proc = getProc(t[-1])
-      cuadruplo = Cuadruplo(cuadCont, 'GOTO',proc.procDir , None, None)
+      cuadruplo = Cuadruplo(cuadCont, 'GOTO', None , proc.procDir, 1)
       cuadruplos.append(cuadruplo)
       cuadCont += 1
       retVar = proc.procRetVar

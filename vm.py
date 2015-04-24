@@ -7,6 +7,7 @@ memEntero = 0
 memFlotante = 0
 memTexto = 0
 memBooleano = 0
+pilaSaltosEjec = []
 
 def getOperand(cuadruplo, num):
 	if (num == 1):
@@ -103,29 +104,41 @@ def initMem():
 		elif cons.consType == 'booleano':
 			if cons.consDir > memBooleano:
 				memBooleano = cons.consDir
+def getCuadMain():
+	for proc in procTable:
+		if proc.procName == 'main':
+			return proc.procDir
 
 def InterpretarCuadruplos():
-	x = cuadEjec
+	x = getCuadMain()
 	initMem()
 	while x < len(cuadruplos):
 		opt = cuadruplos[x].opt
 		num = cuadruplos[x].num
-
 		if opt == 'GOTO':
-			print('GOTO')
+			if cuadruplos[x].res == 1:
+				pilaSaltosEjec.append(x+1)
+			x = cuadruplos[x].opd2
 		elif opt == 'GOTOF':
-			print('GOTOF')
+			val = getOperand(cuadruplos[x], 1)
+			if val == 0:
+				x = cuadruplos[x].opd2
+			else:
+				x = x + 1
 		elif opt == 'RETURN':
-			print('RETURN')
+			x = pilaSaltosEjec.pop()
 		elif opt == 'MOVER':
 			print('MOVER')
+			x = x+1
 		elif opt == 'PINTAR':
 			print('PINTAR')
+			x = x+1
 		elif opt == '=':
 			opdDir = cuadruplos[x].opd1
 			resVar = getResult(cuadruplos[x])
 			resVar.varVal = opdDir
 			print (num,"|",opdDir,"|",None,"|",opt,"|",resVar.varDir,"\n")
+			x = x+1
 		else:
 			opd1 = getOperand(cuadruplos[x], 1)
 			opd2 = getOperand(cuadruplos[x], 2)
@@ -163,4 +176,4 @@ def InterpretarCuadruplos():
 			resDir = prepRes(res,resVar.varType)
 			resVar.varVal = resDir
 			print (num,"|",opd1,"|",opd2,"|",opt,"|",resVar.varDir,"\n")
-		x = x +1
+			x = x +1
