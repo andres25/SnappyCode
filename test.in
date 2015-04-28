@@ -49,8 +49,10 @@ INICIOFUNCION ENTERO snappyFunc2 PARAMETROS entero param1func2, entero param2fun
 	crear flotante var1func2;
 	crear entero var2func2;
 	crear texto var3func2;
-
-	SI param1func2 == 0 ENTONCES
+	var3func2 = "SALI DEL PROC";
+	PINTAR;
+	DECIRALUSUARIO(param1func2);
+	SI (param1func2 == 0) ENTONCES
 		INICIOBLOQUE
 			DECIRALUSUARIO("ENTRO A LA RECURSIVIDAD");
 		FINBLOQUE
@@ -60,6 +62,7 @@ INICIOFUNCION ENTERO snappyFunc2 PARAMETROS entero param1func2, entero param2fun
 		    GIRARDERECHA 100;
 			param1func2 = param1func2 - 1;
 			snappyFunc2(param1func2,1);
+			DECIRALUSUARIO(var3func2);
 		FINBLOQUE
 	FINSI
 
@@ -71,7 +74,7 @@ INICIOPRINCIPAL
 	crear booleano var2main;
 
 	var1main = 1 + 1;
-	var1main = snappyFunc1(1.0,1,"texto");
+	var1main = snappyFunc2(25,1);
 
 FINPRINCIPAL 
 

@@ -28,7 +28,6 @@ def getOperand(cuadruplo, num):
 
 	if opdDir == None:
 		return
-
 	isVar = True
 	while isVar:
 		if opdDir == None:
@@ -51,11 +50,39 @@ def getOperand(cuadruplo, num):
 					opdDir = var.varVal
 		elif opdDir >= 12000 and opdDir < 16000:
 			isVar = False
-
+	
 	for cons in consTable:
 		if cons.consDir == opdDir:
 			return cons.consVal
 
+def getConsFromParam(cuadruplo):
+	opdDir = cuadruplo.opd1
+
+	isVar = True
+	while isVar:
+		if opdDir == None:
+			return
+		elif opdDir >= 0 and opdDir < 4000:
+			for var in varGlb:
+				if var.varDir == opdDir:
+					opdVar = var
+					opdDir = var.varVal
+		elif opdDir >= 7000 and opdDir < 12000:
+			for var in tempTable:
+				if var.varDir == opdDir:
+					opdVar = var
+					opdDir = var.varVal
+		elif opdDir >= 4000 and opdDir < 7000:
+			lastVarSpace = pilaVarTableLocSpace.pop()
+			for var in lastVarSpace:
+				if var.varDir == opdDir:
+					opdVar = var
+					opdDir = var.varVal
+			pilaVarTableLocSpace.append(lastVarSpace)
+		elif opdDir >= 12000 and opdDir < 16000:
+			isVar = False		
+	return opdDir
+	
 def getResult(cuadruplo):
 	opdDir = cuadruplo.res
 	if opdDir == None:
@@ -90,7 +117,7 @@ def prepRes(cVal, cType):
 		elif cType == 'texto':
 			memTexto = memTexto+1
 			mem = memTexto
-		elif cType== 'booleano':
+		elif cType == 'booleano':
 			memBooleano = memBooleano+1
 			mem = memBooleano
 		consInsert(cVal, cType, mem)
@@ -115,7 +142,14 @@ def initMem():
 		elif cons.consType == 'booleano':
 			if cons.consDir > memBooleano:
 				memBooleano = cons.consDir
-
+	if not memEntero > 12000:
+		memEntero = 12000;
+	if not memFlotante > 13000:
+		memFlotante = 13000;
+	if not memTexto > 14000:
+		memTexto = 14000;
+	if not memBooleano > 15000:
+		memBooleano = 15000;
 def getCuadMain():
 	for proc in procTable:
 		if proc.procName == 'main':
@@ -140,6 +174,7 @@ def InterpretarCuadruplos():
 	x = getCuadMain()
 	initMem()
 	while x < len(cuadruplos):
+		cuadruplos[x].printCuad()
 		opt = cuadruplos[x].opt
 		num = cuadruplos[x].num
 		if opt == 'GOTO':
@@ -168,7 +203,8 @@ def InterpretarCuadruplos():
 			opt = cuadruplos[y].opt
 			while opt == 'PARAM':
 				cuadruplos[y].printCuad()
-				setParam(cuadruplos[y].opd1,procName,numParam)
+				opd = getConsFromParam(cuadruplos[y])
+				setParam(opd,procName,numParam)
 				numParam = numParam + 1
 				y = y + 1
 				opt = cuadruplos[y].opt
@@ -244,8 +280,6 @@ def InterpretarCuadruplos():
 				res = opd1 <= opd2
 			elif opt == "==":
 				res = opd1 == opd2
-				print('entro')
-				cuadruplos[x+1].printCuad()
 			elif opt == "!=":
 				res = opd1 != opd2
 
@@ -253,4 +287,4 @@ def InterpretarCuadruplos():
 			resDir = prepRes(res,resVar.varType)
 			resVar.varVal = resDir
 			x = x +1
-		cuadruplos[x].printCuad()
+		

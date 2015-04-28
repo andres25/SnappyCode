@@ -38,12 +38,12 @@ def p_program(t):
     global procTableClean 
     procTableCleanAux = copy.deepcopy(procTable)
     procTableClean.append(procTableCleanAux)
+    procPrint(procTable)
     print ("Cuadruplos")
     for cuad in cuadruplos:
         print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
     print ("Cuadruplos De Ejecucion")
     vm.InterpretarCuadruplos()
-    procPrint(procTable)
     pass
 
 
