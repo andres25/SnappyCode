@@ -7,6 +7,7 @@
 #----------------------------------------------
 from varGlobales import *
 import sys
+import copy
 
 class varTableNode:
 	def __init__(self, vName, vVal, vType, vDir, vDim = None):
@@ -82,6 +83,12 @@ def getProc(pName):
 	for proc in procTable:
 		if proc.procName == pName:
 			return proc
+
+def getProcClean(pName):
+	global procTableClean
+	for proc in procTableClean[0]:
+		if proc.procName == pName:
+			return copy.deepcopy(proc)
 
 def getVarTable(pName):
 	global procTable

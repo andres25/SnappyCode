@@ -9,6 +9,7 @@ from procVarTables import *
 from memory import *
 from cubosemantico import *
 from varGlobales import *
+import copy
 import vm
 
 tokens = snappycodeLex.tokens
@@ -33,11 +34,14 @@ precedence = (
 def p_program(t): 
     'program : INICIOPROGRAMA vars cuerpo FINPROGRAMA'
     global procTable
-
     global cuadruplos
+    global procTableClean 
+    procTableCleanAux = copy.deepcopy(procTable)
+    procTableClean.append(procTableCleanAux)
     print ("Cuadruplos")
     for cuad in cuadruplos:
         print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
+    print ("Cuadruplos De Ejecucion")
     vm.InterpretarCuadruplos()
     procPrint(procTable)
     pass
@@ -156,7 +160,7 @@ def p_finfunc(t):
     global cuadCont
     global cuadruplos
     global procTable
-    cuadruplo = Cuadruplo(cuadCont, 'RETURN',None , None, None)
+    cuadruplo = Cuadruplo(cuadCont, 'ENDPROC',None , None, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
     returnVar = pilaOperandos.pop()
@@ -179,7 +183,8 @@ def p_estatuto(t):
            | condicion
            | ciclo
            | io
-           | accion'''
+           | accion
+           | llamada_sin_ret'''
     pass
  
 def p_asignacion(t): 
@@ -191,24 +196,27 @@ def p_asignacion(t):
 
     if pilaOperandos:
       if varFind(varGlb,t[1]):
-        resDir = getVar(varGlb,t[1])
+        auxVar = getVar(varGlb,t[1])
       else:
-        auxTable = getVarTable(actualProc)
-        if varFind(auxTable,t[1]):
-          resDir = getVar(auxTable,t[1])
+        proc = getProc(actualProc)
+        auxParams = proc.procParams
+        if varFind(auxParams, t[1]):
+          auxVar = getVar(auxParams,t[1])
         else:
-          print ("Error Semantico: Variable ", t[1], " no encontrada" )
+          auxTable = getVarTable(actualProc)
+          if varFind(auxTable,t[1]):
+            auxVar = getVar(auxTable,t[1])
+          else:
+            print ("Error Semantico: Variable ", t[1], " no encontrada para asignacion" )
       tempOperando = pilaOperandos.pop()
-      resType = cubo_semantico[resDir.varType][tempOperando.varType]['=']
+      resType = cubo_semantico[auxVar.varType][tempOperando.varType]['=']
       if resType != "error":
-        cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, resDir.varDir)
+        cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, auxVar.varDir)
         cuadruplos.append(cuadruplo)
         cuadCont += 1
       else:
-        print ("Error Semantico: Variable ", t[3], " incompatible con valor ",resDir.varType, " a asignar")
-    else:
-      print ("Error Semantico: Variable ", t[3], " no se puede asignar" )
-
+        print ("Error Semantico: Variable ", t[3], " incompatible con valor ",auxVar.varType, " a asignar")
+      pilaOperandos.append(auxVar)
     pass
  
 
@@ -379,11 +387,19 @@ def p_llamada(t):
     global pilaParams
     if procFind(t[-1]):
       proc = getProc(t[-1])
-      cuadruplo = Cuadruplo(cuadCont, 'GOTO', None , proc.procDir, 1)
+      #solicitud de memoria
+      cuadruplo = Cuadruplo(cuadCont, 'ERA', None , proc.procName, None)
       cuadruplos.append(cuadruplo)
       cuadCont += 1
+
+      #paso de control de ejecucion
+      cuadruplo = Cuadruplo(cuadCont, 'GOSUB', None , proc.procName, None)
+      cuadruplos.append(cuadruplo)
+      cuadCont += 1
+
       retVar = proc.procRetVar
-      pilaOperandos.append(retVar)
+      if retVar != None:
+        pilaOperandos.append(retVar)
 
       paramsFunc = proc.procParams.copy()
       cantParams = 0
@@ -419,8 +435,10 @@ def p_llamada(t):
 
       else:
         print('Cantidad de parametros en llamada de la funcion ', t[-1],'es incorrecta')
+        sys.exit()
     else:
       print('El procedimiento ', t[-1],' no ha sido declarado')
+      sys.exit()
 
 pass
 
@@ -468,7 +486,7 @@ def p_arraycall(t):
       if varFind(auxTable,t[-1]):
         auxVar = getVar(auxTable,t[-1])
       else:
-        print ("Error Semantico: Variable ", t[-1], " no encontrada" )
+        print ("Error Semantico: Variable de tipo vector ", t[-1], " no encontrada" )
   
     index = pilaOperandos.pop()
 
@@ -649,9 +667,17 @@ def p_objeto_sin_exp(t):
     cuadCont += 1
     pass
 
+def p_llamada_sin_ret(t):
+    'llamada_sin_ret   : ID llamada PUNTOCOMA'
+    pass
+
 def p_principal(t): 
     'principal : iniciomain vars C FINPRINCIPAL'
-
+    global cuadruplos
+    global cuadCont
+    cuadruplo = Cuadruplo(cuadCont,'ENDPROG', None, None, None)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
     pass
 
 def p_iniciomain(t): 

@@ -2,6 +2,7 @@ from varGlobales import *
 from procVarTables import *
 from memory import *
 import turtle
+import copy
 
 cuadEjec = 0
 memEntero = 0
@@ -13,8 +14,8 @@ memBooleano = 0
 turtle.setup(800, 600)
 wn = turtle.Screen()
 wn.title("SnappyCode")
-tess = turtle.Turtle()
-wn.exitonclick()
+
+#wn.exitonclick()
 
 pilaSaltosEjec = []
 pilaVarTableLocSpace = []
@@ -125,14 +126,14 @@ def getProcByJumpDir(jumpDir):
 		if proc.procDir == jumpDir:
 			return proc
 
-def setParam(varDir, jumpDir, numparem):
+def setParam(varDir, pName, numparam):
 	paramsFunc = None
 	procVars = None
-	proc = getProcByJumpDir(jumpDir)
+	proc = getProc(pName)
 	paramsFunc = proc.procParams.copy()
 	procVars = proc.procVars
-	paramsFunc[numparem].varVal = varDir
-	procVars.append(paramsFunc[numparem])
+	paramsFunc[numparam].varVal = varDir
+	procVars.append(paramsFunc[numparam])
 
 def InterpretarCuadruplos():
 	global tess
@@ -142,21 +143,6 @@ def InterpretarCuadruplos():
 		opt = cuadruplos[x].opt
 		num = cuadruplos[x].num
 		if opt == 'GOTO':
-			if cuadruplos[x].res == 1:
-				y = x + 1
-				opt = cuadruplos[y].opt
-				numParam = 0
-				saltoProc = cuadruplos[x].opd2
-				proc = getProcByJumpDir(saltoProc)
-				auxVarTable = proc.procVars.copy()
-				pilaVarTableLocSpace.append(auxVarTable)
-				pilaVarTableLocSpaceName.append(proc.procName)
-				while opt == 'PARAM':
-					setParam(cuadruplos[y].opd1,saltoProc,numParam)
-					numParam = numParam + 1
-					y = y + 1
-					opt = cuadruplos[y].opt
-				pilaSaltosEjec.append(y)
 			x = cuadruplos[x].opd2
 		elif opt == 'GOTOF':
 			val = getOperand(cuadruplos[x], 1)
@@ -164,45 +150,69 @@ def InterpretarCuadruplos():
 				x = cuadruplos[x].opd2
 			else:
 				x = x + 1
-		elif opt == 'RETURN':
+		elif opt == 'ERA':
+			procName = cuadruplos[x].opd2
+			proc = getProc(procName)
+			auxVarTable = proc.procVars.copy()
+			pilaVarTableLocSpace.append(auxVarTable)
+			pilaVarTableLocSpaceName.append(proc.procName)
+			
+			procClean = getProcClean(procName)
+			proc.procVars = procClean.procVars
+			x = x + 1
+		elif opt == 'GOSUB':
+			procName = cuadruplos[x].opd2
+			proc = getProc(procName)
+			numParam = 0
+			y = x + 1
+			opt = cuadruplos[y].opt
+			while opt == 'PARAM':
+				cuadruplos[y].printCuad()
+				setParam(cuadruplos[y].opd1,procName,numParam)
+				numParam = numParam + 1
+				y = y + 1
+				opt = cuadruplos[y].opt
+			pilaSaltosEjec.append(y)
+			x = proc.procDir
+			print('Tabla Intermedia de Variables', '\n')
+			for var in proc.procVars:
+				print ("    " + var.varName, " - ", var.varVal, " - ",var.varType, " - ", var.varDir, "-", var.varDim)
+		elif opt == 'ENDPROC':
 			x = pilaSaltosEjec.pop()
 			procName = pilaVarTableLocSpaceName.pop()
 			proc = getProc(procName)
 			auxVarTable = pilaVarTableLocSpace.pop()
 			proc.procVars = auxVarTable
+		elif opt == 'ENDPROG':
+			turtle.exitonclick()
+			x = x+1
 		elif opt == 'PRINT':
 			opd1 = getOperand(cuadruplos[x], 1)
-			x = x +1
+			x = x + 1
 			print (opd1)
 		elif opt == 'MOVER':
-			tess.forward(getOperand(cuadruplos[x], 1))
-			print('MOVER')
+			turtle.forward(getOperand(cuadruplos[x], 1))
 			x = x+1
 		elif opt == 'PINTAR':
-			tess.pendown()
-			print('PINTAR')
+			turtle.pendown()
 			x = x+1
 		elif opt == 'DESPINTAR':
-			tess.penup()
-			print('DESPINTAR')
+			turtle.penup()
 			x = x+1
 		elif opt == 'BORRAR':
-			tess.reset()
-			print('BORRAR')
+			turtle.reset()
 			x = x+1
 		elif opt == 'GIRARDERECHA':
-			tess.right(getOperand(cuadruplos[x], 1))
-			print('GIRARDERECHA')
+			turtle.right(getOperand(cuadruplos[x], 1))
 			x = x+1
 		elif opt == 'GIRARIZQUIERDA':
-			tess.left(getOperand(cuadruplos[x], 1))
-			print('GIRARIZQUIERDA')
+			turtle.left(getOperand(cuadruplos[x], 1))
 			x = x+1
 		elif opt == '=':
 			opdDir = cuadruplos[x].opd1
 			resVar = getResult(cuadruplos[x])
 			resVar.varVal = opdDir
-			print (num,"|",opdDir,"|",None,"|",opt,"|",resVar.varDir,"\n")
+			#print (num,"|",opdDir,"|",None,"|",opt,"|",resVar.varDir,"\n")
 			x = x+1
 		else:
 			opd1 = getOperand(cuadruplos[x], 1)
@@ -234,11 +244,13 @@ def InterpretarCuadruplos():
 				res = opd1 <= opd2
 			elif opt == "==":
 				res = opd1 == opd2
+				print('entro')
+				cuadruplos[x+1].printCuad()
 			elif opt == "!=":
 				res = opd1 != opd2
 
 
 			resDir = prepRes(res,resVar.varType)
 			resVar.varVal = resDir
-			print (num,"|",opd1,"|",opd2,"|",opt,"|",resVar.varDir,"\n")
 			x = x +1
+		cuadruplos[x].printCuad()
