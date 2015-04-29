@@ -186,39 +186,97 @@ def p_estatuto(t):
            | accion
            | llamada_sin_ret'''
     pass
- 
-def p_asignacion(t): 
-    'asignacion : ID IGUAL expresion PUNTOCOMA'
+
+def p_asignacion(t):
+    'asignacion : ID asignacion_arreglo IGUAL expresion PUNTOCOMA'
+    if t[2] == None:
+      global varGlb
+      global procTable
+      global cuadCont
+      global tempTable
+
+      if pilaOperandos:
+        if varFind(varGlb,t[1]):
+          auxVar = getVar(varGlb,t[1])
+        else:
+          proc = getProc(actualProc)
+          auxParams = proc.procParams
+          if varFind(auxParams, t[1]):
+            auxVar = getVar(auxParams,t[1])
+          else:
+            auxTable = getVarTable(actualProc)
+            if varFind(auxTable,t[1]):
+              auxVar = getVar(auxTable,t[1])
+            else:
+              print ("Error Semantico: Variable ", t[1], " no encontrada para asignacion" )
+        tempOperando = pilaOperandos.pop()
+        resType = cubo_semantico[auxVar.varType][tempOperando.varType]['=']
+        if resType != "error":
+          cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, auxVar.varDir)
+          cuadruplos.append(cuadruplo)
+          cuadCont += 1
+        else:
+          print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[4], " a asignar")
+        pilaOperandos.append(auxVar)
+    pass
+
+def p_asignacion_arreglo(t):
+    'asignacion_arreglo : CORCHETEIZQ exp CORCHETEDER'
+    t[0] = t[1]
     global varGlb
     global procTable
     global cuadCont
     global tempTable
+    global tempCont
 
     if pilaOperandos:
-      if varFind(varGlb,t[1]):
-        auxVar = getVar(varGlb,t[1])
+      if varFind(varGlb,t[-1]):
+        auxVar = getVar(varGlb,t[-1])
       else:
         proc = getProc(actualProc)
         auxParams = proc.procParams
-        if varFind(auxParams, t[1]):
-          auxVar = getVar(auxParams,t[1])
+        if varFind(auxParams, t[-1]):
+          auxVar = getVar(auxParams,t[-1])
         else:
           auxTable = getVarTable(actualProc)
-          if varFind(auxTable,t[1]):
-            auxVar = getVar(auxTable,t[1])
+          if varFind(auxTable,t[-1]):
+            auxVar = getVar(auxTable,t[-1])
           else:
-            print ("Error Semantico: Variable ", t[1], " no encontrada para asignacion" )
-      tempOperando = pilaOperandos.pop()
-      resType = cubo_semantico[auxVar.varType][tempOperando.varType]['=']
-      if resType != "error":
-        cuadruplo = Cuadruplo(cuadCont, '=',tempOperando.varDir , None, auxVar.varDir)
+            print ("Error Semantico: Variable ", t[-1], " no encontrada para asignacion" )
+      operando2 = pilaOperandos.pop()
+      operando1 = pilaOperandos.pop()
+      print(operando1.varDir)
+      print(operando1.varDir)
+      print(2222222222222)
+      print(operando2.varDir)
+      print(operando2.varDir)
+      resType = cubo_semantico[auxVar.varType][operando2.varType]['=']
+      if resType != "error" and operando1.varType == "entero":
+        # Verifica el indice del arreglo
+        cuadruplo = Cuadruplo(cuadCont, 'VER', operando2.varDir, 0, auxVar.varDim-1)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+        # Genera el temporal
+        memoria = asigna_memoria_temporal(resType)
+        operandoTemp = varTableNode('t'+str(tempCont), None, resType, memoria)
+        tempInsert(operandoTemp)
+        tempCont += 1
+        # Asigna al temporal la direccion del arreglo + el offset
+        cuadruplo = Cuadruplo(cuadCont, 'OFST', operando2.varDir, auxVar.varDir, operandoTemp.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+        # Asigna el valor al arreglo
+        cuadruplo = Cuadruplo(cuadCont, 'ARYAS', operando1.varDir, operando2.varDir, operandoTemp.varDir)
         cuadruplos.append(cuadruplo)
         cuadCont += 1
       else:
-        print ("Error Semantico: Variable ", t[3], " incompatible con valor ",auxVar.varType, " a asignar")
+        print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[5], " a asignar")
       pilaOperandos.append(auxVar)
     pass
- 
+
+def p_asignacion_arreglo_empty(t):
+    'asignacion_arreglo : empty'
+    pass
 
 def p_expresion_eval(t): 
     '''expresion : exp MAYORQUE push_opt exp
@@ -690,7 +748,7 @@ def p_iniciomain(t):
 
 def p_error(p):
     if p:
-        print("Error de sintaxis en: '%s'" % p.value + p.type)
+        print("Error de sintaxis en: '%s'" % p.value + p.type + ", Linea: %s"%p.lineno)
     else:
         print("Error de sintaxis")
 

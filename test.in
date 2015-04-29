@@ -1,7 +1,8 @@
-inicioprograma 
+inicioprograma
 crear entero global1;
 crear flotante global2;
-crear entero HolaKeAse [150];
+crear entero HolaKeAse[150];
+
 crear entero despues;
 
 INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wowow
@@ -17,7 +18,6 @@ INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wo
 	DECIRALUSUARIO(wowow);
 
     PINTAR;
-
 
 	SI 2>1 ENTONCES
 		INICIOBLOQUE
@@ -73,8 +73,10 @@ INICIOPRINCIPAL
 	crear entero var1main;
 	crear booleano var2main;
 
+	HolaKeAse[1] = 10;
+	HolaKeAse[2] = 10000;
 	var1main = 1 + 1;
-	var1main = snappyFunc2(25,1);
+	
 
 FINPRINCIPAL 
 

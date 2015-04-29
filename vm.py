@@ -50,7 +50,7 @@ def getOperand(cuadruplo, num):
 					opdDir = var.varVal
 		elif opdDir >= 12000 and opdDir < 16000:
 			isVar = False
-	
+
 	for cons in consTable:
 		if cons.consDir == opdDir:
 			return cons.consVal
@@ -80,7 +80,7 @@ def getConsFromParam(cuadruplo):
 					opdDir = var.varVal
 			pilaVarTableLocSpace.append(lastVarSpace)
 		elif opdDir >= 12000 and opdDir < 16000:
-			isVar = False		
+			isVar = False
 	return opdDir
 	
 def getResult(cuadruplo):
@@ -100,6 +100,27 @@ def getResult(cuadruplo):
 		for var in tempTable:
 			if var.varDir == opdDir:
 				return var
+
+	return None
+
+def getVarFromDir(opdDir):
+	if opdDir == None:
+		return
+	elif opdDir >= 0 and opdDir < 4000:
+		for var in varGlb:
+			if var.varDir == opdDir:
+				return var
+	elif opdDir >= 4000 and opdDir < 7000:
+		for proc in procTable:
+			for var in proc.procVars:
+				if var.varDir == opdDir:
+					return var
+	elif opdDir >= 7000 and opdDir < 12000:
+		for var in tempTable:
+			if var.varDir == opdDir:
+				return var
+
+	return None
 
 def prepRes(cVal, cType):
 	global memEntero
@@ -191,7 +212,6 @@ def InterpretarCuadruplos():
 			auxVarTable = proc.procVars.copy()
 			pilaVarTableLocSpace.append(auxVarTable)
 			pilaVarTableLocSpaceName.append(proc.procName)
-			
 			procClean = getProcClean(procName)
 			proc.procVars = procClean.procVars
 			x = x + 1
@@ -224,8 +244,55 @@ def InterpretarCuadruplos():
 			x = x+1
 		elif opt == 'PRINT':
 			opd1 = getOperand(cuadruplos[x], 1)
-			x = x + 1
 			print (opd1)
+			x = x + 1
+
+		elif opt == 'VER':
+			index = getOperand(cuadruplos[x], 1)
+			limS = cuadruplos[x].res
+			if (index>=limS or index<0):
+				print ("Indice fuera del rango del arreglo")
+				sys.exit()
+			x = x + 1
+		elif opt == 'OFST':
+			index = getOperand(cuadruplos[x], 1)
+			arrayDir = cuadruplos[x].opd2
+			resVar = getResult(cuadruplos[x])
+			res = index + arrayDir
+			resDir = prepRes(res,resVar.varType)
+			resVar.varVal = resDir
+			x = x + 1
+		elif opt == 'ARYAS':
+			opdDir = cuadruplos[x].opd1
+			print (opdDir)
+			resVar = getResult(cuadruplos[x])
+			for cons in consTable:
+				if cons.consDir == resVar.varVal:
+					realDir = cons.consVal
+			arrDir = getVarFromDir(realDir)
+			#No se ha asigando el index del arreglo
+			if (arrDir == None):
+				opdVal = getOperand(cuadruplos[x], 2)
+				baseArray = getVarFromDir(realDir - opdVal)
+				print(realDir)
+				if realDir >= 0 and realDir < 4000:
+					#global
+					varGlbInsert(realDir, opdDir, baseArray.varType, realDir)
+					print (realDir,"|",opdDir,"|",baseArray.varType,"|",realDir,"\n")
+				elif realDir >= 4000 and realDir < 7000:
+					#procTable
+					for proc in procTable:
+						for var in proc.procVars:
+							if var.varDir == arrayDir.varDir:
+								arrProc = proc.Name
+					varLocInsert(realDir, opdDir, baseArray.varType, realDir, arrProc)
+					print (realDir,"|",opdDir,"|",baseArray.varType,"|",realDir,"|",arrProc,"\n")
+			#Ya existe el index del arreglo
+			else:
+				print('cero')
+				print(opdDir)
+				arrDir.varVal = opdDir
+			x = x + 1
 		elif opt == 'MOVER':
 			turtle.forward(getOperand(cuadruplos[x], 1))
 			x = x+1
