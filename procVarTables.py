@@ -131,7 +131,7 @@ def procPrint(procTable):
 	print ("Tabla de variables globales")
 	for var in varGlb:
 		if var:
-			print (var.varName," - ", var.varType, " - ",var.varDir, "-", var.varDim)
+			print (var.varName," - ", var.varVal," - ",var.varType, " - ",var.varDir, "-", var.varDim)
 		else:
 			print ("ConsTable is empty")
 	print ("\n")

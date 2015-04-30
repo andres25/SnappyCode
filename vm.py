@@ -23,31 +23,38 @@ pilaVarTableLocSpaceName = []
 def getOperand(cuadruplo, num):
 	if (num == 1):
 		opdDir = cuadruplo.opd1
-	else:
+	elif (num == 2):
 		opdDir = cuadruplo.opd2
+	elif (num == 3):
+		opdDir = cuadruplo.res
 
 	if opdDir == None:
 		return
+
 	isVar = True
 	while isVar:
-		if opdDir == None:
-			return
-		elif opdDir >= 0 and opdDir < 4000:
+		if opdDir >= 0 and opdDir < 4000:
 			for var in varGlb:
 				if var.varDir == opdDir:
 					opdVar = var
 					opdDir = var.varVal
-		elif opdDir >= 4000 and opdDir < 7000:
+			if num == 3:
+				return None
+		elif opdDir >= 4000 and opdDir < 8000:
 			for proc in procTable:
 				for var in proc.procVars:
 					if var.varDir == opdDir:
 						opdVar = var
 						opdDir = var.varVal
-		elif opdDir >= 7000 and opdDir < 12000:
+			if num == 3:
+				return None
+		elif opdDir >= 8000 and opdDir < 12000:
 			for var in tempTable:
 				if var.varDir == opdDir:
 					opdVar = var
 					opdDir = var.varVal
+			if num == 3:
+				return None
 		elif opdDir >= 12000 and opdDir < 16000:
 			isVar = False
 
@@ -67,12 +74,12 @@ def getConsFromParam(cuadruplo):
 				if var.varDir == opdDir:
 					opdVar = var
 					opdDir = var.varVal
-		elif opdDir >= 7000 and opdDir < 12000:
+		elif opdDir >= 8000 and opdDir < 12000:
 			for var in tempTable:
 				if var.varDir == opdDir:
 					opdVar = var
 					opdDir = var.varVal
-		elif opdDir >= 4000 and opdDir < 7000:
+		elif opdDir >= 4000 and opdDir < 8000:
 			lastVarSpace = pilaVarTableLocSpace.pop()
 			for var in lastVarSpace:
 				if var.varDir == opdDir:
@@ -91,12 +98,12 @@ def getResult(cuadruplo):
 		for var in varGlb:
 			if var.varDir == opdDir:
 				return var
-	elif opdDir >= 4000 and opdDir < 7000:
+	elif opdDir >= 4000 and opdDir < 8000:
 		for proc in procTable:
 			for var in proc.procVars:
 				if var.varDir == opdDir:
 					return var
-	elif opdDir >= 7000 and opdDir < 12000:
+	elif opdDir >= 8000 and opdDir < 12000:
 		for var in tempTable:
 			if var.varDir == opdDir:
 				return var
@@ -110,15 +117,19 @@ def getVarFromDir(opdDir):
 		for var in varGlb:
 			if var.varDir == opdDir:
 				return var
-	elif opdDir >= 4000 and opdDir < 7000:
+	elif opdDir >= 4000 and opdDir < 8000:
 		for proc in procTable:
 			for var in proc.procVars:
 				if var.varDir == opdDir:
 					return var
-	elif opdDir >= 7000 and opdDir < 12000:
+	elif opdDir >= 8000 and opdDir < 12000:
 		for var in tempTable:
 			if var.varDir == opdDir:
 				return var
+	elif opdDir >= 12000 and opdDir < 16000:
+		for cons in consTable:
+			if cons.consDir == opdDir:
+				return cons
 
 	return None
 
@@ -264,34 +275,30 @@ def InterpretarCuadruplos():
 			x = x + 1
 		elif opt == 'ARYAS':
 			opdDir = cuadruplos[x].opd1
-			print (opdDir)
-			resVar = getResult(cuadruplos[x])
-			for cons in consTable:
-				if cons.consDir == resVar.varVal:
-					realDir = cons.consVal
-			arrDir = getVarFromDir(realDir)
+			arrDir = getOperand(cuadruplos[x],3)
 			#No se ha asigando el index del arreglo
 			if (arrDir == None):
-				opdVal = getOperand(cuadruplos[x], 2)
-				baseArray = getVarFromDir(realDir - opdVal)
-				print(realDir)
-				if realDir >= 0 and realDir < 4000:
+				indexVal = getOperand(cuadruplos[x], 2)
+				newArrayDir = getVarFromDir(cuadruplos[x].res).varVal
+				newArrayVal = getVarFromDir(newArrayDir).consVal 
+				baseArray = getVarFromDir(newArrayVal - indexVal)
+				if baseArray.varDir >= 0 and baseArray.varDir < 4000:
 					#global
-					varGlbInsert(realDir, opdDir, baseArray.varType, realDir)
-					print (realDir,"|",opdDir,"|",baseArray.varType,"|",realDir,"\n")
-				elif realDir >= 4000 and realDir < 7000:
+					varName = str(baseArray.varName)+'['+str(newArrayVal)+']'
+					varGlbInsert(varName, opdDir, baseArray.varType, newArrayVal)
+				elif baseArray.varDir >= 4000 and baseArray.varDir < 8000:
 					#procTable
 					for proc in procTable:
 						for var in proc.procVars:
-							if var.varDir == arrayDir.varDir:
+							if var.varDir == baseArray.varDir:
 								arrProc = proc.Name
-					varLocInsert(realDir, opdDir, baseArray.varType, realDir, arrProc)
-					print (realDir,"|",opdDir,"|",baseArray.varType,"|",realDir,"|",arrProc,"\n")
+					varName = str(baseArray.varName)+'['+str(newArrayVal)+']'
+					varLocInsert(varName, opdDir, baseArray.varType, newArrayVal, arrProc)
 			#Ya existe el index del arreglo
 			else:
-				print('cero')
-				print(opdDir)
 				arrDir.varVal = opdDir
+
+			procPrint(procTable)
 			x = x + 1
 		elif opt == 'MOVER':
 			turtle.forward(getOperand(cuadruplos[x], 1))
