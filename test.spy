@@ -4,7 +4,6 @@ INICIOPROGRAMA
 	crear entero arrGlobal[150];
 	crear entero despues;
 
-
 	INICIOFUNCION entero circulo PARAMETROS entero lado
 		crear entero x;
 
@@ -102,7 +101,7 @@ INICIOPROGRAMA
 		crear booleano var2main;
 
 		PEDIRALUSUARIO(index);
-		SI index == 1 ENTONCES
+		si index == 1 ENTONCES
 			INICIOBLOQUE
 			circulo(1);
 			FINBLOQUE
