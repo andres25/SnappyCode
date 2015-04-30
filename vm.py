@@ -300,6 +300,14 @@ def InterpretarCuadruplos():
 
 			procPrint(procTable)
 			x = x + 1
+		elif opt == 'ARYCA':
+			index = getOperand(cuadruplos[x], 1)
+			baseArrDir = cuadruplos[x].opd2
+			resVar = getResult(cuadruplos[x])
+			arrDir = index + baseArrDir
+			arr = getVarFromDir(arrDir)
+			resVar.varVal = arr.varVal
+			x = x + 1
 		elif opt == 'MOVER':
 			turtle.forward(getOperand(cuadruplos[x], 1))
 			x = x+1

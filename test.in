@@ -1,7 +1,7 @@
 inicioprograma
 crear entero global1;
 crear flotante global2;
-crear entero HolaKeAse[150];
+crear entero arrGlobal[150];
 
 crear entero despues;
 
@@ -73,9 +73,11 @@ INICIOPRINCIPAL
 	crear entero var1main;
 	crear booleano var2main;
 
-	HolaKeAse[1] = 10;
-	HolaKeAse[2] = 10000;
-	var1main = 1 + 1;
+	arrGlobal[1] = 10;
+	arrGlobal[2] = 10000;
+	var1main = 2;
+	var1main = arrGlobal[var1main] + 1;
+	DECIRALUSUARIO(var1main);
 	
 
 FINPRINCIPAL 

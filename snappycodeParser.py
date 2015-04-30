@@ -515,7 +515,7 @@ def p_arraycall(t):
     global tempCont
 
     if varFind(varGlb,t[-1]):
-      auxVar = getVar(varGlb,t-[1])
+      auxVar = getVar(varGlb,t[-1])
     else:
       auxTable = getVarTable(actualProc)
       if varFind(auxTable,t[-1]):
@@ -525,6 +525,9 @@ def p_arraycall(t):
   
     index = pilaOperandos.pop()
 
+    cuadruplo = Cuadruplo(cuadCont, 'VER',index.varDir,0, auxVar.varDim-1)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
 
     memoria = asigna_memoria_temporal('entero')
     operandoTemp = varTableNode('t'+str(tempCont), None, 'entero', memoria)
@@ -532,14 +535,12 @@ def p_arraycall(t):
     tempCont += 1
 
 
-    cuadruplo = Cuadruplo(cuadCont, '+',auxVar.varDir , index.varDir , operandoTemp.varDir)
+    cuadruplo = Cuadruplo(cuadCont, 'ARYCA', index.varDir, auxVar.varDir, operandoTemp.varDir)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
 
     
-    cuadruplo = Cuadruplo(cuadCont, 'VER',auxVar.varDim , operandoTemp.varDir , None)
-    cuadruplos.append(cuadruplo)
-    cuadCont += 1
+
 
     pilaOperandos.append(operandoTemp)
 
