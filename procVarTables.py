@@ -43,15 +43,17 @@ def procInsert(pName, pType, pDir):
 		procTable.append(node)
 
 
-def varLocInsert(vName, vVal, vType, vDir, pName, vDim = None):
+def varLocInsert(vName, vVal, vType, vDir, pName, vDim = None, vEdit=None):
 	global procTable
 	for proc in procTable:
 		if proc.procName == pName:
 			if varFind(proc.procVars,vName):
-				var = getVar(proc.procVars,vName)
-				var.varVal =vVal
-				#print("Error Semantico: Variable ", vName, " ya fue declarada")
-				#sys.exit()
+				if vEdit != None:
+					var = getVar(proc.procVars,vName)
+					var.varVal =vVal
+				else:
+					print("Error Semantico: Variable ", vName, " ya fue declarada")
+					sys.exit()
 			else:
 				var = varTableNode(vName, vVal, vType, vDir, vDim)
 				proc.procVars.append(var)
@@ -63,14 +65,16 @@ def paramInsert(vName, vType, vDir, pName):
 		if proc.procName == pName:
 			proc.procParams.append(var)
 
-def varGlbInsert(vName, vVal, vType, vDir, vDim = None):
+def varGlbInsert(vName, vVal, vType, vDir, vDim = None, vEdit=None):
 	global varGlb
 
 	if varFind(varGlb,vName):
-		var = getVar(varGlb,vName)
-		var.varVal =vVal
-		#print("Error Semantico: Variable ", vName, " ya fue declarada")
-		#sys.exit()
+		if vEdit != None:
+			var = getVar(varGlb,vName)
+			var.varVal =vVal
+		else:
+			print("Error Semantico: Variable ", vName, " ya fue declarada")
+			sys.exit()
 	else:
 		var = varTableNode(vName, vVal, vType, vDir, vDim)
 		varGlb.append(var)

@@ -2,7 +2,6 @@ inicioprograma
 crear entero global1;
 crear flotante global2;
 crear entero arrGlobal[150];
-
 crear entero despues;
 
 INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wowow
