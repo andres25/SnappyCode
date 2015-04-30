@@ -242,9 +242,9 @@ def InterpretarCuadruplos():
 				opt = cuadruplos[y].opt
 			pilaSaltosEjec.append(y)
 			x = proc.procDir
-			print('Tabla Intermedia de Variables', '\n')
-			for var in proc.procVars:
-				print ("    " + var.varName, " - ", var.varVal, " - ",var.varType, " - ", var.varDir, "-", var.varDim)
+			#print('Tabla Intermedia de Variables', '\n')
+			#for var in proc.procVars:
+			#	print ("    " + var.varName, " - ", var.varVal, " - ",var.varType, " - ", var.varDir, "-", var.varDim)
 		elif opt == 'ENDPROC':
 			x = pilaSaltosEjec.pop()
 			procName = pilaVarTableLocSpaceName.pop()
@@ -318,7 +318,6 @@ def InterpretarCuadruplos():
 				inputVal = float(inputVal)
 			elif (inputType == 'booleano'):
 				inputval = bool(inputVal)
-			print(inputType)
 			resDir = prepRes(inputVal,inputType)
 			result.varVal = resDir
 			x = x + 1

@@ -1,89 +1,133 @@
-inicioprograma
-crear entero global1;
-crear flotante global2;
-crear entero arrGlobal[150];
-crear entero despues;
+INICIOPROGRAMA
+	crear entero global1;
+	crear flotante global2;
+	crear entero arrGlobal[150];
+	crear entero despues;
 
-INICIOFUNCION entero snappyFunc1 PARAMETROS flotante xoxo, entero yoyo, texto wowow
-	crear flotante var1func1;
-	crear entero var2func1;
-	crear entero arr1func1[5];
 
-	var1func1 = 1 + 2;
-	var1func1 = 1 + 1 + 1;
-	var2func1 = 3 * 2;
-	var2func1 = 3 / 6;
-	var2func1 = 25;
-	DECIRALUSUARIO(wowow);
+	INICIOFUNCION entero circulo PARAMETROS entero lado
+		crear entero x;
 
-    PINTAR;
+		x = 180;
+		
+		MIENTRAS x>0 HACER
+			INICIOBLOQUE
+			    MOVER 1;
+			    GIRARDERECHA 1;
+			    MOVER 1;
+			    GIRARDERECHA 1;
+			    x = x -1;
+			FINBLOQUE
+		FINMIENTRAS
 
-	SI 2>1 ENTONCES
-		INICIOBLOQUE
-			var1func1 = 1;
-		FINBLOQUE
-	SINO
-		INICIOBLOQUE
-			var1func1 = 2;
-		FINBLOQUE
-	FINSI
-
-	
-	MIENTRAS var2func1>1 HACER
-		INICIOBLOQUE
-		    MOVER 200;
-		    GIRARDERECHA 100;
-			var2func1 = var2func1 -1;
-		FINBLOQUE
-	FINMIENTRAS
+		REGRESA 1
+	FINFUNCION
 
 
 
+	INICIOFUNCION entero triangulo PARAMETROS entero lado
+		crear entero x;
 
+		x = 3;
+		
+		MIENTRAS x>0 HACER
+			INICIOBLOQUE
+			    MOVER lado;
+			    GIRARDERECHA 120;
+			    x = x -1;
+			FINBLOQUE
+		FINMIENTRAS
 
-	REGRESA var2func1
-FINFUNCION
+		REGRESA 1
+	FINFUNCION
 
-INICIOFUNCION ENTERO snappyFunc2 PARAMETROS entero param1func2, entero param2func2
-	crear flotante var1func2;
-	crear entero var2func2;
-	crear texto var3func2;
-	var3func2 = "SALI DEL PROC";
-	PINTAR;
-	DECIRALUSUARIO(param1func2);
-	SI (param1func2 == 0) ENTONCES
-		INICIOBLOQUE
-			DECIRALUSUARIO("ENTRO A LA RECURSIVIDAD");
-		FINBLOQUE
-	SINO
-		INICIOBLOQUE
-			MOVER 200;
-		    GIRARDERECHA 100;
-			param1func2 = param1func2 - 1;
-			snappyFunc2(param1func2,1);
-			DECIRALUSUARIO(var3func2);
-		FINBLOQUE
-	FINSI
+	INICIOFUNCION entero trianguloRecursivo PARAMETROS entero lado, entero veces
+		crear entero x;
 
-	REGRESA 1
-FINFUNCION
+		SI (veces == 0) ENTONCES
+			INICIOBLOQUE
+				
+			FINBLOQUE
+		SINO
+			INICIOBLOQUE
+				MOVER 200;
+			    GIRARDERECHA 120;
+				veces = veces - 1;
+				DECIRALUSUARIO(veces);
+				trianguloRecursivo(lado,veces);
+			FINBLOQUE
+		FINSI
 
-INICIOPRINCIPAL 
-	crear entero var1main;
-	crear booleano var2main;
+		REGRESA 1
+	FINFUNCION
 
-	arrGlobal[1] = 10;
-	arrGlobal[2] = 10000;
-	var1main = 2;
-	var1main = arrGlobal[var1main] + 1;
-	var1main = 2;
-	PEDIRALUSUARIO(arrGlobal[2]);
-	DECIRALUSUARIO(arrGlobal[2]);
-	arrGlobal[2] = 20000;
-	DECIRALUSUARIO(arrGlobal[var1main]);
+	INICIOFUNCION entero pentagono PARAMETROS entero lado
+		crear entero x;
 
-FINPRINCIPAL 
+		x = 5;
+		
+		MIENTRAS x>0 HACER
+			INICIOBLOQUE
+			    MOVER lado;
+			    GIRARDERECHA 72;
+			    x = x -1;
+			FINBLOQUE
+		FINMIENTRAS
 
+		REGRESA 1
+	FINFUNCION
 
+	INICIOFUNCION entero fractalEstrella PARAMETROS entero lado
+		crear entero x;
 
-finprograma
+		x = 18;
+		DESPINTAR;
+		GIRARIZQUIERDA 180;
+		MOVER 20;
+	    PINTAR;
+		
+		MIENTRAS x>0 HACER
+			INICIOBLOQUE
+			    MOVER 200;
+			    GIRARDERECHA 100;
+				x = x -1;
+			FINBLOQUE
+		FINMIENTRAS
+
+		REGRESA 1
+	FINFUNCION
+
+	INICIOPRINCIPAL 
+		crear entero index;
+		crear booleano var2main;
+
+		PEDIRALUSUARIO(index);
+		SI index == 1 ENTONCES
+			INICIOBLOQUE
+			circulo(1);
+			FINBLOQUE
+		FINSI
+		SI index == 2 ENTONCES
+			INICIOBLOQUE
+			triangulo(100);
+			FINBLOQUE
+		FINSI
+		SI index == 22 ENTONCES
+			INICIOBLOQUE
+			trianguloRecursivo(100,3);
+			FINBLOQUE
+		FINSI
+		SI index == 3 ENTONCES
+			INICIOBLOQUE
+			pentagono(100);
+			FINBLOQUE
+		FINSI
+		SI index == 4 ENTONCES
+			INICIOBLOQUE
+			fractalEstrella(100);
+			FINBLOQUE
+		FINSI
+
+	FINPRINCIPAL 
+
+FINPROGRAMA

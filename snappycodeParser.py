@@ -209,6 +209,7 @@ def p_asignacion(t):
             auxVar = getVar(auxTable,t[1])
           else:
             print ("Error Semantico: Variable ", t[1], " no encontrada para asignacion" )
+            sys.exit()
       if t[2] == None:
         tempOperando = pilaOperandos.pop()
         resType = cubo_semantico[auxVar.varType][tempOperando.varType]['=']
@@ -218,6 +219,7 @@ def p_asignacion(t):
           cuadCont += 1
         else:
           print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[4], " a asignar")
+          sys.exit()
         pilaOperandos.append(auxVar)
       else:
         operando = pilaOperandos.pop()
@@ -243,6 +245,7 @@ def p_asignacion(t):
           cuadCont += 1
         else:
           print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[5], " a asignar")
+          sys.exit()
         pilaOperandos.append(auxVar)
     pass
 
@@ -287,7 +290,8 @@ def p_expresion_eval(t):
         pilaOperandos.append(operandoTemp)
         t[0]=t[1]
       else:
-        print("Error Semantico: valores incompatibles en la comparacion") 
+        print("Error Semantico: valores incompatibles en la comparacion")
+        sys.exit()
     t[0]=t[1]
     pass
 
@@ -328,7 +332,8 @@ def p_exp_binop(t):
 
 
       else:
-        print("Error Semantico: valores incompatibles en suma")    
+        print("Error Semantico: valores incompatibles en suma")
+        sys.exit()
     pass
 
 def p_push_opt(t):
@@ -412,6 +417,7 @@ def p_push_var_opd(t):
           auxVar = getVar(auxTable,t[-1])
         else:
           print ("Error Semantico: Variable ", t[-1], " no encontrada" )
+          sys.exit()
     pilaOperandos.append(auxVar)
 pass
 
@@ -452,7 +458,7 @@ def p_llamada(t):
       #se evalua la cantidad de parametros
       if cantParams == cantParamsFunc:
         #se coloca en orden de comparacion en caso de ser multiples parametros
-        if cantParams>1:
+        if cantParams>=1:
           aux = pilaParams.pop()
           pilaParams.insert(0,aux)
           paramsFunc.reverse()
@@ -522,6 +528,7 @@ def p_arraycall(t):
         auxVar = getVar(auxTable,t[-1])
       else:
         print ("Error Semantico: Variable de tipo vector ", t[-1], " no encontrada" )
+        sys.exit()
   
     index = pilaOperandos.pop()
 
@@ -691,7 +698,7 @@ def p_io_cin(t):
     cuadruplos.append(cuadruplo)
     cuadCont += 1
 
-    if t[2] == None:
+    if t[4] == None:
       resType = cubo_semantico[auxVar.varType][operandoTemp.varType]['=']
       if resType != "error":
         cuadruplo = Cuadruplo(cuadCont, '=',operandoTemp.varDir , None, auxVar.varDir)
@@ -699,6 +706,7 @@ def p_io_cin(t):
         cuadCont += 1
       else:
         print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[4], " a asignar")
+        sys.exit()
     else:
       index = pilaOperandos.pop()
       resType = cubo_semantico[auxVar.varType][operandoTemp.varType]['=']
@@ -722,6 +730,7 @@ def p_io_cin(t):
         cuadCont += 1
       else:
         print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[5], " a asignar")
+        sys.exit()
       pilaOperandos.append(auxVar)
 
 
@@ -785,9 +794,10 @@ def p_iniciomain(t):
 def p_error(p):
     if p:
         print("Error de sintaxis en: '%s'" % p.value + p.type + ", Linea: %s"%p.lineno)
+        sys.exit()
     else:
         print("Error de sintaxis")
-
+        sys.exit()
 
 
 import ply.yacc as yacc
