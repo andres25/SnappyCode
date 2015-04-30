@@ -539,10 +539,9 @@ def p_arraycall(t):
     cuadruplos.append(cuadruplo)
     cuadCont += 1
 
-    
-
-
+  
     pilaOperandos.append(operandoTemp)
+    t[0]=t[1]
 
 pass
 
@@ -666,9 +665,68 @@ def p_io_cout(t):
     cuadCont += 1
     pass
 def p_io_cin(t):
-    'io : PEDIRALUSUARIO ID PUNTOCOMA'
+    'io : PEDIRALUSUARIO PARENTIZQ ID asignacion_arreglo PARENTDER PUNTOCOMA'
+    global cuadruplos
+    global cuadCont
+    global pilaOperandos
+    global tempCont
+    global memoria
+    
+    if varFind(varGlb,t[3]):
+      auxVar = getVar(varGlb,t[3])
+    else:
+      auxTable = getVarTable(actualProc)
+      if varFind(auxTable,t[3]):
+        auxVar = getVar(auxTable,t[3])
+      else:
+        print ("Error Semantico: Variable de tipo vector ", t[3], " no encontrada" )
+        sys.exit()
+
+    memoria = asigna_memoria_temporal(auxVar.varType)
+    operandoTemp = varTableNode('t'+str(tempCont), None, auxVar.varType, memoria)
+    tempInsert(operandoTemp)
+    tempCont += 1
+
+    cuadruplo = Cuadruplo(cuadCont, 'INPUT', auxVar.varType , None, operandoTemp.varDir)
+    cuadruplos.append(cuadruplo)
+    cuadCont += 1
+
+    if t[2] == None:
+      resType = cubo_semantico[auxVar.varType][operandoTemp.varType]['=']
+      if resType != "error":
+        cuadruplo = Cuadruplo(cuadCont, '=',operandoTemp.varDir , None, auxVar.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+      else:
+        print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[4], " a asignar")
+    else:
+      index = pilaOperandos.pop()
+      resType = cubo_semantico[auxVar.varType][operandoTemp.varType]['=']
+      if resType != "error" and index.varType == "entero":
+        # Verifica el indice del arreglo
+        cuadruplo = Cuadruplo(cuadCont, 'VER', index.varDir, 0, auxVar.varDim-1)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+        # Genera el temporal
+        memoria = asigna_memoria_temporal(resType)
+        operandoTemp2 = varTableNode('t'+str(tempCont), None, resType, memoria)
+        tempInsert(operandoTemp2)
+        tempCont += 1
+        # Asigna al temporal la direccion del arreglo + el offset
+        cuadruplo = Cuadruplo(cuadCont, 'OFST', index.varDir, auxVar.varDir, operandoTemp2.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+        # Asigna el valor al arreglo
+        cuadruplo = Cuadruplo(cuadCont, 'ARYAS', operandoTemp.varDir, index.varDir, operandoTemp2.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+      else:
+        print ("Error Semantico: Variable ", auxVar.varType, " incompatible con valor ",t[5], " a asignar")
+      pilaOperandos.append(auxVar)
+
+
     pass
- 
+
 def p_accion(t):
     'accion   : tipo_accion PUNTOCOMA'
 

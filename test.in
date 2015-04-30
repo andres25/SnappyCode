@@ -77,8 +77,11 @@ INICIOPRINCIPAL
 	arrGlobal[2] = 10000;
 	var1main = 2;
 	var1main = arrGlobal[var1main] + 1;
-	DECIRALUSUARIO(var1main);
-	
+	var1main = 2;
+	PEDIRALUSUARIO(arrGlobal[2]);
+	DECIRALUSUARIO(arrGlobal[2]);
+	arrGlobal[2] = 20000;
+	DECIRALUSUARIO(arrGlobal[var1main]);
 
 FINPRINCIPAL 
 

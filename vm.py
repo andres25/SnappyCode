@@ -31,6 +31,7 @@ def getOperand(cuadruplo, num):
 	if opdDir == None:
 		return
 
+	#opdVar = None
 	isVar = True
 	while isVar:
 		if opdDir >= 0 and opdDir < 4000:
@@ -253,11 +254,6 @@ def InterpretarCuadruplos():
 		elif opt == 'ENDPROG':
 			turtle.exitonclick()
 			x = x+1
-		elif opt == 'PRINT':
-			opd1 = getOperand(cuadruplos[x], 1)
-			print (opd1)
-			x = x + 1
-
 		elif opt == 'VER':
 			index = getOperand(cuadruplos[x], 1)
 			limS = cuadruplos[x].res
@@ -275,28 +271,28 @@ def InterpretarCuadruplos():
 			x = x + 1
 		elif opt == 'ARYAS':
 			opdDir = cuadruplos[x].opd1
-			arrDir = getOperand(cuadruplos[x],3)
+			if opdDir >= 8000 and opdDir < 12000:
+				opdTemp = getVarFromDir(opdDir)
+				opdDir = opdTemp.varVal
+			#arrDir = getOperand(cuadruplos[x],3)
 			#No se ha asigando el index del arreglo
-			if (arrDir == None):
-				indexVal = getOperand(cuadruplos[x], 2)
-				newArrayDir = getVarFromDir(cuadruplos[x].res).varVal
-				newArrayVal = getVarFromDir(newArrayDir).consVal 
-				baseArray = getVarFromDir(newArrayVal - indexVal)
-				if baseArray.varDir >= 0 and baseArray.varDir < 4000:
-					#global
-					varName = str(baseArray.varName)+'['+str(newArrayVal)+']'
-					varGlbInsert(varName, opdDir, baseArray.varType, newArrayVal)
-				elif baseArray.varDir >= 4000 and baseArray.varDir < 8000:
-					#procTable
-					for proc in procTable:
-						for var in proc.procVars:
-							if var.varDir == baseArray.varDir:
-								arrProc = proc.Name
-					varName = str(baseArray.varName)+'['+str(newArrayVal)+']'
-					varLocInsert(varName, opdDir, baseArray.varType, newArrayVal, arrProc)
+			indexVal = getOperand(cuadruplos[x], 2)
+			newArrayDir = getVarFromDir(cuadruplos[x].res).varVal
+			newArrayVal = getVarFromDir(newArrayDir).consVal 
+			baseArray = getVarFromDir(newArrayVal - indexVal)
+			if baseArray.varDir >= 0 and baseArray.varDir < 4000:
+				#global
+				varName = str(baseArray.varName)+'['+str(indexVal)+']'
+				varGlbInsert(varName, opdDir, baseArray.varType, newArrayVal)
+			elif baseArray.varDir >= 4000 and baseArray.varDir < 8000:
+				#procTable
+				for proc in procTable:
+					for var in proc.procVars:
+						if var.varDir == baseArray.varDir:
+							arrProc = proc.Name
+				varName = str(baseArray.varName)+'['+str(indexVal)+']'
+				varLocInsert(varName, opdDir, baseArray.varType, newArrayVal, arrProc)
 			#Ya existe el index del arreglo
-			else:
-				arrDir.varVal = opdDir
 
 			procPrint(procTable)
 			x = x + 1
@@ -307,6 +303,24 @@ def InterpretarCuadruplos():
 			arrDir = index + baseArrDir
 			arr = getVarFromDir(arrDir)
 			resVar.varVal = arr.varVal
+			x = x + 1
+		elif opt == 'PRINT':
+			opd1 = getOperand(cuadruplos[x], 1)
+			print (opd1)
+			x = x + 1
+		elif opt == 'INPUT':
+			result = getResult(cuadruplos[x])
+			inputVal = input('Input:')
+			inputType  = cuadruplos[x].opd1
+			if (inputType == 'entero'):
+				inputVal = int(inputVal)
+			elif (inputType == 'flotante'):
+				inputVal = float(inputVal)
+			elif (inputType == 'booleano'):
+				inputval = bool(inputVal)
+			print(inputType)
+			resDir = prepRes(inputVal,inputType)
+			result.varVal = resDir
 			x = x + 1
 		elif opt == 'MOVER':
 			turtle.forward(getOperand(cuadruplos[x], 1))

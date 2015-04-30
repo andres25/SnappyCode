@@ -48,8 +48,10 @@ def varLocInsert(vName, vVal, vType, vDir, pName, vDim = None):
 	for proc in procTable:
 		if proc.procName == pName:
 			if varFind(proc.procVars,vName):
-				print("Error Semantico: Variable ", vName, " ya fue declarada")
-				sys.exit()
+				var = getVar(proc.procVars,vName)
+				var.varVal =vVal
+				#print("Error Semantico: Variable ", vName, " ya fue declarada")
+				#sys.exit()
 			else:
 				var = varTableNode(vName, vVal, vType, vDir, vDim)
 				proc.procVars.append(var)
@@ -65,8 +67,10 @@ def varGlbInsert(vName, vVal, vType, vDir, vDim = None):
 	global varGlb
 
 	if varFind(varGlb,vName):
-		print("Error Semantico: Variable ", vName, " ya fue declarada")
-		sys.exit()
+		var = getVar(varGlb,vName)
+		var.varVal =vVal
+		#print("Error Semantico: Variable ", vName, " ya fue declarada")
+		#sys.exit()
 	else:
 		var = varTableNode(vName, vVal, vType, vDir, vDim)
 		varGlb.append(var)
@@ -180,9 +184,9 @@ def tempInsert(tVar):
 def getType(value):
 	if type(value) is int:
 		return "entero"
-	if type(value) is float:
+	elif type(value) is float:
 		return "flotante"
-	if type(value) is basestring:
-		return "texto"
-	if type(value) is bool:
+	elif type(value) is bool:
 		return "booleano"
+	else:
+		return "texto"
