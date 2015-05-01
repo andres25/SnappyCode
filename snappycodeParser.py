@@ -749,7 +749,8 @@ def p_tipo_accion(t):
 def p_objeto_con_exp(t):
     '''objeto_con_exp  : GIRARDERECHA exp
                | GIRARIZQUIERDA exp
-               | MOVER exp '''
+               | MOVER exp 
+               | RETROCEDE exp'''
     global cuadruplos
     global cuadCont
     global pilaOperandos
