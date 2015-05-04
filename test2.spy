@@ -72,12 +72,14 @@ INICIOPROGRAMA
 		crear flotante fact;
 		crear entero fib;
 		crear entero indice;
+		crear entero arreglo[5];
 		indice = 6;
 
 
 		fib = fibonacci(5);
 		DECIRALUSUARIO(fib);
 		
+		DECIRALUSUARIO(arreglo[1]);
 	FINPRINCIPAL 
 
 FINPROGRAMA

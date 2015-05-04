@@ -203,6 +203,7 @@ def initMem():
 		elif cons.consType == 'booleano':
 			if cons.consDir > memBooleano:
 				memBooleano = cons.consDir
+
 	if not memEntero > 12000:
 		memEntero = 12000;
 	if not memFlotante > 13000:
@@ -211,6 +212,8 @@ def initMem():
 		memTexto = 14000;
 	if not memBooleano > 15000:
 		memBooleano = 15000;
+
+	consInsert(None, None, 15999)
 def getCuadMain():
 	for proc in procTable:
 		if proc.procName == 'main':
@@ -378,7 +381,10 @@ def InterpretarCuadruplos():
 			resVar = getResult(cuadruplos[x])
 			arrDir = index + baseArrDir
 			arr = getVarFromDir(arrDir)
-			resVar.varVal = arr.varVal
+			if arr:
+				resVar.varVal = arr.varVal
+			else:
+				resVar.varVal = 15999
 			x = x + 1
 		elif opt == 'PRINT':
 			opd1 = getOperand(cuadruplos[x], 1)
