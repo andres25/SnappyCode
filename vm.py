@@ -12,6 +12,7 @@ memBooleano = 0
 
 # grapgics turtle
 turtle.setup(800, 600)
+turtle.speed('normal')
 wn = turtle.Screen()
 wn.title("SnappyCode")
 
@@ -20,6 +21,7 @@ wn.title("SnappyCode")
 pilaSaltosEjec = []
 pilaVarTableLocSpace = []
 pilaVarTableLocSpaceName = []
+
 def getOperand(cuadruplo, num):
 	if (num == 1):
 		opdDir = cuadruplo.opd1
@@ -65,7 +67,6 @@ def getOperand(cuadruplo, num):
 
 def getConsFromParam(cuadruplo):
 	opdDir = cuadruplo.opd1
-
 	isVar = True
 	while isVar:
 		if opdDir == None:
@@ -81,15 +82,42 @@ def getConsFromParam(cuadruplo):
 					opdVar = var
 					opdDir = var.varVal
 		elif opdDir >= 4000 and opdDir < 8000:
-			lastVarSpace = pilaVarTableLocSpace.pop()
+			lastVarSpace = pilaVarTableLocSpace[-1]
 			for var in lastVarSpace:
 				if var.varDir == opdDir:
 					opdVar = var
 					opdDir = var.varVal
-			pilaVarTableLocSpace.append(lastVarSpace)
 		elif opdDir >= 12000 and opdDir < 16000:
 			isVar = False
 	return opdDir
+
+def getConsFromVar(var):
+	opdDir = var.varDir
+
+	isVar = True
+	while isVar:
+		if opdDir >= 0 and opdDir < 4000:
+			for var in varGlb:
+				if var.varDir == opdDir:
+					opdVar = var
+					opdDir = var.varVal
+		elif opdDir >= 4000 and opdDir < 8000:
+			for proc in procTable:
+				for var in proc.procVars:
+					if var.varDir == opdDir:
+						opdVar = var
+						opdDir = var.varVal
+		elif opdDir >= 8000 and opdDir < 12000:
+			for var in tempTable:
+				if var.varDir == opdDir:
+					opdVar = var
+					opdDir = var.varVal
+		elif opdDir >= 12000 and opdDir < 16000:
+			isVar = False
+
+		for cons in consTable:
+			if cons.consDir == opdDir:
+				return cons
 	
 def getResult(cuadruplo):
 	opdDir = cuadruplo.res
@@ -219,13 +247,31 @@ def InterpretarCuadruplos():
 			else:
 				x = x + 1
 		elif opt == 'ERA':
-			procName = cuadruplos[x].opd2
-			proc = getProc(procName)
-			auxVarTable = proc.procVars.copy()
+			#Si esta vacia, significa que la llamada es desde main
+			#Por lo tanto se inserta main en la pila
+			if len(pilaVarTableLocSpaceName) == 0:
+				#Se inserta el nombre del proc actual
+				pilaVarTableLocSpaceName.append('main')
+
+
+			#Se resplada el proc actual
+			procOrigenName = pilaVarTableLocSpaceName[-1]
+			procOrigen = getProc(procOrigenName)
+			auxVarTable = copy.deepcopy(procOrigen.procVars)
 			pilaVarTableLocSpace.append(auxVarTable)
-			pilaVarTableLocSpaceName.append(proc.procName)
-			procClean = getProcClean(procName)
-			proc.procVars = procClean.procVars
+
+			#Se obtiene el proc Destino
+			procDestinoName = cuadruplos[x].opd2
+			procDestino = getProc(procDestinoName)
+
+			#Se limpia el proc Destino
+			procClean = getProcClean(procDestinoName)
+			procDestino.procVars = procClean.procVars
+
+			#Se inserta el nombre del proc actual
+			pilaVarTableLocSpaceName.append(procDestinoName)
+
+				
 			x = x + 1
 		elif opt == 'GOSUB':
 			procName = cuadruplos[x].opd2
@@ -240,17 +286,47 @@ def InterpretarCuadruplos():
 				numParam = numParam + 1
 				y = y + 1
 				opt = cuadruplos[y].opt
+
 			pilaSaltosEjec.append(y)
 			x = proc.procDir
-			#print('Tabla Intermedia de Variables', '\n')
-			#for var in proc.procVars:
-			#	print ("    " + var.varName, " - ", var.varVal, " - ",var.varType, " - ", var.varDir, "-", var.varDim)
 		elif opt == 'ENDPROC':
 			x = pilaSaltosEjec.pop()
-			procName = pilaVarTableLocSpaceName.pop()
+			#Remover proc Actual de la pila porque se acaba su ejecucion
+			procAnteriorName = pilaVarTableLocSpaceName.pop()
+			procAnterior = getProc(procAnteriorName)
+
+
+			#obtener el proc actual
+			procName = pilaVarTableLocSpaceName[-1]
 			proc = getProc(procName)
+
+
+			#obtener el proc del respaldo para regresar el espacio de memoria
 			auxVarTable = pilaVarTableLocSpace.pop()
+
+			#Guardar el valor obtenido al terminar la funcion
+			returnVar = procAnterior.procRetVar
+			varDir = None
+			for var in procAnterior.procVars:
+				if var.varDir == returnVar.varVal:
+					cons = getConsFromVar(var)
+					consDir = cons.consDir
+					varDir = var.varDir
+
+
+			#Regresar el espacio de memoria antes de la llamada
 			proc.procVars = auxVarTable
+
+			
+			#Actualizar con el valor guardado
+			if varDir:
+				for var in proc.procVars:
+					if var.varDir == varDir:
+						var.varVal = consDir
+
+					
+
+		
 		elif opt == 'ENDPROG':
 			turtle.exitonclick()
 			x = x+1
@@ -341,11 +417,16 @@ def InterpretarCuadruplos():
 			x = x+1
 		elif opt == '=':
 			opdDir = cuadruplos[x].opd1
+			if opdDir >= 8000 and opdDir < 12000:
+				var = getVarFromDir(opdDir)
+				cons = getConsFromVar(var)
+				opdDir = cons.consDir
 			resVar = getResult(cuadruplos[x])
 			resVar.varVal = opdDir
 			#print (num,"|",opdDir,"|",None,"|",opt,"|",resVar.varDir,"\n")
 			x = x+1
 		else:
+			#procPrint(procTable)
 			opd1 = getOperand(cuadruplos[x], 1)
 			opd2 = getOperand(cuadruplos[x], 2)
 			resVar = getResult(cuadruplos[x])

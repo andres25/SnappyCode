@@ -18,7 +18,7 @@ class varTableNode:
 		self.varDim = vDim
 
 class procTableNode:
-	def __init__(self, pName, pType, pDir, pRetVar = None):
+	def __init__(self, pName, pType, pDir, pRetVar):
 		self.procName = pName
 		self.procReturn = pType
 		self.procRetVar = pRetVar
@@ -33,13 +33,13 @@ class consTableNode:
 		self.consType = cType
 		self.consDir = cDir
 
-def procInsert(pName, pType, pDir):
+def procInsert(pName, pType, pDir, pRetVar=None):
 	global procTable
 	if procFind(pName):
 		print("Error Semantico: Procedimiento ", pName, " ya fue declarado")
 		sys.exit()
 	else:
-		node = procTableNode(pName, pType, pDir)
+		node = procTableNode(pName, pType, pDir, pRetVar)
 		procTable.append(node)
 
 

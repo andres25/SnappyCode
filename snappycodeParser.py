@@ -109,6 +109,9 @@ def p_funcion(t):
 
 def p_iniciofunc(t): 
     'iniciofunc : INICIOFUNCION tipo ID'
+    global memoria
+    global tempCont
+
     t[0]= t[3]
     global scope
     scope = 'parametro'
@@ -125,7 +128,15 @@ def p_iniciofunc(t):
       procType = 'booleano'
     elif procType == 'ENTERO':
       procType = 'entero'
-    procInsert(actualProc, procType, cuadCont)
+
+    # Genera el temporal
+    memoria = asigna_memoria_temporal(procType)
+    operandoTemp = varTableNode('t'+str(tempCont), None, procType, memoria)
+    tempInsert(operandoTemp)
+    tempCont += 1
+
+    procInsert(actualProc, procType, cuadCont, operandoTemp)
+
     pass
 
 def p_param(t): 
@@ -156,19 +167,21 @@ def p_param_empty(t):
 
 
 def p_finfunc(t): 
-    'finfunc : C REGRESA expresion FINFUNCION'
+    'finfunc : C return FINFUNCION'
     global cuadCont
     global cuadruplos
     global procTable
     cuadruplo = Cuadruplo(cuadCont, 'ENDPROC',None , None, None)
     cuadruplos.append(cuadruplo)
     cuadCont += 1
-    returnVar = pilaOperandos.pop()
+    returnVarOp = pilaOperandos.pop()
     proc = getProc(actualProc)
-    proc.procRetVar = returnVar
-    if returnVar.varType != proc.procReturn:
+    returnVar = proc.procRetVar 
+    if returnVarOp.varType != proc.procReturn:
       print ("Error Semantico: Valor de retorno incompatible con tipo de funcion ",proc.procReturn, " en ", actualProc )
       sys.exit()
+    else:
+      returnVar.varVal = returnVarOp.varDir
     pass
 
  
@@ -184,7 +197,8 @@ def p_estatuto(t):
            | ciclo
            | io
            | accion
-           | llamada_sin_ret'''
+           | llamada_sin_ret
+           | return'''
     pass
 
 def p_asignacion(t):
@@ -439,6 +453,7 @@ def p_llamada(t):
       cuadCont += 1
 
       retVar = proc.procRetVar
+      print(retVar)
       if retVar != None:
         pilaOperandos.append(retVar)
 
@@ -772,6 +787,22 @@ def p_objeto_sin_exp(t):
 
 def p_llamada_sin_ret(t):
     'llamada_sin_ret   : ID llamada PUNTOCOMA'
+    pass
+
+def p_return(t): 
+    'return : REGRESA expresion PUNTOCOMA'
+    global cuadCont
+    global cuadruplos
+    global procTable
+    # cuadruplo = Cuadruplo(cuadCont, 'ENDPROC',None , None, None)
+    # cuadruplos.append(cuadruplo)
+    # cuadCont += 1
+    # returnVar = pilaOperandos.pop()
+    # proc = getProc(actualProc)
+    # proc.procRetVar = returnVar
+    # if returnVar.varType != proc.procReturn:
+    #   print ("Error Semantico: Valor de retorno incompatible con tipo de funcion ",proc.procReturn, " en ", actualProc )
+    #   sys.exit()
     pass
 
 def p_principal(t): 

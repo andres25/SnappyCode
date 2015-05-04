@@ -19,7 +19,7 @@ INICIOPROGRAMA
 			FINBLOQUE
 		FINMIENTRAS
 
-		REGRESA 1
+		REGRESA 1;
 	FINFUNCION
 
 
@@ -37,7 +37,7 @@ INICIOPROGRAMA
 			FINBLOQUE
 		FINMIENTRAS
 
-		REGRESA 1
+		REGRESA 1;
 	FINFUNCION
 
 	INICIOFUNCION entero trianguloRecursivo PARAMETROS entero lado, entero veces
@@ -57,7 +57,7 @@ INICIOPROGRAMA
 			FINBLOQUE
 		FINSI
 
-		REGRESA 1
+		REGRESA 1;
 	FINFUNCION
 
 	INICIOFUNCION entero pentagono PARAMETROS entero lado
@@ -73,7 +73,7 @@ INICIOPROGRAMA
 			FINBLOQUE
 		FINMIENTRAS
 
-		REGRESA 1
+		REGRESA 1;
 	FINFUNCION
 
 	INICIOFUNCION entero fractalEstrella PARAMETROS entero lado
@@ -93,12 +93,75 @@ INICIOPROGRAMA
 			FINBLOQUE
 		FINMIENTRAS
 
-		REGRESA 1
+		REGRESA 1;
 	FINFUNCION
+
+
+	INICIOFUNCION entero piramide PARAMETROS entero lado, entero veces
+		crear entero x;
+
+
+		SI (veces < 1) ENTONCES
+			INICIOBLOQUE
+				
+			FINBLOQUE
+		SINO
+			INICIOBLOQUE
+				GIRARDERECHA 67.5;
+				veces = veces - 1;
+				piramide(lado,veces);
+				PINTAR;
+
+				MOVER lado/2;
+
+				MOVER lado/3;
+			    GIRARDERECHA 120;
+				veces = veces - 1;
+				piramide(lado,veces);
+
+				MOVER lado/4;
+
+				MOVER lado/3;
+			    GIRARDERECHA 120;
+				veces = veces - 1;
+				piramide(lado,veces);
+
+			FINBLOQUE
+		FINSI
+
+		REGRESA 1;
+	FINFUNCION
+
+	INICIOFUNCION flotante fractalSnowFlake PARAMETROS flotante longitud, entero profundidad
+		crear flotante x;
+
+
+		SI profundidad < 0 ENTONCES
+			INICIOBLOQUE
+				MOVER(longitud);
+			FINBLOQUE
+		SINO
+			INICIOBLOQUE
+		    	fractalSnowFlake(longitud/3.0, profundidad-1);
+		     	GIRARDERECHA(60);
+		     	fractalSnowFlake(longitud/3.0, profundidad-1);
+		     	GIRARIZQUIERDA(120);
+		     	fractalSnowFlake(longitud/3.0, profundidad-1);
+		     	GIRARDERECHA(60);
+		     	fractalSnowFlake(longitud/3.0, profundidad-1);
+			FINBLOQUE
+		FINSI
+		
+		REGRESA 1.0;
+	FINFUNCION
+
+	
 
 	INICIOPRINCIPAL 
 		crear entero index;
+		crear flotante num;
 		crear booleano var2main;
+
 
 		PEDIRALUSUARIO(index);
 		si index == 1 ENTONCES
@@ -126,7 +189,16 @@ INICIOPROGRAMA
 			fractalEstrella(100);
 			FINBLOQUE
 		FINSI
-
+		SI index == 5 ENTONCES
+			INICIOBLOQUE
+			piramide(300,3);
+			FINBLOQUE
+		FINSI
+		SI index == 6 ENTONCES
+			INICIOBLOQUE
+			fractalSnowFlake(500.0,4);
+			FINBLOQUE
+		FINSI
 	FINPRINCIPAL 
 
 FINPROGRAMA
