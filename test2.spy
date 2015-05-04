@@ -73,13 +73,22 @@ INICIOPROGRAMA
 		crear entero fib;
 		crear entero indice;
 		crear entero arreglo[5];
-		indice = 6;
 
+		arreglo[3]=5;
 
 		fib = fibonacci(5);
 		DECIRALUSUARIO(fib);
-		
-		DECIRALUSUARIO(arreglo[1]);
+		indice = 0;
+		MIENTRAS indice < 5 HACER
+			INICIOBLOQUE
+				SI (arreglo[indice] == 5) ENTONCES
+					INICIOBLOQUE
+						DECIRALUSUARIO(indice);
+					FINBLOQUE
+				FINSI
+				indice = indice +1;
+			FINBLOQUE
+		FINMIENTRAS
 	FINPRINCIPAL 
 
 FINPROGRAMA

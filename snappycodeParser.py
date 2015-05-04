@@ -60,10 +60,10 @@ def p_single(t):
     global memoria
     if actualProc == 'global':
       memoria = asigna_memoria_global(t[2])
-      varGlbInsert(t[3], None, t[2], memoria)
+      varGlbInsert(t[3], 15999, t[2], memoria)
     else:
       memoria = asigna_memoria_local(t[2])
-      varLocInsert(t[3], None, t[2], memoria, actualProc)
+      varLocInsert(t[3], 15999, t[2], memoria, actualProc)
     pass
 
 def p_array(t):
@@ -71,10 +71,10 @@ def p_array(t):
     global memoria
     if actualProc == 'global':
       memoria = asigna_memoria_global(t[2], t[5])
-      varGlbInsert(t[3], None, t[2], memoria, t[5])
+      varGlbInsert(t[3], 15999, t[2], memoria, t[5])
     else:
       memoria = asigna_memoria_local(t[2], t[5])
-      varLocInsert(t[3], None, t[2], memoria, actualProc, t[5])
+      varLocInsert(t[3], 15999, t[2], memoria, actualProc, t[5])
     memoria += t[5]
     pass
 

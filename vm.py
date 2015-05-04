@@ -336,7 +336,7 @@ def InterpretarCuadruplos():
 		elif opt == 'VER':
 			index = getOperand(cuadruplos[x], 1)
 			limS = cuadruplos[x].res
-			if (index>=limS or index<0):
+			if (index>limS or index<0):
 				print ("Indice fuera del rango del arreglo")
 				sys.exit()
 			x = x + 1
@@ -368,7 +368,7 @@ def InterpretarCuadruplos():
 				for proc in procTable:
 					for var in proc.procVars:
 						if var.varDir == baseArray.varDir:
-							arrProc = proc.Name
+							arrProc = proc.procName
 				varName = str(baseArray.varName)+'['+str(indexVal)+']'
 				varLocInsert(varName, opdDir, baseArray.varType, newArrayVal, arrProc,None,1)
 			#Ya existe el index del arreglo
@@ -380,11 +380,13 @@ def InterpretarCuadruplos():
 			baseArrDir = cuadruplos[x].opd2
 			resVar = getResult(cuadruplos[x])
 			arrDir = index + baseArrDir
+			print('index',index)
 			arr = getVarFromDir(arrDir)
 			if arr:
 				resVar.varVal = arr.varVal
 			else:
 				resVar.varVal = 15999
+			procPrint(procTable)
 			x = x + 1
 		elif opt == 'PRINT':
 			opd1 = getOperand(cuadruplos[x], 1)
