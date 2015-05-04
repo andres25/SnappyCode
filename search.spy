@@ -1,0 +1,25 @@
+INICIOPROGRAMA
+	CREAR entero myArray[15];
+
+	INICIOPRINCIPAL 
+
+		CREAR entero i;
+		CREAR entero valor;
+		valor = 5;
+		myArray[10] = 5;
+		i = 0;
+		MIENTRAS i < 15 HACER
+	    	INICIOBLOQUE
+		        SI myArray[i] == 5 ENTONCES
+					INICIOBLOQUE
+						DECIRALUSUARIO ("La posición con el valor de 5 es:");
+						DECIRALUSUARIO (i);
+				 	FINBLOQUE
+				FINSI
+		        i = i + 1;
+	    	FINBLOQUE
+		FINMIENTRAS
+		
+	FINPRINCIPAL 
+
+FINPROGRAMA
