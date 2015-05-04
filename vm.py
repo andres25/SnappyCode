@@ -12,11 +12,7 @@ memBooleano = 0
 
 # grapgics turtle
 turtle.setup(800, 600)
-<<<<<<< HEAD
 turtle.speed('normal')
-=======
-turtle.speed('fastest')
->>>>>>> origin/master
 wn = turtle.Screen()
 wn.title("SnappyCode")
 
