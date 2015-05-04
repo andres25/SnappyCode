@@ -1,0 +1,39 @@
+INICIOPROGRAMA
+
+	INICIOFUNCION entero espiral 
+		CREAR entero grados;
+		CREAR entero cont;
+		GIRARDERECHA 90;
+		grados = 80;
+		cont = 0;
+		MIENTRAS grados > 3 HACER
+			INICIOBLOQUE
+			SI (grados < 40) ENTONCES
+				INICIOBLOQUE
+					MIENTRAS cont < 12 HACER
+						INICIOBLOQUE
+							MOVER 15;
+							GIRARDERECHA grados;
+							cont = cont + 1;
+						FINBLOQUE
+					FINMIENTRAS
+					cont = 0;
+				FINBLOQUE
+			FINSI
+				MOVER 15;
+				GIRARDERECHA grados;
+				grados = grados - 1;
+		    FINBLOQUE
+		FINMIENTRAS
+
+		REGRESA 1
+	FINFUNCION
+
+	INICIOPRINCIPAL 
+
+		MOVER 10;
+		espiral();
+
+	FINPRINCIPAL 
+
+FINPROGRAMA

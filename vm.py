@@ -12,7 +12,11 @@ memBooleano = 0
 
 # grapgics turtle
 turtle.setup(800, 600)
+<<<<<<< HEAD
 turtle.speed('normal')
+=======
+turtle.speed('fastest')
+>>>>>>> origin/master
 wn = turtle.Screen()
 wn.title("SnappyCode")
 
@@ -399,6 +403,9 @@ def InterpretarCuadruplos():
 			x = x + 1
 		elif opt == 'MOVER':
 			turtle.forward(getOperand(cuadruplos[x], 1))
+			x = x+1
+		elif opt == 'RETROCEDE':
+			turtle.backward(getOperand(cuadruplos[x], 1))
 			x = x+1
 		elif opt == 'PINTAR':
 			turtle.pendown()
