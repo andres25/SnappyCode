@@ -23,6 +23,7 @@ pilaSaltos = []
 pilaParams = []
 
 precedence = (
+    ('nonassoc', 'AND', 'OR'),
     ('nonassoc', 'MAYORQUE', 'MENORQUE', 'DIFERENTEQUE', 'IGUALQUE', 'MAYORIGUAL', 'MENORIGUAL'),
     ('left','MAS','MENOS'),
     ('left','MULT','DIV'),
@@ -273,7 +274,40 @@ def p_asignacion_arreglo_empty(t):
     pass
 
 def p_expresion_eval(t): 
-    '''expresion : exp MAYORQUE push_opt exp
+    '''expresion : comparacion AND push_opt comparacion
+           | comparacion OR push_opt comparacion'''
+    global cuadruplos
+    global pilaOperandos
+    global pilaOperadores
+    global memoria
+    global tempCont
+    global cuadCont
+    
+    if pilaOperadores:
+      operador = pilaOperadores.pop()
+      operando2 = pilaOperandos.pop()
+      operando1 = pilaOperandos.pop()
+      resType = cubo_semantico[operando1.varType][operando2.varType][operador]
+      if resType != "error":
+        memoria = asigna_memoria_temporal(resType)
+        operandoTemp = varTableNode('t'+str(tempCont), None, resType, memoria)
+        tempInsert(operandoTemp)
+        tempCont += 1
+
+        cuadruplo = Cuadruplo(cuadCont, operador, operando1.varDir, operando2.varDir, operandoTemp.varDir)
+        cuadruplos.append(cuadruplo)
+        cuadCont += 1
+
+        pilaOperandos.append(operandoTemp)
+        t[0]=t[1]
+      else:
+        print("Error Semantico: valores incompatibles en la comparacion")
+        sys.exit()
+    t[0]=t[1]
+    pass
+
+def p_comparacion_eval(t): 
+    '''comparacion : exp MAYORQUE push_opt exp
            | exp MENORQUE push_opt exp
            | exp DIFERENTEQUE push_opt exp
            | exp IGUALQUE push_opt exp
@@ -346,7 +380,7 @@ def p_exp_binop(t):
 
 
       else:
-        print("Error Semantico: valores incompatibles en suma")
+        print("Error Semantico: valores incompatibles en operacion")
         sys.exit()
     pass
 
@@ -507,10 +541,14 @@ def p_llamada_param(t):
 pass
 
 def p_expresion_unique(t): 
-    'expresion : exp'
+    'expresion : comparacion'
     t[0] = t[1]
 pass
- 
+
+def p_comparacion_unique(t): 
+    'comparacion : exp'
+    t[0] = t[1]
+pass
 
 def p_llamada_param_mult(t):
     'llamada_param_mult :  llamada_param_mult COMA expresion'

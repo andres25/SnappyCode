@@ -10,7 +10,8 @@ tokens = ( 'INICIOPROGRAMA', 'FINPROGRAMA', 'INICIOFUNCION', 'FINFUNCION', 'REGR
     'SINO','MIENTRAS','FINMIENTRAS','HACER','LISTA', 'IGUAL', 'IGUALQUE' , 'MAYORQUE' , 'MENORQUE', 'DIFERENTEQUE', 
     'PINTAR', 'DESPINTAR', 'DECIRALUSUARIO', 'PEDIRALUSUARIO', 'INICIOBLOQUE', 'FINBLOQUE', 'MAS',
     'MENOS','COMA', 'MULT', 'DIV', 'PUNTOCOMA','PARENTIZQ','PARENTDER', 'ENTERO', 'FLOTANTE', 'TEXTO', 
-    'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO', 'MAYORIGUAL', 'MENORIGUAL', 'BOOLEANO', 'CORCHETEIZQ', 'CORCHETEDER'
+    'CTEENTERO', 'CTEFLOTANTE', 'CTETEXTO', 'MAYORIGUAL', 'MENORIGUAL', 'BOOLEANO', 'CORCHETEIZQ', 'CORCHETEDER',
+    'AND','OR'
     )
 
 reserved = { 'inicioprograma' : 'INICIOPROGRAMA', 
@@ -100,6 +101,8 @@ t_MAYORQUE               = r'>'
 t_DIFERENTEQUE           = r'<>'
 t_MAYORIGUAL             = r'>='
 t_MENORIGUAL             = r'<='
+t_AND                    = r'&&'
+t_OR                     = r'\|\|'
 t_COMA                   = r','
 t_TRUE                   = r'[1]'
 t_FALSE                  = r'[0]'
