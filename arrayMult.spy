@@ -12,7 +12,6 @@ INICIOPROGRAMA
 	    	INICIOBLOQUE
 	    		arregloUno[i] = i * 1;
 	    		arregloDos[i] = i * 1;
-	    		DECIRALUSUARIO(i);
 		        i = i + 1;
 	    	FINBLOQUE
 		FINMIENTRAS

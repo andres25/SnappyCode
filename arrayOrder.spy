@@ -1,0 +1,46 @@
+INICIOPROGRAMA
+
+	INICIOPRINCIPAL 
+
+		CREAR entero arregloUno[5];
+		CREAR entero i;
+		CREAR entero aux;
+		CREAR booleano bandera;
+
+		bandera = TRUE;
+		arregloUno[0] = 5;
+		arregloUno[1] = 3;
+		arregloUno[2] = 4;
+		arregloUno[3] = 1;
+		arregloUno[4] = 2;
+		i = 0;
+		MIENTRAS bandera == TRUE HACER
+	    	INICIOBLOQUE
+	    		bandera = FALSE;
+	    		i = 0;
+	    		MIENTRAS i < 4 HACER
+			    	INICIOBLOQUE
+			    		SI arregloUno[i] > arregloUno[i+1] ENTONCES
+							INICIOBLOQUE
+								aux = arregloUno[i];
+								arregloUno[i] = arregloUno[i+1];
+								arregloUno[i+1] = aux;
+								bandera = TRUE;
+							FINBLOQUE
+						FINSI
+			    		i = i + 1;
+			    	FINBLOQUE
+				FINMIENTRAS
+	    	FINBLOQUE
+		FINMIENTRAS
+
+		i = 0;
+		MIENTRAS i < 5 HACER
+	    	INICIOBLOQUE
+	    		DECIRALUSUARIO(arregloUno[i]);
+	    		i = i + 1;
+	    	FINBLOQUE
+		FINMIENTRAS
+	FINPRINCIPAL 
+
+FINPROGRAMA

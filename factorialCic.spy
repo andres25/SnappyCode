@@ -1,0 +1,17 @@
+INICIOPROGRAMA
+
+	INICIOPRINCIPAL 
+		crear flotante fact;
+		crear flotante resultado;
+		fact = 6;
+		resultado = 1;
+		MIENTRAS  fact > 0 HACER
+	    	INICIOBLOQUE
+	    		resultado = resultado * fact;
+	    		fact = fact - 1; 
+	    	FINBLOQUE
+		FINMIENTRAS
+		DECIRALUSUARIO(resultado);
+	FINPRINCIPAL 
+
+FINPROGRAMA
