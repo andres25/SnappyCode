@@ -51,7 +51,7 @@
 		<key>characterOperator</key>
 		<dict>
 			<key>match</key>
-			<string>(\.|\+=|\+|\*=|\*|\\=|\\|/=|/|=|-=|-|&lt;|&lt;=|&gt;|&gt;=|&amp;=|&amp;|\^|\^=|&gt;&gt;=|&gt;&gt;|&lt;&lt;=|&lt;&lt;|:=)</string>
+			<string>(\.|\|\||\+=|\+|\*=|\*|\\=|\\|/=|/|=|-=|-|&lt;|&lt;=|&gt;|&gt;=|&amp;=|&amp;|\^|\^=|&gt;&gt;=|&gt;&gt;|&lt;&lt;=|&lt;&lt;|:=)</string>
 			<key>name</key>
 			<string>keyword.operator.snappy</string>
 		</dict>
@@ -79,7 +79,7 @@
 		<key>actionKeywords</key>
 		<dict>
 			<key>match</key>
-			<string>(?i:\b(MOVER|GIRARIZQUIERDA|GIRARDERECHA|DESPINTAR|PINTAR|PEDIRALUSUARIO|DECIRALUSUARIO|mover|girarizquierda|girarderecha|despintar|pintar|pediralusuario|deciralusuario|crear|CREAR)\b)</string>
+			<string>(?i:\b(MOVER|RETROCEDE|retrocede|GIRARIZQUIERDA|GIRARDERECHA|DESPINTAR|PINTAR|PEDIRALUSUARIO|DECIRALUSUARIO|mover|girarizquierda|girarderecha|despintar|pintar|pediralusuario|deciralusuario|crear|CREAR)\b)</string>
 			<key>name</key>
 			<string>constant.language.snappy</string>
 		</dict>
