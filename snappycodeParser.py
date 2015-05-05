@@ -487,7 +487,6 @@ def p_llamada(t):
       cuadCont += 1
 
       retVar = proc.procRetVar
-      print(retVar)
       if retVar != None:
         pilaOperandos.append(retVar)
 
@@ -724,6 +723,7 @@ def p_io_cout(t):
     cuadruplos.append(cuadruplo)
     cuadCont += 1
     pass
+
 def p_io_cin(t):
     'io : PEDIRALUSUARIO PARENTIZQ ID asignacion_arreglo PARENTDER PUNTOCOMA'
     global cuadruplos
@@ -830,18 +830,7 @@ def p_llamada_sin_ret(t):
 
 def p_return(t): 
     'return : REGRESA expresion PUNTOCOMA'
-    global cuadCont
-    global cuadruplos
-    global procTable
-    # cuadruplo = Cuadruplo(cuadCont, 'ENDPROC',None , None, None)
-    # cuadruplos.append(cuadruplo)
-    # cuadCont += 1
-    # returnVar = pilaOperandos.pop()
-    # proc = getProc(actualProc)
-    # proc.procRetVar = returnVar
-    # if returnVar.varType != proc.procReturn:
-    #   print ("Error Semantico: Valor de retorno incompatible con tipo de funcion ",proc.procReturn, " en ", actualProc )
-    #   sys.exit()
+
     pass
 
 def p_principal(t): 

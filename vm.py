@@ -452,7 +452,7 @@ def InterpretarCuadruplos():
 			#Si el cuaruplo siguiente es un parametro entonces se inserta en el procedimiento
 			#destino
 			while opt == 'PARAM':
-				cuadruplos[y].printCuad()
+				#cuadruplos[y].printCuad()
 				opd = getConsFromParam(cuadruplos[y])
 				setParam(opd,procName,numParam)
 				numParam = numParam + 1
