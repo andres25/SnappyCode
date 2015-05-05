@@ -43,7 +43,7 @@ def p_program(t):
     print ("Cuadruplos")
     for cuad in cuadruplos:
         print(cuad.num, '|', cuad.opt, '|', cuad.opd1, '|', cuad.opd2, '|', cuad.res , '\n')
-    print ("Cuadruplos De Ejecucion")
+    print ("Resultado de ejecucion")
     vm.InterpretarCuadruplos()
     pass
 

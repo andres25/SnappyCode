@@ -79,6 +79,21 @@ INICIOPROGRAMA
 		REGRESA 1;
 	FINFUNCION
 
+	INICIOFUNCION entero fractalArbol PARAMETROS entero branchLen
+		SI branchLen > 5 ENTONCES
+			INICIOBLOQUE
+				MOVER(branchLen);
+		        GIRARDERECHA(20);
+		        fractalArbol(branchLen - 15);
+		        GIRARIZQUIERDA(40);
+		        fractalArbol(branchLen - 15);
+		        GIRARDERECHA(20);
+		        RETROCEDE(branchLen);
+			FINBLOQUE
+		FINSI
+		REGRESA 1;
+	FINFUNCION
+
 	INICIOFUNCION flotante fractalSnowFlake PARAMETROS flotante longitud, entero profundidad
 		crear flotante x;
 		SI profundidad < 0 ENTONCES
@@ -127,6 +142,13 @@ INICIOPROGRAMA
 		SI index == 4 ENTONCES
 			INICIOBLOQUE
 			fractalEstrella(100);
+			FINBLOQUE
+		FINSI
+		SI index == 5 ENTONCES
+			INICIOBLOQUE
+			GIRARIZQUIERDA(90);
+			RETROCEDE(100);
+			fractalArbol(100);
 			FINBLOQUE
 		FINSI
 		SI index == 6 ENTONCES
