@@ -1,0 +1,29 @@
+INICIOPROGRAMA
+
+	INICIOPRINCIPAL 
+
+		CREAR entero arregloUno[5];
+		CREAR entero arregloDos[5];
+		CREAR entero i;
+		CREAR entero valor;
+		valor = 0;
+		i = 0;
+		MIENTRAS i < 5 HACER
+	    	INICIOBLOQUE
+	    		arregloUno[i] = i * 1;
+	    		arregloDos[i] = i * 1;
+	    		DECIRALUSUARIO(i);
+		        i = i + 1;
+	    	FINBLOQUE
+		FINMIENTRAS
+		i = 0;
+		MIENTRAS i < 5 HACER
+	    	INICIOBLOQUE
+	    		valor = arregloUno[i] * arregloDos[i] + valor;
+	    		i = i + 1;
+	    	FINBLOQUE
+		FINMIENTRAS
+		DECIRALUSUARIO(valor);
+	FINPRINCIPAL 
+
+FINPROGRAMA
