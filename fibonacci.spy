@@ -1,0 +1,57 @@
+INICIOPROGRAMA
+	INICIOFUNCION entero fiboAux PARAMETROS entero n
+		crear entero x;
+		crear entero fib1;
+		crear entero fib2;
+		crear entero fibRes;
+
+		SI (n>2) ENTONCES
+			INICIOBLOQUE
+				fib1 = fiboAux(n-1);
+		 		fib2 = fiboAux(n-2);
+		 		x = fib1 + fib2;
+		 	FINBLOQUE
+		FINSI
+		SI (n==2) ENTONCES
+		 	INICIOBLOQUE
+		 		x=1;
+		 	FINBLOQUE
+		FINSI
+		SI (n==1) ENTONCES
+		 	INICIOBLOQUE
+		 		x=1;
+		 	FINBLOQUE
+		FINSI
+		SI (n==0) ENTONCES
+		 	INICIOBLOQUE
+		 		x=0;
+		 	FINBLOQUE
+		FINSI
+
+		REGRESA x;
+	FINFUNCION
+
+	INICIOFUNCION entero fibonacci PARAMETROS entero n
+		crear entero fibInt;
+		crear entero i;
+		
+		i = 0;
+		MIENTRAS i<n HACER
+	    	INICIOBLOQUE
+		        fibInt = fiboAux(i);
+		        DECIRALUSUARIO(fibInt);
+		        i = i + 1;
+	    	FINBLOQUE
+		FINMIENTRAS
+
+		REGRESA i;
+	FINFUNCION
+
+	INICIOPRINCIPAL 
+		crear entero fib;
+
+		fib = fibonacci(6);
+
+	FINPRINCIPAL 
+
+FINPROGRAMA

@@ -1,0 +1,25 @@
+INICIOPROGRAMA
+
+	INICIOFUNCION flotante factorial PARAMETROS entero n
+		crear flotante x;
+		SI (n==0) ENTONCES
+			INICIOBLOQUE
+				x = 1;
+		 	FINBLOQUE
+		SINO
+		 	INICIOBLOQUE
+		 		x = n*factorial(n-1);
+		 	FINBLOQUE
+		FINSI
+		
+		REGRESA x;
+	FINFUNCION
+
+	INICIOPRINCIPAL 
+		crear flotante fact;
+
+		fact = factorial(6);
+		DECIRALUSUARIO(fact);
+	FINPRINCIPAL 
+
+FINPROGRAMA
