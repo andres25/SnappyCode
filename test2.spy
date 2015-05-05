@@ -78,17 +78,6 @@ INICIOPROGRAMA
 
 		fib = fibonacci(5);
 		DECIRALUSUARIO(fib);
-		indice = 0;
-		MIENTRAS indice < 5 HACER
-			INICIOBLOQUE
-				SI (arreglo[indice] == 5) ENTONCES
-					INICIOBLOQUE
-						DECIRALUSUARIO(indice);
-					FINBLOQUE
-				FINSI
-				indice = indice +1;
-			FINBLOQUE
-		FINMIENTRAS
 	FINPRINCIPAL 
 
 FINPROGRAMA

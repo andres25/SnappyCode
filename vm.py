@@ -353,15 +353,16 @@ def InterpretarCuadruplos():
 			if opdDir >= 8000 and opdDir < 12000:
 				opdTemp = getVarFromDir(opdDir)
 				opdDir = opdTemp.varVal
-			#arrDir = getOperand(cuadruplos[x],3)
-			#No se ha asigando el index del arreglo
 			indexVal = getOperand(cuadruplos[x], 2)
 			newArrayDir = getVarFromDir(cuadruplos[x].res).varVal
 			newArrayVal = getVarFromDir(newArrayDir).consVal 
 			baseArray = getVarFromDir(newArrayVal - indexVal)
 			if baseArray.varDir >= 0 and baseArray.varDir < 4000:
 				#global
-				varName = str(baseArray.varName)+'['+str(indexVal)+']'
+				if indexVal == 0:
+					varName = str(baseArray.varName)
+				else:
+					varName = str(baseArray.varName)+'['+str(indexVal)+']'
 				varGlbInsert(varName, opdDir, baseArray.varType, newArrayVal,None,1)
 			elif baseArray.varDir >= 4000 and baseArray.varDir < 8000:
 				#procTable
@@ -369,7 +370,10 @@ def InterpretarCuadruplos():
 					for var in proc.procVars:
 						if var.varDir == baseArray.varDir:
 							arrProc = proc.procName
-				varName = str(baseArray.varName)+'['+str(indexVal)+']'
+				if indexVal == 0:
+					varName = str(baseArray.varName)
+				else:
+					varName = str(baseArray.varName)+'['+str(indexVal)+']'
 				varLocInsert(varName, opdDir, baseArray.varType, newArrayVal, arrProc,None,1)
 			#Ya existe el index del arreglo
 
